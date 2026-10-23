@@ -1,5 +1,5 @@
 // Çevrimdışı oynanış: açılan her dosya önbelleğe alınır; oyun güncellenince eski önbellek silinir.
-const V = 'hanedan-1792667806';
+const V = 'hanedan-1792740450';
 self.addEventListener('install', (e) => { self.skipWaiting(); e.waitUntil(caches.open(V).then((c) => c.addAll(['./', './index.html', './manifest.webmanifest']))); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== V).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener('fetch', (e) => {
