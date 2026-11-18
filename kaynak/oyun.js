@@ -906,6 +906,105 @@ var zt = {
       originY: 0.964,
       bodyHeight: 342.7,
     },
+    kule_balista_1_bekle: {
+      url: "assets/anim_kule_balista_1_bekle.webp",
+      frameWidth: 358,
+      frameHeight: 274,
+      frames: 36,
+      originX: 0.4502,
+      originY: 0.7903,
+      bodyHeight: 270.0,
+    },
+    kule_balista_1_saldiri_sag: {
+      url: "assets/anim_kule_balista_1_saldiri_sag.webp",
+      frameWidth: 381,
+      frameHeight: 280,
+      frames: 18,
+      originX: 0.4244,
+      originY: 0.7938,
+      bodyHeight: 270.0,
+    },
+    kule_balista_1_saldiri_sol: {
+      url: "assets/anim_kule_balista_1_saldiri_sol.webp",
+      frameWidth: 326,
+      frameHeight: 275,
+      frames: 18,
+      originX: 0.5051,
+      originY: 0.7899,
+      bodyHeight: 270.0,
+    },
+    kule_balista_2_bekle: {
+      url: "assets/anim_kule_balista_2_bekle.webp",
+      frameWidth: 315,
+      frameHeight: 273,
+      frames: 36,
+      originX: 0.5,
+      originY: 0.789,
+      bodyHeight: 270.0,
+    },
+    kule_balista_2_saldiri_sol: {
+      url: "assets/anim_kule_balista_2_saldiri_sol.webp",
+      frameWidth: 435,
+      frameHeight: 279,
+      frames: 18,
+      originX: 0.6377,
+      originY: 0.7925,
+      bodyHeight: 270.0,
+    },
+    kule_balista_3_bekle: {
+      url: "assets/anim_kule_balista_3_bekle.webp",
+      frameWidth: 384,
+      frameHeight: 273,
+      frames: 36,
+      originX: 0.4996,
+      originY: 0.7893,
+      bodyHeight: 270.0,
+    },
+    kule_balista_3_saldiri_sag: {
+      url: "assets/anim_kule_balista_3_saldiri_sag.webp",
+      frameWidth: 490,
+      frameHeight: 278,
+      frames: 18,
+      originX: 0.443,
+      originY: 0.7931,
+      bodyHeight: 270.0,
+    },
+    kule_balista_3_saldiri_sol: {
+      url: "assets/anim_kule_balista_3_saldiri_sol.webp",
+      frameWidth: 397,
+      frameHeight: 274,
+      frames: 18,
+      originX: 0.5118,
+      originY: 0.79,
+      bodyHeight: 270.0,
+    },
+    kule_maden_1_bekle: {
+      url: "assets/anim_kule_maden_1_bekle.webp",
+      frameWidth: 309,
+      frameHeight: 274,
+      frames: 36,
+      originX: 0.5,
+      originY: 0.7893,
+      bodyHeight: 270.0,
+    },
+    kule_maden_2_bekle: {
+      url: "assets/anim_kule_maden_2_bekle.webp",
+      frameWidth: 318,
+      frameHeight: 274,
+      frames: 36,
+      originX: 0.4996,
+      originY: 0.7899,
+      bodyHeight: 270.0,
+    },
+    kule_maden_3_bekle: {
+      url: "assets/anim_kule_maden_3_bekle.webp",
+      frameWidth: 325,
+      frameHeight: 274,
+      frames: 36,
+      originX: 0.5004,
+      originY: 0.7903,
+      bodyHeight: 270.0,
+    },
     kule_ayaz_1_bekle: {
       url: "assets/anim_kule_ayaz_1_bekle.webp",
       frameWidth: 308,
@@ -1663,6 +1762,15 @@ var $t = {
   "dlg.3.pre.2": "Geçitte buz rünlerini uyandırdım. Ateşle buz bir araya gelirse sis yükselir.",
   "dlg.3.post.0": "Haydut yüzbaşısı ölmeden önce birinin adını mırıldandı. Anlayamadım.",
   "dlg.3.post.1": "Silahları iyi dövülmüş. Haydut işi değil bu. Köprüye gidelim.",
+  "enemy.armoredBandit": "Zırhlı Haydut",
+  "enemy.armoredBandit.desc": "Ağır zırhlı ve dayanıklı. Fiziksel hasarın yarısını yutar; balista ve büyü işe yarar.",
+  "hud.income": "Gelir",
+  "tut.mine": "Altın renkli işaretler maden yerleridir. Krallık Madeni yalnızca dalga sürerken altın üretir; erken kurarsan kendini öder.",
+  "dlg.4.pre.0": "Taş Köprü nehrin tek geçidi. Burayı tutarsak kuzey yolu kapanır.",
+  "dlg.4.pre.1": "Köprüye bakan eski bir balista buldum. Zırhlı heriflerin göğüslüğünü delip geçer.",
+  "dlg.4.pre.2": "İki yakada eski maden ağızları var. Kazdırırsan savaş sürerken altın getirirler.",
+  "dlg.4.post.0": "Şu kalkanın arkasına bak. Bir arma vardı; biri kazıyıp silmiş.",
+  "dlg.4.post.1": "Armasını kazıyan haydut olmaz. Bu adamlar birine hizmet ediyor.",
   "settings.title": "Ayarlar",
   "settings.language": "Dil",
   "settings.reset": "İlerlemeyi sıfırla",
@@ -1977,6 +2085,15 @@ var Ls = {
   "dlg.3.pre.2": "I woke the frost runes in the pass. When fire meets ice, mist rises.",
   "dlg.3.post.0": "The bandit captain muttered a name before he died. I couldn’t make it out.",
   "dlg.3.post.1": "Their weapons are well forged. This is no bandit work. To the bridge.",
+  "enemy.armoredBandit": "Armored Bandit",
+  "enemy.armoredBandit.desc": "Heavily armored and tough. Shrugs off half of physical damage; ballistas and magic work.",
+  "hud.income": "Income",
+  "tut.mine": "Gold markers are mine sites. The Royal Mine produces gold only while a wave is running, so build it early and it pays for itself.",
+  "dlg.4.pre.0": "The Stone Bridge is the only crossing. Hold it and the north road is closed.",
+  "dlg.4.pre.1": "I found an old ballista overlooking the bridge. It punches straight through armor.",
+  "dlg.4.pre.2": "There are old mine shafts on both banks. Dig them and they bring in gold while we fight.",
+  "dlg.4.post.0": "Look behind this shield. There was a crest here; someone scratched it off.",
+  "dlg.4.post.1": "Bandits don't scratch off their crests. These men serve someone.",
   "settings.title": "Settings",
   "settings.language": "Language",
   "settings.reset": "Reset progress",
@@ -3045,6 +3162,14 @@ S("mermi_ok", 46, 12, 0.5, 0.5, (e) => {
     e.g.fillTriangle(34, 1, 46, 6, 34, 11),
     e.g.fillStyle(c.cream, 1),
     e.g.fillTriangle(2, 1, 10, 6, 2, 11));
+});
+S("mermi_civata", 78, 18, 0.5, 0.5, (e) => {
+  (e.line(6, 9, 60, 9, 6, c.woodDark),
+    e.line(8, 9, 58, 9, 2, c.wood),
+    e.g.fillStyle(c.iron, 1),
+    e.g.fillTriangle(56, 1, 78, 9, 56, 17),
+    e.g.fillStyle(c.cream, 1),
+    e.g.fillTriangle(2, 2, 16, 9, 2, 16));
 });
 S("mermi_ates", 48, 48, 0.5, 0.5, (e) => {
   (e.g.fillStyle(c.fire, 0.35),
@@ -6082,7 +6207,63 @@ function ai(e) {
     ground: 7315263,
   };
 }
-var ce = [Qa, ei, ti, ...Array.from({ length: 13 }, (e, t) => ai(t + 4))];
+var Ds = {
+  id: 4,
+  era: 1,
+  nameKey: "stage.4",
+  eventKey: "stage.4.event",
+  playable: !0,
+  startGold: 460,
+  castleHp: 20,
+  paths: [
+    [b(-90, 300), b(200, 330), b(420, 420), b(640, 560), b(860, 640), b(1040, 650), b(1260, 650), b(1450, 600), b(1600, 470), b(1780, 420), b(1960, 480), b(2080, 600), b(2160, 660)],
+    [b(-90, 1010), b(220, 965), b(430, 880), b(650, 770), b(860, 670), b(1040, 650), b(1260, 650), b(1450, 600), b(1600, 470), b(1780, 420), b(1960, 480), b(2080, 600), b(2160, 660)],
+  ],
+  buildSpots: [
+    b(330, 560), b(330, 770), b(560, 660), b(520, 300), b(760, 430), b(740, 880), b(950, 500), b(960, 820),
+    b(1350, 800), b(1380, 470), b(1560, 720), b(1700, 260), b(1760, 600), b(1960, 330), b(1920, 700),
+    b(150, 180), b(1250, 1100),
+  ],
+  mineSpots: [15, 16],
+  castle: b(2190, 650),
+  river: { x: 1080, w: 140 },
+  newTowers: ["ballista", "mine"],
+  newEnemies: ["armoredBandit"],
+  waves: [
+    {
+      groups: [
+        { enemy: "goblin", count: 10, interval: 1.1, delay: 0 },
+        { enemy: "armoredBandit", count: 2, interval: 3, delay: 6 },
+      ],
+    },
+    {
+      groups: [
+        { enemy: "wolf", count: 8, interval: 0.8, delay: 0 },
+        { enemy: "shieldBandit", count: 4, interval: 2, delay: 4 },
+        { enemy: "goblin", count: 8, interval: 1, delay: 8 },
+      ],
+    },
+    {
+      groups: [
+        { enemy: "armoredBandit", count: 4, interval: 2.5, delay: 0 },
+        { enemy: "goblin", count: 10, interval: 0.9, delay: 3 },
+        { enemy: "wolf", count: 6, interval: 0.7, delay: 10 },
+      ],
+    },
+    {
+      groups: [
+        { enemy: "shieldBandit", count: 5, interval: 1.8, delay: 0, elite: 1 },
+        { enemy: "armoredBandit", count: 4, interval: 2.2, delay: 4, elite: 1 },
+        { enemy: "goblin", count: 12, interval: 0.8, delay: 8, elite: 1 },
+        { enemy: "wolf", count: 8, interval: 0.6, delay: 14 },
+      ],
+    },
+  ],
+  mapPos: si[0],
+  decor: [],
+  ground: 7315263,
+};
+var ce = [Qa, ei, ti, Ds, ...Array.from({ length: 12 }, (e, t) => ai(t + 5))];
 function ya(e) {
   return e <= 2 ? 3 : e;
 }
@@ -6156,6 +6337,24 @@ var Te = {
       shieldAura: { radius: 95, reduction: 0.3 },
       art: "dusman_haydut_kalkan",
       color: 10119738,
+    },
+    armoredBandit: {
+      id: "armoredBandit",
+      nameKey: "enemy.armoredBandit",
+      descKey: "enemy.armoredBandit.desc",
+      hp: 150,
+      speed: 40,
+      armor: 0.5,
+      magicResist: 0,
+      gold: 16,
+      castleDamage: 2,
+      meleeDamage: 9,
+      meleeRate: 1.3,
+      flying: !1,
+      size: 22,
+      xp: 6,
+      art: "dusman_haydut_zirhli",
+      color: 7368816,
     },
     goblinChief: {
       id: "goblinChief",
@@ -6307,8 +6506,24 @@ var oe = {
       { id: "blizzard", nameKey: "branch.blizzard", descKey: "branch.blizzard.desc", target: "both" },
     ],
   },
-  ballista: ct("ballista", 4, "ground", "mostArmored", "none", "physical", ["piercingSpear", "hook"]),
-  mine: ct("mine", 4, "none", "none", "none", "physical", ["mint", "treasureGuard"]),
+  ballista: {
+    ...ct("ballista", 4, "ground", "mostArmored", "none", "physical", ["piercingSpear", "hook"]),
+    implemented: !0,
+    levels: [
+      { cost: 120, damage: [38, 52], rate: 2.4, range: 330, pierce: 0.5 },
+      { cost: 100, damage: [62, 84], rate: 2.3, range: 345, pierce: 0.6 },
+      { cost: 150, damage: [98, 130], rate: 2.2, range: 365, pierce: 0.7 },
+    ],
+  },
+  mine: {
+    ...ct("mine", 4, "none", "none", "none", "physical", ["mint", "treasureGuard"]),
+    implemented: !0,
+    levels: [
+      { cost: 100, damage: [0, 0], rate: 8, range: 0, income: 12, interval: 8 },
+      { cost: 90, damage: [0, 0], rate: 8, range: 0, income: 18, interval: 8 },
+      { cost: 130, damage: [0, 0], rate: 8, range: 0, income: 26, interval: 8 },
+    ],
+  },
   storm: ct("storm", 5, "both", "densest", "lightning", "magic", ["chainLightning", "thunder"]),
   eagle: ct("eagle", 6, "air", "firstFlying", "none", "physical", ["griffinRiders", "eagleFlock"]),
   alchemist: ct("alchemist", 7, "ground", "unpoisoned", "poison", "magic", ["plague", "acid"]),
@@ -6340,7 +6555,7 @@ function ps(e, t) {
   for (let a = 0; a < t; a++) s += oe[e].levels[a].cost;
   return s;
 }
-var ii = { archer: "kule_gozcu_1", barracks: "kule_kisla_1", fire: "kule_ejder_1", frost: "kule_ayaz_1" },
+var ii = { archer: "kule_gozcu_1", barracks: "kule_kisla_1", fire: "kule_ejder_1", frost: "kule_ayaz_1", ballista: "kule_balista_1", mine: "kule_maden_1", storm: "kule_firtina_1", eagle: "kule_kartal_1", alchemist: "kule_simyaci_1", rune: "kule_run_1" },
   le = 1920,
   ys = le * 2,
   Qe = 2759954;
@@ -7744,7 +7959,7 @@ class vs {
   hit(e, t, s) {
     if (!e.alive) return 0;
     let a = t;
-    if (s.kind === "physical") a *= 1 - e.armor;
+    if (s.kind === "physical") a *= 1 - e.armor * (1 - (s.pierce ?? 0));
     else a *= 1 - e.def.magicResist;
     if (s.element !== "none" && e.def.immune?.includes(s.element)) a = 0;
     if (!s.ignoreShieldAura) a *= this.shieldAuraFactor(e);
@@ -7956,7 +8171,7 @@ class Me {
     this.speed = n;
     this.onHit = o;
     this.flight = l;
-    let d = { arrow: "mermi_ok", fireball: "mermi_ates", ice: "mermi_buz", magic: "mermi_buyu" }[t];
+    let d = { arrow: "mermi_ok", bolt: "mermi_civata", fireball: "mermi_ates", ice: "mermi_buz", magic: "mermi_buyu" }[t];
     ((this.sprite = e.add.image(s, a, d).setDepth(3000)),
       (this.sx = s),
       (this.sy = a),
@@ -7997,7 +8212,7 @@ class Me {
   }
 }
 var li = 0.45,
-  di = { archer: "kule_gozcu", barracks: "kule_kisla", fire: "kule_ejder", frost: "kule_ayaz" };
+  di = { archer: "kule_gozcu", barracks: "kule_kisla", fire: "kule_ejder", frost: "kule_ayaz", ballista: "kule_balista", mine: "kule_maden", storm: "kule_firtina", eagle: "kule_kartal", alchemist: "kule_simyaci", rune: "kule_run" };
 class Ss {
   s;
   def;
@@ -8068,7 +8283,7 @@ class Ss {
       i =
         this.def.id === "barracks"
           ? 1.6
-          : Math.min({ archer: 1.4, frost: 1.6, fire: 1.9 }[this.def.id] ?? 1.4, this.lv.rate * 0.9),
+          : Math.min({ archer: 1.4, frost: 1.6, fire: 1.9, ballista: 1.8 }[this.def.id] ?? 1.4, this.lv.rate * 0.9),
       r = "vurus_" + t + "_" + Math.round(i * 100);
     if (!s.anims.exists(r))
       s.anims.create({ key: r, frames: s.anims.generateFrameNumbers(t, {}), frameRate: a / i, repeat: 0 });
@@ -8164,6 +8379,16 @@ class Ss {
       });
       return;
     }
+    if (this.def.id === "mine") {
+      if (this.silencedT > 0 || !(this.s.enemies.length || this.s.waves.spawning)) return;
+      if (((this.mineT = (this.mineT ?? 0) + e), this.mineT >= this.lv.interval)) {
+        this.mineT -= this.lv.interval;
+        let a = this.lv.income;
+        ((this.s.gold += a), this.s.fx.coin(this.x, this.y - 110, a), V("altin", { volume: 0.35 }));
+        if (!this.attacking) this.playAttack();
+      }
+      return;
+    }
     if (this.silencedT > 0) return;
     if (this.pending) {
       if (((this.pending.t -= e), this.pending.t <= 0)) {
@@ -8257,7 +8482,14 @@ class Ss {
           0.75,
         ),
       );
-    } else if (this.def.id === "frost")
+    } else if (this.def.id === "ballista")
+      (this.s.addProjectile(
+        new Me(this.s, "bolt", s, a + 40, e, null, 1500, (r, n, o) => {
+          if (o) this.s.combat.hit(o, i, { kind: "physical", element: "none", pierce: t.pierce ?? 0.5 });
+        }),
+      ),
+        this.s.sfx("arrow"));
+    else if (this.def.id === "frost")
       (this.s.addProjectile(
         new Me(this.s, "ice", s, a - 20, e, null, 850, (r, n, o) => {
           if ((this.s.fx.frostImpact(r, n), !o)) return;
@@ -9102,6 +9334,16 @@ class Rs extends Phaser.Scene {
         g.loadURL(r.video, !0),
         g.play(!0));
     }
+    if (!s && e.river) {
+      let g = this.add.graphics().setDepth(-895);
+      (g.fillStyle(3828906, 1),
+        g.fillRect(e.river.x, 0, e.river.w, ue),
+        g.fillStyle(6006986, 0.55),
+        g.fillRect(e.river.x + 14, 0, e.river.w - 28, ue),
+        g.lineStyle(10, 5662002, 0.7),
+        g.lineBetween(e.river.x, 0, e.river.x, ue),
+        g.lineBetween(e.river.x + e.river.w, 0, e.river.x + e.river.w, ue));
+    }
     if (!s)
       (wa(this, "yol_katmani", this.paths, re, ue, {
         width: 118,
@@ -9127,11 +9369,13 @@ class Rs extends Phaser.Scene {
               .setDepth(g.y - 40)
           : C(this, g.x, g.y + 22, "insa_noktasi").setDepth(g.y - 40);
         if (s) y.setAlpha(0);
+        if (e.mineSpots.includes(p)) y.setTint(16766080).setAlpha(s ? 0.85 : 1);
         this.spotImgs[p] = y;
       }));
     let l = (g, p, y) => {
         for (let k of this.paths) if (k.nearest(g, p).dist < 95 + y) return !0;
         for (let k of e.buildSpots) if (Math.hypot(k.x - g, k.y - p) < 95 + y) return !0;
+        if (e.river && g > e.river.x - 40 - y && g < e.river.x + e.river.w + 40 + y) return !0;
         if (Math.hypot(e.castle.x - g, e.castle.y - p) < 260) return !0;
         return !1;
       },
@@ -9365,8 +9609,17 @@ class Rs extends Phaser.Scene {
     this.closeMenu();
     let s = this.stage.buildSpots[e];
     ((this.menuTarget = { kind: "spot", index: e }), (this.pendingBuild = t));
-    let a = this.availableTowers(),
-      i = a.length <= 2 ? [-135, -45] : a.length === 3 ? [-150, -90, -30] : [-135, -45, 45, 135],
+    let a = this.availableTowers().filter((n) => (this.stage.mineSpots.includes(e) ? n === "mine" : n !== "mine")),
+      i =
+        a.length === 1
+          ? [-90]
+          : a.length === 2
+            ? [-135, -45]
+            : a.length === 3
+              ? [-150, -90, -30]
+              : a.length === 4
+                ? [-135, -45, 45, 135]
+                : a.map((n, o) => -90 + (o * 360) / a.length),
       r = a.map((n, o) => {
         let l = oe[n].levels[0].cost,
           d = t === n;
@@ -9374,7 +9627,7 @@ class Rs extends Phaser.Scene {
           id: n,
           icon: d
             ? "ikon_tamam"
-            : ({ archer: "kule_gozcu_1", barracks: "kule_kisla_1", fire: "kule_ejder_1", frost: "kule_ayaz_1" }[n] ??
+            : (ii[n] ??
               "ikon_kilit"),
           iconScale: d ? 1.4 : 0.36,
           angle: i[o],
@@ -10026,6 +10279,17 @@ var Hs = {
       { speaker: "thorgar", key: "dlg.3.post.1" },
     ],
   },
+  4: {
+    pre: [
+      { speaker: "aldric", key: "dlg.4.pre.0" },
+      { speaker: "thorgar", key: "dlg.4.pre.1" },
+      { speaker: "sarya", key: "dlg.4.pre.2" },
+    ],
+    post: [
+      { speaker: "thorgar", key: "dlg.4.post.0" },
+      { speaker: "aldric", key: "dlg.4.post.1" },
+    ],
+  },
 };
 function fi(e, t) {
   let s = 20 + t * 5;
@@ -10065,7 +10329,7 @@ var Ra = {
     forgeFire: "ikon_yukselt",
   },
   Ha = (e) => Yt(Te[e].art),
-  pi = { archer: "kule_gozcu_1", barracks: "kule_kisla_1", fire: "kule_ejder_1", frost: "kule_ayaz_1" };
+  pi = ii;
 class Os extends Phaser.Scene {
   b;
   modalOpen = !1;
@@ -10512,7 +10776,7 @@ class Os extends Phaser.Scene {
       h.lineStyle(3, 14200904, 1),
       h.strokeRoundedRect(-l / 2, -d / 2, l, d, 14),
       o.add(h));
-    let u = { archer: "kule_gozcu", barracks: "kule_kisla", fire: "kule_ejder", frost: "kule_ayaz" }[e] ?? "kule_gozcu";
+    let u = di[e] ?? "kule_gozcu";
     o.add(wt(C(this, -l / 2 + 66, 40, u + "_" + Math.max(1, s || t), 1), 112));
     let f = m(a.nameKey) + " · " + m("hud.level", { n: s || t }) + (r && t > 0 ? "  ▲" : "");
     o.add(this.add.text(-l / 2 + 132, -46, f, z(34, "#f4dc90", "900")));
@@ -10533,7 +10797,8 @@ class Os extends Phaser.Scene {
           Math.round(n.soldiers.armor * 100) + "%",
           y(i?.soldiers?.armor, r?.soldiers?.armor),
         ]));
-    } else
+    } else if (n.income) p.push([m("hud.income"), "+" + n.income + " / " + n.interval + " sn", y(i?.income, r?.income)]);
+    else
       (p.push([m("hud.damage"), n.damage[0] + "–" + n.damage[1], y(i?.damage, r?.damage)]),
         p.push([m("hud.rate"), _(n.rate), y(_(i?.rate ?? 0), _(r?.rate ?? 0))]),
         p.push([m("hud.range"), g(n.range), y(g(i?.range ?? 0), g(r?.range ?? 0))]));
@@ -10562,9 +10827,10 @@ class Os extends Phaser.Scene {
     ];
     if (t.soldiers)
       a.push([m("hud.soldiers"), `3 × ${e.soldierHp()} ❤  ${t.soldiers.damage[0]}–${t.soldiers.damage[1]} ⚔`]);
+    else if (t.income) a.push([m("hud.income"), `+${t.income} / ${t.interval} sn`]);
     else
       (a.push([m("hud.damage"), `${t.damage[0]}–${t.damage[1]}`]), a.push([m("hud.rate"), t.rate.toFixed(2) + " sn"]));
-    a.push([m("hud.range"), String(t.range)]);
+    if (!t.income) a.push([m("hud.range"), String(t.range)]);
     let i = -190;
     for (let [n, o] of a)
       (s.add(this.add.text(-60, i, n, z(22, I.muted, "900"))),
@@ -10584,6 +10850,8 @@ class Os extends Phaser.Scene {
       if (s) await this.dialogue(s.pre);
       for (let a of e.stage.newTowers)
         if (!t.seenTowers.includes(a)) (await this.towerCard(a), t.seenTowers.push(a), j());
+      if (e.stage.mineSpots.length && !t.tutorialDone.mine)
+        (await this.messageCard(m("tut.mine"), "kule_maden_1"), (t.tutorialDone.mine = !0), j());
       if (e.stage.tutorial === "burn" && !t.tutorialDone.burn)
         (await this.messageCard(m("tut.burn"), "kule_ejder_2"), (t.tutorialDone.burn = !0), j());
       if (e.stage.tutorial === "combo" && !t.tutorialDone.combo)
