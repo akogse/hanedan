@@ -1144,6 +1144,33 @@
       originY: 0.8579,
       bodyHeight: 270.0,
     },
+    kule_kartal_1_bekle: {
+      url: "assets/anim_kule_kartal_1_bekle.webp",
+      frameWidth: 191,
+      frameHeight: 275,
+      frames: 36,
+      originX: 0.4774,
+      originY: 0.848,
+      bodyHeight: 270.0,
+    },
+    kule_kartal_2_bekle: {
+      url: "assets/anim_kule_kartal_2_bekle.webp",
+      frameWidth: 191,
+      frameHeight: 273,
+      frames: 36,
+      originX: 0.5324,
+      originY: 0.842,
+      bodyHeight: 270.0,
+    },
+    kule_kartal_3_bekle: {
+      url: "assets/anim_kule_kartal_3_bekle.webp",
+      frameWidth: 212,
+      frameHeight: 280,
+      frames: 36,
+      originX: 0.4857,
+      originY: 0.8382,
+      bodyHeight: 270.0,
+    },
     kule_ayaz_1_bekle: {
       url: "assets/anim_kule_ayaz_1_bekle.webp",
       frameWidth: 308,
@@ -1918,6 +1945,17 @@ var $t = {
   "dlg.5.pre.2": "Askerler uçanları durduramaz. Kuleleri ona göre kurun.",
   "dlg.5.post.0": "Bu kuzgunlar sıradan kuş değildi. Birileri onları gözcü diye kullanıyor.",
   "dlg.5.post.1": "İzleri bataklığa gidiyor. Goblin şamanlarının yuvası orada.",
+  "enemy.goblinShaman": "Goblin Şaman",
+  "enemy.goblinShaman.desc": "Birkaç saniyede bir çevresindeki düşmanları iyileştirir. Önce onu indir.",
+  "enemy.swampSlime": "Bataklık Balçığı",
+  "enemy.swampSlime.desc": "Yavaş ve dayanıklı, büyüye dirençli. Ölünce iki küçük balçığa bölünür.",
+  "enemy.slimeling": "Küçük Balçık",
+  "enemy.slimeling.desc": "Bataklık Balçığı'ndan kopan parça.",
+  "dlg.6.pre.0": "Sis o kadar koyu ki kendi kulelerimi zor görüyorum. Şamanlar burada; yaralılarını büyüyle ayağa kaldırıyorlar.",
+  "dlg.6.pre.1": "Dağdaki kartalları çağırdım. Gökten gelen her şeyi pençeleriyle indirirler.",
+  "dlg.6.pre.2": "Çamurdan bir şeyler kıpırdıyor. Kestiğinde ikiye bölünüyor, dikkatli olun.",
+  "dlg.6.post.0": "Şamanın çantasından mühürlü bir mektup çıktı. Mühür kazınmamış: kırmızı bir pençe.",
+  "dlg.6.post.1": "Redclaw. Garrik Redclaw. Kuzeyin eski lordu, sürgüne gönderildiğini sanıyorduk.",
   "settings.title": "Ayarlar",
   "settings.language": "Dil",
   "settings.reset": "İlerlemeyi sıfırla",
@@ -2249,6 +2287,17 @@ var Ls = {
   "dlg.5.pre.2": "Soldiers can't stop what flies. Build your towers accordingly.",
   "dlg.5.post.0": "These were no ordinary birds. Someone is using them as scouts.",
   "dlg.5.post.1": "Their trail leads to the marsh. The goblin shamans nest there.",
+  "enemy.goblinShaman": "Goblin Shaman",
+  "enemy.goblinShaman.desc": "Heals nearby enemies every few seconds. Take it down first.",
+  "enemy.swampSlime": "Swamp Slime",
+  "enemy.swampSlime.desc": "Slow, tough and resistant to magic. Splits into two small slimes when it dies.",
+  "enemy.slimeling": "Slimeling",
+  "enemy.slimeling.desc": "A piece broken off a Swamp Slime.",
+  "dlg.6.pre.0": "The mist is so thick I can barely see my own towers. The shamans are here; they raise their wounded with magic.",
+  "dlg.6.pre.1": "I called the eagles down from the mountain. They tear anything that flies out of the sky.",
+  "dlg.6.pre.2": "Something is moving in the mud. Cut it and it splits in two. Be careful.",
+  "dlg.6.post.0": "A sealed letter was in the shaman's pouch. This seal wasn't scratched off: a red claw.",
+  "dlg.6.post.1": "Redclaw. Garrik Redclaw. The old lord of the north. We thought he was in exile.",
   "settings.title": "Settings",
   "settings.language": "Language",
   "settings.reset": "Reset progress",
@@ -6467,7 +6516,57 @@ var BOLUM_5 = {
   decor: [],
   ground: 7315263,
 };
-var ce = [Qa, ei, ti, BOLUM_4, BOLUM_5, ...Array.from({ length: 11 }, (e, t) => ai(t + 6))];
+var BOLUM_6 = {
+  id: 6,
+  era: 1,
+  nameKey: "stage.6",
+  eventKey: "stage.6.event",
+  playable: !0,
+  startGold: 600,
+  castleHp: 20,
+  paths: [[b(-90, 700), b(200, 690), b(420, 600), b(640, 640), b(820, 760), b(1000, 820), b(1180, 930), b(1420, 950), b(1620, 830), b(1760, 650), b(1960, 600), b(2160, 640)], [b(430, -90), b(470, 180), b(640, 330), b(860, 400), b(1050, 540), b(1080, 720), b(1000, 820), b(1180, 930), b(1420, 950), b(1620, 830), b(1760, 650), b(1960, 600), b(2160, 640)]],
+  buildSpots: [b(1280, 800), b(820, 620), b(1880, 740), b(1480, 780), b(1740, 880), b(1040, 1000), b(1620, 620), b(1220, 1060), b(660, 520), b(1460, 1060), b(1900, 480), b(860, 900), b(500, 420), b(1200, 620), b(600, 160), b(520, 740), b(180, 560)],
+  mineSpots: [],
+  castle: b(2190, 640),
+  newTowers: ["eagle"],
+  newEnemies: ["goblinShaman", "swampSlime"],
+  waves: [
+    {
+      groups: [
+        { enemy: "goblin", count: 8, interval: 1, delay: 0 },
+        { enemy: "goblinShaman", count: 1, interval: 4, delay: 4 },
+        { enemy: "raven", count: 6, interval: 1, delay: 9 },
+      ],
+    },
+    {
+      groups: [
+        { enemy: "swampSlime", count: 2, interval: 3, delay: 0 },
+        { enemy: "wolf", count: 6, interval: 0.7, delay: 5 },
+        { enemy: "raven", count: 7, interval: 1, delay: 10 },
+      ],
+    },
+    {
+      groups: [
+        { enemy: "armoredBandit", count: 2, interval: 2.4, delay: 0 },
+        { enemy: "goblinShaman", count: 2, interval: 3, delay: 3 },
+        { enemy: "goblin", count: 10, interval: 0.8, delay: 6 },
+        { enemy: "raven", count: 8, interval: 0.8, delay: 12 },
+      ],
+    },
+    {
+      groups: [
+        { enemy: "swampSlime", count: 3, interval: 2.8, delay: 0, elite: 1 },
+        { enemy: "goblinShaman", count: 2, interval: 2.5, delay: 4 },
+        { enemy: "shieldBandit", count: 3, interval: 1.8, delay: 8 },
+        { enemy: "raven", count: 9, interval: 0.9, delay: 14 },
+      ],
+    },
+  ],
+  mapPos: si[2],
+  decor: [],
+  ground: 5799525,
+};
+var ce = [Qa, ei, ti, BOLUM_4, BOLUM_5, BOLUM_6, ...Array.from({ length: 10 }, (e, t) => ai(t + 7))];
 function ya(e) {
   return e <= 2 ? 3 : e;
 }
@@ -6578,6 +6677,64 @@ var Te = {
       xp: 2,
       art: "dusman_kuzgun",
       color: 2368548,
+    },
+    goblinShaman: {
+      id: "goblinShaman",
+      nameKey: "enemy.goblinShaman",
+      descKey: "enemy.goblinShaman.desc",
+      hp: 70,
+      speed: 46,
+      stride: 75,
+      armor: 0,
+      magicResist: 0.25,
+      gold: 14,
+      castleDamage: 1,
+      meleeDamage: 4,
+      meleeRate: 1.2,
+      flying: !1,
+      size: 18,
+      xp: 4,
+      heal: { amount: 22, radius: 150, cooldown: 5 },
+      art: "dusman_goblin_saman",
+      color: 6324288,
+    },
+    swampSlime: {
+      id: "swampSlime",
+      nameKey: "enemy.swampSlime",
+      descKey: "enemy.swampSlime.desc",
+      hp: 200,
+      speed: 32,
+      armor: 0.1,
+      magicResist: 0.35,
+      gold: 18,
+      castleDamage: 2,
+      meleeDamage: 8,
+      meleeRate: 1.4,
+      flying: !1,
+      size: 24,
+      xp: 6,
+      split: { into: "slimeling", count: 2 },
+      art: "dusman_bataklik_balcigi",
+      color: 5274162,
+    },
+    slimeling: {
+      id: "slimeling",
+      nameKey: "enemy.slimeling",
+      descKey: "enemy.slimeling.desc",
+      hp: 60,
+      speed: 46,
+      armor: 0,
+      magicResist: 0.35,
+      gold: 4,
+      castleDamage: 1,
+      meleeDamage: 4,
+      meleeRate: 1,
+      flying: !1,
+      size: 16,
+      xp: 1,
+      scale: 0.5,
+      art: "dusman_bataklik_balcigi",
+      color: 5274162,
     },
     goblinChief: {
       id: "goblinChief",
@@ -6756,7 +6913,15 @@ var oe = {
       { cost: 160, damage: [40, 54], rate: 2, range: 315, chains: 4, bounce: 180 },
     ],
   },
-  eagle: ct("eagle", 6, "air", "firstFlying", "none", "physical", ["griffinRiders", "eagleFlock"]),
+  eagle: {
+    ...ct("eagle", 6, "air", "first", "none", "physical", ["griffinRiders", "eagleFlock"]),
+    implemented: !0,
+    levels: [
+      { cost: 100, damage: [26, 36], rate: 1.3, range: 380 },
+      { cost: 90, damage: [44, 58], rate: 1.25, range: 395 },
+      { cost: 130, damage: [70, 92], rate: 1.2, range: 410 },
+    ],
+  },
   alchemist: ct("alchemist", 7, "ground", "unpoisoned", "poison", "magic", ["plague", "acid"]),
   rune: ct("rune", 8, "none", "none", "none", "magic", ["warRune", "quakeRune"]),
 };
@@ -7985,7 +8150,7 @@ class ws {
     let l = s.at(o);
     ((this.x = l.x),
       (this.y = l.y),
-      (this.scale = t.boss ? 1 : t.id === "wolf" ? 0.78 : 0.8),
+      (this.scale = t.scale ?? (t.boss ? 1 : t.id === "wolf" ? 0.78 : 0.8)),
       (this.view = this.buildView()));
   }
   get boss() {
@@ -8069,6 +8234,16 @@ class ws {
           this.skillAnim)
         )
           this.skillT = Ta;
+      }
+    }
+    if (this.def.heal && !t.stunned) {
+      let l = this.def.heal;
+      if (((this.healCd = (this.healCd ?? l.cooldown * 0.5) - e), this.healCd <= 0)) {
+        this.healCd = l.cooldown;
+        let d = 0;
+        for (let h of this.scene.enemiesNear(this.x, this.y, l.radius))
+          if (h.hp < h.maxHp) ((h.hp = Math.min(h.maxHp, h.hp + l.amount)), d++);
+        if (d) (this.scene.fx.ring(this.x, this.y, l.radius, 9500544, 450, 6), this.scene.fx.floatText(this.x, this.y - 110, "+" + l.amount, "#9fe08a", 26));
       }
     }
     let s = !1;
@@ -8713,6 +8888,13 @@ class Ss {
           0.75,
         ),
       );
+    } else if (this.def.id === "eagle") {
+      (this.s.addProjectile(
+        new Me(this.s, "arrow", s, a - 10, e, null, 1300, (r, n, o) => {
+          if (o) this.s.combat.hit(o, i, { kind: "physical", element: "none" });
+        }),
+      ),
+        this.s.sfx("arrow"));
     } else if (this.def.id === "storm") {
       let r = [e],
         n = e;
@@ -10108,6 +10290,9 @@ class Rs extends Phaser.Scene {
     return this.enemies.filter((a) => a.alive && Math.hypot(a.x - e, (a.y - t) * 1.1) <= s);
   }
   enemyKilled(e) {
+    if (e.def.split && !e.reached)
+      for (let a = 0; a < e.def.split.count; a++)
+        this.spawnEnemy(e.def.split.into, e.pathIndex, null, this.waves.index, Math.max(0, e.dist - 10 - a * 34), e);
     let t = e.def.gold * (e.elite ? 2 : 1);
     if (
       ((this.gold += t),
@@ -10574,6 +10759,17 @@ var Hs = {
     post: [
       { speaker: "velmora", key: "dlg.5.post.0" },
       { speaker: "sarya", key: "dlg.5.post.1" },
+    ],
+  },
+  6: {
+    pre: [
+      { speaker: "sarya", key: "dlg.6.pre.0" },
+      { speaker: "velmora", key: "dlg.6.pre.1" },
+      { speaker: "thorgar", key: "dlg.6.pre.2" },
+    ],
+    post: [
+      { speaker: "sarya", key: "dlg.6.post.0" },
+      { speaker: "aldric", key: "dlg.6.post.1" },
     ],
   },
 };
