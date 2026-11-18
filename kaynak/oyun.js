@@ -81,6 +81,15 @@ var zt = {
     ipucu_balonu: "assets/ipucu_balonu.webp",
     kahraman_aldric: "assets/kahraman_aldric.webp",
     kahraman_aldric_portre: "assets/kahraman_aldric_portre.webp",
+    buyu_royalGuard: "assets/buyu_royalGuard.webp",
+    buyu_shieldWall: "assets/buyu_shieldWall.webp",
+    buyu_ravenSwarm: "assets/buyu_ravenSwarm.webp",
+    buyu_huntersMark: "assets/buyu_huntersMark.webp",
+    buyu_meteor: "assets/buyu_meteor.webp",
+    buyu_elementStorm: "assets/buyu_elementStorm.webp",
+    buyu_anvilStrike: "assets/buyu_anvilStrike.webp",
+    buyu_forgeFire: "assets/buyu_forgeFire.webp",
+    ikon_yildiz_hud: "assets/ikon_yildiz_hud.webp",
     kahraman_villager_portre: "assets/kahraman_villager_portre.webp",
     kahraman_sarya: "assets/kahraman_sarya.webp",
     kahraman_sarya_portre: "assets/kahraman_sarya_portre.webp",
@@ -7712,7 +7721,7 @@ class _s extends Phaser.Scene {
     let r = [
         ["ikon_hazine", String(e.treasure ?? 0), 0.7],
         ["ikon_elmas", String(e.diamonds ?? 0), 0.62],
-        ["ikon_yildiz", String(bt()), 0.62],
+        ["ikon_yildiz_hud", String(bt()), 0.62],
       ],
       n = 330,
       o = 18;
@@ -11111,14 +11120,14 @@ function za(e, t, s) {
   return { rewards: i, newStars: a };
 }
 var Ra = {
-    royalGuard: "sovalye",
-    shieldWall: "ikon_kalkan",
-    ravenSwarm: "mermi_buyu",
-    huntersMark: "ikon_yildiz",
-    meteor: "mermi_ates",
-    elementStorm: "mermi_buz",
-    anvilStrike: "ikon_disli",
-    forgeFire: "ikon_yukselt",
+    royalGuard: "buyu_royalGuard",
+    shieldWall: "buyu_shieldWall",
+    ravenSwarm: "buyu_ravenSwarm",
+    huntersMark: "buyu_huntersMark",
+    meteor: "buyu_meteor",
+    elementStorm: "buyu_elementStorm",
+    anvilStrike: "buyu_anvilStrike",
+    forgeFire: "buyu_forgeFire",
   },
   Ha = (e) => Yt(Te[e].art),
   pi = ii;
@@ -11269,8 +11278,8 @@ class Os extends Phaser.Scene {
           (h.add(this.add.circle(0, 0, 60, u ? 858168 : 1842984)),
             h.add(this.add.image(0, 0, "hud_buyu_cercevesi").setDisplaySize(158, 159)));
         else (h.add(this.add.circle(0, 0, 60, 1840142)), h.add(this.add.circle(0, 0, 54, u ? 4864556 : 3814188)));
-        let f = C(this, 0, 0, u ? Ra[n.id] : "ikon_kilit", u ? 1.1 : 1).setOrigin(0.5);
-        if (n.id === "ravenSwarm") f.setTint(6969994);
+        let f = C(this, 0, 0, u ? Ra[n.id] : "ikon_kilit", 1).setOrigin(0.5);
+        wt(f, u ? 100 : 64);
         h.add(f);
         let _ = this.add.graphics();
         h.add(_);
@@ -11803,7 +11812,7 @@ class Os extends Phaser.Scene {
       let a = this.add.container(O / 2, w / 2);
       return (
         a.add(pe(this, 0, 0, 1040, 480)),
-        a.add(C(this, -380, 90, t, t.startsWith("kule") ? 0.9 : 2.2)),
+        a.add(t.startsWith("buyu_") ? wt(C(this, -380, 90, t, 1), 190) : C(this, -380, 90, t, t.startsWith("kule") ? 0.9 : 2.2)),
         a.add(ne(this, -220, -170, e, 640, 34)),
         a.add(F(this, 250, 160, 300, 96, m("common.ok"), () => s(), "gold")),
         [a]
