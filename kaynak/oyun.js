@@ -1658,7 +1658,7 @@ var $t = {
   "common.back": "Geri",
   "common.locked": "Kilitli",
   "common.comingSoon": "Yakında",
-  "common.phase2": "2. aşamada açılacak",
+  "common.phase2": "Yakında açılacak.",
   "common.ok": "Tamam",
   "common.yes": "Evet",
   "common.no": "Hayır",
@@ -1860,6 +1860,7 @@ var $t = {
   "spell.forgeFire": "Demirci Ateşi",
   "spell.forgeFire.desc": "Yakındaki kuleleri kısa süre güçlendirir.",
   "spell.unlockAt": "{n}. bölümde açılır",
+  "hero.choose": "Seç",
   "spell.choosePoint": "Büyünün düşeceği yere dokun",
   "hud.wave": "Dalga {n}/{m}",
   "hud.startWave": "Dalgayı başlat",
@@ -2002,7 +2003,7 @@ var $t = {
   "settings.resetConfirm": "Tüm ilerleme silinsin mi?",
   "settings.version": "Sürüm 0.1 · 1. aşama",
   "phase2.title": "Yakında",
-  "phase2.body": "Bu bölüm 2. aşamada açılacak: profil güçlendirmesi, Taç Ağacı, ganimet ve hikaye vakayinamesi.",
+  "phase2.body": "Yakında: kule güçlendirmeleri, Taç Ağacı, ganimet ve hikâye vakayinamesi.",
   "rotate.hint": "Yatay ekran önerilir",
 };
 var Ls = {
@@ -2016,7 +2017,7 @@ var Ls = {
   "common.back": "Back",
   "common.locked": "Locked",
   "common.comingSoon": "Coming soon",
-  "common.phase2": "Unlocks in phase 2",
+  "common.phase2": "Coming soon.",
   "common.ok": "OK",
   "common.yes": "Yes",
   "common.no": "No",
@@ -2218,6 +2219,7 @@ var Ls = {
   "spell.forgeFire": "Forge Fire",
   "spell.forgeFire.desc": "Briefly empowers nearby towers.",
   "spell.unlockAt": "Unlocks at stage {n}",
+  "hero.choose": "Choose",
   "spell.choosePoint": "Tap where the spell should land",
   "hud.wave": "Wave {n}/{m}",
   "hud.startWave": "Start wave",
@@ -2362,7 +2364,7 @@ var Ls = {
   "settings.resetConfirm": "Delete all progress?",
   "settings.version": "Version 0.1 · Phase 1",
   "phase2.title": "Coming soon",
-  "phase2.body": "This opens in phase 2: tower profile upgrades, the Crown Tree, loot and the story chronicle.",
+  "phase2.body": "Coming soon: tower upgrades, the Crown Tree, loot and the story chronicle.",
   "rotate.hint": "Landscape recommended",
 };
 var Ka = { tr: $t, en: Ls };
@@ -2767,27 +2769,15 @@ class Ze extends Phaser.Scene {
     });
   }
   playBurst() {
-    let e = this.pickUrl(_e.gecis);
-    if (!e) {
-      this.flashOut();
-      return;
-    }
-    let t = this.add.video(0, 0).setVisible(!1);
-    (this.stage.addAt(t, 1), (this.burst = t), t.loadURL(e, !1));
-    let s = () => {
-        (this.fit(t), t.setVisible(!0), this.intro?.setVisible(!1));
-      },
-      a = this.time.addEvent({
-        delay: 16,
-        loop: !0,
-        callback: () => {
-          if (t.getCurrentTime() > 0.04) (a.remove(), s());
-        },
-      });
-    (t.once("complete", () => this.goMenu()),
-      t.once("error", () => this.flashOut()),
-      t.play(!1),
-      this.time.delayedCall(12000, () => this.goMenu()));
+    // eski geçiş videosu logoyu ~1 sn tamamen beyaza patlatıyordu; yerine logodan karartmaya yumuşak geçiş
+    let e = this.intro,
+      t = this.cameras.main;
+    if (e) this.tweens.add({ targets: e, scale: (e.scale ?? 1) * 1.06, duration: 900, ease: "Sine.easeIn" });
+    let a = this.add.graphics().setDepth(10).setBlendMode(Phaser.BlendModes.ADD).setAlpha(0);
+    (a.fillStyle(16766080, 1), a.fillCircle(T / 2, w * 0.45, Math.max(T, w) * 0.42));
+    (this.tweens.add({ targets: a, alpha: 0.18, duration: 380, yoyo: !0, ease: "Sine.easeInOut" }),
+      this.time.delayedCall(380, () => t.fadeOut(520, 0, 0, 0)),
+      this.time.delayedCall(920, () => this.goMenu()));
   }
   pickUrl(e) {
     if (!e?.length) return null;
@@ -6040,6 +6030,7 @@ class ms extends Phaser.Scene {
                 color: "#3a2508",
               })
               .setOrigin(0.5)
+              .setScale(Math.min(1, (i * 0.56) / Math.max(1, m("identity." + o).length * 21)))
               .setShadow(0, 1, "#f8e7b0", 0, !1, !0),
           ),
           u.add(
@@ -6185,10 +6176,10 @@ class ms extends Phaser.Scene {
           .text(0, -60, m(o.nameKey), {
             fontFamily: D,
             fontStyle: "700",
-            fontSize: "29px",
+            fontSize: "26px",
             color: X.cream,
             align: "center",
-            wordWrap: { width: a - 40 },
+            wordWrap: { width: a - 100 },
           })
           .setOrigin(0.5, 0),
       ),
@@ -6205,18 +6196,22 @@ class ms extends Phaser.Scene {
         ),
         d.add(cs(this, 0, 46, 220)),
         d.add(
-          this.add.text(-a / 2 + 34, 66, m(o.passiveKey), {
-            ...z(23, "#d6dcea", "700"),
-            wordWrap: { width: a - 68, useAdvancedWrap: !0 },
+          this.add.text(0, 66, m(o.passiveKey), {
+            ...z(22, "#e6e9f2", "800"),
+            align: "center",
+            wordWrap: { width: a - 120, useAdvancedWrap: !0 },
             lineSpacing: 4,
-          }),
+          }).setOrigin(0.5, 0),
         ),
-        d.add(
-          this.add.text(-a / 2 + 34, 162, "✦ " + m(o.spells[0].nameKey) + ": " + m(o.spells[0].descKey), {
-            ...z(21, X.muted, "700"),
-            wordWrap: { width: a - 68, useAdvancedWrap: !0 },
-            lineSpacing: 4,
-          }),
+        o.spells.slice(0, 1).forEach((sp, si) =>
+          d.add(
+            this.add.text(0, 160 + si * 92, "✦ " + m(sp.nameKey) + "\n" + m(sp.descKey), {
+              ...z(19, X.muted, "700"),
+              align: "center",
+              wordWrap: { width: a - 120, useAdvancedWrap: !0 },
+              lineSpacing: 3,
+            }).setOrigin(0.5, 0),
+          ),
         ),
         d.setSize(a, i).setInteractive({ useHandCursor: !0 }),
         d.on("pointerup", () => {
@@ -7394,8 +7389,10 @@ class _s extends Phaser.Scene {
       i = this.add.container(0, 0);
     t.add(i);
     let r = this.add.graphics();
-    (r.fillGradientStyle(1709586, 1709586, 1709586, 1709586, 0.15, 0.55, 0.15, 0.55),
-      r.fillRect(s - 120, 0, 240, w),
+    (r.fillGradientStyle(1709586, 1709586, 1709586, 1709586, 0, 0.72, 0, 0.72),
+      r.fillRect(s - 420, 0, 420, w),
+      r.fillGradientStyle(1709586, 1709586, 1709586, 1709586, 0.72, 0.45, 0.72, 0.45),
+      r.fillRect(s, 0, 120, w),
       r.fillStyle(1709586, 0.45),
       r.fillRect(s + 120, 0, le, w),
       i.add(r));
@@ -7485,7 +7482,14 @@ class _s extends Phaser.Scene {
     if (M(d))
       n.add(
         this.add
-          .text(0, 2, String(e.id), { fontFamily: D, fontStyle: "900", fontSize: "38px", color: s || i ? "#f4dc90" : "#8d8676" })
+          .text(0, -2, String(e.id), {
+            fontFamily: D,
+            fontStyle: "900",
+            fontSize: "46px",
+            color: s || i ? "#ffe39a" : "#8d8676",
+            stroke: s || i ? "#3b2604" : "#1c1a16",
+            strokeThickness: 7,
+          })
           .setOrigin(0.5)
           .setShadow(0, 2, "#000", 6, !1, !0),
       );
@@ -7535,7 +7539,7 @@ class _s extends Phaser.Scene {
             this.add.image((k - 2) * 28, 79, k < a ? "ikon_yildiz" : "ikon_yildiz_bos"),
             k < a ? "ikon_yildiz" : "ikon_yildiz_bos",
             0.48,
-          ).setTint(k < a ? 16771210 : 7368816).setAlpha(k < a ? 1 : 0.85),
+          ).setTint(k < a ? 16771210 : 11053224).setAlpha(k < a ? 1 : 0.7),
         );
     }
     if (i && M("harita_bayragi")) {
@@ -7689,19 +7693,20 @@ class _s extends Phaser.Scene {
       a = this.add.graphics().setDepth(60);
     // düz lacivert şerit yerine haritayı kapatmayan yumuşak gölge; kaynaklar savaştaki plakalarla aynı tasarım
     (a.fillGradientStyle(396060, 396060, 396060, 396060, 0.9, 0.9, 0, 0), a.fillRect(-Ke, 0, at, 170));
-    (wt(C(this, t + 54, 70, "ikon_tac", 1), 88).setDepth(61),
+    let kp = 560,
+      kx = t + kp / 2;
+    if (M("hud_kaynak_plakasi")) {
+      let _ = this.add.image(kx, 72, "hud_kaynak_plakasi").setDepth(60.5);
+      _.setDisplaySize(kp, (kp * _.height) / _.width);
+    }
+    (wt(C(this, kx - kp / 2 + kp * 0.24, 72, "ikon_tac", 1), 62).setDepth(61),
       this.add
-        .text(t + 112, 20, G(e.kingdom || m("intro.kingdomDefault")), {
-          fontFamily: D,
-          fontStyle: "700",
-          fontSize: "42px",
-          color: "#f4dc90",
-        })
-        .setLetterSpacing(4)
-        .setShadow(0, 3, "#000", 8, !1, !0)
+        .text(kx - kp / 2 + kp * 0.4, 70, G(e.kingdom || m("intro.kingdomDefault")), { fontFamily: D, fontStyle: "700", fontSize: "32px", color: "#f4dc90" })
+        .setOrigin(0, 0.5)
+        .setLetterSpacing(3)
         .setDepth(61),
       this.add
-        .text(t + 114, 76, e.identity ? m("identity." + e.identity) : "", z(28, "#d9dfee", "800"))
+        .text(kx - kp / 2 + kp * 0.4, 132, "", z(24, "#d9dfee", "800"))
         .setShadow(0, 2, "#000", 6, !1, !0)
         .setDepth(61));
     let r = [
@@ -7815,10 +7820,10 @@ class _s extends Phaser.Scene {
       let s = this.add.zone(0, 0, 1240, 820).setInteractive();
       (t.add(s),
         t.add(ne(this, -490, -325, m(e.eventKey), 980, 30)),
-        t.add(this.add.text(-490, -255, m("map.waves", { n: ya(e.id) }), z(28, I.muted, "900"))));
+        t.add(this.add.text(-490, -255, m("map.waves", { n: e.waves?.length ?? ya(e.id) }), z(28, I.muted, "900"))));
       let a = P().bestStars[e.id] ?? 0;
       t.add(this.add.text(-490, -210, m("map.best"), z(28, I.muted, "900")));
-      for (let u = 0; u < 5; u++) t.add(C(this, -340 + u * 52, -192, u < a ? "ikon_yildiz" : "ikon_yildiz_bos", 0.85).setTint(u < a ? 16777215 : 4210752).setAlpha(u < a ? 1 : 0.6));
+      for (let u = 0; u < 5; u++) t.add(C(this, -340 + u * 52, -192, u < a ? "ikon_yildiz" : "ikon_yildiz_bos", 0.85).setTint(u < a ? 16777215 : 11053224).setAlpha(u < a ? 1 : 0.7));
       let i = -490;
       if (e.newTowers.length)
         (t.add(this.add.text(i, -150, G(m("map.newTowers")), z(22, I.red, "900"))),
@@ -7838,6 +7843,19 @@ class _s extends Phaser.Scene {
         o = 100 + (r - 1) * 12 + P().mastery * 2,
         l = this.add.graphics();
       t.add(this.add.text(-490, 95, G(m("map.selectHero")), z(22, I.muted, "900")));
+    {
+      let hk = "harita_stage" + e.id + "_tam";
+      if (M(hk)) {
+        let im = this.add.image(285, -120, hk),
+          gw = 430;
+        im.setDisplaySize(gw, (gw * im.height) / im.width);
+        let gh = im.displayHeight,
+          fr = this.add.graphics();
+        (fr.fillStyle(0, 0.5), fr.fillRoundedRect(285 - gw / 2 - 8, -120 - gh / 2 - 8, gw + 16, gh + 16, 12),
+          fr.lineStyle(4, 14200904, 1), fr.strokeRoundedRect(285 - gw / 2 - 6, -120 - gh / 2 - 6, gw + 12, gh + 12, 10));
+        t.add([fr, im]);
+      }
+    }
       let d = this.add.container(0, 0);
       t.add(d);
       let h = () => {
@@ -7910,10 +7928,9 @@ class _s extends Phaser.Scene {
                     this,
                     r - 165,
                     118 + d * 64,
-                    (d === 0 ? "✦ " : "\uD83D\uDD12 ") +
-                      m(l.nameKey) +
-                      " · " +
-                      m("spell.unlockAt", { n: l.unlockStage }),
+                    ((P().bestStars[l.unlockStage - 1] ?? 0) > 0 || l.unlockStage <= 1
+                      ? "✦ " + m(l.nameKey) + ": " + m(l.descKey)
+                      : "\uD83D\uDD12 " + m(l.nameKey) + " · " + m("spell.unlockAt", { n: l.unlockStage })),
                     330,
                     20,
                     I.muted,
@@ -7927,7 +7944,7 @@ class _s extends Phaser.Scene {
                   296,
                   280,
                   84,
-                  n ? m("hero.selected") : m("map.selectHero"),
+                  n ? m("hero.selected") : m("hero.choose"),
                   () => {
                     ((P().hero = s), j(), t());
                   },
@@ -9845,6 +9862,7 @@ class Zt {
     this.scene = e;
     this.x = t;
     this.y = s;
+    let ft = a.length > 4 ? Math.max(178, 245 / (2 * Math.sin(Math.PI / a.length))) : 178;
     let n = e.add.container(t, s).setDepth(6000);
     this.container = n;
     let o = e.add.circle(0, 0, ft, 0, 0).setStrokeStyle(5, 14200904, 0.7);
@@ -9891,6 +9909,13 @@ class Zt {
           (p.text = e.add.text(h, u + 68, l.label, z(36, "#f4dc90", "900")).setOrigin(0.5)),
           n.add(p.text));
       (this.paint(p), this.buttons.push(p));
+    }
+    {
+      let v = e.cameras.main.worldView,
+        rr = (ft + Pe + 70) * (q / i),
+        nx = Phaser.Math.Clamp(t, v.x + rr, v.right - rr),
+        ny = Phaser.Math.Clamp(s, v.y + rr + 120 / i, v.bottom - rr - 40 / i);
+      if (v.width > 2 * rr && v.height > 2 * rr) n.setPosition(nx, ny);
     }
     (n.setScale((0.2 * q) / i), e.tweens.add({ targets: n, scale: q / i, duration: 160, ease: "Back.Out" }));
   }
@@ -10404,15 +10429,7 @@ class Rs extends Phaser.Scene {
           ((this.gold -= r), s.upgrade(), this.closeMenu(), this.events.emit("towerUpgraded", s));
         },
       });
-    } else
-      a.push({
-        id: "branch",
-        icon: "ikon_kilit",
-        angle: -90,
-        label: this.stage.id >= ka ? "4" : m("common.locked"),
-        enabled: !1,
-        action: () => this.events.emit("toast", m("hud.branchLocked")),
-      });
+    }
     let i = Math.floor(ps(s.def.id, s.level) * gs);
     if (
       (a.push({
@@ -11379,8 +11396,10 @@ class Os extends Phaser.Scene {
       let n = Math.max(0, this.boss.hp / this.boss.maxHp);
       if (
         (this.bossFill.clear(),
-        this.bossFill.fillStyle(9318181, 1),
-        this.bossFill.fillRect(-290, 4, 580 * n, 26),
+        this.bossFill.fillStyle(11541026, 1),
+        this.bossFill.fillRect(this.bossBarX[0], -16, (this.bossBarX[1] - this.bossBarX[0]) * n, 32),
+        this.bossFill.fillStyle(16742485, 0.55),
+        this.bossFill.fillRect(this.bossBarX[0], -16, (this.bossBarX[1] - this.bossBarX[0]) * n, 8),
         !this.boss.alive)
       ) {
         let o = this.bossBar;
@@ -11422,13 +11441,15 @@ class Os extends Phaser.Scene {
         t.add([o, i]),
         t.add(
           this.add
-            .text(O / 2 - r * 0.25, 2, G(m("hud.bossIncoming")), { ...z(24, "#e8c8a0", "900") })
+            .text(O / 2 - r * 0.29, 2, G(m("hud.bossIncoming")), { ...z(24, "#e8c8a0", "900") })
             .setOrigin(0.5)
-            .setLetterSpacing(4)
+            .setLetterSpacing(3)
             .setShadow(0, 2, "#000", 6, !1, !0),
         ));
+      let sol = t.list[t.list.length - 1];
+      sol.setScale(Math.min(1, (r * 0.24) / sol.width));
       let l = this.add
-        .text(O / 2 + r * 0.25, 2, G(m(e.def.nameKey)), {
+        .text(O / 2 + r * 0.29, 2, m(e.def.nameKey).toUpperCase(), {
           fontFamily: D,
           fontStyle: "900",
           fontSize: "40px",
@@ -11437,7 +11458,7 @@ class Os extends Phaser.Scene {
         .setOrigin(0.5)
         .setLetterSpacing(3)
         .setShadow(0, 3, "#000", 8, !1, !0);
-      (l.setScale(Math.min(1, (r * 0.36) / l.width)), t.add(l));
+      (l.setScale(Math.min(1, (r * 0.24) / l.width)), t.add(l));
     } else {
       let i = this.add.graphics();
       (i.fillStyle(660528, 0.85),
@@ -11463,18 +11484,20 @@ class Os extends Phaser.Scene {
       this.tweens.add({ targets: t, alpha: 0, delay: 2000, duration: 600, onComplete: () => t.destroy() }),
       this.b.cameras.main.shake(300, 0.002),
       this.bossBar?.destroy());
-    let s = this.add.container(O / 2, 128),
-      a = this.add.graphics();
-    (a.fillStyle(660528, 0.92),
-      a.fillRoundedRect(-310, -20, 620, 64, 16),
-      a.lineStyle(2, 14200904, 1),
-      a.strokeRoundedRect(-310, -20, 620, 64, 16),
-      a.fillStyle(3806228, 1),
-      a.fillRect(-290, 4, 580, 26),
-      s.add(a),
-      (this.bossFill = this.add.graphics()),
-      s.add(this.bossFill),
-      s.add(this.add.text(0, -6, m(e.def.nameKey), Z(26, "#ffd0c0", 6)).setOrigin(0.5)),
+    let s = this.add.container(O / 2, 200),
+      a = this.add.graphics(),
+      bw = 720,
+      bx0 = -bw / 2 + bw * 0.36,
+      bx1 = -bw / 2 + bw * 0.84;
+    (a.fillStyle(2363404, 1), a.fillRect(bx0, -16, bx1 - bx0, 32), s.add(a), (this.bossFill = this.add.graphics()), s.add(this.bossFill));
+    if (M("hud_kaynak_plakasi")) {
+      let pl = this.add.image(0, 0, "hud_kaynak_plakasi");
+      (pl.setDisplaySize(bw, (bw * pl.height) / pl.width), s.add(pl));
+    }
+    let bi = C(this, -bw / 2 + bw * 0.24, 0, Yt(e.def.art), 1);
+    (bi.setScale((bi.scaleX * 96) / Math.max(bi.displayWidth, bi.displayHeight)), s.add(bi));
+    (s.add(this.add.text((bx0 + bx1) / 2, -2, m(e.def.nameKey), Z(26, "#fff1d6", 5)).setOrigin(0.5)),
+      (this.bossBarX = [bx0, bx1]),
       (this.bossBar = s));
   }
   newEnemyCard(e) {
@@ -11706,7 +11729,7 @@ class Os extends Phaser.Scene {
               p = w - 290,
               y = h ? g + 220.5 : g + 1500 - 220.5,
               k = p - 212.40234375 + 198.80859375;
-            if (l || Q("kahraman_" + o.speaker + "_portre")) a.add(Ae(this, y, k, 128, "kahraman_" + o.speaker + "_portre", he[o.speaker]?.color ?? 9075298));
+            if (l || M("kahraman_" + o.speaker + "_portre")) a.add(Ae(this, y, k, 128, "kahraman_" + o.speaker + "_portre", he[o.speaker]?.color ?? 9075298));
             else
               (a.add(this.add.circle(y, k, 132, 858168)),
                 a.add(this.add.text(y, k, "?", ge(110, "#f4dc90")).setOrigin(0.5)));
@@ -11726,7 +11749,7 @@ class Os extends Phaser.Scene {
               a.add(ne(this, v, p - 212.40234375 + 161.42578125, m(o.key), R, 32, "#eef0f6")),
               a.add(this.add.text(v + R, p + 212.40234375 - 106.201171875, "▶", z(28, "#f4dc90")).setOrigin(1, 0.5)));
           } else {
-            if (l || Q("kahraman_" + o.speaker + "_portre")) a.add(Ae(this, u, w - 300, 140, "kahraman_" + o.speaker + "_portre", he[o.speaker]?.color ?? 9075298));
+            if (l || M("kahraman_" + o.speaker + "_portre")) a.add(Ae(this, u, w - 300, 140, "kahraman_" + o.speaker + "_portre", he[o.speaker]?.color ?? 9075298));
             else
               (a.add(this.add.circle(u, w - 300, 148, 1840142)),
                 a.add(this.add.circle(u, w - 300, 140, 9075298)),
@@ -11750,7 +11773,7 @@ class Os extends Phaser.Scene {
         if ((s++, s >= e.length)) t();
         else i();
       });
-      let n = F(this, O - 150, 70, 220, 84, m("common.skip"), () => t(), "stone", { size: 32 });
+      let n = F(this, O - 150, 200, 220, 84, m("common.skip"), () => t(), "stone", { size: 32 });
       return [a, r, n];
     });
   }
@@ -11949,20 +11972,23 @@ class Os extends Phaser.Scene {
     let o = this.add.container(O / 2, w / 2),
       l = e.victory ? "zafer_afisi" : "yenilgi_afisi",
       d = M(l);
-    if ((o.add(pe(this, 0, 40, 1100, 720, d ? void 0 : e.victory ? m("end.victory") : m("end.defeat"))), d)) {
+    let kisa = !e.victory || r.length <= 3 ? 130 : 0;
+    if ((o.add(pe(this, 0, 40 - kisa / 2, 1100, 720 - kisa, d ? void 0 : e.victory ? m("end.victory") : m("end.defeat"))), d)) {
       let f = this.add.image(0, -392, l),
         _ = 500;
       f.setScale(500 / f.width);
       let g = f.height * f.scaleY,
         p = this.add
-          .text(0, -392 + g * 0.33, G(e.victory ? m("end.victory") : m("end.defeat")), {
+          .text(0, -392 + g * 0.305, G(e.victory ? m("end.victory") : m("end.defeat")), {
             fontFamily: D,
             fontStyle: "900",
-            fontSize: "40px",
-            color: "#f4dc90",
+            fontSize: "34px",
+            color: "#ffe6a0",
+            stroke: "#1a1206",
+            strokeThickness: 6,
           })
           .setOrigin(0.5)
-          .setLetterSpacing(6)
+          .setLetterSpacing(5)
           .setShadow(0, 3, "#000", 8, !1, !0);
       o.add([f, p]);
       let y = f.scale;
@@ -11972,7 +11998,7 @@ class Os extends Phaser.Scene {
       for (let g = 0; g < 5; g++) {
         let p = (g - 2) * 130,
           y = (d ? -170 : -230) + Math.abs(g - 2) * 14;
-        if ((o.add(C(this, p, y, "ikon_yildiz_bos", 1.9)), g < e.stars)) {
+        if ((o.add(C(this, p, y, "ikon_yildiz_bos", 1.9).setTint(10130576).setAlpha(0.6)), g < e.stars)) {
           let k = C(this, p, y, "ikon_yildiz", 1.9),
             v = k.scale;
           if (
@@ -12001,8 +12027,14 @@ class Os extends Phaser.Scene {
       o.add(
         this.add.text(-440, -60 + f, G(n.length ? m("end.rewards") : m("end.replayReward")), z(24, I.muted, "900")),
       );
-      let _ = -20 + f;
+      let _ = -20 + f,
+        bir = [];
       for (let g of r) {
+        let es = bir.find((x) => g.treasure && x.treasure);
+        if (es) es.treasure += g.treasure;
+        else bir.push({ ...g });
+      }
+      for (let g of bir) {
         let [p, y] = yi(g);
         (o.add(C(this, -410, _ + 18, p, 0.75)), o.add(this.add.text(-370, _ + 4, y, z(28))), (_ += r.length > 3 ? 44 : 56));
       }
@@ -12019,10 +12051,11 @@ class Os extends Phaser.Scene {
           z(30, I.blue, "900"),
         ),
       );
+      o.add(Ae(this, 300, 90 + f, 80, "kahraman_" + s + "_portre", he[s].color));
     } else
       (o.add(this.add.text(0, d ? -100 : -190, m("end.castleLeft", { n: 0 }), z(34)).setOrigin(0.5)),
         o.add(ne(this, -430, d ? -40 : -120, m("end.tip"), 860, 32)),
-        o.add(
+        a > 0 && o.add(
           this.add.text(
             -430,
             d ? 110 : 40,
@@ -12038,22 +12071,22 @@ class Os extends Phaser.Scene {
     let h = ce.find((f) => f.id === e.stageId + 1),
       u = e.victory && h?.playable;
     if (
-      (o.add(F(this, u ? -340 : -200, 290, 300, 100, m("end.retry"), () => this.restart(), "stone")),
+      (o.add(F(this, u ? -340 : -200, 290 - kisa, 300, 100, m("end.retry"), () => this.restart(), "stone")),
       o.add(
         F(
           this,
           u ? 0 : 200,
-          290,
+          290 - kisa,
           300,
           100,
           m("end.map"),
           () => this.b.scene.start("Map"),
-          e.victory && !u ? "gold" : "stone",
+          "stone",
         ),
       ),
       u)
     )
-      o.add(F(this, 340, 290, 300, 100, m("end.next"), () => this.b.scene.start("Battle", { stageId: h.id }), "gold"));
+      o.add(F(this, 340, 290 - kisa, 300, 100, m("end.next"), () => this.b.scene.start("Battle", { stageId: h.id }), "stone"));
     (o.setScale(0.7), this.tweens.add({ targets: o, scale: 1, duration: 260, ease: "Back.Out" }));
   }
 }
