@@ -1140,6 +1140,33 @@ var zt = {
       originY: 0.8747,
       bodyHeight: 270.0,
     },
+    kule_run_1_bekle: {
+      url: "assets/anim_kule_run_1_bekle.webp",
+      frameWidth: 218,
+      frameHeight: 274,
+      frames: 36,
+      originX: 0.5,
+      originY: 0.79,
+      bodyHeight: 270.0,
+    },
+    kule_run_2_bekle: {
+      url: "assets/anim_kule_run_2_bekle.webp",
+      frameWidth: 199,
+      frameHeight: 275,
+      frames: 36,
+      originX: 0.4986,
+      originY: 0.8005,
+      bodyHeight: 270.0,
+    },
+    kule_run_3_bekle: {
+      url: "assets/anim_kule_run_3_bekle.webp",
+      frameWidth: 502,
+      frameHeight: 300,
+      frames: 36,
+      originX: 0.5092,
+      originY: 0.7486,
+      bodyHeight: 270.0,
+    },
     kule_ayaz_1_bekle: {
       url: "assets/anim_kule_ayaz_1_bekle.webp",
       frameWidth: 308,
@@ -1930,6 +1957,15 @@ var $t = {
   "dlg.7.pre.2": "Zehirlenmiş birine ateş değerse patlar. Ocakla iksiri yan yana kurun.",
   "dlg.7.post.0": "Kamp düştü. Ama Garrik burada değil; adamları onun kalesine çekildi.",
   "dlg.7.post.1": "O zaman kalesine gideriz. Bu iş orada bitecek.",
+  "enemy.garrik": "Garrik Redclaw",
+  "enemy.garrik.desc": "Boss. Savaş naraması atar: yakınındaki düşmanlara kalkan ve hız verir.",
+  "hud.buff": "Güç artışı",
+  "hud.rallied": "SAVAŞ NARASI",
+  "dlg.8.pre.0": "Redclaw'ın kalesi. Garrik'in sancağı hâlâ burçlarda dalgalanıyor.",
+  "dlg.8.pre.1": "Eski rün taşlarını uyandırdım. Yanına kurduğun kuleler daha sert vurur.",
+  "dlg.8.pre.2": "Garrik bağırdığında adamları kalkanlanır ve koşmaya başlar. O an her şeyimizi ona yöneltin.",
+  "dlg.8.post.0": "Garrik düştü. Ölürken güldü: 'Ben sadece kapıyı açtım. Asıl gelen Varhol'dan.'",
+  "dlg.8.post.1": "Varhol... Sınırın ötesinde ölüler yürüyor diyorlardı. Masal sanmıştım.",
   "settings.title": "Ayarlar",
   "settings.language": "Dil",
   "settings.reset": "İlerlemeyi sıfırla",
@@ -2277,6 +2313,15 @@ var Ls = {
   "dlg.7.pre.2": "Fire touching a poisoned foe makes it explode. Build the forge and the alchemist side by side.",
   "dlg.7.post.0": "The camp has fallen. But Garrik isn't here; his men fell back to his keep.",
   "dlg.7.post.1": "Then we go to his keep. This ends there.",
+  "enemy.garrik": "Garrik Redclaw",
+  "enemy.garrik.desc": "Boss. His war cry gives nearby enemies a shield and a burst of speed.",
+  "hud.buff": "Power bonus",
+  "hud.rallied": "WAR CRY",
+  "dlg.8.pre.0": "Redclaw's keep. Garrik's banner still flies from the battlements.",
+  "dlg.8.pre.1": "I woke the old rune stones. Towers you build beside them hit harder.",
+  "dlg.8.pre.2": "When Garrik roars, his men raise shields and start running. Turn everything on him in that moment.",
+  "dlg.8.post.0": "Garrik has fallen. He laughed as he died: 'I only opened the gate. What comes next comes from Varhol.'",
+  "dlg.8.post.1": "Varhol... They said the dead walk beyond the border. I thought it was a tale.",
   "settings.title": "Settings",
   "settings.language": "Language",
   "settings.reset": "Reset progress",
@@ -6593,7 +6638,55 @@ var BOLUM_7 = {
   decor: [],
   ground: 7315263,
 };
-var ce = [Qa, ei, ti, BOLUM_4, BOLUM_5, BOLUM_6, BOLUM_7, ...Array.from({ length: 9 }, (e, t) => ai(t + 8))];
+var BOLUM_8 = {
+  id: 8,
+  era: 1,
+  nameKey: "stage.8",
+  eventKey: "stage.8.event",
+  playable: !0,
+  startGold: 680,
+  castleHp: 20,
+  paths: [[b(-90, 300), b(230, 300), b(460, 380), b(640, 520), b(860, 600), b(1080, 640), b(1300, 700), b(1460, 860), b(1680, 940), b(1900, 860), b(1980, 680), b(2050, 540), b(2160, 520)], [b(-90, 1010), b(240, 1000), b(470, 900), b(680, 760), b(880, 680), b(1080, 640), b(1300, 700), b(1460, 860), b(1680, 940), b(1900, 860), b(1980, 680), b(2050, 540), b(2160, 520)]],
+  buildSpots: [b(1680, 780), b(1160, 780), b(1840, 680), b(1500, 720), b(2080, 800), b(960, 780), b(1320, 900), b(1080, 520), b(620, 640), b(860, 480), b(1280, 560), b(1800, 1040), b(1500, 1020), b(1980, 960), b(780, 840), b(1920, 500), b(460, 740), b(300, 440), b(180, 880)],
+  mineSpots: [],
+  castle: b(2190, 520),
+  newTowers: ["rune"],
+  newEnemies: ["garrik"],
+  bossName: "garrik",
+  waves: [
+    { groups: [
+        { enemy: "goblin", count: 14, interval: 0.8, delay: 0 },
+        { enemy: "armoredBandit", count: 3, interval: 2.4, delay: 5 },
+        { enemy: "raven", count: 6, interval: 0.9, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "shieldBandit", count: 5, interval: 1.8, delay: 0 },
+        { enemy: "goblinShaman", count: 3, interval: 2.6, delay: 3 },
+        { enemy: "wolf", count: 10, interval: 0.6, delay: 9 },
+    ] },
+    { groups: [
+        { enemy: "swampSlime", count: 4, interval: 2.6, delay: 0 },
+        { enemy: "armoredBandit", count: 4, interval: 2.2, delay: 5, elite: 1 },
+        { enemy: "raven", count: 8, interval: 0.9, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "goblin", count: 16, interval: 0.6, delay: 0, elite: 2 },
+        { enemy: "shieldBandit", count: 5, interval: 1.6, delay: 4, elite: 1 },
+        { enemy: "goblinShaman", count: 3, interval: 2.4, delay: 8 },
+        { enemy: "raven", count: 6, interval: 0.9, delay: 14 },
+    ] },
+    { groups: [
+        { enemy: "armoredBandit", count: 5, interval: 2, delay: 0, elite: 1 },
+        { enemy: "wolf", count: 10, interval: 0.6, delay: 4 },
+        { enemy: "shieldBandit", count: 4, interval: 1.8, delay: 10 },
+        { enemy: "garrik", count: 1, interval: 1, delay: 18 },
+    ] },
+  ],
+  mapPos: si[4],
+  decor: [],
+  ground: 7315263,
+};
+var ce = [Qa, ei, ti, BOLUM_4, BOLUM_5, BOLUM_6, BOLUM_7, BOLUM_8, ...Array.from({ length: 8 }, (e, t) => ai(t + 9))];
 function ya(e) {
   return e <= 2 ? 3 : e;
 }
@@ -6821,6 +6914,25 @@ var Te = {
       art: "boss_haydut_yuzbasi",
       color: 9059120,
     },
+    garrik: {
+      id: "garrik",
+      nameKey: "enemy.garrik",
+      descKey: "enemy.garrik.desc",
+      hp: 1200,
+      speed: 33,
+      armor: 0.4,
+      magicResist: 0.2,
+      gold: 180,
+      castleDamage: 10,
+      meleeDamage: 26,
+      meleeRate: 1.3,
+      flying: !1,
+      size: 36,
+      xp: 80,
+      boss: { ability: "rally", cooldown: 9 },
+      art: "boss_garrik",
+      color: 9055272,
+    },
   },
   fs = ["shielded", "fast", "regen", "explode"];
 function _a(e, t) {
@@ -6958,7 +7070,15 @@ var oe = {
       { cost: 140, damage: [18, 26], rate: 1.6, range: 310, splash: 85, poisonDps: 16, poisonTime: 4.5, armorBreak: 4 },
     ],
   },
-  rune: ct("rune", 8, "none", "none", "none", "magic", ["warRune", "quakeRune"]),
+  rune: {
+    ...ct("rune", 8, "none", "none", "none", "magic", ["warRune", "quakeRune"]),
+    implemented: !0,
+    levels: [
+      { cost: 120, damage: [0, 0], rate: 3, range: 260, buff: 0.15 },
+      { cost: 100, damage: [0, 0], rate: 3, range: 280, buff: 0.22 },
+      { cost: 150, damage: [0, 0], rate: 3, range: 300, buff: 0.3 },
+    ],
+  },
 };
 function ct(e, t, s, a, i, r, n) {
   let o = { cost: 100, damage: [10, 10], rate: 1, range: 280 };
@@ -8820,6 +8940,15 @@ class Ss {
       });
       return;
     }
+    if (this.def.id === "rune") {
+      if (this.silencedT > 0) return;
+      if (((this.pulseT = (this.pulseT ?? 0) + e), this.pulseT >= 3)) {
+        this.pulseT = 0;
+        if (this.s.towers.some((a) => a && a !== this && a.def.id !== "rune" && this.empowers(a)))
+          this.s.fx.ring(this.x, this.y, this.lv.range, 15255674, 700, 3);
+      }
+      return;
+    }
     if (this.def.id === "mine") {
       if (this.silencedT > 0 || !(this.s.enemies.length || this.s.waves.spawning)) return;
       if (((this.mineT = (this.mineT ?? 0) + e), this.mineT >= this.lv.interval)) {
@@ -8848,6 +8977,17 @@ class Ss {
     let s = this.attacking ? 0 : this.playAttack(t);
     if (s > 0) this.pending = { t: s, target: t };
     else this.fire(t);
+  }
+  empowers(e) {
+    let t = e.x - this.x,
+      s = (e.y - this.y) * 1.15;
+    return t * t + s * s <= this.lv.range * this.lv.range;
+  }
+  runeMul() {
+    let e = 1;
+    for (let t of this.s.towers)
+      if (t && t !== this && t.def.id === "rune" && t.silencedT <= 0 && t.empowers(this)) e = Math.max(e, 1 + t.lv.buff);
+    return e;
   }
   inRange(e) {
     if (!e.alive) return !1;
@@ -8891,7 +9031,7 @@ class Ss {
     let t = this.lv,
       s = this.x,
       a = this.y - 120 - this.level * 14,
-      i = mt(t.damage) * this.s.damageBuff;
+      i = mt(t.damage) * this.s.damageBuff * this.runeMul();
     if (this.def.id === "archer") {
       let r = (t.critChance ?? 0) + (this.s.heroId === "sarya" ? 0.05 : 0),
         n = Math.random() < r;
@@ -10491,6 +10631,10 @@ class Rs extends Phaser.Scene {
       for (let s = 0; s < 3; s++)
         this.spawnEnemy("goblin", e.pathIndex, null, this.waves.index, Math.max(0, e.dist - 30 - s * 26), e);
       (this.fx.ring(e.x, e.y, 120, 8367678, 500, 8), this.fx.floatText(e.x, e.y - 140, "!", "#c6ff7a", 60));
+    } else if (t === "rally") {
+      (this.fx.ring(e.x, e.y, 300, 13382451, 650, 10), this.fx.floatText(e.x, e.y - 170, m("hud.rallied"), "#ff9a7a", 34));
+      for (let s of this.enemiesNear(e.x, e.y, 300))
+        ((s.shieldHp = Math.max(s.shieldHp, s === e ? 120 : 50)), (s.status.haste = 0.25), (s.status.hasteT = 4));
     } else if (t === "howl") {
       this.fx.ring(e.x, e.y, 280, 9318181, 700, 10);
       for (let s of this.enemiesNear(e.x, e.y, 280)) ((s.status.haste = 0.35), (s.status.hasteT = 4));
@@ -10836,6 +10980,17 @@ var Hs = {
     post: [
       { speaker: "aldric", key: "dlg.7.post.0" },
       { speaker: "thorgar", key: "dlg.7.post.1" },
+    ],
+  },
+  8: {
+    pre: [
+      { speaker: "aldric", key: "dlg.8.pre.0" },
+      { speaker: "velmora", key: "dlg.8.pre.1" },
+      { speaker: "sarya", key: "dlg.8.pre.2" },
+    ],
+    post: [
+      { speaker: "sarya", key: "dlg.8.post.0" },
+      { speaker: "aldric", key: "dlg.8.post.1" },
     ],
   },
 };
@@ -11346,6 +11501,7 @@ class Os extends Phaser.Scene {
           y(i?.soldiers?.armor, r?.soldiers?.armor),
         ]));
     } else if (n.income) p.push([m("hud.income"), "+" + n.income + " / " + n.interval + " sn", y(i?.income, r?.income)]);
+    else if (n.buff) p.push([m("hud.buff"), "+" + Math.round(n.buff * 100) + "%", y(i?.buff, r?.buff)]);
     else
       (p.push([m("hud.damage"), n.damage[0] + "–" + n.damage[1], y(i?.damage, r?.damage)]),
         p.push([m("hud.rate"), _(n.rate), y(_(i?.rate ?? 0), _(r?.rate ?? 0))]),
@@ -11376,6 +11532,7 @@ class Os extends Phaser.Scene {
     if (t.soldiers)
       a.push([m("hud.soldiers"), `3 × ${e.soldierHp()} ❤  ${t.soldiers.damage[0]}–${t.soldiers.damage[1]} ⚔`]);
     else if (t.income) a.push([m("hud.income"), `+${t.income} / ${t.interval} sn`]);
+    else if (t.buff) a.push([m("hud.buff"), `+${Math.round(t.buff * 100)}%`]);
     else
       (a.push([m("hud.damage"), `${t.damage[0]}–${t.damage[1]}`]), a.push([m("hud.rate"), t.rate.toFixed(2) + " sn"]));
     if (!t.income) a.push([m("hud.range"), String(t.range)]);
