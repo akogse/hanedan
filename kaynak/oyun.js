@@ -1086,6 +1086,60 @@ var zt = {
       originY: 0.8382,
       bodyHeight: 270.0,
     },
+    kule_simyaci_1_bekle: {
+      url: "assets/anim_kule_simyaci_1_bekle.webp",
+      frameWidth: 190,
+      frameHeight: 286,
+      frames: 36,
+      originX: 0.5795,
+      originY: 0.8452,
+      bodyHeight: 270.0,
+    },
+    kule_simyaci_1_saldiri: {
+      url: "assets/anim_kule_simyaci_1_saldiri.webp",
+      frameWidth: 413,
+      frameHeight: 281,
+      frames: 18,
+      originX: 0.4499,
+      originY: 0.8323,
+      bodyHeight: 270.0,
+    },
+    kule_simyaci_2_bekle: {
+      url: "assets/anim_kule_simyaci_2_bekle.webp",
+      frameWidth: 193,
+      frameHeight: 288,
+      frames: 36,
+      originX: 0.5055,
+      originY: 0.8718,
+      bodyHeight: 270.0,
+    },
+    kule_simyaci_2_saldiri: {
+      url: "assets/anim_kule_simyaci_2_saldiri.webp",
+      frameWidth: 204,
+      frameHeight: 294,
+      frames: 18,
+      originX: 0.5486,
+      originY: 0.8737,
+      bodyHeight: 270.0,
+    },
+    kule_simyaci_3_bekle: {
+      url: "assets/anim_kule_simyaci_3_bekle.webp",
+      frameWidth: 173,
+      frameHeight: 274,
+      frames: 36,
+      originX: 0.5,
+      originY: 0.8752,
+      bodyHeight: 270.0,
+    },
+    kule_simyaci_3_saldiri: {
+      url: "assets/anim_kule_simyaci_3_saldiri.webp",
+      frameWidth: 361,
+      frameHeight: 273,
+      frames: 18,
+      originX: 0.7158,
+      originY: 0.8747,
+      bodyHeight: 270.0,
+    },
     kule_ayaz_1_bekle: {
       url: "assets/anim_kule_ayaz_1_bekle.webp",
       frameWidth: 308,
@@ -1871,6 +1925,11 @@ var $t = {
   "dlg.6.pre.2": "Çamurdan bir şeyler kıpırdıyor. Kestiğinde ikiye bölünüyor, dikkatli olun.",
   "dlg.6.post.0": "Şamanın çantasından mühürlü bir mektup çıktı. Mühür kazınmamış: kırmızı bir pençe.",
   "dlg.6.post.1": "Redclaw. Garrik Redclaw. Kuzeyin eski lordu, sürgüne gönderildiğini sanıyorduk.",
+  "dlg.7.pre.0": "Garrik'in yağmacı kampı ileride. Kazık duvarın iki yanından da adam akıtıyorlar.",
+  "dlg.7.pre.1": "Simyacı Kulesi'ni kurdum. İksiri zırhı yumuşatır, zehri de yavaş ama emin öldürür.",
+  "dlg.7.pre.2": "Zehirlenmiş birine ateş değerse patlar. Ocakla iksiri yan yana kurun.",
+  "dlg.7.post.0": "Kamp düştü. Ama Garrik burada değil; adamları onun kalesine çekildi.",
+  "dlg.7.post.1": "O zaman kalesine gideriz. Bu iş orada bitecek.",
   "settings.title": "Ayarlar",
   "settings.language": "Dil",
   "settings.reset": "İlerlemeyi sıfırla",
@@ -2213,6 +2272,11 @@ var Ls = {
   "dlg.6.pre.2": "Something is moving in the mud. Cut it and it splits in two. Be careful.",
   "dlg.6.post.0": "A sealed letter was in the shaman's pouch. This seal wasn't scratched off: a red claw.",
   "dlg.6.post.1": "Redclaw. Garrik Redclaw. The old lord of the north. We thought he was in exile.",
+  "dlg.7.pre.0": "Garrik's raider camp lies ahead. They are pouring men out of both sides of the palisade.",
+  "dlg.7.pre.1": "I've built the Alchemist Tower. Its brew softens armor, and the poison kills slowly but surely.",
+  "dlg.7.pre.2": "Fire touching a poisoned foe makes it explode. Build the forge and the alchemist side by side.",
+  "dlg.7.post.0": "The camp has fallen. But Garrik isn't here; his men fell back to his keep.",
+  "dlg.7.post.1": "Then we go to his keep. This ends there.",
   "settings.title": "Settings",
   "settings.language": "Language",
   "settings.reset": "Reset progress",
@@ -6481,7 +6545,55 @@ var BOLUM_6 = {
   decor: [],
   ground: 5799525,
 };
-var ce = [Qa, ei, ti, BOLUM_4, BOLUM_5, BOLUM_6, ...Array.from({ length: 10 }, (e, t) => ai(t + 7))];
+var BOLUM_7 = {
+  id: 7,
+  era: 1,
+  nameKey: "stage.7",
+  eventKey: "stage.7.event",
+  playable: !0,
+  startGold: 640,
+  castleHp: 20,
+  paths: [[b(-90, 560), b(200, 560), b(420, 430), b(700, 330), b(1000, 310), b(1300, 350), b(1520, 470), b(1700, 610), b(1920, 650), b(2160, 650)], [b(-90, 560), b(200, 560), b(420, 690), b(700, 810), b(1000, 870), b(1300, 850), b(1520, 750), b(1700, 610), b(1920, 650), b(2160, 650)]],
+  buildSpots: [b(1880, 520), b(1720, 740), b(1480, 620), b(440, 560), b(180, 420), b(180, 700), b(1700, 460), b(1900, 800), b(620, 500), b(340, 320), b(340, 800), b(1300, 720), b(1320, 520), b(1140, 440), b(800, 440), b(1040, 740), b(1580, 880), b(1000, 140), b(900, 1060)],
+  mineSpots: [],
+  castle: b(2190, 650),
+  newTowers: ["alchemist"],
+  newEnemies: [],
+  waves: [
+    { groups: [
+        { enemy: "goblin", count: 12, interval: 0.9, delay: 0 },
+        { enemy: "shieldBandit", count: 3, interval: 2.2, delay: 5 },
+        { enemy: "wolf", count: 6, interval: 0.7, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "armoredBandit", count: 4, interval: 2.4, delay: 0 },
+        { enemy: "goblinShaman", count: 2, interval: 3, delay: 4 },
+        { enemy: "goblin", count: 10, interval: 0.8, delay: 6 },
+        { enemy: "raven", count: 6, interval: 0.9, delay: 12 },
+    ] },
+    { groups: [
+        { enemy: "swampSlime", count: 3, interval: 2.8, delay: 0 },
+        { enemy: "shieldBandit", count: 4, interval: 2, delay: 4 },
+        { enemy: "wolf", count: 10, interval: 0.6, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "armoredBandit", count: 5, interval: 2.2, delay: 0, elite: 1 },
+        { enemy: "goblinShaman", count: 3, interval: 2.5, delay: 4 },
+        { enemy: "raven", count: 8, interval: 0.9, delay: 8 },
+        { enemy: "goblin", count: 14, interval: 0.7, delay: 12, elite: 1 },
+    ] },
+    { groups: [
+        { enemy: "shieldBandit", count: 5, interval: 1.7, delay: 0, elite: 1 },
+        { enemy: "armoredBandit", count: 5, interval: 2, delay: 4, elite: 1 },
+        { enemy: "swampSlime", count: 3, interval: 2.6, delay: 8 },
+        { enemy: "raven", count: 8, interval: 0.8, delay: 14 },
+    ] },
+  ],
+  mapPos: si[3],
+  decor: [],
+  ground: 7315263,
+};
+var ce = [Qa, ei, ti, BOLUM_4, BOLUM_5, BOLUM_6, BOLUM_7, ...Array.from({ length: 9 }, (e, t) => ai(t + 8))];
 function ya(e) {
   return e <= 2 ? 3 : e;
 }
@@ -6837,7 +6949,15 @@ var oe = {
       { cost: 130, damage: [70, 92], rate: 1.2, range: 410 },
     ],
   },
-  alchemist: ct("alchemist", 7, "ground", "unpoisoned", "poison", "magic", ["plague", "acid"]),
+  alchemist: {
+    ...ct("alchemist", 7, "ground", "unpoisoned", "poison", "magic", ["plague", "acid"]),
+    implemented: !0,
+    levels: [
+      { cost: 110, damage: [8, 12], rate: 1.7, range: 280, splash: 70, poisonDps: 7, poisonTime: 4, armorBreak: 3 },
+      { cost: 95, damage: [12, 18], rate: 1.65, range: 295, splash: 75, poisonDps: 11, poisonTime: 4, armorBreak: 3.5 },
+      { cost: 140, damage: [18, 26], rate: 1.6, range: 310, splash: 85, poisonDps: 16, poisonTime: 4.5, armorBreak: 4 },
+    ],
+  },
   rune: ct("rune", 8, "none", "none", "none", "magic", ["warRune", "quakeRune"]),
 };
 function ct(e, t, s, a, i, r, n) {
@@ -8604,7 +8724,7 @@ class Ss {
       i =
         this.def.id === "barracks"
           ? 1.6
-          : Math.min({ archer: 1.4, frost: 1.6, fire: 1.9, ballista: 1.8, storm: 1.6 }[this.def.id] ?? 1.4, this.lv.rate * 0.9),
+          : Math.min({ archer: 1.4, frost: 1.6, fire: 1.9, ballista: 1.8, storm: 1.6, alchemist: 1.4 }[this.def.id] ?? 1.4, this.lv.rate * 0.9),
       r = "vurus_" + t + "_" + Math.round(i * 100);
     if (!s.anims.exists(r))
       s.anims.create({ key: r, frames: s.anims.generateFrameNumbers(t, {}), frameRate: a / i, repeat: 0 });
@@ -8757,6 +8877,10 @@ class Ss {
         let s = e.filter((a) => a.status.slowTotal(a.boss) === 0 && !a.status.frozen);
         return t(s.length ? s : e);
       }
+      case "unpoisoned": {
+        let s = e.filter((a) => !a.status.poisoned);
+        return t(s.length ? s : e);
+      }
       case "mostArmored":
         return e.reduce((s, a) => (a.armor > s.armor ? a : s));
       default:
@@ -8803,6 +8927,22 @@ class Ss {
           0.75,
         ),
       );
+    } else if (this.def.id === "alchemist") {
+      let r = t.splash ?? 70;
+      (this.s.addProjectile(
+        new Me(this.s, "magic", s, a - 10, e, null, 900, (n, o) => {
+          this.s.fx.ring(n, o, r, 9500544, 380, 6);
+          for (let l of this.s.enemiesNear(n, o, r)) {
+            if (l.flying) continue;
+            (this.s.combat.hit(l, i, { kind: "magic", element: "poison" }),
+              l.alive &&
+                ((l.status.poisonDps = Math.max(l.status.poisonT > 0 ? l.status.poisonDps : 0, t.poisonDps ?? 7)),
+                (l.status.poisonT = Math.max(l.status.poisonT, t.poisonTime ?? 4)),
+                (l.status.armorBrokenT = Math.max(l.status.armorBrokenT, t.armorBreak ?? 3))));
+          }
+        }),
+      ),
+        V("muhur", { volume: 0.3, minGapMs: 120 }));
     } else if (this.def.id === "eagle") {
       (this.s.addProjectile(
         new Me(this.s, "arrow", s, a - 10, e, null, 1300, (r, n, o) => {
@@ -10685,6 +10825,17 @@ var Hs = {
     post: [
       { speaker: "sarya", key: "dlg.6.post.0" },
       { speaker: "aldric", key: "dlg.6.post.1" },
+    ],
+  },
+  7: {
+    pre: [
+      { speaker: "sarya", key: "dlg.7.pre.0" },
+      { speaker: "thorgar", key: "dlg.7.pre.1" },
+      { speaker: "velmora", key: "dlg.7.pre.2" },
+    ],
+    post: [
+      { speaker: "aldric", key: "dlg.7.post.0" },
+      { speaker: "thorgar", key: "dlg.7.post.1" },
     ],
   },
 };

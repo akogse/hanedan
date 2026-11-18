@@ -14,8 +14,8 @@ const stageId=+process.argv[2], plan=JSON.parse(process.argv[3]), out=process.ar
   const res=await p.evaluate((plan)=>{
     const sc=window.__g.scene.getScene('Battle'); const log={mineGold:0,bolt:0,boltDmg:0,kills:0,events:[]};
     const fc=sc.fx.coin.bind(sc.fx); sc.fx.coin=(x,y,a)=>{ if(sc.towers.some(t=>t&&t.def.id==="mine"&&t.x===x&&t.y-110===y)) log.mineGold+=a; return fc(x,y,a); };
-    const oh=sc.combat.hit.bind(sc.combat); sc.combat.hit=(e,d,o)=>{ const r=oh(e,d,o); if(o.pierce!==undefined){log.bolt++; log.boltDmg+=r;} if(o.element==="lightning"){log.zap=(log.zap||0)+1; log.zapDmg=(log.zapDmg||0)+r;} if(e.flying){log.airHits=(log.airHits||0)+1;} return r; };
-    const ek=sc.enemyKilled.bind(sc); sc.enemyKilled=(e)=>{ log.kills++; if(e.flying) log.ravenKills=(log.ravenKills||0)+1; return ek(e); }; const er=sc.enemyReachedCastle.bind(sc); sc.enemyReachedCastle=(e)=>{ log.leak=(log.leak||[]); log.leak.push(e.def.id); return er(e); };
+    const oh=sc.combat.hit.bind(sc.combat); sc.combat.hit=(e,d,o)=>{ const r=oh(e,d,o); if(o.pierce!==undefined){log.bolt++; log.boltDmg+=r;} if(o.element==="lightning"){log.zap=(log.zap||0)+1; log.zapDmg=(log.zapDmg||0)+r;} if(e.flying){log.airHits=(log.airHits||0)+1;} if(o.element==="poison"){log.poisonHits=(log.poisonHits||0)+1; if(e.status.armorBrokenT>0) log.armorBroken=(log.armorBroken||0)+1;} return r; };
+    const cf=sc.fx.comboFlash.bind(sc.fx); sc.fx.comboFlash=(a,b,c)=>{ log.combo=log.combo||{}; log.combo[c]=(log.combo[c]||0)+1; return cf(a,b,c); }; const ek=sc.enemyKilled.bind(sc); sc.enemyKilled=(e)=>{ log.kills++; if(e.flying) log.ravenKills=(log.ravenKills||0)+1; return ek(e); }; const er=sc.enemyReachedCastle.bind(sc); sc.enemyReachedCastle=(e)=>{ log.leak=(log.leak||[]); log.leak.push(e.def.id); return er(e); };
     sc.game.loop.sleep && sc.game.loop.sleep();
     let step=0, pi=0; const dt=50;
     sc.setPaused && sc.setPaused(false); sc.paused=false;
@@ -36,7 +36,7 @@ const stageId=+process.argv[2], plan=JSON.parse(process.argv[3]), out=process.ar
     const hp=sc.castleHp; log.wave=sc.waves.index+1; log.alive=sc.enemies.length;
     return {ended:sc.ended, victory:sc.victory, time:(step*dt/1000).toFixed(0), castle:hp, gold:sc.gold, ...log};
   },plan);
-  console.log(JSON.stringify(res,null,1));
+  if(res.leak){const c={};res.leak.forEach(x=>c[x]=(c[x]||0)+1);res.leak=c;} res.events=res.events.filter(x=>x.includes("dalga")); console.log(JSON.stringify(res));
   await p.screenshot({path:out});
   console.log('errors:',errs.length?errs.join('\n'):'none'); await b.close();
 })();
