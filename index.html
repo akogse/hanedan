@@ -177,6 +177,13 @@
     kule_ayaz_1: "assets/kule_ayaz_1.webp",
     kule_ayaz_2: "assets/kule_ayaz_2.webp",
     kule_ayaz_3: "assets/kule_ayaz_3.webp",
+    kule_ayaz_dal_firtina: "assets/kule_ayaz_dal_firtina.webp",
+    kule_ayaz_dal_muhur: "assets/kule_ayaz_dal_muhur.webp",
+    duman: "assets/duman.webp",
+    parcacik: "assets/parcacik.webp",
+    mermi_buz: "assets/mermi_buz.webp",
+    mermi_ates: "assets/mermi_ates.webp",
+    mermi_ok: "assets/mermi_ok.webp",
     kule_balista_1: "assets/kule_balista_1.webp",
     kule_balista_2: "assets/kule_balista_2.webp",
     kule_balista_3: "assets/kule_balista_3.webp",
@@ -5062,6 +5069,8 @@ var xt = {
   kule_ayaz_1: { w: 175, ox: 0.5, oy: 0.8 },
   kule_ayaz_2: { w: 175, ox: 0.5, oy: 0.81 },
   kule_ayaz_3: { w: 175, ox: 0.5, oy: 0.82 },
+  kule_ayaz_dal_firtina: { w: 148, ox: 0.5, oy: 0.8 },
+  kule_ayaz_dal_muhur: { w: 149, ox: 0.5, oy: 0.8 },
   kule_balista_1: { w: 186, ox: 0.5, oy: 0.794 },
   kule_balista_2: { w: 185, ox: 0.5, oy: 0.793 },
   kule_balista_3: { w: 186, ox: 0.5, oy: 0.793 },
@@ -5242,7 +5251,7 @@ function ha(e) {
   return Rt[e] ?? null;
 }
 function Q(e) {
-  return e in et;
+  return e in et && (!ke || ke.textures.exists(e));
 }
 function Ft(e, t, s, a = 1) {
   let i = e.add.sprite(0, 0, t, 0);
