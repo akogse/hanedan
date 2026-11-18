@@ -5384,7 +5384,7 @@ class ls extends Phaser.Scene {
       a = T / 2 - t / 2,
       i = w * 0.62,
       r = this.add
-        .text(T / 2, w * 0.44, "HANEDAN KUŞATMASI", {
+        .text(T / 2, w * 0.44, "DYNASTY SIEGE", {
           fontFamily: "Cinzel, 'Trajan Pro', Georgia, serif",
           fontStyle: "700",
           fontSize: "76px",
@@ -5411,7 +5411,20 @@ class ls extends Phaser.Scene {
         e.strokeRoundedRect(a - 3, i - 3, t + 6, s + 6, 7),
         n.setText(Math.round(l * 100) + "%"));
     };
-    (o(0), this.load.on("progress", o), da(this), Fs(this));
+    // yükleme görseli her şeyden önce iner ve gelir gelmez arkaya serilir
+    (this.load.image("yukleme_arka_plani", "assets/yukleme_arka_plani.webp?v=1bbbae23"),
+      this.load.once("filecomplete-image-yukleme_arka_plani", () => {
+        let l = this.add.image(T / 2, w / 2, "yukleme_arka_plani").setDepth(-2).setAlpha(0);
+        l.setScale(Math.max(T / l.width, w / l.height));
+        let d = this.add.graphics().setDepth(-1);
+        (d.fillGradientStyle(0, 0, 0, 0, 0, 0, 0.85, 0.85), d.fillRect(0, w * 0.5, T, w * 0.5));
+        (r.setY(w * 0.76), e.setY(w * 0.84 - i), n.setY(w * 0.84 + 44), r.setShadow(0, 4, "#000", 12, !1, !0));
+        this.tweens.add({ targets: l, alpha: 1, duration: 700 });
+      }),
+      o(0),
+      this.load.on("progress", o),
+      da(this),
+      Fs(this));
   }
   async create() {
     (ua(this), Ys(this.game));
@@ -7554,10 +7567,10 @@ class _s extends Phaser.Scene {
       if ((y.setScale(150 / y.height), r)) y.setTint(16769712);
       n.add(y);
     } else n.add(o);
-    if ((s || i) && M(d))
+    if (M(d))
       n.add(
         this.add
-          .text(0, 2, String(e.id), { fontFamily: D, fontStyle: "900", fontSize: "38px", color: "#f4dc90" })
+          .text(0, 2, String(e.id), { fontFamily: D, fontStyle: "900", fontSize: "38px", color: s || i ? "#f4dc90" : "#8d8676" })
           .setOrigin(0.5)
           .setShadow(0, 2, "#000", 6, !1, !0),
       );
@@ -7600,14 +7613,14 @@ class _s extends Phaser.Scene {
     if (e.era === 2 && bt() < Nt[1].starsRequired) n.setAlpha(0.3);
     if (s) {
       let y = this.add.graphics();
-      (y.fillStyle(660528, 0.85), y.fillRoundedRect(-66, 64, 132, 30, 15), n.add(y));
+      (y.fillStyle(660528, 0.9), y.fillRoundedRect(-78, 62, 156, 34, 17), y.lineStyle(1.5, 14200904, 0.7), y.strokeRoundedRect(-78, 62, 156, 34, 17), n.add(y));
       for (let k = 0; k < 5; k++)
         n.add(
           de(
-            this.add.image((k - 2) * 24, 79, k < a ? "ikon_yildiz" : "ikon_yildiz_bos"),
+            this.add.image((k - 2) * 28, 79, k < a ? "ikon_yildiz" : "ikon_yildiz_bos"),
             k < a ? "ikon_yildiz" : "ikon_yildiz_bos",
-            0.4,
-          ).setTint(k < a ? 16777215 : 4210752).setAlpha(k < a ? 1 : 0.55),
+            0.48,
+          ).setTint(k < a ? 16771210 : 7368816).setAlpha(k < a ? 1 : 0.85),
         );
     }
     if (i && M("harita_bayragi")) {
@@ -7759,41 +7772,43 @@ class _s extends Phaser.Scene {
       t = Be,
       s = T - Be,
       a = this.add.graphics().setDepth(60);
-    if (
-      (a.fillGradientStyle(858168, 858168, 396060, 396060, 0.96),
-      a.fillRect(-Ke, 0, at, 128),
-      a.lineStyle(2, 14200904, 1),
-      a.lineBetween(-Ke, 128, T + Ke, 128),
-      a.lineStyle(1, 14200904, 0.5),
-      a.lineBetween(-Ke, 122, T + Ke, 122),
-      M("ayrac"))
-    ) {
-      let r = this.add.image(T / 2, 128, "ayrac").setDepth(61);
-      r.setDisplaySize(620, (620 * r.height) / r.width);
-    }
-    (wt(C(this, t + 50, 64, "ikon_tac", 1), 84).setDepth(61),
+    // düz lacivert şerit yerine haritayı kapatmayan yumuşak gölge; kaynaklar savaştaki plakalarla aynı tasarım
+    (a.fillGradientStyle(396060, 396060, 396060, 396060, 0.9, 0.9, 0, 0), a.fillRect(-Ke, 0, at, 170));
+    (wt(C(this, t + 54, 70, "ikon_tac", 1), 88).setDepth(61),
       this.add
-        .text(t + 104, 14, G(e.kingdom || m("intro.kingdomDefault")), {
+        .text(t + 112, 20, G(e.kingdom || m("intro.kingdomDefault")), {
           fontFamily: D,
           fontStyle: "700",
           fontSize: "42px",
           color: "#f4dc90",
         })
         .setLetterSpacing(4)
+        .setShadow(0, 3, "#000", 8, !1, !0)
         .setDepth(61),
-      this.add.text(t + 106, 70, e.identity ? m("identity." + e.identity) : "", z(28, "#c4cce0", "800")).setDepth(61),
-      [
-        ["ikon_hazine", String(e.treasure), m("map.treasure")],
-        ["ikon_elmas", String(e.diamonds), m("map.diamonds")],
-        ["ikon_yildiz", String(bt()), m("map.stars")],
-      ].forEach(([r, n, o], l) => {
-        let d = s - 1020 + l * 345;
-        (wt(C(this, d + 34, 64, r, 1), 76).setDepth(61),
-          this.add
-            .text(d + 82, 12, n, { fontFamily: D, fontStyle: "700", fontSize: "40px", color: "#f4dc90" })
-            .setDepth(61),
-          this.add.text(d + 82, 70, o, z(26, "#c4cce0", "800")).setDepth(61));
-      }));
+      this.add
+        .text(t + 114, 76, e.identity ? m("identity." + e.identity) : "", z(28, "#d9dfee", "800"))
+        .setShadow(0, 2, "#000", 6, !1, !0)
+        .setDepth(61));
+    let r = [
+        ["ikon_hazine", String(e.treasure ?? 0), 0.7],
+        ["ikon_elmas", String(e.diamonds ?? 0), 0.62],
+        ["ikon_yildiz", String(bt()), 0.62],
+      ],
+      n = 330,
+      o = 18;
+    r.forEach(([l, d, h], u) => {
+      let f = s - (r.length - u) * (n + o) + o + n / 2;
+      if (M("hud_kaynak_plakasi")) {
+        let _ = this.add.image(f, 72, "hud_kaynak_plakasi").setDepth(60.5);
+        _.setDisplaySize(n, (n * _.height) / _.width);
+      }
+      let g = C(this, f - n / 2 + n * 0.24, 72, l, 1).setOrigin(0.5).setDepth(61);
+      (g.setScale((g.scaleX * (68 * h) / 0.62) / Math.max(g.displayWidth, g.displayHeight)),
+        this.add
+          .text(f - n / 2 + n * 0.42, 70, d, Z(40, l === "ikon_hazine" ? "#f4dc90" : "#ffffff"))
+          .setOrigin(0, 0.5)
+          .setDepth(61));
+    });
   }
   drawBottomBar() {
     let e = [
