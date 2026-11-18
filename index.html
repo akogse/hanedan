@@ -12214,5 +12214,17 @@ window.__game = Cs;
 Ks(() => !Cs.scene.isActive("Battle"));
 </script>
 
-<script>if('serviceWorker' in navigator) addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));</script>
+<script>
+if ('serviceWorker' in navigator) {
+  // yeni sürüm gelince eski kopyayla devam etme: yeni çalışan devraldığı an sayfayı bir kez yenile
+  var yenilendi = false, ilkKurulum = !navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange', function () { if (ilkKurulum || yenilendi) return; yenilendi = true; location.reload(); });
+  addEventListener('load', function () {
+    navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(function (k) {
+      k.update().catch(function () {});
+      document.addEventListener('visibilitychange', function () { if (!document.hidden) k.update().catch(function () {}); });
+    }).catch(function () {});
+  });
+}
+</script>
 </body></html>
