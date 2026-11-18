@@ -81,6 +81,7 @@ var zt = {
     ipucu_balonu: "assets/ipucu_balonu.webp",
     kahraman_aldric: "assets/kahraman_aldric.webp",
     kahraman_aldric_portre: "assets/kahraman_aldric_portre.webp",
+    kahraman_villager_portre: "assets/kahraman_villager_portre.webp",
     kahraman_sarya: "assets/kahraman_sarya.webp",
     kahraman_sarya_portre: "assets/kahraman_sarya_portre.webp",
     kahraman_thorgar: "assets/kahraman_thorgar.webp",
@@ -909,6 +910,15 @@ var zt = {
       originY: 0.9853,
       bodyHeight: 346.5,
     },
+    kahraman_aldric_yuru_arka: {
+      url: "assets/anim_kahraman_aldric_yuru_arka.webp",
+      frameWidth: 269,
+      frameHeight: 354,
+      frames: 20,
+      originX: 0.5019,
+      originY: 0.9729,
+      bodyHeight: 342.0,
+    },
     kahraman_aldric_yuru: {
       url: "assets/anim_kahraman_aldric_yuru.webp",
       frameWidth: 282,
@@ -1415,6 +1425,10 @@ var zt = {
     },
   },
   tt = {
+    muzik_harita: "ses/muzik_harita.mp3",
+    muzik_kesif: "ses/muzik_kesif.mp3",
+    muzik_savas: "ses/muzik_savas.mp3",
+    muzik_boss: "ses/muzik_boss.mp3",
     altin: "ses/altin.mp3",
     altin_2: "ses/altin_2.mp3",
     altin_3: "ses/altin_3.mp3",
@@ -2466,6 +2480,7 @@ function Ns(e) {
   (Xs(), (pt = e), (Et = "kesif"));
   for (let s of ["kesif", "savas", "boss"]) {
     let a = e + "_" + s;
+    if (!(a in tt)) a = "muzik_" + s;
     if (!(a in tt)) continue;
     let i = ke.sound.add(a, { loop: !0, volume: 0 });
     (i.play(), (Le[s] = i));
@@ -2478,6 +2493,9 @@ function Vs(e) {
   let t = Le[Et];
   if (((Et = e), t)) yt(t, 0, 1400);
   yt(Le[e], Ee.music, 1400);
+}
+function muzikDurum(e) {
+  if (Le[e]) Vs(e);
 }
 function We(e = "light") {
   let s = window.Capacitor?.Plugins?.Haptics;
@@ -5096,6 +5114,7 @@ var xt = {
   boss_kemik_krali: { h: 240, ox: 0.5, oy: 0.97 },
   kahraman_aldric: { h: 150, ox: 0.52, oy: 0.97 },
   kahraman_aldric_portre: { h: 160, ox: 0.5, oy: 0.5, focus: { x: 0.5, y: 0.4, span: 0.6 } },
+  kahraman_villager_portre: { h: 160, ox: 0.5, oy: 0.5, focus: { x: 0.45, y: 0.4, span: 0.62 } },
   kahraman_sarya: { h: 148, ox: 0.5, oy: 0.97 },
   kahraman_sarya_portre: { h: 160, ox: 0.5, oy: 0.5, focus: { x: 0.56, y: 0.36, span: 0.62 } },
   kahraman_velmora: { h: 152, ox: 0.5, oy: 0.97 },
@@ -7463,7 +7482,7 @@ class _s extends Phaser.Scene {
           .text(0, 1, String(e.id), { fontFamily: D, fontStyle: "700", fontSize: "36px", color: "#f1e3c2" })
           .setOrigin(0.5),
       );
-    else if (!M(d)) n.add(de(this.add.image(0, 0, "ikon_kilit"), "ikon_kilit", 0.8).setAlpha(0.85));
+    else n.add(de(this.add.image(0, 0, "ikon_kilit"), "ikon_kilit", 0.8).setAlpha(0.85));
     let h = G(m(e.nameKey)),
       u = this.add
         .text(0, M(d) ? -100 : -78, h, {
@@ -7478,8 +7497,9 @@ class _s extends Phaser.Scene {
       _ = this.add.graphics();
     _.fillStyle(s ? 3808276 : 2827808, s ? 0.92 : 0.75);
     let g = M(d) ? -118 : -96;
-    if (e.mapPos.y < 280) g = M(d) ? 86 : 70;
-    if (g > 0) u.setY(g + 18);
+    // 6 ve 7 birbirine ve üst çubuğa çok yakın: etiketleri düğümün sağına
+    let yan = [6, 7].includes(e.id) ? (M(d) ? 86 : 70) + f / 2 + 14 : 0;
+    if (yan) ((g = -18), u.setPosition(yan, 0), (_.x = yan));
     if (!s && !i) (u.setVisible(!1), _.setVisible(!1));
     if (
       (_.fillStyle(s ? 858168 : 1842984, s ? 0.92 : 0.75),
@@ -7704,7 +7724,7 @@ class _s extends Phaser.Scene {
     e.forEach(([n, o, l], d) => {
       let h = r + s[d] / 2;
       ((r += s[d] + a),
-        F(this, h, w - 72, s[d], 104, o, () => !this.modal.length && l(), d === 0 ? "gold" : "stone", {
+        F(this, h, w - 72, s[d], 104, o, () => !this.modal.length && l(), "stone", {
           icon: n,
           size: 36,
         }).setDepth(61));
@@ -10509,6 +10529,7 @@ class Rs extends Phaser.Scene {
       o = _a(this.stage.id, a + 1),
       l = this.paths[t % this.paths.length],
       d = new ws(this, n, l, t, o.hp, o.speed, s, i);
+    if (n.boss) muzikDurum("boss");
     if (r) d.view.setAlpha(0);
     if ((this.enemies.push(d), r)) this.tweens.add({ targets: d.view, alpha: 1, duration: 300 });
     if (n.boss) this.events.emit("bossIncoming", d);
@@ -10799,6 +10820,7 @@ class Rs extends Phaser.Scene {
   }
   startNextWave(e = !0) {
     if (this.ended || this.waves.spawning) return;
+    muzikDurum("savas");
     if (e && this.waves.countdown > 0) {
       let s = Math.ceil(this.waves.countdown * Ut);
       this.gold += s;
@@ -10884,7 +10906,7 @@ class Rs extends Phaser.Scene {
     if (a.running && !a.spawning && !a.isLast && a.countdown < 0 && a.index >= 0) a.countdown = Vt;
     if (a.finished(this.enemies.length))
       if (((a.running = !1), a.isLast)) this.time.delayedCall(900, () => this.finish(!0));
-      else this.events.emit("waveCleared", a.index);
+      else (this.events.emit("waveCleared", a.index), muzikDurum("kesif"));
     if (a.countdown > 0) {
       if (!this.enemies.length) a.countdown = Math.min(a.countdown, Pa);
       if (((a.countdown -= s), a.countdown <= 0)) this.startNextWave(!1);
@@ -11669,7 +11691,7 @@ class Os extends Phaser.Scene {
               p = w - 290,
               y = h ? g + 220.5 : g + 1500 - 220.5,
               k = p - 212.40234375 + 198.80859375;
-            if (l) a.add(Ae(this, y, k, 128, "kahraman_" + o.speaker + "_portre", he[o.speaker].color));
+            if (l || Q("kahraman_" + o.speaker + "_portre")) a.add(Ae(this, y, k, 128, "kahraman_" + o.speaker + "_portre", he[o.speaker]?.color ?? 9075298));
             else
               (a.add(this.add.circle(y, k, 132, 858168)),
                 a.add(this.add.text(y, k, "?", ge(110, "#f4dc90")).setOrigin(0.5)));
@@ -11689,7 +11711,7 @@ class Os extends Phaser.Scene {
               a.add(ne(this, v, p - 212.40234375 + 161.42578125, m(o.key), R, 32, "#eef0f6")),
               a.add(this.add.text(v + R, p + 212.40234375 - 106.201171875, "▶", z(28, "#f4dc90")).setOrigin(1, 0.5)));
           } else {
-            if (l) a.add(Ae(this, u, w - 300, 140, "kahraman_" + o.speaker + "_portre", he[o.speaker].color));
+            if (l || Q("kahraman_" + o.speaker + "_portre")) a.add(Ae(this, u, w - 300, 140, "kahraman_" + o.speaker + "_portre", he[o.speaker]?.color ?? 9075298));
             else
               (a.add(this.add.circle(u, w - 300, 148, 1840142)),
                 a.add(this.add.circle(u, w - 300, 140, 9075298)),
