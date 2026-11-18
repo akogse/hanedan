@@ -1005,6 +1005,60 @@ var zt = {
       originY: 0.7903,
       bodyHeight: 270.0,
     },
+    kule_firtina_1_bekle: {
+      url: "assets/anim_kule_firtina_1_bekle.webp",
+      frameWidth: 158,
+      frameHeight: 285,
+      frames: 36,
+      originX: 0.5009,
+      originY: 0.8484,
+      bodyHeight: 270.0,
+    },
+    kule_firtina_1_saldiri: {
+      url: "assets/anim_kule_firtina_1_saldiri.webp",
+      frameWidth: 156,
+      frameHeight: 273,
+      frames: 18,
+      originX: 0.5066,
+      originY: 0.8411,
+      bodyHeight: 270.0,
+    },
+    kule_firtina_2_bekle: {
+      url: "assets/anim_kule_firtina_2_bekle.webp",
+      frameWidth: 155,
+      frameHeight: 278,
+      frames: 36,
+      originX: 0.5009,
+      originY: 0.8593,
+      bodyHeight: 270.0,
+    },
+    kule_firtina_2_saldiri: {
+      url: "assets/anim_kule_firtina_2_saldiri.webp",
+      frameWidth: 416,
+      frameHeight: 281,
+      frames: 18,
+      originX: 0.5245,
+      originY: 0.8598,
+      bodyHeight: 270.0,
+    },
+    kule_firtina_3_bekle: {
+      url: "assets/anim_kule_firtina_3_bekle.webp",
+      frameWidth: 157,
+      frameHeight: 273,
+      frames: 36,
+      originX: 0.5084,
+      originY: 0.8538,
+      bodyHeight: 270.0,
+    },
+    kule_firtina_3_saldiri: {
+      url: "assets/anim_kule_firtina_3_saldiri.webp",
+      frameWidth: 479,
+      frameHeight: 279,
+      frames: 18,
+      originX: 0.5255,
+      originY: 0.8579,
+      bodyHeight: 270.0,
+    },
     kule_ayaz_1_bekle: {
       url: "assets/anim_kule_ayaz_1_bekle.webp",
       frameWidth: 308,
@@ -1771,6 +1825,14 @@ var $t = {
   "dlg.4.pre.2": "İki yakada eski maden ağızları var. Kazdırırsan savaş sürerken altın getirirler.",
   "dlg.4.post.0": "Şu kalkanın arkasına bak. Bir arma vardı; biri kazıyıp silmiş.",
   "dlg.4.post.1": "Armasını kazıyan haydut olmaz. Bu adamlar birine hizmet ediyor.",
+  "enemy.raven": "Kara Kuzgun",
+  "enemy.raven.desc": "Uçar; askerlerin ve kahramanın üstünden geçer. Ejder Ocağı ve Balista vuramaz.",
+  "tut.flying": "Uçan düşmanlar askerlerin üstünden geçer. Okçu, Ayaz ve Fırtına kuleleri onları vurabilir; Ejder Ocağı ve Balista vuramaz.",
+  "dlg.5.pre.0": "Bu tepede eski bir fırtına kulesi uyuyor. Rünlerini uyandırırsam şimşek bir düşmandan ötekine sıçrar.",
+  "dlg.5.pre.1": "Gökyüzü kararıyor. Kuzgunlar geliyor, hem de sürüyle.",
+  "dlg.5.pre.2": "Askerler uçanları durduramaz. Kuleleri ona göre kurun.",
+  "dlg.5.post.0": "Bu kuzgunlar sıradan kuş değildi. Birileri onları gözcü diye kullanıyor.",
+  "dlg.5.post.1": "İzleri bataklığa gidiyor. Goblin şamanlarının yuvası orada.",
   "settings.title": "Ayarlar",
   "settings.language": "Dil",
   "settings.reset": "İlerlemeyi sıfırla",
@@ -2094,6 +2156,14 @@ var Ls = {
   "dlg.4.pre.2": "There are old mine shafts on both banks. Dig them and they bring in gold while we fight.",
   "dlg.4.post.0": "Look behind this shield. There was a crest here; someone scratched it off.",
   "dlg.4.post.1": "Bandits don't scratch off their crests. These men serve someone.",
+  "enemy.raven": "Black Raven",
+  "enemy.raven.desc": "Flies over soldiers and the hero. Dragon Forges and ballistas cannot hit it.",
+  "tut.flying": "Flying enemies pass over your soldiers. Archer, Frost and Storm towers can hit them; Dragon Forges and ballistas cannot.",
+  "dlg.5.pre.0": "An old storm tower sleeps on this hill. If I wake its runes, lightning will leap from one foe to the next.",
+  "dlg.5.pre.1": "The sky is darkening. Ravens are coming, a whole flock of them.",
+  "dlg.5.pre.2": "Soldiers can't stop what flies. Build your towers accordingly.",
+  "dlg.5.post.0": "These were no ordinary birds. Someone is using them as scouts.",
+  "dlg.5.post.1": "Their trail leads to the marsh. The goblin shamans nest there.",
   "settings.title": "Settings",
   "settings.language": "Language",
   "settings.reset": "Reset progress",
@@ -6207,7 +6277,7 @@ function ai(e) {
     ground: 7315263,
   };
 }
-var Ds = {
+var BOLUM_4 = {
   id: 4,
   era: 1,
   nameKey: "stage.4",
@@ -6263,7 +6333,56 @@ var Ds = {
   decor: [],
   ground: 7315263,
 };
-var ce = [Qa, ei, ti, Ds, ...Array.from({ length: 12 }, (e, t) => ai(t + 5))];
+var BOLUM_5 = {
+  id: 5,
+  era: 1,
+  nameKey: "stage.5",
+  eventKey: "stage.5.event",
+  playable: !0,
+  startGold: 480,
+  castleHp: 20,
+  paths: [[b(-90, 930), b(230, 900), b(440, 790), b(560, 600), b(700, 420), b(930, 330), b(1180, 370), b(1330, 540), b(1310, 760), b(1180, 920), b(1330, 1060), b(1600, 1040), b(1790, 860), b(1880, 640), b(1990, 470), b(2160, 430)]],
+  buildSpots: [b(1440, 840), b(1180, 600), b(1040, 460), b(840, 480), b(1640, 860), b(2000, 680), b(340, 720), b(680, 640), b(160, 780), b(440, 560), b(1740, 680), b(1120, 780), b(580, 800), b(1860, 960), b(180, 1040), b(960, 170), b(1520, 420)],
+  mineSpots: [],
+  castle: b(2190, 430),
+  newTowers: ["storm"],
+  newEnemies: ["raven"],
+  tutorial: "flying",
+  waves: [
+    {
+      groups: [
+        { enemy: "goblin", count: 10, interval: 1, delay: 0 },
+        { enemy: "raven", count: 5, interval: 1.2, delay: 8 },
+      ],
+    },
+    {
+      groups: [
+        { enemy: "shieldBandit", count: 4, interval: 2, delay: 0 },
+        { enemy: "armoredBandit", count: 3, interval: 2.6, delay: 5 },
+        { enemy: "raven", count: 6, interval: 1, delay: 10 },
+      ],
+    },
+    {
+      groups: [
+        { enemy: "wolf", count: 10, interval: 0.7, delay: 0 },
+        { enemy: "goblin", count: 10, interval: 0.9, delay: 4 },
+        { enemy: "raven", count: 10, interval: 0.8, delay: 12 },
+      ],
+    },
+    {
+      groups: [
+        { enemy: "armoredBandit", count: 4, interval: 2.2, delay: 0, elite: 1 },
+        { enemy: "shieldBandit", count: 5, interval: 1.8, delay: 3 },
+        { enemy: "raven", count: 10, interval: 0.8, delay: 8, elite: 1 },
+        { enemy: "goblin", count: 14, interval: 0.8, delay: 14, elite: 1 },
+      ],
+    },
+  ],
+  mapPos: si[1],
+  decor: [],
+  ground: 7315263,
+};
+var ce = [Qa, ei, ti, BOLUM_4, BOLUM_5, ...Array.from({ length: 11 }, (e, t) => ai(t + 6))];
 function ya(e) {
   return e <= 2 ? 3 : e;
 }
@@ -6355,6 +6474,25 @@ var Te = {
       xp: 6,
       art: "dusman_haydut_zirhli",
       color: 7368816,
+    },
+    raven: {
+      id: "raven",
+      nameKey: "enemy.raven",
+      descKey: "enemy.raven.desc",
+      hp: 38,
+      speed: 92,
+      stride: 220,
+      armor: 0,
+      magicResist: 0,
+      gold: 7,
+      castleDamage: 1,
+      meleeDamage: 0,
+      meleeRate: 1,
+      flying: !0,
+      size: 18,
+      xp: 2,
+      art: "dusman_kuzgun",
+      color: 2368548,
     },
     goblinChief: {
       id: "goblinChief",
@@ -6524,7 +6662,15 @@ var oe = {
       { cost: 130, damage: [0, 0], rate: 8, range: 0, income: 26, interval: 8 },
     ],
   },
-  storm: ct("storm", 5, "both", "densest", "lightning", "magic", ["chainLightning", "thunder"]),
+  storm: {
+    ...ct("storm", 5, "both", "densest", "lightning", "magic", ["chainLightning", "thunder"]),
+    implemented: !0,
+    levels: [
+      { cost: 130, damage: [16, 22], rate: 2.2, range: 290, chains: 3, bounce: 160 },
+      { cost: 110, damage: [26, 36], rate: 2.1, range: 300, chains: 4, bounce: 170 },
+      { cost: 160, damage: [40, 54], rate: 2, range: 315, chains: 4, bounce: 180 },
+    ],
+  },
   eagle: ct("eagle", 6, "air", "firstFlying", "none", "physical", ["griffinRiders", "eagleFlock"]),
   alchemist: ct("alchemist", 7, "ground", "unpoisoned", "poison", "magic", ["plague", "acid"]),
   rune: ct("rune", 8, "none", "none", "none", "magic", ["warRune", "quakeRune"]),
@@ -7870,8 +8016,8 @@ class ws {
       this.facing = a.dx >= 0 ? 1 : -1;
     let n = this.view;
     if (
-      (n.setPosition(this.x, this.y),
-      n.setDepth(this.y),
+      (n.setPosition(this.x, this.y - (this.def.flying ? 70 : 0)),
+      n.setDepth(this.y + (this.def.flying ? 400 : 0)),
       (n.scaleX = this.scale * this.facing),
       this.walkAnim && this.body)
     ) {
@@ -8195,7 +8341,7 @@ class Me {
       return;
     }
     if (this.target && this.target.alive)
-      ((this.tx = this.target.x), (this.ty = this.target.y - 34 * this.target.scale));
+      ((this.tx = this.target.x), (this.ty = this.target.y - 34 * this.target.scale - (this.target.flying ? 70 : 0)));
     let s = this.tx - t.x,
       a = this.ty - t.y,
       i = Math.hypot(s, a),
@@ -8283,7 +8429,7 @@ class Ss {
       i =
         this.def.id === "barracks"
           ? 1.6
-          : Math.min({ archer: 1.4, frost: 1.6, fire: 1.9, ballista: 1.8 }[this.def.id] ?? 1.4, this.lv.rate * 0.9),
+          : Math.min({ archer: 1.4, frost: 1.6, fire: 1.9, ballista: 1.8, storm: 1.6 }[this.def.id] ?? 1.4, this.lv.rate * 0.9),
       r = "vurus_" + t + "_" + Math.round(i * 100);
     if (!s.anims.exists(r))
       s.anims.create({ key: r, frames: s.anims.generateFrameNumbers(t, {}), frameRate: a / i, repeat: 0 });
@@ -8482,6 +8628,27 @@ class Ss {
           0.75,
         ),
       );
+    } else if (this.def.id === "storm") {
+      let r = [e],
+        n = e;
+      for (let d = 1; d < (t.chains ?? 3); d++) {
+        let h = null,
+          u = t.bounce ?? 170;
+        for (let f of this.s.enemies) {
+          if (!f.alive || r.includes(f)) continue;
+          let _ = Math.hypot(f.x - n.x, f.y - n.y);
+          if (_ < u) ((u = _), (h = f));
+        }
+        if (!h) break;
+        (r.push(h), (n = h));
+      }
+      let o = [{ x: s, y: a - 30 }],
+        l = i;
+      for (let d of r)
+        (o.push({ x: d.x, y: d.y - 34 * d.scale - (d.flying ? 70 : 0) }),
+          this.s.combat.hit(d, l, { kind: "magic", element: "lightning" }),
+          (l *= 0.65));
+      (this.s.fx.lightning(o), V("muhur", { volume: 0.35, minGapMs: 120 }));
     } else if (this.def.id === "ballista")
       (this.s.addProjectile(
         new Me(this.s, "bolt", s, a + 40, e, null, 1500, (r, n, o) => {
@@ -8926,6 +9093,29 @@ class Ps {
       ease: "Cubic.Out",
       onComplete: () => r.destroy(),
     });
+  }
+  lightning(e) {
+    let t = this.s.add.graphics().setDepth(3001),
+      s = [];
+    for (let a = 0; a < e.length - 1; a++) {
+      let i = e[a],
+        r = e[a + 1],
+        n = Math.max(3, Math.round(Math.hypot(r.x - i.x, r.y - i.y) / 26));
+      for (let o = 0; o < n; o++) {
+        let l = o / n,
+          d = o === 0 ? 0 : (Math.random() - 0.5) * 30;
+        s.push({ x: i.x + (r.x - i.x) * l + d, y: i.y + (r.y - i.y) * l + d * 0.6 });
+      }
+    }
+    s.push(e[e.length - 1]);
+    let a = (i, r, n) => {
+      (t.lineStyle(i, r, n), t.beginPath(), t.moveTo(s[0].x, s[0].y));
+      for (let o of s) t.lineTo(o.x, o.y);
+      t.strokePath();
+    };
+    (a(16, 7062015, 0.28), a(7, 11587583, 0.75), a(3, 16777215, 1));
+    for (let i of e.slice(1)) this.ring(i.x, i.y, 34, 11587583, 220, 4);
+    this.s.tweens.add({ targets: t, alpha: 0, duration: 240, onComplete: () => t.destroy() });
   }
   hitSpark(e, t) {
     (this.burst(e, t, "kivilcim", 4, 16773312, 28, 220, 0.7), this.flash(e, t, 16773312, 34, 140));
@@ -10290,6 +10480,17 @@ var Hs = {
       { speaker: "aldric", key: "dlg.4.post.1" },
     ],
   },
+  5: {
+    pre: [
+      { speaker: "velmora", key: "dlg.5.pre.0" },
+      { speaker: "sarya", key: "dlg.5.pre.1" },
+      { speaker: "aldric", key: "dlg.5.pre.2" },
+    ],
+    post: [
+      { speaker: "velmora", key: "dlg.5.post.0" },
+      { speaker: "sarya", key: "dlg.5.post.1" },
+    ],
+  },
 };
 function fi(e, t) {
   let s = 20 + t * 5;
@@ -10852,6 +11053,8 @@ class Os extends Phaser.Scene {
         if (!t.seenTowers.includes(a)) (await this.towerCard(a), t.seenTowers.push(a), j());
       if (e.stage.mineSpots.length && !t.tutorialDone.mine)
         (await this.messageCard(m("tut.mine"), "kule_maden_1"), (t.tutorialDone.mine = !0), j());
+      if (e.stage.tutorial === "flying" && !t.tutorialDone.flying)
+        (await this.messageCard(m("tut.flying"), "dusman_kuzgun"), (t.tutorialDone.flying = !0), j());
       if (e.stage.tutorial === "burn" && !t.tutorialDone.burn)
         (await this.messageCard(m("tut.burn"), "kule_ejder_2"), (t.tutorialDone.burn = !0), j());
       if (e.stage.tutorial === "combo" && !t.tutorialDone.combo)
