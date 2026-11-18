@@ -8,7 +8,7 @@ const stageId=+process.argv[2], plan=JSON.parse(process.argv[3]), out=process.ar
   await p.addInitScript(()=>{ let G; Object.defineProperty(window,'Phaser',{configurable:true,get(){return G},set(v){ const O=v.Game; v.Game=function(c){const g=new O(c); window.__g=g; return g}; v.Game.prototype=O.prototype; G=v; }});
     localStorage.setItem('hanedan-kusatmasi-save-v1',JSON.stringify({version:1,lang:'tr',identity:'commander',kingdom:'Test',bestStars:{1:3,2:3,3:3},tutorialDone:{basics:true,burn:true,combo:true,spell:true,hero:true,mine:true}}));});
   await p.goto('http://localhost:8765/index.html');
-  for(let i=0;i<40;i++){ await p.waitForTimeout(3000); if(await p.evaluate(()=>window.__g&&window.__g.textures.exists('kule_firtina_1_bekle'))) break; } await p.waitForTimeout(5000);
+  for(let i=0;i<60;i++){ await p.waitForTimeout(3000); if(await p.evaluate(()=>window.__g&&['Opening','Intro','Map'].some(k=>window.__g.scene.isActive(k)))) break; } await p.waitForTimeout(5000);
   await p.evaluate((id)=>{ const g=window.__g; g.scene.scenes.forEach(s=>{ const k=s.sys.settings.key; if(k!=='Battle'&&k!=='Hud'&&s.sys.isActive()) g.scene.stop(k)}); const H=g.scene.getScene('Hud'); Object.getPrototypeOf(H).modal=function(){return Promise.resolve();}; g.scene.start('Battle',{stageId:id}); },stageId);
   await p.waitForTimeout(6000);
   const res=await p.evaluate((plan)=>{

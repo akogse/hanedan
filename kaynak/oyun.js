@@ -1663,7 +1663,7 @@ var $t = {
   "identity.youngRuler.tag": "İntikam",
   "intro.toBattle": "Savaşa Başla",
   "intro.chooseHero": "Konseyden bir kahraman seç",
-  "intro.heroNote": "Kahramanını her stage öncesinde değiştirebilirsin.",
+  "intro.heroNote": "Kahramanını her bölümden önce değiştirebilirsin.",
   "map.treasure": "Krallık Hazinesi",
   "map.diamonds": "Elmas",
   "map.sovereignty": "Hükümdarlık Puanı",
@@ -1677,7 +1677,7 @@ var $t = {
   "map.resumeBtn": "Kaldığın yerden devam et",
   "map.discard": "Vazgeç",
   "map.eraLocked": "{n} yıldız gerekiyor",
-  "map.stageLocked": "Önceki stage’i geç",
+  "map.stageLocked": "Önceki bölümü geç",
   "map.play": "Savaşa başla",
   "map.waves": "{n} dalga",
   "map.best": "En iyi",
@@ -1723,7 +1723,7 @@ var $t = {
   "stage.16": "Kemik Taht",
   "stage.16.event": "Iskar ve Kemik Kralı ile final.",
   "tower.archer": "Gözcü Kulesi",
-  "tower.archer.role": "Hızlı tek hedef, kritik vuruş",
+  "tower.archer.role": "Tek hedef, kritik vuruş",
   "tower.barracks": "Kışla",
   "tower.barracks.role": "Yolu tutan askerler",
   "tower.fire": "Ejder Ocağı",
@@ -1733,7 +1733,7 @@ var $t = {
   "tower.ballista": "Kuşatma Balistası",
   "tower.ballista.role": "Zırh delme",
   "tower.mine": "Krallık Madeni",
-  "tower.mine.role": "Stage içi altın üretimi",
+  "tower.mine.role": "Bölüm içi altın üretimi",
   "tower.storm": "Fırtına Kulesi",
   "tower.storm.role": "Zincirleme sekme",
   "tower.eagle": "Kartal Yuvası",
@@ -1845,7 +1845,7 @@ var $t = {
   "spell.anvilStrike.desc": "Yere vuruşla alan sersemletmesi.",
   "spell.forgeFire": "Demirci Ateşi",
   "spell.forgeFire.desc": "Yakındaki kuleleri kısa süre güçlendirir.",
-  "spell.unlockAt": "{n}. stage’de açılır",
+  "spell.unlockAt": "{n}. bölümde açılır",
   "spell.choosePoint": "Büyünün düşeceği yere dokun",
   "hud.wave": "Dalga {n}/{m}",
   "hud.startWave": "Dalgayı başlat",
@@ -1862,7 +1862,7 @@ var $t = {
   "hud.info": "Bilgi",
   "hud.rally": "Bayrak",
   "hud.maxLevel": "En üst seviye",
-  "hud.branchLocked": "4. seviye dalları 5. stage’de açılır",
+  "hud.branchLocked": "4. seviye dalları 5. bölümde açılır",
   "hud.notEnoughGold": "Yeterli altın yok",
   "hud.level": "Seviye {n}",
   "hud.levelUp": "SEVİYE {n}",
@@ -1912,7 +1912,7 @@ var $t = {
   "end.replayReward": "Tekrar oynama ödülü",
   "end.retry": "Tekrar dene",
   "end.map": "Haritaya dön",
-  "end.next": "Sonraki stage",
+  "end.next": "Sonraki bölüm",
   "end.tip": "İpucu: Kuleleri yükseltmek, yeni kule kurmaktan çoğu zaman daha verimlidir. Kışlayı kavşaklara kur.",
   "end.heroXp": "{hero} +{n} deneyim",
   "reward.treasure": "{n} Krallık Hazinesi",
@@ -1980,6 +1980,10 @@ var $t = {
   "dlg.8.post.1": "Varhol... Sınırın ötesinde ölüler yürüyor diyorlardı. Masal sanmıştım.",
   "settings.title": "Ayarlar",
   "settings.language": "Dil",
+  "settings.music": "Müzik",
+  "settings.sfx": "Ses",
+  "settings.on": "Açık",
+  "settings.off": "Kapalı",
   "settings.reset": "İlerlemeyi sıfırla",
   "settings.resetConfirm": "Tüm ilerleme silinsin mi?",
   "settings.version": "Sürüm 0.1 · 1. aşama",
@@ -2077,7 +2081,7 @@ var Ls = {
   "stage.16": "The Bone Throne",
   "stage.16.event": "The final battle with Iskar and the Bone King.",
   "tower.archer": "Watch Tower",
-  "tower.archer.role": "Fast single target, critical hits",
+  "tower.archer.role": "Single target, critical hits",
   "tower.barracks": "Barracks",
   "tower.barracks.role": "Soldiers hold the road",
   "tower.fire": "Dragon Forge",
@@ -2336,6 +2340,10 @@ var Ls = {
   "dlg.8.post.1": "Varhol... They said the dead walk beyond the border. I thought it was a tale.",
   "settings.title": "Settings",
   "settings.language": "Language",
+  "settings.music": "Music",
+  "settings.sfx": "Sound",
+  "settings.on": "On",
+  "settings.off": "Off",
   "settings.reset": "Reset progress",
   "settings.resetConfirm": "Delete all progress?",
   "settings.version": "Version 0.1 · Phase 1",
@@ -2379,6 +2387,21 @@ function La() {
 }
 function Fs(e) {
   for (let t in tt) e.load.audio(t, tt[t]);
+}
+function sesKaydet() {
+  try {
+    localStorage.setItem(Ga, JSON.stringify(Ee));
+  } catch {}
+}
+function sesEtiket(e) {
+  return m(e === "music" ? "settings.music" : "settings.sfx") + ": " + m(Ee[e] > 0 ? "settings.on" : "settings.off");
+}
+function sesDegistir(e) {
+  if (e === "music") {
+    Ee.music = Ee.music > 0 ? 0 : 0.6;
+    for (let t of [...Object.values(Le), ...(nt ? [nt] : [])]) if (t) t.setVolume(Ee.music);
+  } else Ee.sfx = Ee.sfx > 0 ? 0 : 0.8;
+  sesKaydet();
 }
 function Ys(e) {
   ((ke = e),
@@ -5171,7 +5194,7 @@ function ha(e) {
   return Rt[e] ?? null;
 }
 function Q(e) {
-  return e in et && (!ke || ke.textures.exists(e));
+  return e in et && (!ke || (ke.textures.exists(e) && ke.textures.get(e).frameTotal > 2));
 }
 function Ft(e, t, s, a = 1) {
   let i = e.add.sprite(0, 0, t, 0);
@@ -6106,7 +6129,9 @@ class ms extends Phaser.Scene {
         ((P().hero = t),
           j(),
           this.cameras.main.fadeOut(400, 0, 0, 0),
-          this.time.delayedCall(420, () => this.scene.start("Map", { fade: !0 })));
+          this.time.delayedCall(420, () =>
+            (P().bestStars[1] ?? 0) > 0 ? this.scene.start("Map", { fade: !0 }) : this.scene.start("Battle", { stageId: 1 }),
+          ));
       });
     s.setAlpha(0).disableInteractive();
     let a = 400,
@@ -7453,6 +7478,9 @@ class _s extends Phaser.Scene {
       _ = this.add.graphics();
     _.fillStyle(s ? 3808276 : 2827808, s ? 0.92 : 0.75);
     let g = M(d) ? -118 : -96;
+    if (e.mapPos.y < 280) g = M(d) ? 86 : 70;
+    if (g > 0) u.setY(g + 18);
+    if (!s && !i) (u.setVisible(!1), _.setVisible(!1));
     if (
       (_.fillStyle(s ? 858168 : 1842984, s ? 0.92 : 0.75),
       _.fillRoundedRect(-f / 2, g, f, 36, 6),
@@ -7463,7 +7491,7 @@ class _s extends Phaser.Scene {
       n.add([_, u]),
       !s)
     )
-      n.setAlpha(e.playable ? 0.92 : 0.78);
+      n.setAlpha(e.playable ? 0.7 : 0.45).setScale(0.8);
     if (e.era === 2 && bt() < Nt[1].starsRequired) n.setAlpha(0.3);
     if (s) {
       let y = this.add.graphics();
@@ -7474,7 +7502,7 @@ class _s extends Phaser.Scene {
             this.add.image((k - 2) * 24, 79, k < a ? "ikon_yildiz" : "ikon_yildiz_bos"),
             k < a ? "ikon_yildiz" : "ikon_yildiz_bos",
             0.4,
-          ),
+          ).setTint(k < a ? 16777215 : 4210752).setAlpha(k < a ? 1 : 0.55),
         );
     }
     if (i && M("harita_bayragi")) {
@@ -7652,7 +7680,7 @@ class _s extends Phaser.Scene {
       [
         ["ikon_hazine", String(e.treasure), m("map.treasure")],
         ["ikon_elmas", String(e.diamonds), m("map.diamonds")],
-        ["ikon_yildiz", String(bt()), m("map.sovereignty")],
+        ["ikon_yildiz", String(bt()), m("map.stars")],
       ].forEach(([r, n, o], l) => {
         let d = s - 1020 + l * 345;
         (wt(C(this, d + 34, 64, r, 1), 76).setDepth(61),
@@ -7665,14 +7693,11 @@ class _s extends Phaser.Scene {
   drawBottomBar() {
     let e = [
         ["ikon_kalkan", m("map.hero"), () => this.heroPanel()],
-        ["ikon_yukselt", m("map.towers"), () => this.phase2Popup(m("map.towers"), m("phase2.body"))],
-        ["ikon_tac", m("map.crownTree"), () => this.phase2Popup(m("map.crownTree"), m("phase2.body"))],
-        ["ikon_kitap", m("map.chronicle"), () => this.phase2Popup(m("map.chronicle"), m("phase2.body"))],
         ["ikon_disli", m("map.settings"), () => this.settings()],
       ],
       t = this.add.graphics().setDepth(60);
-    (t.fillGradientStyle(396060, 396060, 396060, 396060, 0, 0, 0.85, 0.85), t.fillRect(-Ke, w - 200, at, 200));
-    let s = e.map((n, o) => (o === 0 ? 430 : 340)),
+    (t.fillGradientStyle(396060, 396060, 396060, 396060, 0, 0, 0.6, 0.6), t.fillRect(-Ke, w - 150, at, 150));
+    let s = e.map(() => 400),
       a = 14,
       i = s.reduce((n, o) => n + o, 0) + a * (s.length - 1),
       r = T / 2 - i / 2;
@@ -7754,62 +7779,55 @@ class _s extends Phaser.Scene {
       t.add(pe(this, 0, 0, 1240, 820, m(e.nameKey)));
       let s = this.add.zone(0, 0, 1240, 820).setInteractive();
       (t.add(s),
-        t.add(ne(this, -560, -330, m(e.eventKey), 640, 32)),
-        t.add(this.add.text(-560, -240, m("map.waves", { n: ya(e.id) }), z(28, I.muted, "900"))));
+        t.add(ne(this, -490, -325, m(e.eventKey), 980, 30)),
+        t.add(this.add.text(-490, -255, m("map.waves", { n: ya(e.id) }), z(28, I.muted, "900"))));
       let a = P().bestStars[e.id] ?? 0;
-      t.add(this.add.text(-560, -190, m("map.best"), z(28, I.muted, "900")));
-      for (let u = 0; u < 5; u++) t.add(C(this, -400 + u * 52, -172, u < a ? "ikon_yildiz" : "ikon_yildiz_bos", 0.85));
-      let i = -560;
+      t.add(this.add.text(-490, -210, m("map.best"), z(28, I.muted, "900")));
+      for (let u = 0; u < 5; u++) t.add(C(this, -340 + u * 52, -192, u < a ? "ikon_yildiz" : "ikon_yildiz_bos", 0.85).setTint(u < a ? 16777215 : 4210752).setAlpha(u < a ? 1 : 0.6));
+      let i = -490;
       if (e.newTowers.length)
-        (t.add(this.add.text(i, -110, G(m("map.newTowers")), z(22, I.red, "900"))),
+        (t.add(this.add.text(i, -150, G(m("map.newTowers")), z(22, I.red, "900"))),
           e.newTowers.forEach((u, f) => {
-            (t.add(C(this, i + 60 + f * 130, 60, ii[u] ?? "ikon_kilit", 0.62)),
-              t.add(this.add.text(i + 60 + f * 130, 80, m(oe[u].nameKey), z(20, I.ink, "800")).setOrigin(0.5, 0)));
+            (t.add(C(this, i + 60 + f * 130, 25, ii[u] ?? "ikon_kilit", 0.5)),
+              t.add(this.add.text(i + 60 + f * 130, 40, m(oe[u].nameKey), z(20, I.ink, "800")).setOrigin(0.5, 0)));
           }),
           (i += Math.max(300, e.newTowers.length * 140 + 40)));
       if (e.newEnemies.length)
-        (t.add(this.add.text(i, -110, G(m("map.newEnemies")), z(22, I.red, "900"))),
+        (t.add(this.add.text(i, -150, G(m("map.newEnemies")), z(22, I.red, "900"))),
           e.newEnemies.forEach((u, f) => {
-            (t.add(C(this, i + 70 + f * 140, 40, Yt(Te[u].art), 0.9)),
-              t.add(this.add.text(i + 70 + f * 140, 80, m(Te[u].nameKey), z(20, I.ink, "800")).setOrigin(0.5, 0)));
+            (t.add(C(this, i + 70 + f * 140, 0, Yt(Te[u].art), 0.9)),
+              t.add(this.add.text(i + 70 + f * 140, 40, m(Te[u].nameKey), z(20, I.ink, "800")).setOrigin(0.5, 0)));
           }));
       let r = Ne(P().heroXp[P().hero] ?? 0),
         n = 100 + (e.id - 1) * 25,
         o = 100 + (r - 1) * 12 + P().mastery * 2,
         l = this.add.graphics();
-      (l.fillStyle(1840142, 0.9),
-        l.fillRoundedRect(150, -350, 410, 150, 18),
-        t.add(l),
-        t.add(this.add.text(180, -330, m("map.recommendedPower"), z(24, "#d9c9a5", "800"))),
-        t.add(this.add.text(530, -330, String(n), Z(30, "#e8c87a", 5)).setOrigin(1, 0)),
-        t.add(this.add.text(180, -270, m("map.yourPower"), z(24, "#d9c9a5", "800"))),
-        t.add(this.add.text(530, -270, String(o), Z(30, o >= n ? "#9fe08a" : "#ffb0a0", 5)).setOrigin(1, 0)),
-        t.add(this.add.text(-560, 160, G(m("map.selectHero")), z(22, I.muted, "900"))));
+      t.add(this.add.text(-490, 95, G(m("map.selectHero")), z(22, I.muted, "900")));
       let d = this.add.container(0, 0);
       t.add(d);
       let h = () => {
         (d.removeAll(!0),
           vt.forEach((u, f) => {
             let _ = P().hero === u,
-              g = -480 + f * 140,
+              g = -430 + f * 130,
               p = 260,
-              y = Ae(this, g, 260, 52, "kahraman_" + u + "_portre", _ ? 15255674 : 7035460);
+              y = Ae(this, g, 180, 50, "kahraman_" + u + "_portre", _ ? 15255674 : 7035460);
             if (!_) y.setAlpha(0.65);
             d.add(y);
             let k = Ne(P().heroXp[u] ?? 0);
-            d.add(this.add.text(g + 40, 300, String(k), Z(24, "#e8c87a", 5)).setOrigin(0.5));
-            let v = this.add.zone(g, 260, 120, 120).setInteractive({ useHandCursor: !0 });
+            d.add(this.add.text(g + 38, 218, String(k), Z(24, "#e8c87a", 5)).setOrigin(0.5));
+            let v = this.add.zone(g, 180, 120, 120).setInteractive({ useHandCursor: !0 });
             (v.on("pointerup", () => {
               ((P().hero = u), j(), h());
             }),
               d.add(v));
           }),
-          d.add(ne(this, -560, 330, m(he[P().hero].passiveKey), 740, 24, I.ink)));
+          d.add(ne(this, -490, 250, m(he[P().hero].passiveKey), 560, 24, I.ink)));
       };
       return (
         h(),
         t.add(
-          F(this, 400, 320, 360, 110, m("map.play"), () => this.scene.start("Battle", { stageId: e.id }), "red", {
+          F(this, 330, 235, 340, 104, m("map.play"), () => this.scene.start("Battle", { stageId: e.id }), "red", {
             icon: "ikon_kilic",
             size: 38,
           }),
@@ -7904,13 +7922,16 @@ class _s extends Phaser.Scene {
   settings() {
     this.openModal(() => {
       let e = this.add.container(T / 2, w / 2);
-      (e.add(pe(this, 0, 0, 760, 600, m("settings.title"))),
-        e.add(this.add.zone(0, 0, 760, 600).setInteractive()),
+      (e.add(pe(this, 0, 0, 760, 760, m("settings.title"))),
+        e.add(this.add.zone(0, 0, 760, 760).setInteractive()));
+      let a = F(this, -125, -230, 230, 90, sesEtiket("music"), () => (sesDegistir("music"), a.setLabel(sesEtiket("music"))), "blue", { size: 24 }),
+        i = F(this, 125, -230, 230, 90, sesEtiket("sfx"), () => (sesDegistir("sfx"), i.setLabel(sesEtiket("sfx"))), "blue", { size: 24 });
+      (e.add([a, i]),
         e.add(
           F(
             this,
             0,
-            -130,
+            -110,
             480,
             100,
             m("hud.language"),
@@ -7925,7 +7946,7 @@ class _s extends Phaser.Scene {
         s = F(
           this,
           0,
-          10,
+          20,
           480,
           100,
           m("settings.reset"),
@@ -7942,7 +7963,7 @@ class _s extends Phaser.Scene {
       return (
         e.add(s),
         e.add(this.add.text(0, 150, m("settings.version"), z(26, I.muted, "800")).setOrigin(0.5)),
-        e.add(F(this, 0, 230, 240, 84, m("common.close"), () => this.closeModal(), "stone", { size: 28 })),
+        e.add(F(this, 0, 260, 240, 84, m("common.close"), () => this.closeModal(), "stone", { size: 28 })),
         [e]
       );
     });
@@ -11856,20 +11877,9 @@ class Os extends Phaser.Scene {
               "stone",
             ),
           ));
-        let s = F(
-          this,
-          0,
-          220,
-          460,
-          90,
-          m("hud.language"),
-          () => {
-            (it(Ue() === "tr" ? "en" : "tr"), (P().lang = Ue()), j(), s.setLabel(m("hud.language")));
-          },
-          "blue",
-          { size: 30 },
-        );
-        return (t.add(s), [t]);
+        let s = F(this, -118, 215, 222, 88, sesEtiket("music"), () => (sesDegistir("music"), s.setLabel(sesEtiket("music"))), "blue", { size: 24 }),
+          a = F(this, 118, 215, 222, 88, sesEtiket("sfx"), () => (sesDegistir("sfx"), a.setLabel(sesEtiket("sfx"))), "blue", { size: 24 });
+        return (t.add([s, a]), [t]);
       }));
   }
   restart() {
@@ -11942,14 +11952,14 @@ class Os extends Phaser.Scene {
             n.includes(g + 1))
           ) {
             let R = this.add
-              .text(p, y + 66, m("end.newStar"), Z(20, "#e8c87a", 5))
+              .text(p, y + 50, m("end.newStar"), Z(17, "#e8c87a", 4))
               .setOrigin(0.5)
               .setAlpha(0);
             (o.add(R), this.tweens.add({ targets: R, alpha: 1, delay: 400 + g * 260, duration: 300 }));
           }
         }
       }
-      o.add(this.add.text(0, d ? -70 : -120, m("end.castleLeft", { n: e.hpPct }), z(32)).setOrigin(0.5));
+      o.add(this.add.text(0, d ? -62 : -104, m("end.castleLeft", { n: e.hpPct }), z(28)).setOrigin(0.5));
       let f = d ? 20 : 0;
       o.add(
         this.add.text(-440, -60 + f, G(n.length ? m("end.rewards") : m("end.replayReward")), z(24, I.muted, "900")),
@@ -11957,7 +11967,7 @@ class Os extends Phaser.Scene {
       let _ = -20 + f;
       for (let g of r) {
         let [p, y] = yi(g);
-        (o.add(C(this, -410, _ + 20, p, 0.9)), o.add(this.add.text(-370, _ + 4, y, z(32))), (_ += 56));
+        (o.add(C(this, -410, _ + 18, p, 0.75)), o.add(this.add.text(-370, _ + 4, y, z(28))), (_ += r.length > 3 ? 44 : 56));
       }
       o.add(
         this.add.text(

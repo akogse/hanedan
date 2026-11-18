@@ -20,6 +20,14 @@ for satir in oyun.split('\n'):
     if m: adlar.append(m.group(1))
 cift = [a for a, n in Counter(adlar).items() if n > 1]
 assert not cift, f"ayni ust duzey ad birden fazla tanimlanmis: {cift}"
+# her varlık adresine içerik parmak izi: değişen dosya yeni adres alır, değişmeyen telefonda önbellekte kalır
+import hashlib
+def izli(m_):
+    yol = m_.group(1)
+    tam = os.path.join(kok, yol)
+    if not os.path.exists(tam): return m_.group(0)
+    return '"' + yol + '?v=' + hashlib.md5(open(tam, 'rb').read()).hexdigest()[:8] + '"'
+oyun = re.sub(r'"((?:assets|ses|canli|acilis)/[^"?]+)"', izli, oyun)
 open(os.path.join(kok, 'index.html'), 'w', encoding='utf-8').write(sablon.replace('/*OYUN_KODU*/', oyun))
 # servis calisani onbellek surumunu her derlemede yenile
 sw = os.path.join(kok, 'sw.js'); t = open(sw).read()
