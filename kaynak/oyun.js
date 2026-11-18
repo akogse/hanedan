@@ -7828,10 +7828,10 @@ class _s extends Phaser.Scene {
       if (e.newTowers.length)
         (t.add(this.add.text(i, -150, G(m("map.newTowers")), z(22, I.red, "900"))),
           e.newTowers.forEach((u, f) => {
-            (t.add(C(this, i + 60 + f * 130, 25, ii[u] ?? "ikon_kilit", 0.5)),
-              t.add(this.add.text(i + 60 + f * 130, 40, m(oe[u].nameKey), z(20, I.ink, "800")).setOrigin(0.5, 0)));
+            (t.add(C(this, i + 75 + f * 160, 25, ii[u] ?? "ikon_kilit", 0.5)),
+              t.add(this.add.text(i + 75 + f * 160, 40, m(oe[u].nameKey), { ...z(19, I.ink, "800"), align: "center", wordWrap: { width: 150 } }).setOrigin(0.5, 0)));
           }),
-          (i += Math.max(300, e.newTowers.length * 140 + 40)));
+          (i += Math.max(300, e.newTowers.length * 160 + 30)));
       if (e.newEnemies.length)
         (t.add(this.add.text(i, -150, G(m("map.newEnemies")), z(22, I.red, "900"))),
           e.newEnemies.forEach((u, f) => {
