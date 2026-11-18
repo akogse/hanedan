@@ -38,6 +38,11 @@ var zt = {
     harita_stage1_tam: "assets/harita_stage1_tam.webp",
     harita_stage2_tam: "assets/harita_stage2_tam.webp",
     harita_stage3_tam: "assets/harita_stage3_tam.webp",
+    harita_stage4_tam: "assets/harita_stage4_tam.webp",
+    harita_stage5_tam: "assets/harita_stage5_tam.webp",
+    harita_stage6_tam: "assets/harita_stage6_tam.webp",
+    harita_stage7_tam: "assets/harita_stage7_tam.webp",
+    harita_stage8_tam: "assets/harita_stage8_tam.webp",
     harita_zemin_cim: "assets/harita_zemin_cim.webp",
     harita_zemin_yol: "assets/harita_zemin_yol.webp",
     hud_buyu_cercevesi: "assets/hud_buyu_cercevesi.webp",
@@ -6607,7 +6612,7 @@ var BOLUM_7 = {
   playable: !0,
   startGold: 640,
   castleHp: 20,
-  paths: [[b(-90, 560), b(200, 560), b(420, 430), b(700, 330), b(1000, 310), b(1300, 350), b(1520, 470), b(1700, 610), b(1920, 650), b(2160, 650)], [b(-90, 560), b(200, 560), b(420, 690), b(700, 810), b(1000, 870), b(1300, 850), b(1520, 750), b(1700, 610), b(1920, 650), b(2160, 650)]],
+  paths: [[b(-90, 560), b(200, 560), b(420, 410), b(700, 305), b(1000, 285), b(1300, 325), b(1520, 455), b(1700, 610), b(1920, 650), b(2160, 650)], [b(-90, 560), b(200, 560), b(420, 705), b(700, 825), b(1000, 885), b(1300, 865), b(1520, 765), b(1700, 610), b(1920, 650), b(2160, 650)]],
   buildSpots: [b(1880, 520), b(1720, 740), b(1480, 620), b(440, 560), b(180, 420), b(180, 700), b(1700, 460), b(1900, 800), b(620, 500), b(340, 320), b(340, 800), b(1300, 720), b(1320, 520), b(1140, 440), b(800, 440), b(1040, 740), b(1580, 880), b(1000, 140), b(900, 1060)],
   mineSpots: [],
   castle: b(2190, 650),
@@ -10030,7 +10035,7 @@ class Rs extends Phaser.Scene {
               .setDepth(g.y - 40)
           : C(this, g.x, g.y + 22, "insa_noktasi").setDepth(g.y - 40);
         if (s) y.setAlpha(0);
-        if (e.mineSpots.includes(p)) y.setTint(16766080).setAlpha(s ? 0.85 : 1);
+        if (e.mineSpots.includes(p)) y.setTint(16766080).setAlpha(s ? 0 : 1);
         this.spotImgs[p] = y;
       }));
     let l = (g, p, y) => {
