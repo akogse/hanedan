@@ -14258,12 +14258,14 @@ class Os extends Phaser.Scene {
   modal(e) {
     return new Promise((t) => {
       ((this.modalOpen = !0), this.b.setPaused(!0), this.children.list.forEach((r) => r.getData?.("duyuru") && r.setVisible(!1)));
+      // perde savaş sahnesine çizilir: Hud kamerası güvenli alanla sınırlı, kenarlar karartılmadan kalıyordu
       let s = [],
+        perde = this.b.add.rectangle(-4000, -4000, 2e4, 2e4, 854535, 0.5).setOrigin(0).setDepth(1e7),
         a = (i) => {
           for (let r of s) r.destroy();
-          ((this.modalOpen = !1), this.b.setPaused(!1), t(i));
+          (perde.destroy(), (this.modalOpen = !1), this.b.setPaused(!1), t(i));
         };
-      (s.push(Tt(this, 0.55)), s.push(...e(a)));
+      (s.push(Tt(this, 0.001)), s.push(...e(a)));
     });
   }
   dialogue(e) {
@@ -14292,8 +14294,9 @@ class Os extends Phaser.Scene {
                 .setDisplaySize(1500, 424.8046875)
                 .setFlipX(!h),
             );
-            let v = h ? g + 434.99999999999994 : g + 90,
-              R = 960;
+            // çevrilmiş kutuda sol üst kıvrım ismin ilk harfini örtüyordu
+            let v = h ? g + 434.99999999999994 : g + 150,
+              R = 920;
             (a.add(
               this.add
                 .text(v, p - 212.40234375 + 106.201171875, d, ge(34, "#f4dc90"))
