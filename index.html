@@ -164,6 +164,18 @@
     z_fiyat_plakasi: "assets/z_fiyat_plakasi.webp?v=64678ef8",
     z_isik: "assets/z_isik.webp?v=9965f9fb",
     z_xp_dolgu: "assets/z_xp_dolgu.webp?v=b675781f",
+    kh_tam_aldric: "assets/kh_tam_aldric.webp?v=fe81699b",
+    kh_tam_sarya: "assets/kh_tam_sarya.webp?v=6b6a246c",
+    kh_tam_velmora: "assets/kh_tam_velmora.webp?v=ab6dc53a",
+    kh_tam_thorgar: "assets/kh_tam_thorgar.webp?v=1f5544c1",
+    kh_kart: "assets/kh_kart.webp?v=026f4717",
+    kh_kart_isik: "assets/kh_kart_isik.webp?v=a7f9f896",
+    kh_rol_tank: "assets/kh_rol_tank.webp?v=cb311486",
+    kh_rol_menzil: "assets/kh_rol_menzil.webp?v=87d227b8",
+    kh_rol_buyu: "assets/kh_rol_buyu.webp?v=6276a3b0",
+    kh_rol_destek: "assets/kh_rol_destek.webp?v=081d0b9f",
+    kh_anahtar_yatak: "assets/kh_anahtar_yatak.webp?v=d6dcdddd",
+    kh_anahtar_topuz: "assets/kh_anahtar_topuz.webp?v=08dd9b18",
     ui_bolum_seridi: "assets/ui_bolum_seridi.webp?v=b0f5cb39",
     ui_dugme_yuvarlak: "assets/ui_dugme_yuvarlak.webp?v=fd71954d",
     ui_ipucu_seridi: "assets/ui_ipucu_seridi.webp?v=9c2ed02b",
@@ -3383,6 +3395,33 @@ function sesKaydet() {
 function sesEtiket(e) {
   return m(e === "music" ? "settings.music" : "settings.sfx") + ": " + m(Ee[e] > 0 ? "settings.on" : "settings.off");
 }
+// altın aç-kapa anahtarı + etiket (Ayarlar ve Duraklat)
+function sesAnahtari(e, x, y, tur) {
+  if (!M("kh_anahtar_yatak") || !M("kh_anahtar_topuz")) {
+    let b = F(e, x, y, 240, 96, sesEtiket(tur), () => (sesDegistir(tur), b.setLabel(sesEtiket(tur))), "blue", { size: 26 });
+    return b;
+  }
+  let c = e.add.container(x, y),
+    YW = 150,
+    yat = e.add.image(0, 0, "kh_anahtar_yatak");
+  yat.setScale(YW / yat.width);
+  let YH = yat.displayHeight,
+    ic = e.add.rectangle(0, 0, YW * 0.8, YH * 0.48, 0).setOrigin(0.5),
+    top = e.add.image(0, 0, "kh_anahtar_topuz"),
+    et = e.add.text(0, -YH / 2 - 26, G(m(tur === "music" ? "settings.music" : "settings.sfx")), { fontFamily: D, fontStyle: "700", fontSize: "22px", color: "#e8c87a" }).setOrigin(0.5).setLetterSpacing(2);
+  top.setScale((YH * 0.62) / top.height);
+  let ciz = (anim) => {
+    let on = Ee[tur] > 0,
+      tx = (on ? 1 : -1) * YW * 0.27;
+    ic.setFillStyle(on ? 2969664 : 1315860, 1);
+    anim ? e.tweens.add({ targets: top, x: tx, duration: 160, ease: "Cubic.Out" }) : top.setX(tx);
+    top.setTint(on ? 16777215 : 9474192);
+  };
+  let z0 = e.add.zone(0, 0, YW + 30, YH + 30).setInteractive({ useHandCursor: !0 });
+  z0.on("pointerup", () => (sesDegistir(tur), V("ui_tik"), ciz(!0)));
+  (c.add([ic, yat, top, et, z0]), ciz(!1));
+  return c;
+}
 function sesDegistir(e) {
   if (e === "music") {
     Ee.music = Ee.music > 0 ? 0 : 0.6;
@@ -6169,7 +6208,7 @@ function Va(e) {
 }
 // Bellek: iPhone Safari sekmesi ~1,5 GB'ı aşınca sayfayı öldürüp yeniden açıyor.
 // Ağır görseller (bölüm haritaları, kitap sayfaları, ağaç) ve tüm animasyon sayfaları gerektiği an yüklenir, iş bitince bırakılır.
-var AGIR = /^harita_stage\d+_(tam|arka)$|^vaka_\d+$|^vakayiname_cerceve$|^tac_agaci_arka$/;
+var AGIR = /^harita_stage\d+_(tam|arka)$|^vaka_\d+$|^vakayiname_cerceve$|^tac_agaci_arka$|^kh_tam_/;
 function sayfaIste(e, t, s) {
   // e: sahne, t: anahtar listesi (et ya da zt), s: hepsi gelince çağrılır
   let a = t.filter((i) => !e.textures.exists(i));
@@ -9839,69 +9878,96 @@ class _s extends Phaser.Scene {
     });
   }
   heroPanel() {
+    // Kahraman salonu: dört uzun kart, tam boy kahramanlar (ağır görseller yalnız burada yüklenir)
+    let TAM = vt.map((h) => "kh_tam_" + h).filter((k) => zt[k]);
+    if (TAM.some((k) => !this.textures.exists(k))) return void (this.toast(m("common.loading")), sayfaIste(this, TAM, () => this.heroPanel()));
+    this.agirYeni = TAM;
     this.openModal(() => {
-      let e = this.add.container(T / 2, w / 2 + 10);
-      (e.add(pe(this, 0, 0, 1700, 800, m("map.hero"))), e.add(this.add.zone(0, 0, 1700, 800).setInteractive()));
+      let e = this.add.container(T / 2, w / 2 + 10),
+        PW = 1720,
+        PH = 820;
+      (e.add(pe(this, 0, 0, PW, PH, m("map.hero"))), e.add(this.add.zone(0, 0, PW, PH).setInteractive()));
+      let ROL = { "hero.role.tank": "kh_rol_tank", "hero.role.ranged": "kh_rol_menzil", "hero.role.magic": "kh_rol_buyu", "hero.role.support": "kh_rol_destek" },
+        KW = 372,
+        KH = KW * (900 / 399),
+        olcek = Math.min(1, (PH - 40) / KH);
+      ((KW *= olcek), (KH *= olcek));
+      let kartlar = this.add.container(0, 8);
+      e.add(kartlar);
       let t = () => {
-        (e.list.slice(2).forEach((s) => s.destroy()),
+        (kartlar.removeAll(!0),
           vt.forEach((s, a) => {
             let i = he[s],
-              r = -600 + a * 400,
+              r = (a - 1.5) * (KW + 26),
               n = P().hero === s,
-              o = Ne(P().heroXp[s] ?? 0);
-            (e.add(Ae(this, r, -200, 100, "kahraman_" + s + "_portre", n ? 15255674 : i.color)),
-              e.add(
+              o = Ne(P().heroXp[s] ?? 0),
+              k = this.add.container(r, 0);
+            kartlar.add(k);
+            if (n && M("kh_kart_isik")) {
+              let isk = this.add.image(0, 0, "kh_kart_isik").setBlendMode(Phaser.BlendModes.ADD).setDisplaySize(KW * 1.22, KH * 1.1);
+              (k.add(isk), this.tweens.add({ targets: isk, alpha: { from: 0.55, to: 1 }, duration: 1300, yoyo: !0, repeat: -1, ease: "Sine.InOut" }));
+            }
+            // kemerin içi: koyu kadife + kahraman
+            let ax0 = -KW / 2 + KW * 0.073,
+              aw = KW * 0.852,
+              ay0 = -KH / 2 + KH * 0.05,
+              ah = KH * 0.5;
+            if (M("brf_zemin")) k.add(this.add.image(0, ay0 + ah / 2, "brf_zemin").setDisplaySize(aw, ah).setTint(n ? 16777215 : 11184810));
+            let isim = this.add.graphics();
+            (isim.fillGradientStyle(0, 0, 0, 0, 0, 0, 0.55, 0.55), isim.fillRect(ax0, ay0 + ah * 0.7, aw, ah * 0.3), k.add(isim));
+            let tk = "kh_tam_" + s;
+            if (M(tk)) {
+              let kh = this.add.image(0, ay0 + ah + 6, tk).setOrigin(0.5, 1);
+              kh.setScale(Math.min((ah * 0.97) / kh.height, (aw * 1.05) / kh.width));
+              if (!n) kh.setTint(10066329);
+              let mk = this.make.graphics({}, !1);
+              (mk.fillStyle(16777215), mk.fillRect(0, 0, aw, ah + 4));
+              let sync = () => {
+                let mx = k.getWorldTransformMatrix();
+                (mk.setPosition(mx.tx + ax0 * mx.scaleX, mx.ty + ay0 * mx.scaleY), mk.setScale(mx.scaleX, mx.scaleY));
+              };
+              (sync(), this.events.on("postupdate", sync), kh.on("destroy", () => this.events.off("postupdate", sync)), kh.setMask(mk.createGeometryMask()), k.add(kh));
+              if (n) this.tweens.add({ targets: kh, scaleY: kh.scaleY * 1.012, duration: 1800, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
+            } else k.add(Ae(this, 0, ay0 + ah / 2, 100, "kahraman_" + s + "_portre", i.color));
+            if (M("kh_kart")) k.add(this.add.image(0, 0, "kh_kart").setDisplaySize(KW, KH));
+            // rol rozeti ve seviye
+            let rk = ROL[i.roleKey];
+            if (rk && M(rk)) k.add(wt(C(this, KW / 2 - 40, -KH / 2 + 62, rk, 1), 62));
+            let lb = this.add.text(-KW / 2 + 40, -KH / 2 + 62, String(o), { fontFamily: D, fontStyle: "700", fontSize: "22px", color: "#f4dc90" }).setOrigin(0.5);
+            if (M("brf_seviye_rozeti")) k.add(wt(C(this, -KW / 2 + 40, -KH / 2 + 60, "brf_seviye_rozeti", 1), 50));
+            k.add(lb);
+            // alt bölme: ad, unvan, pasif, yetenekler, düğme
+            let y0 = ay0 + ah + 22,
+              x0 = -KW / 2 + KW * 0.1,
+              iw = KW * 0.8;
+            k.add(this.add.text(0, y0, m(i.nameKey).replace(/^(Sir|Sör) /, ""), { fontFamily: D, fontStyle: "700", fontSize: "25px", color: "#f4dc90" }).setOrigin(0.5, 0).setShadow(0, 2, "#000", 4, !1, !0));
+            k.add(this.add.text(0, y0 + 34, G(m(i.nameKey.replace(/$/, ".title"))) + "  ·  " + G(m(i.roleKey)), { fontFamily: D, fontStyle: "700", fontSize: "14px", color: "#c9a24a" }).setOrigin(0.5, 0).setLetterSpacing(1));
+            let ps = m(i.passiveKey),
+              ik = ps.indexOf(":"),
+              pt = this.add.text(0, y0 + 62, ((x) => x.charAt(0).toLocaleUpperCase(Ue() === "tr" ? "tr" : "en") + x.slice(1))(ik > 0 ? ps.slice(ik + 1).trim() : ps), { ...z(18, "#e9e1cc", "700"), align: "center", wordWrap: { width: iw, useAdvancedWrap: !0 } }).setOrigin(0.5, 0);
+            k.add(pt);
+            let sy = y0 + 70 + pt.height + 8;
+            i.spells.forEach((l, d) => {
+              let acik = (P().bestStars[l.unlockStage - 1] ?? 0) > 0 || l.unlockStage <= 1,
+                yy = sy + d * 50,
+                bk = "buyu_" + l.id;
+              if (M(bk)) {
+                let bi = wt(C(this, x0 + 20, yy + 18, bk, 1), 40);
+                (!acik && bi.setTint(5592405), k.add(bi));
+              }
+              k.add(
                 this.add
-                  .text(r, -78, m(i.nameKey), { ...ge(28, "#f4dc90"), wordWrap: { width: 340 }, align: "center" })
-                  .setOrigin(0.5, 0)
-                  .setShadow(0, 2, "#000", 6, !1, !0),
-              ),
-              e.add(
-                this.add
-                  .text(r, -10, G(m("hero.level", { n: o }) + " · " + m(i.roleKey)), {
-                    fontFamily: D,
-                    fontStyle: "700",
-                    fontSize: "18px",
-                    color: "#c9a24a",
-                  })
-                  .setOrigin(0.5, 0)
-                  .setLetterSpacing(2),
-              ),
-              e.add(ne(this, r - 165, 34, m(i.passiveKey), 330, 22)),
-              i.spells.forEach((l, d) =>
-                e.add(
-                  ne(
-                    this,
-                    r - 165,
-                    118 + d * 64,
-                    ((P().bestStars[l.unlockStage - 1] ?? 0) > 0 || l.unlockStage <= 1
-                      ? "✦ " + m(l.nameKey) + ": " + m(l.descKey)
-                      : "\uD83D\uDD12 " + m(l.nameKey) + " · " + m("spell.unlockAt", { n: l.unlockStage })),
-                    330,
-                    20,
-                    I.muted,
-                  ),
-                ),
-              ),
-              e.add(
-                F(
-                  this,
-                  r,
-                  296,
-                  280,
-                  84,
-                  n ? m("hero.selected") : m("hero.choose"),
-                  () => {
-                    ((P().hero = s), j(), t());
-                  },
-                  n ? "gold" : "stone",
-                  { size: 28 },
-                ),
-              ));
-          }),
-          e.add(ds(this, 800, -380, () => this.closeModal())));
+                  .text(x0 + 48, yy + 18, acik ? m(l.nameKey) : m(l.nameKey) + " · " + m("spell.unlockAt", { n: l.unlockStage }), z(17, acik ? "#e8c87a" : "#8d8676", "800"))
+                  .setOrigin(0, 0.5)
+                  .setWordWrapWidth(iw - 50),
+              );
+            });
+            let dg = F(this, 0, KH / 2 - 62, KW * 0.7, 74, n ? m("hero.selected") : m("hero.choose"), () => (P().hero !== s && V("ui_tik"), (P().hero = s), j(), t()), n ? "gold" : "stone", { size: 24 });
+            k.add(dg);
+            if (!n) k.setScale(0.96);
+          }));
       };
-      return (t(), [e]);
+      return (t(), e.add(ds(this, PW / 2 - 66, -PH / 2 + 64, () => this.closeModal())), [e]);
     });
   }
   phase2Popup(e, t) {
@@ -9922,8 +9988,8 @@ class _s extends Phaser.Scene {
       let e = this.add.container(T / 2, w / 2);
       (e.add(pe(this, 0, 0, 760, 760, m("settings.title"))),
         e.add(this.add.zone(0, 0, 760, 760).setInteractive()));
-      let a = F(this, -125, -230, 240, 96, sesEtiket("music"), () => (sesDegistir("music"), a.setLabel(sesEtiket("music"))), "blue", { size: 26 }),
-        i = F(this, 125, -230, 240, 96, sesEtiket("sfx"), () => (sesDegistir("sfx"), i.setLabel(sesEtiket("sfx"))), "blue", { size: 26 });
+      let a = sesAnahtari(this, -170, -230, "music"),
+        i = sesAnahtari(this, 170, -230, "sfx");
       (e.add([a, i]),
         e.add(
           F(
@@ -14714,8 +14780,8 @@ class Os extends Phaser.Scene {
               "stone",
             ),
           ));
-        let s = F(this, -118, 215, 222, 88, sesEtiket("music"), () => (sesDegistir("music"), s.setLabel(sesEtiket("music"))), "blue", { size: 24 }),
-          a = F(this, 118, 215, 222, 88, sesEtiket("sfx"), () => (sesDegistir("sfx"), a.setLabel(sesEtiket("sfx"))), "blue", { size: 24 });
+        let s = sesAnahtari(this, -120, 225, "music"),
+          a = sesAnahtari(this, 120, 225, "sfx");
         return (t.add([s, a]), [t]);
       }));
   }
