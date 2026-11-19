@@ -1,0 +1,60 @@
+DYNASTY SIEGE — BÖLÜM BRİFİNG EKRANI (görsel paketi 6, 11 görsel)
+
+Amaç: Bölüme dokununca açılan pencere oyunun en çok görülen ekranlarından biri. Şu an içi kodla çizilmiş düz daireler,
+ince çizgiler ve düz renkli zeminden oluşuyor; bu yüzden ucuz duruyor. Her parçayı el çizimi, zengin bir görselle değiştireceğiz.
+Yazılar, sayılar, yıldızlar, kule/düşman/kahraman resimleri KODLA üstüne basılacak: görsellerde YAZI, HARF, SAYI OLMASIN.
+
+ORTAK EK (1–10 numaralı görsellerin her promptuna ekle):
+"premium dark fantasy mobile strategy game UI element, ornate gold filigree with small blue sapphires and polished silver
+accents, deep navy blue velvet, same style as the rest of the UI (gold + royal navy + sapphire), rich painterly detail,
+soft rim light, perfectly symmetrical, front view, no text, no letters, no numbers, isolated on a flat solid pure magenta
+#FF00FF background, no shadow on the background, sharp clean edges"
+
+1) brifing_zemin.png   1600×900   (11 numara hariç tek opak olan; MAGENTA YOK, ORTAK EK EKLEME)
+   "Seamless dark royal navy velvet fabric texture with a subtle embossed gold-thread damask pattern, very dark and rich,
+    soft vignette toward the edges, faint warm candlelight sheen from the top, no objects, no text, flat front view,
+    premium dark fantasy game UI background"
+
+2) brifing_harita_cercevesi.png   1600×960
+   "A grand ornate gold picture frame for a battle map, thick carved gold molding with corner brackets shaped like
+    fleur-de-lis and small sapphires, a small gold crown at the top center, the inside of the frame is EMPTY and filled
+    with flat magenta #FF00FF (it will be cut out), wide 16:9 opening"
+
+3) madalyon_kule.png   512×512
+   "A round heraldic medallion frame: thick gold ring with a laurel wreath around it, four small sapphire studs,
+    a tiny gold crown on top, the round center is EMPTY and filled with flat magenta #FF00FF"
+
+4) madalyon_dusman.png   512×512
+   "A round menacing medallion frame for an enemy: dark blackened iron ring with thorny spikes and small blood-red rubies,
+    thin gold inner edge, a small horned skull ornament on top, the round center is EMPTY and filled with flat magenta #FF00FF"
+
+5) kahraman_yuva_secili.png   512×512
+   "A round portrait frame for the SELECTED hero: rich gold ring with radiant engraved sunburst rays behind it,
+    a gold crown on top, sapphires, glowing warm aura, the round center is EMPTY and filled with flat magenta #FF00FF"
+
+6) kahraman_yuva.png   512×512
+   "A round portrait frame for an UNSELECTED hero: simple dark silver and steel ring with subtle engraving,
+    no crown, muted and darker, the round center is EMPTY and filled with flat magenta #FF00FF"
+
+7) seviye_rozeti.png   256×256
+   "A small heraldic shield badge, navy enamel center with a thin gold border and one tiny sapphire at the top,
+    the center is plain and empty (a number will be printed on it)"
+
+8) baslik_kurdelesi.png   1024×160
+   "A small horizontal gold-bordered navy ribbon plaque for a section heading, with small curled gold filigree tips on
+    both ends, slim and elegant, empty center"
+
+9) susleme_ayirici.png   1536×96
+   "A long thin horizontal ornamental divider: delicate gold filigree scrollwork that tapers to thin points on both ends,
+    a small sapphire diamond in the middle"
+
+10) parsomen_tomari.png   1400×360
+   "A horizontal unrolled aged parchment scroll with rolled wooden ends capped in gold, slightly torn edges,
+    a red wax seal with a crown emblem pressed at the bottom right corner, the parchment surface is blank and empty"
+
+11) dugme_savas.png   1200×360   (ORTAK EK EKLE)
+   "A large ornate call-to-action button: a crimson red lacquered plaque framed by heavy gold filigree, two crossed swords
+    behind it sticking out on both sides, a gold crown on top, sapphires, glossy highlight on the red, empty center
+    (text will be added)"
+
+Not: Arka plan mutlaka düz magenta (#FF00FF). Kenarları ben temizlerim. 1 numara opak doku (magenta yok).

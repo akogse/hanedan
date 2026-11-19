@@ -9705,6 +9705,7 @@ class _s extends Phaser.Scene {
             if (_) {
               let hl = this.add.graphics();
               (hl.fillStyle(15255674, 0.22), hl.fillCircle(g, py, 74), d.add(hl));
+              this.tweens.add({ targets: hl, alpha: 0.45, duration: 1100, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
             }
             let y = Ae(this, g, py, _ ? 58 : 52, "kahraman_" + u + "_portre", _ ? 15255674 : 5260872);
             if (!_) y.setAlpha(0.55);
@@ -9733,14 +9734,32 @@ class _s extends Phaser.Scene {
           d.add([et, ne(this, RX + et.width + 8, ay + 44, ps.slice(ik + 1).trim(), RW - et.width - 8, 25, SOLUK)]);
         } else d.add(ne(this, RX, ay + 44, ps, RW, 25, SOLUK));
       };
+      // pencereye canlılık: içte yavaşça yükselen altın toz zerreleri, savaş düğmesinde nabız
+      for (let k = 0; k < 16; k++) {
+        let zx = (Math.random() - 0.5) * (PW - 160),
+          zy = (Math.random() - 0.5) * (PH - 160),
+          z0 = this.add.circle(zx, zy, 1.5 + Math.random() * 2, 16045174, 0);
+        t.add(z0);
+        this.tweens.add({
+          targets: z0,
+          y: zy - 60 - Math.random() * 80,
+          alpha: { from: 0, to: 0.25 + Math.random() * 0.3 },
+          duration: 2600 + Math.random() * 2600,
+          delay: Math.random() * 2500,
+          yoyo: !0,
+          repeat: -1,
+          ease: "Sine.InOut",
+        });
+      }
+      let sb = F(this, RX + RW - 200, PH / 2 - 92, 400, 110, m("map.play"), () => this.scene.start("Battle", { stageId: e.id }), "red", {
+        icon: "ikon_kilic",
+        size: 38,
+      });
+      this.tweens.add({ targets: sb, scale: 1.04, duration: 900, yoyo: !0, repeat: -1, ease: "Sine.InOut", delay: 400 });
+      t.once("destroy", () => this.time.delayedCall(0, () => this.tweens.getTweens().forEach((tw) => tw.targets.some((x) => !x.scene) && tw.remove())));
       return (
         h(),
-        t.add(
-          F(this, RX + RW - 200, PH / 2 - 92, 400, 110, m("map.play"), () => this.scene.start("Battle", { stageId: e.id }), "red", {
-            icon: "ikon_kilic",
-            size: 38,
-          }),
-        ),
+        t.add(sb),
         t.add(ds(this, PW / 2 - 66, -PH / 2 + 64, () => this.closeModal())),
         t.setScale(0.85),
         this.tweens.add({ targets: t, scale: 1, duration: 200, ease: "Back.Out" }),
