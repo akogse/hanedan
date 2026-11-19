@@ -46,3 +46,4 @@ ses_dusman_gargoyle_olum.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce üc
 ses_dusman_ates_iblisi_olum.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
 ses_dusman_runlu_muhafiz_olum.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
 ses_dusman_varhol_sovalyesi_olum.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
+harita_sonsuz_tam_a/b.webp — paket 11 (sonsuz mod). Mod kodlanınca biri seçilip yollar araclar/yol_uydur.py ile uydurulacak; kale konumu yerleşimden biraz farklı.
