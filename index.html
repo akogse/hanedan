@@ -1991,9 +1991,9 @@
     wave: "ses/wave.mp3?v=869370b2",
     bolum_baslangic: "ses/bolum_baslangic.mp3?v=991c4b1b",
     yenilgi: "ses/yenilgi.mp3?v=61519d84",
-    yildiz: "ses/yildiz.mp3?v=32a00a1f",
-    yildiz_2: "ses/yildiz_2.mp3?v=a16b4bda",
-    yildiz_3: "ses/yildiz_3.mp3?v=07afee40",
+    yildiz: "ses/yildiz.mp3?v=66cf0a46",
+    yildiz_2: "ses/yildiz_2.mp3?v=de2873b3",
+    yildiz_3: "ses/yildiz_3.mp3?v=7bb0f536",
     zafer: "ses/zafer.mp3?v=c585f766",
   },
   Rt = {
@@ -3249,14 +3249,14 @@ function V(e, t = {}) {
   if (a - (Ws[e] ?? -1e9) < (t.minGapMs ?? 45)) return;
   if ((Ct[e] ?? 0) >= (t.maxLive ?? 5)) return;
   Ws[e] = a;
-  let i = s[Math.floor(Math.random() * s.length)],
+  let i = t.anahtar && s.includes(t.anahtar) ? t.anahtar : s[Math.floor(Math.random() * s.length)],
     r = ke.sound.add(i);
   if (
     ((Ct[e] = (Ct[e] ?? 0) + 1),
     r.once("complete", () => {
       (Ct[e]--, r.destroy());
     }),
-    r.play({ volume: Ee.sfx * (t.volume ?? 1), detune: (Math.random() - 0.5) * 120 }),
+    r.play({ volume: Ee.sfx * (t.volume ?? 1), detune: t.detune ?? (Math.random() - 0.5) * 120 }),
     t.pan !== void 0 && "setPan" in r)
   )
     r.setPan(Math.max(-1, Math.min(1, t.pan)));
@@ -14423,7 +14423,7 @@ class Os extends Phaser.Scene {
               delay: 300 + g * 260,
               duration: 300,
               ease: "Back.Out",
-              onStart: () => V("yildiz", { volume: 0.7, minGapMs: 0 }),
+              onStart: () => V("yildiz", { volume: 0.8, minGapMs: 0, anahtar: ["yildiz", "yildiz", "yildiz_2", "yildiz_3", "yildiz_3"][g], detune: [0, 200, 0, 0, 200][g] }),
             }),
             n.includes(g + 1))
           ) {
