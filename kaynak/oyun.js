@@ -39,6 +39,61 @@ var zt = {
     harita_stage2_tam: "assets/harita_stage2_tam.webp",
     harita_stage3_tam: "assets/harita_stage3_tam.webp",
     harita_stage4_tam: "assets/harita_stage4_tam.webp",
+    vaka_01: "assets/vaka_01.webp",
+    vaka_02: "assets/vaka_02.webp",
+    vaka_03: "assets/vaka_03.webp",
+    vaka_04: "assets/vaka_04.webp",
+    vaka_05: "assets/vaka_05.webp",
+    vaka_06: "assets/vaka_06.webp",
+    vaka_07: "assets/vaka_07.webp",
+    vaka_08: "assets/vaka_08.webp",
+    vaka_09: "assets/vaka_09.webp",
+    vaka_10: "assets/vaka_10.webp",
+    vaka_11: "assets/vaka_11.webp",
+    vaka_12: "assets/vaka_12.webp",
+    vaka_13: "assets/vaka_13.webp",
+    vaka_14: "assets/vaka_14.webp",
+    vaka_15: "assets/vaka_15.webp",
+    vaka_16: "assets/vaka_16.webp",
+    vakayiname_cerceve: "assets/vakayiname_cerceve.webp",
+    tac_agaci_arka: "assets/tac_agaci_arka.webp",
+    tac_okcu: "assets/tac_okcu.webp",
+    tac_kisla: "assets/tac_kisla.webp",
+    tac_ates: "assets/tac_ates.webp",
+    tac_buz: "assets/tac_buz.webp",
+    tac_firtina: "assets/tac_firtina.webp",
+    tac_simya: "assets/tac_simya.webp",
+    tac_balista: "assets/tac_balista.webp",
+    tac_kartal: "assets/tac_kartal.webp",
+    tac_run: "assets/tac_run.webp",
+    tac_kahraman: "assets/tac_kahraman.webp",
+    tac_kale: "assets/tac_kale.webp",
+    tac_buyu: "assets/tac_buyu.webp",
+    tac_ekonomi: "assets/tac_ekonomi.webp",
+    harita_stage9_tam: "assets/harita_stage9_tam.webp",
+    harita_stage10_tam: "assets/harita_stage10_tam.webp",
+    harita_stage11_tam: "assets/harita_stage11_tam.webp",
+    harita_stage12_tam: "assets/harita_stage12_tam.webp",
+    harita_stage13_tam: "assets/harita_stage13_tam.webp",
+    harita_stage14_tam: "assets/harita_stage14_tam.webp",
+    harita_stage15_tam: "assets/harita_stage15_tam.webp",
+    harita_stage16_tam: "assets/harita_stage16_tam.webp",
+    kahraman_garrik_portre: "assets/kahraman_garrik_portre.webp",
+    kahraman_iskar_portre: "assets/kahraman_iskar_portre.webp",
+    kahraman_varhol_portre: "assets/kahraman_varhol_portre.webp",
+    kahraman_kemikKral_portre: "assets/kahraman_kemikKral_portre.webp",
+    efekt_kul_tanesi: "assets/efekt_kul_tanesi.webp",
+    efekt_kar_tanesi: "assets/efekt_kar_tanesi.webp",
+    efekt_yaprak_sonbahar: "assets/efekt_yaprak_sonbahar.webp",
+    efekt_yaprak_yesil: "assets/efekt_yaprak_yesil.webp",
+    efekt_ates_bocegi: "assets/efekt_ates_bocegi.webp",
+    efekt_hayalet_isigi: "assets/efekt_hayalet_isigi.webp",
+    efekt_mor_ruh: "assets/efekt_mor_ruh.webp",
+    efekt_alev_dili: "assets/efekt_alev_dili.webp",
+    efekt_duman_bulutu: "assets/efekt_duman_bulutu.webp",
+    efekt_sis_seridi: "assets/efekt_sis_seridi.webp",
+    efekt_isik_huzmesi: "assets/efekt_isik_huzmesi.webp",
+    efekt_yagmur_damlasi: "assets/efekt_yagmur_damlasi.webp",
     harita_stage5_tam: "assets/harita_stage5_tam.webp",
     harita_stage6_tam: "assets/harita_stage6_tam.webp",
     harita_stage7_tam: "assets/harita_stage7_tam.webp",
@@ -2256,6 +2311,163 @@ var $t = {
   "reward.banner": "Kozmetik bayrak",
   "speaker.scout": "İzci",
   "speaker.villager": "Değirmenci",
+  "vaka.1": "Karakolda Şafak",
+  "vaka.1.metin": "Sınır karakolunda sabah sisi daha dağılmamıştı ki orman ateş gözleriyle doldu. Sir Aldric surlardan baktı; goblin meşaleleri yolun kıvrımlarına dizilmişti. O gün ilk kuleler kuruldu, ilk oklar atıldı. Kimse bunun bir savaşın değil, bir çağın başlangıcı olduğunu bilmiyordu.",
+  "vaka.2": "Değirmen Yanarken",
+  "vaka.2.metin": "Kurtlar gece geldi. Değirmen alev alev yanarken köylüler kaleye koştu, Aldric'in askerleri de onların önüne kalkan oldu. Thorgar'ın ocağından çıkan ateş sürüyü dağıttı. Sabah olduğunda köy kurtulmuştu ama herkes aynı şeyi soruyordu: Bu baskınlar neden bu kadar sık?",
+  "vaka.3": "Kuzgunların Geçidi",
+  "vaka.3.metin": "Sarya'nın kuzgunları akınların aynı saatte, aynı yoldan geldiğini fark etti. Geçidi tuttular; Velmora buz rünlerini uyandırdı, ateşle buz buluşunca sis yükseldi. Ölen haydut yüzbaşısı son nefesinde bir isim fısıldadı. Kimse anlayamadı, ama hepsi bir şeyden emindi: biri onlara yol gösteriyordu.",
+  "vaka.4": "Taş Köprü",
+  "vaka.4.metin": "Nehrin tek geçidi olan Taş Köprü'de eski bir balista ve iki terk edilmiş maden bulundu. Zırhlı haydutlar köprüye yığıldı, ama geçemediler. Savaştan sonra bir kalkanın arkasında kazınmış bir arma çıktı. Haydutlar armalarını kazımazdı. Bu adamlar birine hizmet ediyordu.",
+  "vaka.5": "Fırtına Tepesi",
+  "vaka.5.metin": "Tepedeki eski fırtına kulesi yüzyıllardır uyuyordu. Velmora rünlerine dokununca şimşek bir düşmandan ötekine sıçradı. Gökyüzü kuzgunlarla karardı; bunlar sıradan kuşlar değil, birinin gözcüleriydi. İzleri güneydeki bataklığa, goblin şamanlarının yuvasına uzanıyordu.",
+  "vaka.6": "Sisli Bataklık",
+  "vaka.6.metin": "Sis o kadar koyuydu ki kuleler birbirini zor görüyordu. Şamanlar yaralılarını büyüyle ayağa kaldırıyor, balçıklar kesildikçe ikiye bölünüyordu. Dağın kartalları gökyüzünü temizledi. Şamanın çantasında mühürlü bir mektup vardı. Mühür kazınmamıştı: kırmızı bir pençe. Redclaw.",
+  "vaka.7": "Yağmacı Kampı",
+  "vaka.7.metin": "Garrik Redclaw, sürgün edilmiş kuzey lordu. Yağmacı kampı kazık duvarların ardında kaynıyordu. Simyacının iksirleri zırhları eritti, ateşle buluşan zehir patladı. Kamp düştü, çalınan sancaklar geri alındı. Ama Garrik orada değildi; adamları onun kalesine çekilmişti.",
+  "vaka.8": "Redclaw'ın Kalesi",
+  "vaka.8.metin": "Garrik'in sancağı burçlarda dalgalanıyordu. Rün taşları kulelere güç verdi; Garrik bağırdığında adamları kalkanlanıp koştu. Sonunda kapıda düştü. Ölürken güldü: 'Ben sadece kapıyı açtım. Asıl gelen Varhol'dan.' Varhol... sınırın ötesinde ölülerin yürüdüğü anlatılan yer.",
+  "vaka.9": "Kül Yağmuru",
+  "vaka.9.metin": "Tarlalara kül yağıyordu, ama ortada yangın yoktu. Kül Varhol'dan geliyordu ve içinde ölü büyüsü vardı. Rüzgâr sertleştikçe kuleler daha kısa görüyordu. Yoldan iskeletler yürüdü; yıkıldıklarında yeniden kalktılar. Yalnızca ateşle ölenler toprakta kaldı.",
+  "vaka.10": "Taş Bekçiler",
+  "vaka.10.metin": "Eski mabedin heykelleri kaidelerinden kalktı. Taş kanatlar gökyüzünü doldurdu, rünlü muhafızlar büyüyü üzerlerinden silkip attı. Savaş bittiğinde kaidelerin hepsinde aynı mühür vardı: mor bir kafatası. Velmora onu tanıdı. Iskar, sarayın sürgün edilmiş büyücüsü.",
+  "vaka.11": "Fısıltılar Mezarlığı",
+  "vaka.11.metin": "Mezarlıkta Iskar onları bekliyordu. Hayaletler askerlerin içinden geçti, ölü büyücüler mezarlardan yeni iskeletler kaldırdı. Iskar sonunda geri çekildi ama yenilmiş gibi değildi: 'Bu yalnızca bir provaydı. Kemik Kral uyandığında kuzey benim olacak.' Gittiği yön belliydi: Kuzey Kalesi.",
+  "vaka.12": "Kuzey Kalesi'nin Düşüşü",
+  "vaka.12.metin": "Kale yanıyordu. Aldric kaleyi kurtaramayacağını biliyordu ama halkı kurtarabilirdi. Üç yoldan ölüler aktı, buz trolleri yaralarını kendileri kapattı. Son köylü kapıdan çıktığında Aldric sancağını indirdi. 'Geri alacağız,' dedi. 'Thorgar, bize kalkan lazım.'",
+  "vaka.13": "Koç ve Kalkan",
+  "vaka.13.metin": "Thorgar ocağını vadiye kurdu ve gece gündüz çekiç salladı. Her örs darbesi yakındaki kulelere güç verdi. Koçbaşları askerleri ezip kapıya yürüdü, ama vadi dayandı. Şafakta kalkanlar hazırdı. Velmora kuzeydeki eski mabedi anlattı: dört elementin rünlerinin uyuduğu yer.",
+  "vaka.14": "Element Mabedi",
+  "vaka.14.metin": "Dört tapınak, dört güç: ateş, buz, şimşek ve zehir. Velmora yalnızca birini uyandırabildi ve seçim savaşın kaderini belirledi. Üç yoldan gelen ölü ordusu rün çemberinde dağıldı. Mabet gücünü verdi. Artık kaleyi geri almanın zamanı gelmişti.",
+  "vaka.15": "Kuzey Kalesi'ni Geri Al",
+  "vaka.15.metin": "Şafakta saldırdılar. Kemik devleri yıkıldıkça içlerinden iskeletler döküldü, ama yeni kalkanlar geri adım attırmadı. Öğleye doğru ölü sancakları burçlardan indi ve krallığın sancağı yeniden göndere çekildi. Iskar ise çoktan kaçmıştı: Kemik Taht'a, efendisinin yanına.",
+  "vaka.16": "Kemik Taht",
+  "vaka.16.metin": "Kemik Kral yüzyıllık uykusundan uyandı. Krallık onun mezarının üstüne kurulmuştu. Canı azaldıkça yeni ordular çağırdı, ama dört kahraman geri çekilmedi. Sonunda taht yıkıldı ve ölüler toprağa döndü. Yalnızca bir şey eksikti: Iskar'ın asası. Biri onu almıştı. Bir çağ kapandı; hikâye bitmedi.",
+  "tac.okcu": "Okçu Ustalığı",
+  "tac.okcu.desc": "Okçu kulelerinin hasarı +%{x}.",
+  "tac.kisla": "Kışla Disiplini",
+  "tac.kisla.desc": "Askerlerin canı +%{x}.",
+  "tac.ates": "Ejder Ateşi",
+  "tac.ates.desc": "Ateş kulelerinin hasarı +%{x}.",
+  "tac.buz": "Kuzey Ayazı",
+  "tac.buz.desc": "Buz kulelerinin hasarı +%{x}.",
+  "tac.firtina": "Fırtına Çağrısı",
+  "tac.firtina.desc": "Fırtına kulelerinin hasarı +%{x}.",
+  "tac.simya": "Simya Bilgisi",
+  "tac.simya.desc": "Simyacı kulelerinin hasarı +%{x}.",
+  "tac.balista": "Kuşatma Ustaları",
+  "tac.balista.desc": "Balistaların hasarı +%{x}.",
+  "tac.kartal": "Kartal Yuvası",
+  "tac.kartal.desc": "Kartal kulelerinin hasarı +%{x}.",
+  "tac.run": "Kadim Rünler",
+  "tac.run.desc": "Rün kulelerinin verdiği güç +%{x}.",
+  "tac.kahraman": "Kahramanlık",
+  "tac.kahraman.desc": "Kahramanın canı ve hasarı +%{x}.",
+  "tac.kale": "Taş Surlar",
+  "tac.kale.desc": "Kalenin canı +{x}.",
+  "tac.buyu": "Büyü Bilgeliği",
+  "tac.buyu.desc": "Büyülerin bekleme süresi -%{x}.",
+  "tac.ekonomi": "Kraliyet Hazinesi",
+  "tac.ekonomi.desc": "Her bölüme +{x} altınla başla.",
+  "map.chronicle": "Vakayiname",
+  "vaka.kilitli": "Bu sayfa henüz yazılmadı.\n{n}. bölümü geçince açılır.",
+  "vaka.yeni": "Vakayiname'ye yeni sayfa eklendi",
+  "vaka.cag": "{c} · {n}. Bölüm",
+  "tac.puan": "Taç Puanı: {n}",
+  "tac.aciklama": "Bölümlerden kazandığın her yıldız bir Taç Puanı'dır. Puanlar istediğin zaman geri alınıp yeniden dağıtılabilir.",
+  "tac.yukselt": "Yükselt · {n}",
+  "tac.maks": "En üst seviye",
+  "tac.sifirla": "Puanları Geri Al",
+  "tac.yetersiz": "Yeterli Taç Puanı yok. Bölümlerden daha çok yıldız topla.",
+  "tac.sec": "Bir dala dokun",
+  "tac.seviye": "Seviye {n}/3",
+  "enemy.skeleton": "İskelet Asker",
+  "enemy.skeleton.desc": "Ateşle yakılmadıkça öldükten sonra bir kez yeniden kalkar.",
+  "enemy.fireImp": "Ateş İblisi",
+  "enemy.fireImp.desc": "Çok hızlı. Ateşten etkilenmez.",
+  "enemy.ghost": "Hayalet",
+  "enemy.ghost.desc": "Fiziksel saldırılar zor işler; askerlerin içinden geçip gider.",
+  "enemy.gargoyle": "Gargoyle",
+  "enemy.gargoyle.desc": "Uçan taş canavar. Zırhı kalın; yalnız havaya vuran kuleler yetişir.",
+  "enemy.necromancer": "Ölü Büyücü",
+  "enemy.necromancer.desc": "Durmadan yeni iskeletler kaldırır. Önce onu indir.",
+  "enemy.iceTroll": "Buz Trolü",
+  "enemy.iceTroll.desc": "Yaraları kendiliğinden kapanır. Buzdan etkilenmez.",
+  "enemy.runeGuard": "Rünlü Muhafız",
+  "enemy.runeGuard.desc": "Büyüye çok dayanıklı; rün kalkanıyla yakınındakileri korur.",
+  "enemy.varholKnight": "Varhol Şövalyesi",
+  "enemy.varholKnight.desc": "Ağır zırhlı ölü şövalye. Askerleri hızla biçer.",
+  "enemy.ram": "Koçbaşı",
+  "enemy.ram.desc": "Askerlerle durdurulamaz. Kapıya ulaşırsa 5 can götürür.",
+  "enemy.boneGiant": "Kemik Dev",
+  "enemy.boneGiant.desc": "Devasa ve dayanıklı. Ölünce içinden 3 iskelet dökülür.",
+  "enemy.iskar": "Iskar",
+  "enemy.iskar.desc": "Sürgün saray büyücüsü. İskelet kaldırır, kuleleri susturur.",
+  "enemy.kemikKral": "Kemik Kral",
+  "enemy.kemikKral.desc": "Kemik Taht'ın efendisi. Canı azaldıkça yeni güçler çağırır.",
+  "speaker.iskar": "Iskar",
+  "speaker.varhol": "Varhol Komutanı",
+  "dlg.12.pre.v": "Kaleniz düştü bile. Kapıdan kim çıkarsa onu da Kemik Kral'a götüreceğim.",
+  "dlg.15.pre.v": "Bu surları bir kez aldım. Bir kez daha alırım, ölüler yorulmaz.",
+  "speaker.kemikKral": "Kemik Kral",
+  "speaker.garrik": "Garrik Redclaw",
+  "mech.ash": "Kül fırtınası! Kulelerin menzili kısaldı.",
+  "mech.ashEnd": "Kül fırtınası dindi.",
+  "mech.statue": "Taş bekçiler uyanıyor!",
+  "mech.anvil": "Örs Darbesi! Yakındaki kuleler 10 sn güçlü.",
+  "mech.anvilHint": "Örse dokun",
+  "mech.shrine": "{x} Mabedi uyandı: bu kuleler +%30 hasar.",
+  "mech.shrineHint": "Bir tapınak seç",
+  "mech.fire": "Ateş",
+  "mech.ice": "Buz",
+  "mech.lightning": "Şimşek",
+  "mech.poison": "Zehir",
+  "mech.revive": "Kalkıyor!",
+  "mech.phase": "Kemik Kral öfkeleniyor!",
+  "map.eraLocked": "II. Çağ için {n} yıldız gerekli.",
+  "dlg.9.pre.0": "Kül yağıyor ama ortada yangın yok. Bu kül Varhol'dan geliyor.",
+  "dlg.9.pre.1": "Küllerde ölü büyüsü var. Fırtına sertleşince kuleler daha kısa görür.",
+  "dlg.9.pre.2": "Demek ölüler gerçekten yürüyor. Masal değilmiş.",
+  "dlg.9.pre.3": "Kemiğe ateş iyi gelir. Yanarak ölen iskelet bir daha kalkmaz.",
+  "dlg.9.post.0": "Bu iskeletleri biri uyandırıyor. Böyle bir büyü kendi kendine yürümez.",
+  "dlg.9.post.1": "Kuzgunlarım eski mabette bir şey gördü. Heykeller... kıpırdıyor.",
+  "dlg.10.pre.0": "Mabedin heykellerinden bazıları kaidesinde değil.",
+  "dlg.10.pre.1": "Taş Bekçiler. Ölü büyüsü onları da uyandırmış. Taş zırha ok zor işler.",
+  "dlg.10.pre.2": "Rünlü muhafızlar büyüye dayanıklı. Onları balistayla, askerle karşılayın.",
+  "dlg.10.post.0": "Kaidelerin hepsinde aynı mühür var: mor bir kafatası.",
+  "dlg.10.post.1": "Iskar'ın mührü. Eskiden sarayın büyücüsüydü; ölü büyüsü yüzünden sürgün edildi.",
+  "dlg.11.pre.0": "Mezarlığıma hoş geldiniz. Burada herkes sonunda bana hizmet eder.",
+  "dlg.11.pre.1": "Hayaletlere kılıç işlemez, büyü işler. Ateş, buz, şimşek: ne varsa.",
+  "dlg.11.pre.2": "Ölü büyücüleri önce indirin. Her biri yeni iskeletler kaldırıyor.",
+  "dlg.11.post.0": "Bu yalnızca bir provaydı, Aldric. Kemik Kral uyandığında kuzey benim olacak.",
+  "dlg.11.post.1": "Kaçtı. Gittiği yön de belli: Kuzey Kalesi.",
+  "dlg.12.pre.0": "Kale düşüyor! Kadınlar, çocuklar hâlâ içeride!",
+  "dlg.12.pre.1": "Kaleyi kurtaramayız ama halkı kurtarabiliriz. Herkes çıkana kadar yolu tutun.",
+  "dlg.12.pre.2": "Buz trolüne buz işlemez, yarası da kendiliğinden kapanır. Ateşle durmadan yakın.",
+  "dlg.12.post.0": "Hepimiz çıktık. Size can borçluyuz.",
+  "dlg.12.post.1": "Kaleyi kaybettik ama geri alacağız. Thorgar, bize kalkan lazım.",
+  "dlg.13.pre.0": "Ocağımı vadiye kurdum. Kalkanlar bitene kadar burayı tutun.",
+  "dlg.13.pre.1": "Koçbaşları geliyor! Askerler onları durduramaz, kapıya kadar yürürler.",
+  "dlg.13.pre.2": "Örsüme dokunun: her darbem yakındaki kuleleri güçlendirir.",
+  "dlg.13.post.0": "Kalkanlar hazır. Varhol'un ölüleri bunları kolay kolay delemez.",
+  "dlg.13.post.1": "Kuzeyde dört elementin rünlerinin uyuduğu eski bir mabet var. Gücüne ihtiyacımız olacak.",
+  "dlg.14.pre.0": "Element Mabedi. Dört tapınak, dört güç. Ama yalnızca birini uyandırabilirim.",
+  "dlg.14.pre.1": "Bir tapınağa dokun: o elementin kuleleri bu savaş boyunca daha sert vurur.",
+  "dlg.14.pre.2": "Üç yoldan geliyorlar. İblisler ateşe, troller buza aldırmaz; iyi seç.",
+  "dlg.14.post.0": "Mabet bize gücünü verdi. Artık kaleyi geri alabiliriz.",
+  "dlg.14.post.1": "Şafakta saldırıyoruz.",
+  "dlg.15.pre.0": "Kuzey Kalesi. Burçlarda ölü sancakları dalgalanıyor. Bugün inecekler.",
+  "dlg.15.pre.1": "Kemik devleri ölünce içlerinden iskeletler dökülüyor. Kuleleri arka arkaya kurun.",
+  "dlg.15.pre.2": "Yeni kalkanlar askerlerin sırtında. Bu sefer geri adım yok.",
+  "dlg.15.post.0": "Kale yeniden bizim. Sancağımız yine burçlarda.",
+  "dlg.15.post.1": "Iskar Kemik Taht'a, efendisinin yanına kaçtı. Son savaş orada.",
+  "dlg.16.pre.0": "Yüzyıllardır uyuyordum. Krallığınız benim mezarımın üstüne kuruldu.",
+  "dlg.16.pre.1": "Efendim uyandı. Onu ilk görecek olanlar da sizsiniz.",
+  "dlg.16.pre.2": "Krallığım için, halkım için. Herkes yerine!",
+  "dlg.16.pre.3": "Canı azaldıkça yeni güçler çağıracak. Hazır olun.",
+  "dlg.16.post.0": "Kemik Kral düştü. Ölüler yeniden toprağa döndü.",
+  "dlg.16.post.1": "Ama Iskar'ın asası ortada yok. Biri onu almış.",
+  "dlg.16.post.2": "O hâlde hikâye bitmedi. Yalnızca bir çağ kapandı.",
   "dlg.1.pre.0": "Sınır karakolundan duman yükseliyor. Goblinler ormandan çıkmış!",
   "dlg.1.pre.1": "Kuzgunlarım saydı: küçük bir sürü. Ama arkasından daha fazlası gelir.",
   "dlg.1.pre.2": "Kulelerinizi yolun kıvrımlarına kurun. Düşman orada daha uzun kalır.",
@@ -2619,6 +2831,163 @@ var Ls = {
   "reward.banner": "Cosmetic banner",
   "speaker.scout": "Scout",
   "speaker.villager": "Miller",
+  "vaka.1": "Dawn at the Outpost",
+  "vaka.1.metin": "The morning mist had not yet lifted from the border outpost when the forest filled with burning eyes. Sir Aldric watched from the wall as goblin torches lined the bends of the road. That day the first towers rose and the first arrows flew. No one knew it was the start not of a battle, but of an age.",
+  "vaka.2": "While the Mill Burned",
+  "vaka.2.metin": "The wolves came at night. As the mill burned, the villagers ran for the keep and Aldric's soldiers became their shield. Fire from Thorgar's forge scattered the pack. By morning the village was saved, yet everyone asked the same thing: why were the raids so frequent?",
+  "vaka.3": "Pass of Ravens",
+  "vaka.3.metin": "Sarya's ravens noticed that every raid came at the same hour, by the same road. They held the pass; Velmora woke the frost runes, and where fire met ice the mist rose. The dying bandit captain whispered a name. No one understood it, yet all were sure of one thing: someone was guiding them.",
+  "vaka.4": "The Stone Bridge",
+  "vaka.4.metin": "At the Stone Bridge, the river's only crossing, they found an old ballista and two abandoned mines. Armored bandits crowded onto the bridge but could not pass. Afterwards, a scratched-off crest was found behind a shield. Bandits do not scratch off their crests. These men served someone.",
+  "vaka.5": "Storm Hill",
+  "vaka.5.metin": "The old storm tower on the hill had slept for centuries. When Velmora touched its runes, lightning leapt from foe to foe. The sky darkened with ravens, no ordinary birds but someone's scouts. Their trail led south, to the swamp where the goblin shamans nested.",
+  "vaka.6": "The Misty Swamp",
+  "vaka.6.metin": "The mist was so thick the towers could barely see one another. Shamans raised their wounded with magic, and slimes split in two when cut. The mountain eagles cleared the sky. In a shaman's satchel lay a sealed letter, its seal unscratched: a red claw. Redclaw.",
+  "vaka.7": "The Raider Camp",
+  "vaka.7.metin": "Garrik Redclaw, the exiled lord of the north. His raider camp seethed behind palisade walls. The alchemist's potions melted armor, and poison exploded when it met fire. The camp fell and the stolen banners were taken back. But Garrik was not there; his men had withdrawn to his fortress.",
+  "vaka.8": "Redclaw's Fortress",
+  "vaka.8.metin": "Garrik's banner flew from the battlements. Rune stones empowered the towers; when Garrik roared, his men raised their shields and charged. At last he fell at the gate. Dying, he laughed: 'I only opened the door. The real threat comes from Varhol.' Varhol... the land beyond the border where, they said, the dead walk.",
+  "vaka.9": "Ash Rain",
+  "vaka.9.metin": "Ash fell on the fields, yet nothing burned. It came from Varhol, laced with death magic. When the wind rose, the towers saw less far. Skeletons marched down the road and rose again after falling. Only those that died burning stayed in the earth.",
+  "vaka.10": "The Stone Sentinels",
+  "vaka.10.metin": "The statues of the old temple rose from their plinths. Stone wings filled the sky, and rune guards shrugged off every spell. When it was over, every plinth bore the same seal: a violet skull. Velmora knew it. Iskar, the court's exiled mage.",
+  "vaka.11": "Graveyard of Whispers",
+  "vaka.11.metin": "Iskar was waiting in the graveyard. Ghosts passed through soldiers, and necromancers raised new skeletons from the graves. In the end Iskar withdrew, though not like a beaten man: 'That was only a rehearsal. When the Bone King wakes, the north is mine.' His path was clear: the North Keep.",
+  "vaka.12": "Fall of the North Keep",
+  "vaka.12.metin": "The keep was burning. Aldric knew he could not save it, but he could save its people. The dead poured in from three roads and the ice trolls closed their own wounds. When the last villager was through the gate, Aldric lowered his banner. 'We will take it back,' he said. 'Thorgar, we need shields.'",
+  "vaka.13": "Ram and Shield",
+  "vaka.13.metin": "Thorgar set up his forge in the valley and swung his hammer day and night. Each strike on the anvil empowered the towers around it. Battering rams crushed soldiers and marched on the gate, yet the valley held. By dawn the shields were ready. Velmora spoke of an old temple to the north, where the runes of four elements slept.",
+  "vaka.14": "Temple of Elements",
+  "vaka.14.metin": "Four shrines, four powers: fire, ice, lightning and poison. Velmora could wake only one, and that choice decided the battle. The army of the dead, coming from three roads, broke on the rune circle. The temple gave its strength. Now it was time to retake the keep.",
+  "vaka.15": "Retake the North Keep",
+  "vaka.15.metin": "They attacked at dawn. As bone giants fell, skeletons spilled out of them, but the new shields gave no ground. By noon the banners of the dead came down and the kingdom's banner was raised once more. Iskar had already fled: to the Bone Throne, to his master.",
+  "vaka.16": "The Bone Throne",
+  "vaka.16.metin": "The Bone King woke from his centuries-long sleep. The kingdom had been built upon his tomb. As his strength waned he called new armies, yet the four heroes did not retreat. At last the throne shattered and the dead returned to the earth. Only one thing was missing: Iskar's staff. Someone had taken it. An age had ended; the story had not.",
+  "tac.okcu": "Archer Mastery",
+  "tac.okcu.desc": "Archer towers deal +{x}% damage.",
+  "tac.kisla": "Barracks Discipline",
+  "tac.kisla.desc": "Soldiers have +{x}% health.",
+  "tac.ates": "Dragonfire",
+  "tac.ates.desc": "Fire towers deal +{x}% damage.",
+  "tac.buz": "Northern Frost",
+  "tac.buz.desc": "Frost towers deal +{x}% damage.",
+  "tac.firtina": "Call of the Storm",
+  "tac.firtina.desc": "Storm towers deal +{x}% damage.",
+  "tac.simya": "Alchemy Lore",
+  "tac.simya.desc": "Alchemist towers deal +{x}% damage.",
+  "tac.balista": "Siege Masters",
+  "tac.balista.desc": "Ballistas deal +{x}% damage.",
+  "tac.kartal": "Eagle Eyrie",
+  "tac.kartal.desc": "Eagle towers deal +{x}% damage.",
+  "tac.run": "Ancient Runes",
+  "tac.run.desc": "Rune towers grant +{x}% more power.",
+  "tac.kahraman": "Heroism",
+  "tac.kahraman.desc": "Your hero gains +{x}% health and damage.",
+  "tac.kale": "Stone Walls",
+  "tac.kale.desc": "The castle gains +{x} lives.",
+  "tac.buyu": "Spell Wisdom",
+  "tac.buyu.desc": "Spell cooldowns -{x}%.",
+  "tac.ekonomi": "Royal Treasury",
+  "tac.ekonomi.desc": "Start every stage with +{x} gold.",
+  "map.chronicle": "Chronicle",
+  "vaka.kilitli": "This page is not yet written.\nIt opens when you clear stage {n}.",
+  "vaka.yeni": "A new page was added to the Chronicle",
+  "vaka.cag": "{c} · Stage {n}",
+  "tac.puan": "Crown Points: {n}",
+  "tac.aciklama": "Every star you earn is a Crown Point. You can take your points back and spend them again at any time.",
+  "tac.yukselt": "Upgrade · {n}",
+  "tac.maks": "Maxed",
+  "tac.sifirla": "Refund Points",
+  "tac.yetersiz": "Not enough Crown Points. Earn more stars in stages.",
+  "tac.sec": "Tap a branch",
+  "tac.seviye": "Rank {n}/3",
+  "enemy.skeleton": "Skeleton Soldier",
+  "enemy.skeleton.desc": "Rises once more after death unless it was burning.",
+  "enemy.fireImp": "Fire Imp",
+  "enemy.fireImp.desc": "Very fast. Immune to fire.",
+  "enemy.ghost": "Ghost",
+  "enemy.ghost.desc": "Takes little physical damage and passes through soldiers.",
+  "enemy.gargoyle": "Gargoyle",
+  "enemy.gargoyle.desc": "A flying stone beast with thick armor. Only towers that hit air can reach it.",
+  "enemy.necromancer": "Necromancer",
+  "enemy.necromancer.desc": "Keeps raising skeletons. Kill it first.",
+  "enemy.iceTroll": "Ice Troll",
+  "enemy.iceTroll.desc": "Its wounds close on their own. Immune to ice.",
+  "enemy.runeGuard": "Rune Guard",
+  "enemy.runeGuard.desc": "Highly magic-resistant; its runes shield nearby allies.",
+  "enemy.varholKnight": "Varhol Knight",
+  "enemy.varholKnight.desc": "A heavily armored undead knight. Cuts down soldiers fast.",
+  "enemy.ram": "Battering Ram",
+  "enemy.ram.desc": "Cannot be blocked by soldiers. Costs 5 lives at the gate.",
+  "enemy.boneGiant": "Bone Giant",
+  "enemy.boneGiant.desc": "Huge and tough. Releases 3 skeletons when it dies.",
+  "enemy.iskar": "Iskar",
+  "enemy.iskar.desc": "The exiled court mage. Raises skeletons and silences towers.",
+  "enemy.kemikKral": "The Bone King",
+  "enemy.kemikKral.desc": "Lord of the Bone Throne. Calls new powers as his health falls.",
+  "speaker.iskar": "Iskar",
+  "speaker.varhol": "Varhol Commander",
+  "dlg.12.pre.v": "Your keep has already fallen. Whoever comes out of that gate, I will take to the Bone King.",
+  "dlg.15.pre.v": "I took these walls once. I will take them again; the dead do not tire.",
+  "speaker.kemikKral": "The Bone King",
+  "speaker.garrik": "Garrik Redclaw",
+  "mech.ash": "Ash storm! Tower range is reduced.",
+  "mech.ashEnd": "The ash storm has passed.",
+  "mech.statue": "The stone sentinels awaken!",
+  "mech.anvil": "Anvil Strike! Nearby towers empowered for 10 s.",
+  "mech.anvilHint": "Tap the anvil",
+  "mech.shrine": "The {x} Shrine awakens: these towers deal +30% damage.",
+  "mech.shrineHint": "Choose a shrine",
+  "mech.fire": "Fire",
+  "mech.ice": "Ice",
+  "mech.lightning": "Lightning",
+  "mech.poison": "Poison",
+  "mech.revive": "Rises!",
+  "mech.phase": "The Bone King rages!",
+  "map.eraLocked": "{n} stars are needed for Era II.",
+  "dlg.9.pre.0": "Ash is falling, yet nothing is burning. This ash comes from Varhol.",
+  "dlg.9.pre.1": "There is death magic in the ash. When the storm rises, our towers see less far.",
+  "dlg.9.pre.2": "So the dead truly walk. It was no tale.",
+  "dlg.9.pre.3": "Fire suits bones. A skeleton that dies burning stays down.",
+  "dlg.9.post.0": "Someone is waking these skeletons. Magic like this does not walk on its own.",
+  "dlg.9.post.1": "My ravens saw something at the old temple. The statues... are moving.",
+  "dlg.10.pre.0": "Some of the temple statues are no longer on their plinths.",
+  "dlg.10.pre.1": "The Stone Sentinels. Death magic woke them too. Arrows struggle against stone.",
+  "dlg.10.pre.2": "Rune guards shrug off magic. Meet them with ballistas and soldiers.",
+  "dlg.10.post.0": "Every plinth bears the same seal: a violet skull.",
+  "dlg.10.post.1": "Iskar's seal. He was once the court mage, exiled for death magic.",
+  "dlg.11.pre.0": "Welcome to my graveyard. Here, everyone serves me in the end.",
+  "dlg.11.pre.1": "Blades pass through ghosts; magic does not. Fire, ice, lightning, all of it.",
+  "dlg.11.pre.2": "Take down the necromancers first. Each one raises more skeletons.",
+  "dlg.11.post.0": "That was only a rehearsal, Aldric. When the Bone King wakes, the north is mine.",
+  "dlg.11.post.1": "He fled. And we know where: the North Keep.",
+  "dlg.12.pre.0": "The keep is falling! Women and children are still inside!",
+  "dlg.12.pre.1": "We cannot save the keep, but we can save its people. Hold the roads until everyone is out.",
+  "dlg.12.pre.2": "Ice does nothing to a troll, and its wounds close by themselves. Keep it burning.",
+  "dlg.12.post.0": "We all made it out. We owe you our lives.",
+  "dlg.12.post.1": "We lost the keep, but we will take it back. Thorgar, we need shields.",
+  "dlg.13.pre.0": "I set up my forge in the valley. Hold this place until the shields are done.",
+  "dlg.13.pre.1": "Battering rams! Soldiers cannot stop them; they will march right to the gate.",
+  "dlg.13.pre.2": "Tap my anvil: every strike empowers the towers around it.",
+  "dlg.13.post.0": "The shields are ready. Varhol's dead will not pierce these easily.",
+  "dlg.13.post.1": "North of here lies an old temple where the runes of four elements sleep. We will need its power.",
+  "dlg.14.pre.0": "The Temple of Elements. Four shrines, four powers. But I can wake only one.",
+  "dlg.14.pre.1": "Tap a shrine: towers of that element hit harder for the whole battle.",
+  "dlg.14.pre.2": "They come from three roads. Imps ignore fire, trolls ignore ice. Choose well.",
+  "dlg.14.post.0": "The temple gave us its strength. Now we can retake the keep.",
+  "dlg.14.post.1": "We attack at dawn.",
+  "dlg.15.pre.0": "The North Keep. Banners of the dead fly from its walls. Today they come down.",
+  "dlg.15.pre.1": "When bone giants fall, skeletons spill out. Build your towers in depth.",
+  "dlg.15.pre.2": "The new shields are on our soldiers' backs. No retreat this time.",
+  "dlg.15.post.0": "The keep is ours again. Our banner flies once more.",
+  "dlg.15.post.1": "Iskar fled to the Bone Throne, to his master. The last battle is there.",
+  "dlg.16.pre.0": "I slept for centuries. Your kingdom was built upon my tomb.",
+  "dlg.16.pre.1": "My master has awoken. And you will be the first to see him.",
+  "dlg.16.pre.2": "For my kingdom, for my people. To your posts!",
+  "dlg.16.pre.3": "As his strength wanes he will call new powers. Be ready.",
+  "dlg.16.post.0": "The Bone King has fallen. The dead return to the earth.",
+  "dlg.16.post.1": "But Iskar's staff is gone. Someone took it.",
+  "dlg.16.post.2": "Then the story is not over. Only an age has ended.",
   "dlg.1.pre.0": "Smoke rises from the border outpost. Goblins have come out of the forest!",
   "dlg.1.pre.1": "My ravens counted them: a small pack. More will follow.",
   "dlg.1.pre.2": "Build your towers at the bends of the road. Enemies linger there.",
@@ -5426,6 +5795,10 @@ var xt = {
   boss_kemik_krali: { h: 240, ox: 0.5, oy: 0.97 },
   kahraman_aldric: { h: 150, ox: 0.52, oy: 0.97 },
   kahraman_aldric_portre: { h: 160, ox: 0.5, oy: 0.5, focus: { x: 0.5, y: 0.4, span: 0.6 } },
+  kahraman_garrik_portre: { h: 160, ox: 0.5, oy: 0.5, focus: { x: 0.5, y: 0.36, span: 0.6 } },
+  kahraman_varhol_portre: { h: 160, ox: 0.5, oy: 0.5, focus: { x: 0.5, y: 0.36, span: 0.6 } },
+  kahraman_iskar_portre: { h: 160, ox: 0.5, oy: 0.5, focus: { x: 0.5, y: 0.36, span: 0.6 } },
+  kahraman_kemikKral_portre: { h: 160, ox: 0.5, oy: 0.5, focus: { x: 0.5, y: 0.36, span: 0.6 } },
   kahraman_villager_portre: { h: 160, ox: 0.5, oy: 0.5, focus: { x: 0.45, y: 0.4, span: 0.62 } },
   kahraman_sarya: { h: 148, ox: 0.5, oy: 0.97 },
   kahraman_sarya_portre: { h: 160, ox: 0.5, oy: 0.5, focus: { x: 0.56, y: 0.36, span: 0.62 } },
@@ -6073,6 +6446,22 @@ function Ae(e, t, s, a, i, r = 13081150) {
     n.once(Phaser.GameObjects.Events.DESTROY, () => {
       (e.events.off(Phaser.Scenes.Events.PRE_RENDER, _), u.destroy());
     }),
+    n
+  );
+}
+function yd(e, t, s, a, i, r) {
+  // yuvarlak simge düğmesi: koyu lacivert, altın kenar
+  let n = e.add.container(t, s),
+    o = e.add.circle(0, 4, a, 0, 0.45),
+    l = e.add.circle(0, 0, a, 660528, 0.96).setStrokeStyle(Math.max(3, a * 0.09), 14200904, 1),
+    d = e.add.text(0, -a * 0.06, i, { fontFamily: "Georgia, serif", fontStyle: "700", fontSize: Math.round(a * 1.1) + "px", color: "#f4dc90" }).setOrigin(0.5);
+  n.add([o, l, d]);
+  let h = e.add.zone(0, 0, a * 2.2, a * 2.2).setInteractive({ useHandCursor: !0 });
+  return (
+    h.on("pointerdown", () => n.setScale(0.92)),
+    h.on("pointerout", () => n.setScale(1)),
+    h.on("pointerup", () => (n.setScale(1), V("ui_tik"), r())),
+    n.add(h),
     n
   );
 }
@@ -6809,6 +7198,8 @@ var re = 2304,
     decor: [],
     ground: 6986300,
   };
+// I. ve II. Çağ haritalarının üst üste bindiği genişlik
+var DIKIS = 260;
 var si = [
   b(999, 513),
   b(808, 312),
@@ -7096,7 +7487,417 @@ var BOLUM_8 = {
   decor: [],
   ground: 7315263,
 };
-var ce = [Qa, ei, ti, BOLUM_4, BOLUM_5, BOLUM_6, BOLUM_7, BOLUM_8, ...Array.from({ length: 8 }, (e, t) => ai(t + 9))];
+var BOLUM_9 = {
+  id: 9,
+  era: 2,
+  nameKey: "stage.9",
+  eventKey: "stage.9.event",
+  playable: !0,
+  startGold: 720,
+  castleHp: 20,
+  paths: [[b(-90, 640), b(8, 625), b(95, 634), b(222, 604), b(312, 556), b(370, 511), b(485, 453), b(610, 420), b(684, 425), b(749, 455), b(888, 552), b(980, 660), b(1050, 711), b(1165, 775), b(1240, 781), b(1300, 774), b(1423, 728), b(1531, 652), b(1599, 579), b(1723, 507), b(1825, 503), b(1852, 508), b(1977, 573), b(2075, 598), b(2117, 599), b(2192, 589), b(2240, 560)]],
+  buildSpots: [b(1240, 620), b(620, 540), b(1740, 640), b(800, 620), b(160, 480), b(440, 600), b(1060, 560), b(1420, 560), b(1580, 760), b(340, 380), b(920, 420), b(980, 800), b(1940, 400), b(220, 720), b(1400, 860), b(1580, 440), b(1920, 700)],
+  mineSpots: [],
+  castle: b(2190, 600),
+  newTowers: [],
+  newEnemies: ["skeleton", "fireImp"],
+  mechanic: "ash",
+  waves: [
+    { groups: [
+        { enemy: "skeleton", count: 12, interval: 0.9, delay: 0 },
+        { enemy: "goblin", count: 10, interval: 0.7, delay: 7 },
+    ] },
+    { groups: [
+        { enemy: "skeleton", count: 10, interval: 0.8, delay: 0 },
+        { enemy: "fireImp", count: 8, interval: 0.6, delay: 5 },
+        { enemy: "armoredBandit", count: 3, interval: 2.2, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "fireImp", count: 12, interval: 0.5, delay: 0 },
+        { enemy: "skeleton", count: 12, interval: 0.7, delay: 6 },
+        { enemy: "raven", count: 6, interval: 0.9, delay: 12 },
+    ] },
+    { groups: [
+        { enemy: "skeleton", count: 16, interval: 0.6, delay: 0, elite: 1 },
+        { enemy: "armoredBandit", count: 4, interval: 2, delay: 4 },
+        { enemy: "fireImp", count: 10, interval: 0.5, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "skeleton", count: 20, interval: 0.55, delay: 0 },
+        { enemy: "fireImp", count: 14, interval: 0.45, delay: 6 },
+        { enemy: "shieldBandit", count: 5, interval: 1.6, delay: 10 },
+        { enemy: "swampSlime", count: 3, interval: 2.4, delay: 14 },
+    ] },
+  ],
+  mapPos: { x: si[5].x - DIKIS, y: si[5].y },
+  decor: [],
+  ground: 7315263,
+};
+var BOLUM_10 = {
+  id: 10,
+  era: 2,
+  nameKey: "stage.10",
+  eventKey: "stage.10.event",
+  playable: !0,
+  startGold: 880,
+  castleHp: 20,
+  paths: [[b(-90, 300), b(-18, 303), b(69, 296), b(254, 323), b(337, 348), b(411, 389), b(445, 417), b(505, 493), b(564, 555), b(609, 592), b(625, 624), b(646, 647), b(672, 663), b(718, 672), b(770, 700), b(922, 722), b(994, 714), b(1156, 680), b(1328, 592), b(1399, 573), b(1471, 568), b(1581, 591), b(1729, 675), b(1796, 729), b(1880, 760), b(1922, 765), b(2090, 766), b(2176, 759), b(2208, 768), b(2240, 760)], [b(-90, 1000), b(-20, 993), b(150, 994), b(373, 933), b(449, 893), b(503, 842), b(528, 808), b(586, 765), b(612, 708), b(633, 684), b(662, 678), b(706, 704), b(777, 713), b(791, 709), b(820, 681)]],
+  buildSpots: [b(480, 660), b(660, 820), b(740, 540), b(940, 580), b(860, 840), b(1500, 700), b(340, 480), b(340, 800), b(1900, 620), b(160, 860), b(1300, 740), b(1140, 540), b(140, 440), b(1060, 820), b(1680, 780), b(600, 380), b(1720, 520), b(180, 180)],
+  mineSpots: [],
+  castle: b(2190, 760),
+  newTowers: [],
+  newEnemies: ["gargoyle", "runeGuard"],
+  mechanic: "statues",
+  waves: [
+    { groups: [
+        { enemy: "skeleton", count: 7, interval: 0.8, delay: 0 },
+        { enemy: "runeGuard", count: 1, interval: 3, delay: 8 },
+    ] },
+    { groups: [
+        { enemy: "gargoyle", count: 2, interval: 2, delay: 0 },
+        { enemy: "skeleton", count: 8, interval: 0.7, delay: 4 },
+        { enemy: "fireImp", count: 4, interval: 0.6, delay: 9 },
+    ] },
+    { groups: [
+        { enemy: "runeGuard", count: 3, interval: 2.6, delay: 0 },
+        { enemy: "skeleton", count: 11, interval: 0.6, delay: 3 },
+        { enemy: "raven", count: 5, interval: 0.9, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "gargoyle", count: 5, interval: 1.7, delay: 0 },
+        { enemy: "armoredBandit", count: 4, interval: 2, delay: 4, elite: 1 },
+        { enemy: "fireImp", count: 10, interval: 0.5, delay: 9 },
+    ] },
+    { groups: [
+        { enemy: "runeGuard", count: 4, interval: 2.2, delay: 0 },
+        { enemy: "gargoyle", count: 5, interval: 1.5, delay: 6 },
+        { enemy: "skeleton", count: 18, interval: 0.5, delay: 8 },
+        { enemy: "shieldBandit", count: 4, interval: 1.8, delay: 14 },
+    ] },
+  ],
+  mapPos: { x: si[6].x - DIKIS, y: si[6].y },
+  decor: [],
+  ground: 7315263,
+};
+var BOLUM_11 = {
+  id: 11,
+  era: 2,
+  nameKey: "stage.11",
+  eventKey: "stage.11.event",
+  playable: !0,
+  startGold: 800,
+  castleHp: 20,
+  paths: [[b(-90, 520), b(-19, 522), b(52, 535), b(166, 523), b(249, 492), b(312, 435), b(340, 401), b(478, 327), b(533, 313), b(619, 308), b(692, 323), b(769, 356), b(815, 386), b(857, 427), b(882, 463), b(896, 521), b(896, 566), b(856, 662), b(850, 705), b(857, 744), b(889, 809), b(952, 867), b(978, 883), b(1049, 905), b(1119, 914), b(1191, 905), b(1247, 889), b(1299, 862), b(1369, 813), b(1418, 754), b(1465, 642), b(1515, 575), b(1566, 525), b(1661, 483), b(1729, 471), b(1825, 510), b(1912, 535), b(2059, 545), b(2130, 560), b(2208, 550), b(2240, 560)]],
+  buildSpots: [b(1120, 760), b(640, 460), b(1620, 640), b(1300, 700), b(1020, 600), b(740, 620), b(180, 380), b(420, 480), b(1820, 620), b(1900, 400), b(1520, 800), b(360, 240), b(1380, 520), b(180, 640), b(540, 180), b(1360, 960), b(920, 980), b(1560, 380), b(800, 220)],
+  mineSpots: [],
+  castle: b(2190, 560),
+  newTowers: [],
+  newEnemies: ["ghost", "necromancer", "iskar"],
+  bossName: "iskar",
+  mechanic: "graveyard",
+  waves: [
+    { groups: [
+        { enemy: "ghost", count: 6, interval: 1.2, delay: 0 },
+        { enemy: "skeleton", count: 10, interval: 0.75, delay: 4 },
+    ] },
+    { groups: [
+        { enemy: "necromancer", count: 2, interval: 4, delay: 0 },
+        { enemy: "skeleton", count: 8, interval: 0.7, delay: 3 },
+        { enemy: "ghost", count: 6, interval: 1.1, delay: 8 },
+    ] },
+    { groups: [
+        { enemy: "ghost", count: 10, interval: 0.85, delay: 0 },
+        { enemy: "fireImp", count: 8, interval: 0.55, delay: 5 },
+        { enemy: "gargoyle", count: 3, interval: 2, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "necromancer", count: 2, interval: 4, delay: 0 },
+        { enemy: "runeGuard", count: 3, interval: 2.4, delay: 4 },
+        { enemy: "ghost", count: 8, interval: 0.9, delay: 8 },
+    ] },
+    { groups: [
+        { enemy: "skeleton", count: 20, interval: 0.5, delay: 0, elite: 1 },
+        { enemy: "ghost", count: 10, interval: 0.8, delay: 6 },
+        { enemy: "necromancer", count: 2, interval: 4, delay: 12 },
+    ] },
+    { groups: [
+        { enemy: "ghost", count: 8, interval: 1, delay: 0 },
+        { enemy: "skeleton", count: 12, interval: 0.6, delay: 4 },
+        { enemy: "iskar", count: 1, interval: 1, delay: 12 },
+    ] },
+  ],
+  mapPos: { x: si[7].x - DIKIS, y: si[7].y },
+  decor: [],
+  ground: 7315263,
+};
+var BOLUM_12 = {
+  id: 12,
+  era: 2,
+  nameKey: "stage.12",
+  eventKey: "stage.12.event",
+  playable: !0,
+  startGold: 960,
+  castleHp: 20,
+  paths: [[b(-90, 240), b(54, 247), b(97, 243), b(154, 256), b(283, 268), b(436, 306), b(495, 307), b(600, 356), b(676, 400), b(797, 444), b(925, 513), b(1039, 549), b(1137, 570), b(1209, 575), b(1325, 559), b(1521, 577), b(1590, 601), b(1730, 638), b(1822, 681), b(1908, 703), b(1969, 704), b(2028, 692), b(2087, 700), b(2240, 700)], [b(-90, 1060), b(49, 1029), b(93, 1033), b(193, 1027), b(263, 1008), b(367, 959), b(461, 924), b(536, 881), b(653, 831), b(793, 732), b(907, 675), b(973, 650), b(1047, 604), b(1128, 578), b(1244, 571)], [b(300, -90), b(330, 71), b(361, 139), b(407, 196), b(467, 259), b(635, 374), b(672, 395), b(754, 428)]],
+  buildSpots: [b(740, 560), b(580, 160), b(480, 460), b(1020, 400), b(220, 140), b(1060, 740), b(740, 260), b(300, 400), b(1260, 680), b(1220, 440), b(1460, 680), b(1420, 440), b(160, 900), b(1900, 560), b(380, 820), b(620, 960), b(1640, 740), b(580, 720), b(820, 860), b(1660, 480)],
+  mineSpots: [],
+  castle: b(2190, 700),
+  newTowers: [],
+  newEnemies: ["varholKnight", "iceTroll"],
+  mechanic: "burning",
+  waves: [
+    { groups: [
+        { enemy: "skeleton", count: 8, interval: 0.65, delay: 0 },
+        { enemy: "varholKnight", count: 1, interval: 3, delay: 8 },
+    ] },
+    { groups: [
+        { enemy: "iceTroll", count: 1, interval: 4, delay: 0 },
+        { enemy: "skeleton", count: 9, interval: 0.55, delay: 3 },
+        { enemy: "fireImp", count: 6, interval: 0.55, delay: 8 },
+    ] },
+    { groups: [
+        { enemy: "varholKnight", count: 3, interval: 2.6, delay: 0 },
+        { enemy: "ghost", count: 7, interval: 0.85, delay: 4 },
+        { enemy: "gargoyle", count: 4, interval: 1.7, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "iceTroll", count: 2, interval: 4, delay: 0 },
+        { enemy: "necromancer", count: 2, interval: 4, delay: 4 },
+        { enemy: "skeleton", count: 18, interval: 0.5, delay: 8 },
+    ] },
+    { groups: [
+        { enemy: "varholKnight", count: 5, interval: 2.2, delay: 0, elite: 1 },
+        { enemy: "fireImp", count: 12, interval: 0.45, delay: 5 },
+        { enemy: "runeGuard", count: 3, interval: 2.6, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "iceTroll", count: 3, interval: 3.2, delay: 0 },
+        { enemy: "varholKnight", count: 4, interval: 2.4, delay: 4 },
+        { enemy: "ghost", count: 10, interval: 0.75, delay: 10 },
+        { enemy: "gargoyle", count: 5, interval: 1.5, delay: 14 },
+    ] },
+  ],
+  mapPos: { x: si[8].x - DIKIS, y: si[8].y },
+  decor: [],
+  ground: 7315263,
+};
+var BOLUM_13 = {
+  id: 13,
+  era: 2,
+  nameKey: "stage.13",
+  eventKey: "stage.13.event",
+  playable: !0,
+  startGold: 960,
+  castleHp: 20,
+  paths: [[b(-90, 860), b(85, 860), b(128, 846), b(202, 845), b(259, 824), b(424, 705), b(515, 576), b(628, 464), b(720, 419), b(872, 381), b(1027, 393), b(1069, 406), b(1108, 428), b(1166, 473), b(1192, 505), b(1209, 544), b(1215, 603), b(1224, 630), b(1282, 701), b(1361, 763), b(1410, 793), b(1467, 815), b(1551, 829), b(1608, 833), b(1651, 826), b(1707, 808), b(1784, 768), b(1815, 738), b(1913, 610), b(1936, 573), b(1951, 531), b(1960, 522), b(2031, 503), b(2092, 510), b(2133, 494), b(2177, 488), b(2208, 473), b(2240, 480)]],
+  buildSpots: [b(940, 520), b(1500, 660), b(1700, 660), b(740, 540), b(1100, 620), b(180, 720), b(1340, 560), b(1980, 720), b(340, 600), b(600, 680), b(460, 440), b(460, 820), b(760, 280), b(1380, 900), b(1820, 500), b(200, 960), b(980, 260), b(1200, 780), b(1840, 860)],
+  mineSpots: [],
+  castle: b(2190, 480),
+  newTowers: [],
+  newEnemies: ["ram"],
+  mechanic: "anvil",
+  waves: [
+    { groups: [
+        { enemy: "ram", count: 1, interval: 1, delay: 0 },
+        { enemy: "skeleton", count: 8, interval: 0.6, delay: 3 },
+    ] },
+    { groups: [
+        { enemy: "varholKnight", count: 3, interval: 2.2, delay: 0 },
+        { enemy: "ram", count: 1, interval: 1, delay: 6 },
+        { enemy: "fireImp", count: 8, interval: 0.5, delay: 9 },
+    ] },
+    { groups: [
+        { enemy: "ram", count: 2, interval: 5, delay: 0 },
+        { enemy: "ghost", count: 9, interval: 0.8, delay: 3 },
+        { enemy: "gargoyle", count: 4, interval: 1.6, delay: 9 },
+    ] },
+    { groups: [
+        { enemy: "iceTroll", count: 3, interval: 3.5, delay: 0 },
+        { enemy: "ram", count: 2, interval: 5, delay: 5 },
+        { enemy: "skeleton", count: 18, interval: 0.5, delay: 8 },
+    ] },
+    { groups: [
+        { enemy: "varholKnight", count: 6, interval: 2, delay: 0 },
+        { enemy: "necromancer", count: 3, interval: 3.5, delay: 4 },
+        { enemy: "ram", count: 2, interval: 4, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "ram", count: 3, interval: 4, delay: 0, elite: 1 },
+        { enemy: "runeGuard", count: 5, interval: 2.2, delay: 4 },
+        { enemy: "iceTroll", count: 3, interval: 3.5, delay: 10 },
+        { enemy: "fireImp", count: 16, interval: 0.4, delay: 14 },
+    ] },
+  ],
+  mapPos: { x: si[9].x - DIKIS, y: si[9].y },
+  decor: [],
+  ground: 7315263,
+};
+var BOLUM_14 = {
+  id: 14,
+  era: 2,
+  nameKey: "stage.14",
+  eventKey: "stage.14.event",
+  playable: !0,
+  startGold: 1250,
+  castleHp: 20,
+  paths: [[b(-90, 640), b(10, 641), b(125, 656), b(197, 651), b(299, 632), b(447, 567), b(545, 549), b(671, 566), b(872, 634), b(929, 643), b(1071, 639), b(1110, 623), b(1212, 611), b(1250, 590), b(1316, 567), b(1403, 555), b(1461, 560), b(1559, 580), b(1614, 600), b(1679, 636), b(1754, 652), b(1960, 646), b(2074, 652), b(2131, 629), b(2240, 643)], [b(1100, -90), b(1094, 471), b(1101, 527), b(1100, 640)], [b(1100, 1390), b(1095, 1250), b(1098, 1067), b(1085, 952), b(1105, 838), b(1099, 753), b(1089, 711), b(1100, 640)]],
+  buildSpots: [b(980, 520), b(1220, 720), b(1220, 460), b(980, 780), b(580, 680), b(1440, 680), b(180, 520), b(1740, 520), b(780, 720), b(380, 720), b(980, 180), b(980, 1120), b(1220, 180), b(1220, 920), b(1220, 1120), b(360, 460), b(1880, 760), b(780, 460), b(1620, 740), b(1520, 440)],
+  mineSpots: [],
+  castle: b(2190, 640),
+  newTowers: [],
+  newEnemies: [],
+  mechanic: "shrines",
+  waves: [
+    { groups: [
+        { enemy: "fireImp", count: 6, interval: 0.5, delay: 0 },
+        { enemy: "iceTroll", count: 1, interval: 4, delay: 5 },
+    ] },
+    { groups: [
+        { enemy: "runeGuard", count: 2, interval: 2.2, delay: 0 },
+        { enemy: "ghost", count: 6, interval: 0.8, delay: 4 },
+        { enemy: "gargoyle", count: 2, interval: 1.8, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "iceTroll", count: 2, interval: 3, delay: 0 },
+        { enemy: "fireImp", count: 10, interval: 0.4, delay: 4 },
+        { enemy: "necromancer", count: 2, interval: 4, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "varholKnight", count: 4, interval: 2, delay: 0 },
+        { enemy: "ghost", count: 10, interval: 0.7, delay: 5 },
+        { enemy: "ram", count: 2, interval: 5, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "fireImp", count: 14, interval: 0.35, delay: 0, elite: 1 },
+        { enemy: "iceTroll", count: 2, interval: 3, delay: 5 },
+        { enemy: "gargoyle", count: 4, interval: 1.4, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "runeGuard", count: 4, interval: 2, delay: 0 },
+        { enemy: "varholKnight", count: 4, interval: 2, delay: 4 },
+        { enemy: "ghost", count: 10, interval: 0.6, delay: 10 },
+        { enemy: "ram", count: 2, interval: 5, delay: 16 },
+    ] },
+  ],
+  mapPos: { x: si[10].x - DIKIS, y: si[10].y },
+  decor: [],
+  ground: 7315263,
+};
+var BOLUM_15 = {
+  id: 15,
+  era: 2,
+  nameKey: "stage.15",
+  eventKey: "stage.15.event",
+  playable: !0,
+  startGold: 1120,
+  castleHp: 20,
+  paths: [[b(-90, 420), b(37, 430), b(94, 423), b(136, 433), b(178, 428), b(220, 439), b(260, 458), b(314, 509), b(419, 561), b(478, 644), b(556, 706), b(608, 736), b(653, 781), b(707, 800), b(794, 819), b(899, 832), b(1058, 816), b(1174, 790), b(1333, 694), b(1441, 600), b(1505, 570), b(1579, 523), b(1619, 510), b(1691, 502), b(1749, 509), b(1777, 518), b(1842, 561), b(1930, 581), b(2103, 594), b(2162, 584), b(2208, 589), b(2240, 600)], [b(-90, 960), b(51, 958), b(190, 985), b(232, 985), b(287, 974), b(326, 953), b(370, 957), b(468, 945), b(535, 921), b(712, 829), b(840, 817)]],
+  buildSpots: [b(500, 800), b(740, 660), b(720, 960), b(340, 700), b(940, 700), b(940, 940), b(1600, 660), b(180, 560), b(1140, 660), b(200, 860), b(1800, 660), b(580, 540), b(1300, 560), b(1440, 760), b(1920, 440), b(540, 1040), b(180, 1100), b(1180, 900), b(1480, 440), b(400, 400)],
+  mineSpots: [],
+  castle: b(2190, 600),
+  newTowers: [],
+  newEnemies: ["boneGiant"],
+  mechanic: "dawn",
+  waves: [
+    { groups: [
+        { enemy: "skeleton", count: 10, interval: 0.5, delay: 0 },
+        { enemy: "boneGiant", count: 1, interval: 1, delay: 8 },
+    ] },
+    { groups: [
+        { enemy: "varholKnight", count: 3, interval: 2, delay: 0 },
+        { enemy: "ghost", count: 8, interval: 0.7, delay: 4 },
+        { enemy: "fireImp", count: 8, interval: 0.45, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "boneGiant", count: 2, interval: 5, delay: 0 },
+        { enemy: "necromancer", count: 3, interval: 3.5, delay: 4 },
+        { enemy: "gargoyle", count: 4, interval: 1.4, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "iceTroll", count: 3, interval: 3, delay: 0 },
+        { enemy: "ram", count: 2, interval: 5, delay: 5 },
+        { enemy: "skeleton", count: 20, interval: 0.4, delay: 9 },
+    ] },
+    { groups: [
+        { enemy: "boneGiant", count: 3, interval: 4.5, delay: 0 },
+        { enemy: "varholKnight", count: 5, interval: 1.8, delay: 5, elite: 1 },
+        { enemy: "ghost", count: 12, interval: 0.6, delay: 11 },
+    ] },
+    { groups: [
+        { enemy: "runeGuard", count: 5, interval: 2, delay: 0 },
+        { enemy: "iceTroll", count: 3, interval: 3, delay: 5 },
+        { enemy: "fireImp", count: 17, interval: 0.35, delay: 10 },
+        { enemy: "gargoyle", count: 7, interval: 1.2, delay: 14 },
+    ] },
+    { groups: [
+        { enemy: "boneGiant", count: 3, interval: 4, delay: 0, elite: 1 },
+        { enemy: "varholKnight", count: 7, interval: 1.6, delay: 5 },
+        { enemy: "ram", count: 3, interval: 4, delay: 10 },
+        { enemy: "necromancer", count: 3, interval: 3.5, delay: 14 },
+    ] },
+  ],
+  mapPos: { x: si[11].x - DIKIS, y: si[11].y },
+  decor: [],
+  ground: 7315263,
+};
+var BOLUM_16 = {
+  id: 16,
+  era: 2,
+  nameKey: "stage.16",
+  eventKey: "stage.16.event",
+  playable: !0,
+  startGold: 1200,
+  castleHp: 20,
+  paths: [[b(-90, 240), b(68, 239), b(125, 253), b(182, 259), b(292, 285), b(440, 343), b(553, 428), b(612, 508), b(668, 636), b(681, 756), b(703, 802), b(738, 830), b(870, 893), b(1015, 918), b(1131, 918), b(1188, 912), b(1271, 889), b(1321, 862), b(1402, 781), b(1440, 717), b(1474, 634), b(1534, 554), b(1563, 505), b(1594, 474), b(1633, 453), b(1689, 438), b(1760, 430), b(1845, 436), b(1970, 467), b(2062, 505), b(2146, 518), b(2208, 510), b(2240, 520)], [b(-90, 1080), b(24, 1073), b(80, 1063), b(166, 1070), b(266, 1064), b(365, 1047), b(459, 1019), b(495, 996), b(565, 925), b(655, 851), b(684, 802), b(685, 748)]],
+  buildSpots: [b(540, 780), b(720, 940), b(820, 720), b(520, 580), b(1660, 600), b(1160, 760), b(380, 440), b(1860, 560), b(760, 520), b(1320, 660), b(360, 920), b(180, 380), b(160, 940), b(1560, 760), b(1420, 500), b(220, 140), b(440, 200), b(600, 300), b(380, 1160), b(1020, 1040), b(1240, 1020)],
+  mineSpots: [],
+  castle: b(2190, 520),
+  newTowers: [],
+  newEnemies: ["kemikKral"],
+  bossName: "kemikKral",
+  mechanic: "bone",
+  waves: [
+    { groups: [
+        { enemy: "skeleton", count: 12, interval: 0.45, delay: 0 },
+        { enemy: "ghost", count: 5, interval: 0.8, delay: 6 },
+    ] },
+    { groups: [
+        { enemy: "boneGiant", count: 2, interval: 5, delay: 0 },
+        { enemy: "fireImp", count: 10, interval: 0.4, delay: 4 },
+        { enemy: "gargoyle", count: 3, interval: 1.4, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "varholKnight", count: 6, interval: 1.8, delay: 0 },
+        { enemy: "necromancer", count: 3, interval: 3.5, delay: 5 },
+        { enemy: "iceTroll", count: 3, interval: 3.5, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "ram", count: 3, interval: 4.5, delay: 0 },
+        { enemy: "ghost", count: 14, interval: 0.6, delay: 4 },
+        { enemy: "runeGuard", count: 5, interval: 2, delay: 10 },
+    ] },
+    { groups: [
+        { enemy: "boneGiant", count: 3, interval: 4, delay: 0, elite: 1 },
+        { enemy: "skeleton", count: 24, interval: 0.35, delay: 5 },
+        { enemy: "gargoyle", count: 7, interval: 1.2, delay: 12 },
+    ] },
+    { groups: [
+        { enemy: "varholKnight", count: 7, interval: 1.6, delay: 0 },
+        { enemy: "ghost", count: 12, interval: 0.6, delay: 5 },
+        { enemy: "iskar", count: 1, interval: 1, delay: 12 },
+    ] },
+    { groups: [
+        { enemy: "boneGiant", count: 3, interval: 5, delay: 0 },
+        { enemy: "necromancer", count: 3, interval: 3, delay: 4 },
+        { enemy: "iceTroll", count: 3, interval: 3, delay: 8 },
+        { enemy: "kemikKral", count: 1, interval: 1, delay: 16 },
+    ] },
+  ],
+  mapPos: { x: si[12].x - DIKIS, y: si[12].y },
+  decor: [],
+  ground: 7315263,
+};
+var ce = [Qa, ei, ti, BOLUM_4, BOLUM_5, BOLUM_6, BOLUM_7, BOLUM_8, BOLUM_9, BOLUM_10, BOLUM_11, BOLUM_12, BOLUM_13, BOLUM_14, BOLUM_15, BOLUM_16];
 function ya(e) {
   return e <= 2 ? 3 : e;
 }
@@ -7343,10 +8144,23 @@ var Te = {
       art: "boss_garrik",
       color: 9055272,
     },
+    skeleton: {"id": "skeleton", "nameKey": "enemy.skeleton", "descKey": "enemy.skeleton.desc", "hp": 50, "speed": 56, "armor": 0.15, "magicResist": 0, "gold": 6, "castleDamage": 1, "meleeDamage": 5, "meleeRate": 1, "flying": !1, "size": 19, "xp": 3, "revive": {"hp": 0.5, "delay": 1.4}, "art": "dusman_iskelet", "color": 13421741},
+    fireImp: {"id": "fireImp", "nameKey": "enemy.fireImp", "descKey": "enemy.fireImp.desc", "hp": 38, "speed": 90, "armor": 0, "magicResist": 0.3, "gold": 7, "castleDamage": 1, "meleeDamage": 4, "meleeRate": 0.8, "flying": !1, "size": 17, "xp": 3, "immune": ["fire"], "art": "dusman_ates_iblisi", "color": 16733986},
+    ghost: {"id": "ghost", "nameKey": "enemy.ghost", "descKey": "enemy.ghost.desc", "hp": 70, "speed": 62, "armor": 0, "magicResist": 0, "gold": 9, "castleDamage": 1, "meleeDamage": 4, "meleeRate": 1, "flying": !1, "size": 20, "xp": 4, "ethereal": 0.5, "unblockable": !0, "art": "dusman_hayalet", "color": 11206655},
+    gargoyle: {"id": "gargoyle", "nameKey": "enemy.gargoyle", "descKey": "enemy.gargoyle.desc", "hp": 120, "speed": 54, "armor": 0.45, "magicResist": 0.1, "gold": 13, "castleDamage": 2, "meleeDamage": 8, "meleeRate": 1.2, "flying": !0, "size": 23, "xp": 5, "art": "dusman_gargoyle", "color": 8421504},
+    necromancer: {"id": "necromancer", "nameKey": "enemy.necromancer", "descKey": "enemy.necromancer.desc", "hp": 110, "speed": 40, "armor": 0.1, "magicResist": 0.45, "gold": 16, "castleDamage": 2, "meleeDamage": 8, "meleeRate": 1.3, "flying": !1, "size": 22, "xp": 6, "summon": {"enemy": "skeleton", "count": 2, "cooldown": 7}, "art": "dusman_olu_buyucu", "color": 7020722},
+    iceTroll: {"id": "iceTroll", "nameKey": "enemy.iceTroll", "descKey": "enemy.iceTroll.desc", "hp": 420, "speed": 32, "armor": 0.3, "magicResist": 0.2, "gold": 30, "castleDamage": 3, "meleeDamage": 20, "meleeRate": 1.5, "flying": !1, "size": 30, "xp": 10, "immune": ["ice"], "regen": 0.025, "art": "dusman_buz_trolu", "color": 10541055},
+    runeGuard: {"id": "runeGuard", "nameKey": "enemy.runeGuard", "descKey": "enemy.runeGuard.desc", "hp": 240, "speed": 42, "armor": 0.25, "magicResist": 0.6, "gold": 22, "castleDamage": 2, "meleeDamage": 12, "meleeRate": 1.3, "flying": !1, "size": 25, "xp": 8, "shieldAura": {"radius": 110, "reduction": 0.25}, "art": "dusman_runlu_muhafiz", "color": 6061055},
+    varholKnight: {"id": "varholKnight", "nameKey": "enemy.varholKnight", "descKey": "enemy.varholKnight.desc", "hp": 360, "speed": 46, "armor": 0.55, "magicResist": 0.25, "gold": 30, "castleDamage": 3, "meleeDamage": 22, "meleeRate": 1.2, "flying": !1, "size": 27, "xp": 10, "art": "dusman_varhol_sovalyesi", "color": 4210752},
+    ram: {"id": "ram", "nameKey": "enemy.ram", "descKey": "enemy.ram.desc", "hp": 650, "speed": 34, "armor": 0.6, "magicResist": 0.3, "gold": 40, "castleDamage": 5, "meleeDamage": 0, "meleeRate": 2, "flying": !1, "size": 34, "xp": 14, "unblockable": !0, "art": "dusman_kos", "color": 9067076},
+    boneGiant: {"id": "boneGiant", "nameKey": "enemy.boneGiant", "descKey": "enemy.boneGiant.desc", "hp": 950, "speed": 28, "armor": 0.35, "magicResist": 0.3, "gold": 55, "castleDamage": 4, "meleeDamage": 34, "meleeRate": 1.6, "flying": !1, "size": 36, "xp": 18, "split": {"into": "skeleton", "count": 3}, "art": "dusman_kemik_dev", "color": 14211288},
+    iskar: {"id": "iskar", "nameKey": "enemy.iskar", "descKey": "enemy.iskar.desc", "hp": 2600, "speed": 30, "armor": 0.2, "magicResist": 0.55, "gold": 260, "castleDamage": 12, "meleeDamage": 24, "meleeRate": 1.3, "flying": !1, "size": 34, "xp": 120, "boss": {"ability": "raise", "cooldown": 8}, "art": "boss_iskar", "color": 8798367},
+    kemikKral: {"id": "kemikKral", "nameKey": "enemy.kemikKral", "descKey": "enemy.kemikKral.desc", "hp": 6000, "speed": 26, "armor": 0.45, "magicResist": 0.45, "gold": 500, "castleDamage": 20, "meleeDamage": 40, "meleeRate": 1.4, "flying": !1, "size": 42, "xp": 250, "boss": {"ability": "boneKing", "cooldown": 9, "phases": [0.66, 0.33]}, "art": "boss_kemik_krali", "color": 13150650},
   },
   fs = ["shielded", "fast", "regen", "explode"];
 function _a(e, t) {
-  return { hp: 1 + 0.14 * (t - 1) + 0.1 * (e - 1), speed: 1 + 0.025 * (t - 1) };
+  // II. Çağ düşmanları zaten güçlü; bölüm çarpanı 8'den sonra yavaş artar
+  return { hp: 1 + 0.14 * (t - 1) + 0.1 * (Math.min(e, 8) - 1) - 0.025 * Math.max(0, e - 9), speed: 1 + 0.025 * (t - 1) };
 }
 var oe = {
   archer: {
@@ -7511,6 +8325,37 @@ function ct(e, t, s, a, i, r, n) {
 }
 var ka = 5,
   gs = 0.6;
+// Taç Ağacı: her düğüm 3 seviye, seviye n'in bedeli n yıldız
+var TAC = {
+  okcu: { kule: "archer", adim: 6 },
+  kisla: { kule: "barracks", adim: 10 },
+  ates: { kule: "fire", adim: 6 },
+  buz: { kule: "frost", adim: 6 },
+  firtina: { kule: "storm", adim: 6 },
+  simya: { kule: "alchemist", adim: 6 },
+  balista: { kule: "ballista", adim: 6 },
+  kartal: { kule: "eagle", adim: 6 },
+  run: { adim: 10 },
+  kahraman: { adim: 6 },
+  kale: { adim: 1 },
+  buyu: { adim: 6 },
+  ekonomi: { adim: 30 },
+};
+function tac(e) {
+  return Math.min(3, P().tac?.[e] ?? 0);
+}
+function tacHarcanan() {
+  let e = 0;
+  for (let t in TAC) {
+    let s = tac(t);
+    e += (s * (s + 1)) / 2;
+  }
+  return e;
+}
+function tacKule(e) {
+  for (let t in TAC) if (TAC[t].kule === e) return 1 + (tac(t) * TAC[t].adim) / 100;
+  return 1;
+}
 var DAL = {
   sniper: { art: "kule_gozcu_dal_keskin", cost: 190, damage: [120, 165], rate: 2.6, range: 430, critChance: 0.25, critMult: 2.5 },
   arrowRain: { art: "kule_gozcu_dal_okyagmuru", cost: 180, damage: [20, 28], rate: 2.2, range: 340, arrows: 7, splash: 120, target: "ground" },
@@ -7555,7 +8400,7 @@ function ps(e, t, b) {
 }
 var ii = { archer: "kule_gozcu_1", barracks: "kule_kisla_1", fire: "kule_ejder_1", frost: "kule_ayaz_1", ballista: "kule_balista_1", mine: "kule_maden_1", storm: "kule_firtina_1", eagle: "kule_kartal_1", alchemist: "kule_simyaci_1", rune: "kule_run_1" },
   le = 1920,
-  ys = le * 2,
+  ys = le * 2 - DIKIS,
   Qe = 2759954;
 function bs(e) {
   let t = e;
@@ -7607,6 +8452,155 @@ class _s extends Phaser.Scene {
       this.drawResume(),
       this.setupScroll(),
       this.revealNewStage());
+    if (P().yeniVaka) {
+      let t = P().yeniVaka;
+      ((P().yeniVaka = 0), j(), this.time.delayedCall(900, () => this.vakayiname(t, !0)));
+    }
+  }
+  vakayiname(e, t = !1) {
+    let s = ce.filter((d) => M("vaka_" + String(d.id).padStart(2, "0"))).map((d) => d.id),
+      a = (d) => (P().bestStars[d] ?? 0) > 0,
+      i = e ?? s.filter(a).pop() ?? 1,
+      r = s.indexOf(i) < 0 ? 0 : s.indexOf(i);
+    this.openModal(() => {
+      let d = this.add.container(T / 2, w / 2),
+        h = Math.min(w / 1080, T / 1920),
+        u = this.add.image(0, 0, "vakayiname_cerceve").setScale(h);
+      d.add([u, this.add.zone(0, 0, 1920 * h, 1080 * h).setInteractive()]);
+      let f = (x, y) => [(-0.5 + x) * 1920 * h, (-0.5 + y) * 1080 * h],
+        _ = this.add.container(0, 0);
+      d.add(_);
+      let g = () => {
+        _.removeAll(!0);
+        let x = s[r],
+          y = a(x),
+          [k, A] = f(0.295, 0.33),
+          v = 1920 * h * 0.33,
+          E = String(x).padStart(2, "0");
+        if (y) {
+          let L = this.add.image(k, A, "vaka_" + E);
+          (L.setScale(v / L.width), _.add(L));
+          let B = this.add.graphics();
+          (B.lineStyle(5, 3809296, 0.9), B.strokeRect(k - v / 2, A - (L.height * L.scaleY) / 2, v, L.height * L.scaleY), _.add(B));
+        } else {
+          let L = this.add.graphics();
+          (L.fillStyle(5913896, 0.35), L.fillRect(k - v / 2, A - v * 0.28, v, v * 0.5625), _.add(L), _.add(C(this, k, A, "ikon_kilit", 1.6).setAlpha(0.5)));
+        }
+        let [S, R] = f(0.295, 0.575),
+          N = ce.find((L) => L.id === x),
+          U = { fontFamily: D, fontStyle: "900", color: "#4a2a10" };
+        (_.add(this.add.text(S, R, m("vaka.cag", { c: m("era." + (N?.era ?? 1)), n: x }), { ...U, fontSize: Math.round(30 * h) + "px", color: "#7a5326" }).setOrigin(0.5)),
+          _.add(this.add.text(S, R + 58 * h, y ? m("vaka." + x) : "? ? ?", { ...U, fontSize: Math.round(54 * h) + "px" }).setOrigin(0.5)));
+        {
+          let L = this.add.graphics();
+          (L.lineStyle(3 * h, 7951654, 0.8), L.lineBetween(S - 220 * h, R + 112 * h, S - 24 * h, R + 112 * h), L.lineBetween(S + 24 * h, R + 112 * h, S + 220 * h, R + 112 * h), L.fillStyle(7951654, 0.9), L.fillTriangle(S, R + 100 * h, S + 12 * h, R + 112 * h, S, R + 124 * h), L.fillTriangle(S, R + 100 * h, S - 12 * h, R + 112 * h, S, R + 124 * h), _.add(L));
+        }
+        let [O2, W2] = f(0.53, 0.12);
+        (_.add(
+          this.add.text(O2, W2, y ? m("vaka." + x + ".metin") : m("vaka.kilitli", { n: x }), {
+            fontFamily: D,
+            fontStyle: "700",
+            fontSize: Math.round(33 * h) + "px",
+            color: "#3a2614",
+            lineSpacing: 12 * h,
+            wordWrap: { width: 1920 * h * 0.35, useAdvancedWrap: !0 },
+          }),
+        ),
+          _.add(this.add.text(...f(0.705, 0.86), r + 1 + " / " + s.length, { ...U, fontSize: Math.round(28 * h) + "px", color: "#7a5326" }).setOrigin(0.5)));
+        if (t && x === e) {
+          let L = this.add.text(...f(0.295, 0.06), m("vaka.yeni"), { ...U, fontSize: Math.round(30 * h) + "px", color: "#fff1c8", backgroundColor: "#7a1f14", padding: { x: 22, y: 8 } }).setOrigin(0.5);
+          _.add(L);
+        }
+      };
+      let p = (x) => {
+        let y = r + x;
+        if (y < 0 || y >= s.length) return;
+        (V("ui_tik"),
+          this.tweens.add({
+            targets: _,
+            alpha: 0,
+            x: -x * 40,
+            duration: 120,
+            onComplete: () => {
+              ((r = y), g(), (_.x = x * 40), this.tweens.add({ targets: _, alpha: 1, x: 0, duration: 160 }));
+            },
+          }));
+      };
+      g();
+      let [b1, b2] = f(0.06, 0.5),
+        [c1] = f(0.94, 0.5);
+      return (
+        d.add(yd(this, b1, b2, 56, "‹", () => p(-1))),
+        d.add(yd(this, c1, b2, 56, "›", () => p(1))),
+        d.add(yd(this, ...f(0.955, 0.075), 46, "✕", () => this.closeModal())),
+        u.setAlpha(0),
+        this.tweens.add({ targets: u, alpha: 1, duration: 250 }),
+        [d]
+      );
+    });
+  }
+  tacAgaci() {
+    this.openModal(() => {
+      let e = this.add.container(0, 0),
+        t = this.add.image(T / 2, w / 2, "tac_agaci_arka");
+      (t.setScale(Math.max(T / t.width, w / t.height)), e.add([t, this.add.zone(T / 2, w / 2, T, w).setInteractive()]));
+      let s = this.add.graphics();
+      (s.fillGradientStyle(0, 0, 0, 0, 0.9, 0.9, 0, 0), s.fillRect(0, 0, T, 230), s.fillGradientStyle(0, 0, 0, 0, 0, 0, 0.85, 0.85), s.fillRect(0, w - 260, T, 260), e.add(s));
+      let a = Object.keys(TAC),
+        i = [];
+      for (let o = 0; o < 9; o++) {
+        let l = o / 8;
+        i.push([0.12 + l * 0.76, 0.36 - 0.15 * Math.sin(Math.PI * l)]);
+      }
+      i.push([0.24, 0.6], [0.5, 0.42], [0.76, 0.6], [0.5, 0.62]);
+      let r = null,
+        n = this.add.container(0, 0);
+      e.add(n);
+      let d = () => {
+        n.removeAll(!0);
+        let o = bt() - tacHarcanan();
+        n.add(this.add.text(T / 2, 64, m("tac.puan", { n: o }), { ...Z(46, "#ffe39a", 7) }).setOrigin(0.5));
+        n.add(this.add.text(T / 2, 112, m("tac.aciklama"), { ...z(25, "#f1e6cc", "700"), align: "center", wordWrap: { width: T * 0.62 }, stroke: "#120c06", strokeThickness: 5 }).setOrigin(0.5, 0));
+        a.forEach((l, h) => {
+          let [u, f] = i[h],
+            _ = T * u,
+            g = w * f + 40,
+            p = tac(l),
+            y = this.add.container(_, g),
+            k = this.add.circle(0, 0, 74, 0, 0.55).setStrokeStyle(r === l ? 7 : 3, r === l ? 16771530 : p ? 14200904 : 6971992, 1);
+          y.add(k);
+          let A = wt(C(this, 0, 0, "tac_" + l, 1), 128);
+          (p || A.setTint(9474192), y.add(A));
+          for (let v = 0; v < 3; v++) y.add(this.add.circle(-26 + v * 26, 88, 9, v < p ? 16766032 : 2236962).setStrokeStyle(2, 14200904, 1));
+          let v = this.add.text(0, 118, m("tac." + l), { ...z(22, "#f4e6c4", "800"), backgroundColor: "#1a120ccc", padding: { x: 10, y: 4 } }).setOrigin(0.5);
+          y.add(v);
+          let E = this.add.zone(0, 30, 170, 230).setInteractive({ useHandCursor: !0 });
+          (E.on("pointerup", () => ((r = l), V("ui_tik"), d())), y.add(E), n.add(y));
+        });
+        if (r) {
+          let l = tac(r),
+            h = this.add.container(T / 2, w - 112),
+            u = this.add.graphics();
+          (u.fillStyle(660528, 0.95), u.fillRoundedRect(-640, -82, 1280, 164, 18), u.lineStyle(3, 14200904, 1), u.strokeRoundedRect(-640, -82, 1280, 164, 18), h.add(u));
+          (h.add(wt(C(this, -560, 0, "tac_" + r, 1), 120)),
+            h.add(this.add.text(-480, -56, m("tac." + r) + "  ·  " + m("tac.seviye", { n: l }), z(32, "#f4dc90", "900"))),
+            h.add(ne(this, -480, -8, m("tac." + r + ".desc", { x: TAC[r].adim * Math.max(1, l + (l < 3 ? 1 : 0)) }), 640, 26, "#ece2c8")));
+          if (l < 3)
+            h.add(
+              F(this, 440, 0, 330, 104, m("tac.yukselt", { n: l + 1 + " ★" }), () => {
+                if (bt() - tacHarcanan() < l + 1) return this.toast(m("tac.yetersiz"));
+                ((P().tac = { ...(P().tac ?? {}), [r]: l + 1 }), j(), V("altin"), d());
+              }, "gold", { size: 30 }),
+            );
+          else h.add(this.add.text(440, 0, m("tac.maks"), z(32, "#a8d070", "900")).setOrigin(0.5));
+          n.add(h);
+        } else n.add(this.add.text(T / 2, w - 112, m("tac.sec"), Z(34, "#e9dcc0", 5)).setOrigin(0.5));
+        if (tacHarcanan() > 0)
+          n.add(F(this, 220, 64, 360, 84, m("tac.sifirla"), () => ((P().tac = {}), j(), d()), "stone", { size: 26 }));
+        n.add(yd(this, T - 90, 70, 46, "✕", () => this.closeModal()));
+      };
+      return (d(), (e.alpha = 0), this.tweens.add({ targets: e, alpha: 1, duration: 220 }), [e]);
+    });
   }
   maxScroll() {
     return Math.max(0, ys - at);
@@ -7651,10 +8645,28 @@ class _s extends Phaser.Scene {
       t = bt() >= Nt[1].starsRequired;
     for (let n = 0; n < 2; n++) {
       let o = "harita_cag" + (n + 1);
+      // II. Çağ haritası I. Çağ'ın üstüne yumuşak geçişle biner (düz dikiş çizgisi görünmesin)
+      if (n === 1 && M(o)) {
+        if (this.textures.exists("harita_cag2_yumusak")) this.textures.remove("harita_cag2_yumusak");
+        let l = this.textures.get(o).getSourceImage(),
+          d = this.textures.createCanvas("harita_cag2_yumusak", l.width, l.height),
+          h = d.getContext(),
+          u = (l.width * DIKIS) / le,
+          f = h.createLinearGradient(0, 0, u, 0);
+        (h.drawImage(l, 0, 0),
+          (h.globalCompositeOperation = "destination-in"),
+          f.addColorStop(0, "rgba(0,0,0,0)"),
+          f.addColorStop(0.5, "rgba(0,0,0,0.55)"),
+          f.addColorStop(1, "rgba(0,0,0,1)"),
+          (h.fillStyle = f),
+          h.fillRect(0, 0, l.width, l.height),
+          d.refresh());
+        if (!(l.complete ?? !0) || h.getImageData(Math.floor(l.width / 2), Math.floor(l.height / 2), 1, 1).data[3] === 0) this.textures.remove("harita_cag2_yumusak");
+      }
       if (M(o))
         e.add(
           this.add
-            .image(n * le, 0, o)
+            .image(n * (le - DIKIS), 0, n === 1 && this.textures.exists("harita_cag2_yumusak") ? "harita_cag2_yumusak" : o)
             .setOrigin(0)
             .setDisplaySize(le, w),
         );
@@ -7766,7 +8778,7 @@ class _s extends Phaser.Scene {
   }
   fogEra(e) {
     let t = this.world,
-      s = e * le,
+      s = e * le - DIKIS / 2,
       a = bs(900 + e),
       i = this.add.container(0, 0);
     t.add(i);
@@ -7986,6 +8998,7 @@ class _s extends Phaser.Scene {
             m("common.phase2"),
         );
       else if (!s) this.toast(m("map.stageLocked"));
+      else if (e.era === 2 && bt() < Nt[1].starsRequired) this.toast(m("map.eraLocked", { n: Nt[1].starsRequired }));
       else this.stagePanel(e);
     }),
       n.add(p));
@@ -8115,11 +9128,13 @@ class _s extends Phaser.Scene {
   drawBottomBar() {
     let e = [
         ["ikon_kalkan", m("map.hero"), () => this.heroPanel()],
+        ["ikon_tac", m("map.crownTree"), () => this.tacAgaci()],
+        ["ikon_kitap", m("map.chronicle"), () => this.vakayiname()],
         ["ikon_disli", m("map.settings"), () => this.settings()],
       ],
       t = this.add.graphics().setDepth(60);
     (t.fillGradientStyle(396060, 396060, 396060, 396060, 0, 0, 0.6, 0.6), t.fillRect(-Ke, w - 150, at, 150));
-    let s = e.map(() => 400),
+    let s = e.map(() => Math.min(400, (T - 160) / e.length - 14)),
       a = 14,
       i = s.reduce((n, o) => n + o, 0) + a * (s.length - 1),
       r = T / 2 - i / 2;
@@ -8128,7 +9143,7 @@ class _s extends Phaser.Scene {
       ((r += s[d] + a),
         F(this, h, w - 72, s[d], 104, o, () => !this.modal.length && l(), "stone", {
           icon: n,
-          size: 36,
+          size: 30,
         }).setDepth(61));
     });
   }
@@ -8849,6 +9864,20 @@ class ws {
     if (t.poisonT > 0) this.scene.combat.tickDamage(this, t.poisonDps * e, "poison");
     if (!this.alive) return;
     if (this.elite === "regen" && this.hp < this.maxHp) this.hp = Math.min(this.maxHp, this.hp + this.maxHp * 0.02 * e);
+    if (this.def.regen && this.hp < this.maxHp && t.burnT <= 0) this.hp = Math.min(this.maxHp, this.hp + this.maxHp * this.def.regen * e);
+    if (this.def.boss?.phases) {
+      let l = this.def.boss.phases[this.faz ?? 0];
+      if (l !== void 0 && this.hp / this.maxHp < l) ((this.faz = (this.faz ?? 0) + 1), this.scene.bossFaz(this));
+    }
+    if (this.def.summon && !t.stunned) {
+      let l = this.def.summon;
+      if (((this.summonCd = (this.summonCd ?? l.cooldown * 0.6) - e), this.summonCd <= 0)) {
+        this.summonCd = l.cooldown;
+        for (let d = 0; d < l.count; d++)
+          this.scene.spawnEnemy(l.enemy, this.pathIndex, null, this.scene.waves.index, Math.max(0, this.dist - 30 - d * 28), this);
+        (this.scene.fx.ring(this.x, this.y, 110, 9055202, 450, 7), this.skillAnim && (this.skillT = Ta));
+      }
+    }
     if (this.def.boss) {
       if (((this.abilityCd -= e), this.abilityCd <= 0 && !t.stunned)) {
         if (
@@ -8992,6 +10021,7 @@ class vs {
     if (s.kind === "physical") a *= 1 - e.armor * (1 - (s.pierce ?? 0));
     else a *= 1 - e.def.magicResist;
     if (s.element !== "none" && e.def.immune?.includes(s.element)) a = 0;
+    if (e.def.ethereal && s.kind === "physical") a *= e.def.ethereal;
     if (!s.ignoreShieldAura) a *= this.shieldAuraFactor(e);
     if (e.status.wet && s.element === "lightning") a *= 1.2;
     if (
@@ -9144,7 +10174,7 @@ class Mt {
       let n = null,
         o = 1 / 0;
       for (let l of this.s.enemies) {
-        if (!l.alive || l.flying || (l.blockedBy && l.blockedBy !== this)) continue;
+        if (!l.alive || l.flying || l.def.unblockable || (l.blockedBy && l.blockedBy !== this)) continue;
         if (Math.hypot(l.x - this.homeX, l.y - this.homeY) > oi) continue;
         let h = Math.hypot(l.x - this.x, l.y - this.y);
         if (h < o) ((o = h), (n = l));
@@ -9306,7 +10336,7 @@ class Ss {
     }
   }
   get range() {
-    return this.lv.range;
+    return this.lv.range * (this.s.menzilCarpani ?? 1);
   }
   applyArt() {
     let e = this.artKey(),
@@ -9389,7 +10419,7 @@ class Ss {
   }
   soldierHp() {
     let e = this.lv.soldiers.hp;
-    return Math.round(e * (this.s.heroId === "aldric" ? 1 + St.aldricSoldierHp : 1));
+    return Math.round(e * (this.s.heroId === "aldric" ? 1 + St.aldricSoldierHp : 1) * tacKule("barracks"));
   }
   spawnSoldiers() {
     let e = this.lv.soldiers;
@@ -9497,9 +10527,9 @@ class Ss {
     return t * t + s * s <= this.lv.range * this.lv.range;
   }
   runeMul() {
-    let e = 1;
+    let e = tacKule(this.def.id) * (this.orsT > 0 ? 1.3 : 1) * (this.s.mabet && this.s.mabet === { fire: "fire", frost: "ice", storm: "lightning", alchemist: "poison" }[this.def.id] ? 1.3 : 1);
     for (let t of this.s.towers)
-      if (t && t !== this && t.def.id === "rune" && t.silencedT <= 0 && t.empowers(this)) e = Math.max(e, 1 + t.lv.buff);
+      if (t && t !== this && t.def.id === "rune" && t.silencedT <= 0 && t.empowers(this)) e = Math.max(e, tacKule(this.def.id) * (1 + t.lv.buff * (1 + tac("run") * 0.1)));
     return e;
   }
   inRange(e) {
@@ -9851,7 +10881,7 @@ class Ms {
     this.level = s;
     ((this.x = this.guardX = a),
       (this.y = this.guardY = i),
-      (this.power = 1 + (s - 1) * 0.06),
+      (this.power = (1 + (s - 1) * 0.06) * (1 + tac("kahraman") * 0.06)),
       (this.maxHp = Math.round(t.hp * this.power)),
       (this.hp = this.maxHp),
       (this.view = e.add.container(a, i)),
@@ -9995,7 +11025,7 @@ class Ms {
       let l = null,
         d = 1 / 0;
       for (let h of this.s.enemies) {
-        if (!h.alive || h.flying || (h.blockedBy && h.blockedBy !== this)) continue;
+        if (!h.alive || h.flying || h.def.unblockable || (h.blockedBy && h.blockedBy !== this)) continue;
         let u = Math.hypot(h.x - this.guardX, h.y - this.guardY);
         if (u < Ma && u < d) ((d = u), (l = h));
       }
@@ -10617,16 +11647,17 @@ class Rs extends Phaser.Scene {
     let e = (this.stage = ce.find((r) => r.id === this.init0.stageId));
     (Ns("muzik_stage" + e.id), (this.paths = e.paths.map((r) => new ks(r))), arkaYukle(this));
     let t = this.init0.resume ?? null;
-    ((this.gold = t?.gold ?? e.startGold),
-      (this.castleMax = e.castleHp),
-      (this.castleHp = t?.castleHp ?? e.castleHp),
+    ((this.gold = t?.gold ?? e.startGold + tac("ekonomi") * 30),
+      (this.castleMax = e.castleHp + tac("kale")),
+      (this.castleHp = t?.castleHp ?? e.castleHp + tac("kale")),
       (this.speed = P().speed ?? 1),
       (this.combat = new vs(this)),
       (this.fx = new Ps(this)),
       (this.waves = new zs(e, (r, n) => this.spawnEnemy(r.enemy, r.path, r.elite, n))),
       this.cameras.main.setBounds(0, 0, re, ue),
       this.cameras.main.setBackgroundColor(c.grassDark),
-      this.drawMap());
+      this.drawMap(),
+      this.ortamKur());
     let s = t?.hero ?? P().hero,
       a = this.paths[0],
       i = a.at(a.length - 330);
@@ -10773,6 +11804,221 @@ class Rs extends Phaser.Scene {
       });
     }
   }
+  // ---- ortam efektleri: harita başına parçacık, sis, ışık ----
+  ortamKur() {
+    let e = this.stage.id,
+      t = {
+        1: [["yaprak_yesil", 7, "drift", 10479952], ["ates_bocegi", 10, "float", 15400800]],
+        2: [["kivilcim", 22, "rise", 16747050], ["duman_bulutu", 5, "smoke", 5592405]],
+        3: [["kar_tanesi", 26, "fall", 15660543], ["sis_seridi", 2, "fog", 14540253]],
+        4: [["yaprak_sonbahar", 10, "drift", 14250530], ["sis_seridi", 2, "fog", 14540253]],
+        5: [["yagmur_damlasi", 70, "rain", 12636927]],
+        6: [["sis_seridi", 4, "fog", 13427404], ["ates_bocegi", 14, "float", 12123984]],
+        7: [["kivilcim", 26, "rise", 16747050], ["duman_bulutu", 6, "smoke", 4473924]],
+        8: [["kul_tanesi", 18, "fall", 10066329], ["kivilcim", 14, "rise", 16740390]],
+        9: [["kul_tanesi", 46, "fall", 11184810], ["kivilcim", 16, "rise", 16740390]],
+        10: [["isik_huzmesi", 3, "ray", 16771248], ["yaprak_yesil", 8, "drift", 9419599]],
+        11: [["hayalet_isigi", 12, "wisp", 9502608], ["sis_seridi", 4, "fog", 11197627]],
+        12: [["kivilcim", 34, "rise", 16747050], ["duman_bulutu", 8, "smoke", 3815994], ["kul_tanesi", 16, "fall", 10066329]],
+        13: [["kivilcim", 14, "rise", 16762960], ["yaprak_yesil", 6, "drift", 9419599]],
+        14: [["ates_bocegi", 16, "float", 15400800], ["sis_seridi", 2, "fog", 13421823]],
+        15: [["isik_huzmesi", 4, "ray", 16768160], ["yaprak_sonbahar", 10, "drift", 14250530]],
+        16: [["mor_ruh", 14, "wisp", 12088319], ["sis_seridi", 4, "fog", 9064593]],
+      }[e];
+    if (t) for (let [s, a, i, r] of t) this.ortamKatman(M("efekt_" + s) ? "efekt_" + s : s === "kivilcim" ? "kivilcim" : null, a, i, r);
+    let s = {
+      9: [[816, 210], [1692, 300], [444, 984], [1920, 1104]],
+      13: [[750, 910], [1054, 874], [920, 900], [350, 80]],
+      16: [[354, 342], [72, 840]],
+    }[e];
+    if (s)
+      for (let [a, i] of s) {
+        let r = e === 16 ? 11817727 : 16747050,
+          n = this.add.image(a, i, "parcacik").setTint(r).setBlendMode(Phaser.BlendModes.ADD).setDepth(i + 5).setScale(7).setAlpha(0.35);
+        this.tweens.add({ targets: n, scale: 8.5, alpha: 0.2, yoyo: !0, repeat: -1, duration: 300 + Math.random() * 300, ease: "Sine.InOut" });
+        if (M("efekt_alev_dili"))
+          this.time.addEvent({
+            delay: 140,
+            loop: !0,
+            callback: () => {
+              let o = this.add
+                .image(a + (Math.random() - 0.5) * 18, i, "efekt_alev_dili")
+                .setTint(e === 16 ? 12088319 : Math.random() < 0.5 ? 16747050 : 16762960)
+                .setBlendMode(Phaser.BlendModes.ADD)
+                .setDepth(i + 6)
+                .setScale(0.16 + Math.random() * 0.08);
+              this.tweens.add({ targets: o, y: i - 40 - Math.random() * 30, scaleX: o.scaleX * 0.4, alpha: 0, duration: 520, onComplete: () => o.destroy() });
+            },
+          });
+      }
+  }
+  ortamKatman(e, t, s, a) {
+    if (!e) return;
+    let i = () => Math.random();
+    if (s === "fog") {
+      for (let r = 0; r < t; r++) {
+        let n = this.add
+          .image(i() * re, 150 + (r / t) * (ue - 300) + i() * 120, e)
+          .setTint(a)
+          .setDepth(4400)
+          .setAlpha(0)
+          .setScale(2.2 + i());
+        (this.tweens.add({ targets: n, alpha: 0.3 + i() * 0.16, duration: 3000 }),
+          this.tweens.add({ targets: n, x: n.x + (i() < 0.5 ? -1 : 1) * (300 + i() * 300), duration: 26000 + i() * 14000, yoyo: !0, repeat: -1, ease: "Sine.InOut" }));
+      }
+      return;
+    }
+    if (s === "ray") {
+      for (let r = 0; r < t; r++) {
+        let n = this.add
+          .image(300 + i() * (re - 600), 0, e)
+          .setOrigin(0.5, 0)
+          .setTint(a)
+          .setBlendMode(Phaser.BlendModes.ADD)
+          .setDepth(4300)
+          .setAlpha(0.12)
+          .setScale(3, 2.6)
+          .setAngle(-18);
+        this.tweens.add({ targets: n, alpha: 0.28, duration: 5000 + i() * 4000, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
+      }
+      return;
+    }
+    let r = (n) => {
+      if (this.ended) return;
+      let o = s === "rain" ? 0.9 : s === "smoke" ? 1.4 : s === "wisp" ? 0.7 : s === "float" ? 0.6 : e === "kivilcim" ? 1.6 : 0.36,
+        l,
+        d,
+        h,
+        u,
+        f;
+      if (s === "fall" || s === "rain") ((l = i() * (re + 400) - 200), (d = -40), (h = l + (s === "rain" ? -160 : 120 + i() * 200)), (u = ue + 40), (f = s === "rain" ? 700 + i() * 300 : 7000 + i() * 5000));
+      else if (s === "rise" || s === "smoke") ((l = i() * re), (d = ue * (0.3 + i() * 0.7)), (h = l + 80 + i() * 160), (u = d - 300 - i() * 300), (f = s === "smoke" ? 9000 : 3500 + i() * 2500));
+      else if (s === "drift") ((l = -60), (d = i() * ue), (h = re + 60), (u = d + (i() - 0.5) * 400), (f = 14000 + i() * 8000));
+      else ((l = i() * re), (d = 120 + i() * (ue - 200)), (h = l + (i() - 0.5) * 160), (u = d + (i() - 0.5) * 120), (f = 4000 + i() * 3000));
+      if (n) ((l = l + (h - l) * n), (d = d + (u - d) * n));
+      let g = this.add
+        .image(l, d, e)
+        .setTint(a)
+        .setDepth(s === "smoke" ? 4350 : 4420)
+        .setScale(o * (0.6 + i() * 0.6))
+        .setAlpha(0);
+      if (s === "rise" || s === "float" || s === "wisp") g.setBlendMode(Phaser.BlendModes.ADD);
+      if (s === "rain") g.setAngle(14);
+      let p = s === "smoke" ? 0.35 : s === "rain" ? 0.45 : s === "fall" ? 0.75 : 0.85;
+      (this.tweens.add({ targets: g, alpha: p, duration: s === "rain" ? 80 : 600 }),
+        this.tweens.add({
+          targets: g,
+          x: h,
+          y: u,
+          angle: s === "drift" || s === "fall" ? (i() - 0.5) * 720 : g.angle,
+          scale: s === "smoke" ? g.scale * 2.4 : g.scale,
+          duration: f * (n ? 1 - n : 1),
+          ease: s === "float" || s === "wisp" ? "Sine.InOut" : "Linear",
+          onComplete: () => this.tweens.add({ targets: g, alpha: 0, duration: 500, onComplete: () => (g.destroy(), r(0)) }),
+        }));
+      if (s === "float" || s === "wisp") this.tweens.add({ targets: g, alpha: p * 0.25, duration: 700 + i() * 700, yoyo: !0, repeat: -1, delay: 700 });
+    };
+    for (let n = 0; n < t; n++) this.time.delayedCall(i() * 1500, () => r(i()));
+  }
+  // ---- bölüm mekanikleri ----
+  mekanikGuncelle(e) {
+    let t = this.stage.mechanic;
+    if (!t) return;
+    for (let s of this.towers) if (s && s.orsT > 0) s.orsT -= e;
+    if (t === "ash") {
+      let s = this.waves.running || this.enemies.length;
+      if (((this.kulT = (this.kulT ?? 24) - (s ? e : 0)), this.kulT <= 0 && !this.kulFirtina)) {
+        ((this.kulFirtina = 8), (this.menzilCarpani = 0.8), this.events.emit("toast", m("mech.ash")));
+        let a = this.add.rectangle(re / 2, ue / 2, re, ue, 4013373, 0).setDepth(4410);
+        (this.tweens.add({ targets: a, fillAlpha: 0.32, duration: 900 }), (this.kulPerde = a));
+        for (let i = 0; i < 40; i++) this.time.delayedCall(i * 60, () => this.ortamKatman(M("efekt_kul_tanesi") ? "efekt_kul_tanesi" : null, 1, "fall", 12105912));
+      }
+      if (this.kulFirtina && ((this.kulFirtina -= e), this.kulFirtina <= 0)) {
+        ((this.kulFirtina = 0), (this.kulT = 30), (this.menzilCarpani = 1), this.events.emit("toast", m("mech.ashEnd")));
+        let a = this.kulPerde;
+        a && this.tweens.add({ targets: a, fillAlpha: 0, duration: 1200, onComplete: () => a.destroy() });
+      }
+    } else if (t === "statues") {
+      let s = this.waves.index;
+      if (this.waves.running && [1, 3, 4].includes(s) && this.heykelDalga !== s) {
+        this.heykelDalga = s;
+        let a = [
+          [620, 90],
+          [1820, 190],
+          [580, 1000],
+          [1510, 940],
+        ];
+        for (let [i, r] of a.sort(() => Math.random() - 0.5).slice(0, s === 4 ? 3 : 2))
+          this.time.delayedCall(4000 + Math.random() * 6000, () => {
+            if (this.ended) return;
+            let n = 0,
+              o = 1 / 0,
+              l = 0;
+            this.paths.forEach((g, p) => {
+              let y = g.nearest(i, r);
+              if (y.dist < o) ((o = y.dist), (n = p), (l = y.d));
+            });
+            (this.cameras.main.shake(260, 0.004), this.fx.dust(i, r), this.fx.ring(i, r, 120, 10526880, 500, 10));
+            this.spawnEnemy("gargoyle", n, null, s, Math.max(0, l), !0);
+            this.events.emit("toast", m("mech.statue"));
+          });
+      }
+    } else if (t === "anvil") {
+      if (!this.ors) this.orsKur();
+      this.ors.cd = Math.max(0, this.ors.cd - e);
+      this.ors.halka.setAlpha(this.ors.cd > 0 ? 0.15 : 0.55 + 0.3 * Math.sin(this.time.now / 300));
+    } else if (t === "shrines") {
+      if (!this.mabetler) this.mabetKur();
+    }
+  }
+  orsKur() {
+    let [e, t] = [914, 1030],
+      s = this.add.ellipse(e, t + 10, 190, 90).setStrokeStyle(6, 16762960, 1).setDepth(t + 3);
+    this.ors = { x: e, y: t, cd: 0, halka: s };
+    let a = this.add.text(e, t + 76, m("mech.anvilHint"), { ...z(26, "#ffe6a0", "800"), stroke: "#2a1a06", strokeThickness: 6 }).setOrigin(0.5).setDepth(t + 4);
+    this.time.delayedCall(12000, () => this.tweens.add({ targets: a, alpha: 0, duration: 800, onComplete: () => a.destroy() }));
+  }
+  mabetKur() {
+    let e = [
+      ["fire", 612, 216, 16740390],
+      ["ice", 1632, 204, 8442111],
+      ["poison", 564, 996, 9502608],
+      ["lightning", 1656, 984, 12088319],
+    ];
+    this.mabetler = e.map(([t, s, a, i]) => {
+      let r = this.add.ellipse(s, a + 40, 270, 125).setStrokeStyle(11, i, 1).setDepth(a + 5),
+        n = this.add.image(s, a + 40, "parcacik").setTint(i).setBlendMode(Phaser.BlendModes.ADD).setDepth(a + 4).setScale(9, 4.5).setAlpha(0.35),
+        o = wt(C(this, s, a - 150, { fire: "ikon_ates", ice: "ikon_buz", lightning: "ikon_firtina", poison: "ikon_zehir" }[t], 1), 84).setDepth(a + 300);
+      return (
+        this.tweens.add({ targets: [r, n], alpha: 0.45, yoyo: !0, repeat: -1, duration: 700, ease: "Sine.InOut" }),
+        this.tweens.add({ targets: o, y: a - 172, yoyo: !0, repeat: -1, duration: 900, ease: "Sine.InOut" }),
+        { el: t, x: s, y: a, renk: i, halka: r, isik: n, ikon: o }
+      );
+    });
+    let t = this.add.text(1098, 560, m("mech.shrineHint"), { ...z(30, "#ffe6a0", "800"), stroke: "#2a1a06", strokeThickness: 6 }).setOrigin(0.5).setDepth(3000);
+    this.mabetYazi = t;
+  }
+  mekanikDokun(e, t) {
+    if (this.ors && this.ors.cd <= 0 && Math.hypot(e - this.ors.x, (t - this.ors.y) * 1.4) < 120) {
+      let s = this.ors;
+      ((s.cd = 35), this.cameras.main.shake(200, 0.005), this.fx.ring(s.x, s.y, 420, 16762960, 700, 12), this.fx.burst(s.x, s.y - 30, "kivilcim", 24, 16762960, 160, 700, 1.4, s.y + 50));
+      Ie("spell_anvilStrike", "muhur", { volume: 0.8 });
+      for (let a of this.towers) if (a && Math.hypot(a.x - s.x, a.y - s.y) < 420) ((a.orsT = 10), this.fx.ring(a.x, a.y, 80, 16762960, 400, 6));
+      this.events.emit("toast", m("mech.anvil"));
+      return !0;
+    }
+    if (this.mabetler && !this.mabet)
+      for (let s of this.mabetler)
+        if (Math.hypot(e - s.x, (t - s.y - 40) * 1.4) < 150) {
+          ((this.mabet = s.el), this.cameras.main.flash(300, 255, 240, 200), this.fx.ring(s.x, s.y + 40, 520, s.renk, 900, 16));
+          for (let a of this.mabetler) a !== s ? (a.halka.destroy(), a.isik.destroy(), a.ikon.destroy()) : (this.tweens.killTweensOf(a.halka), a.halka.setAlpha(1).setStrokeStyle(8, a.renk, 1));
+          let a = this.add.image(s.x, s.y, "parcacik").setTint(s.renk).setBlendMode(Phaser.BlendModes.ADD).setDepth(s.y + 6).setScale(12).setAlpha(0.4);
+          this.tweens.add({ targets: a, scale: 14, alpha: 0.22, yoyo: !0, repeat: -1, duration: 700 });
+          (this.mabetYazi?.destroy(), Ie("spell_elementStorm", "muhur", { volume: 0.8 }), this.events.emit("toast", m("mech.shrine", { x: m("mech." + s.el) })));
+          return !0;
+        }
+    return !1;
+  }
   ambientLife() {
     let e = () => {
       if (this.ended) return;
@@ -10898,6 +12144,7 @@ class Rs extends Phaser.Scene {
       (this.castSpell(this.spellIndex, e, t), this.setState("idle"));
       return;
     }
+    if (this.state === "idle" && this.hitTower(e, t) < 0 && this.mekanikDokun(e, t)) return;
     if (this.state === "rally") {
       this.tryRally(e, t);
       return;
@@ -11186,6 +12433,17 @@ class Rs extends Phaser.Scene {
     return this.enemies.filter((a) => a.alive && Math.hypot(a.x - e, (a.y - t) * 1.1) <= s);
   }
   enemyKilled(e) {
+    if (e.def.revive && !e.revived && !e.reached && e.status.burnT <= 0) {
+      let a = e.dist,
+        i = e.pathIndex,
+        r = e.x,
+        n = e.y;
+      this.time.delayedCall(e.def.revive.delay * 1000, () => {
+        if (this.ended) return;
+        let o = this.spawnEnemy(e.def.id, i, null, this.waves.index, a, e);
+        ((o.revived = !0), (o.hp = o.maxHp * e.def.revive.hp), this.fx.dust(r, n), this.fx.floatText(r, n - 110, m("mech.revive"), "#e8e0c8", 26));
+      });
+    }
     if (e.def.split && !e.reached)
       for (let a = 0; a < e.def.split.count; a++)
         this.spawnEnemy(e.def.split.into, e.pathIndex, null, this.waves.index, Math.max(0, e.dist - 10 - a * 34), e);
@@ -11409,8 +12667,31 @@ class Rs extends Phaser.Scene {
     if (this.hero.alive) e.push(this.hero);
     return e;
   }
+  bossFaz(e) {
+    (this.cameras.main.shake(500, 0.008), this.fx.ring(e.x, e.y, 340, 9055202, 800, 14), this.fx.floatText(e.x, e.y - 220, m("mech.phase"), "#e2b8ff", 40));
+    let t = e.faz === 1 ? ["boneGiant", "ghost", "ghost"] : ["boneGiant", "boneGiant", "varholKnight", "ghost", "ghost"];
+    t.forEach((s, a) => this.spawnEnemy(s, (e.pathIndex + a) % this.paths.length, null, this.waves.index, Math.max(0, e.dist - 60 - a * 40), e));
+    ((e.status.haste = 0.25), (e.status.hasteT = 6));
+  }
   bossAbility(e) {
     let t = e.def.boss.ability;
+    if (t === "raise" || t === "boneKing") {
+      let s = (e.yetenekSira = (e.yetenekSira ?? 0) + 1);
+      if (s % 2) {
+        let a = t === "boneKing" ? 5 : 4;
+        for (let i = 0; i < a; i++)
+          this.spawnEnemy(i % 4 === 3 ? "ghost" : "skeleton", e.pathIndex, null, this.waves.index, Math.max(0, e.dist - 40 - i * 28), e);
+        (this.fx.ring(e.x, e.y, 160, 9055202, 600, 10), this.fx.floatText(e.x, e.y - 150, "!", "#e2b8ff", 60));
+      } else {
+        let a = this.towers
+          .filter((i) => i && i.silencedT <= 0)
+          .sort((i, r) => Math.hypot(i.x - e.x, i.y - e.y) - Math.hypot(r.x - e.x, r.y - e.y))
+          .slice(0, t === "boneKing" ? 2 : 1);
+        for (let i of a)
+          (i.silence(5), this.fx.ring(i.x, i.y - 60, 90, 10127048, 500, 8), this.fx.floatText(i.x, i.y - 200, m("hud.silenced"), "#d8c8ff", 32));
+      }
+      return;
+    }
     if (t === "summon") {
       for (let s = 0; s < 3; s++)
         this.spawnEnemy("goblin", e.pathIndex, null, this.waves.index, Math.max(0, e.dist - 30 - s * 26), e);
@@ -11474,7 +12755,7 @@ class Rs extends Phaser.Scene {
   castSpell(e, t, s) {
     let a = this.hero,
       i = a.def.spells[e];
-    a.spellCd[e] = i.cooldown;
+    a.spellCd[e] = i.cooldown * (1 - tac("buyu") * 0.06);
     let r = a.power;
     switch ((this.events.emit("spellCast", e), i.id)) {
       case "royalGuard": {
@@ -11610,6 +12891,7 @@ class Rs extends Phaser.Scene {
     for (let i of this.enemies) i.update(s);
     if (this.enemies.length > 60 || this.enemies.some((i) => !i.alive))
       this.enemies = this.enemies.filter((i) => i.alive);
+    this.mekanikGuncelle(s);
     for (let i of this.towers) i?.update(s);
     this.hero.update(s);
     for (let i of this.summons) i.update(s);
@@ -11695,6 +12977,99 @@ class Rs extends Phaser.Scene {
   }
 }
 var Hs = {
+  9: {
+    pre: [
+      { speaker: "sarya", key: "dlg.9.pre.0" },
+      { speaker: "velmora", key: "dlg.9.pre.1" },
+      { speaker: "aldric", key: "dlg.9.pre.2" },
+      { speaker: "thorgar", key: "dlg.9.pre.3" },
+    ],
+    post: [
+      { speaker: "velmora", key: "dlg.9.post.0" },
+      { speaker: "sarya", key: "dlg.9.post.1" },
+    ],
+  },
+  10: {
+    pre: [
+      { speaker: "sarya", key: "dlg.10.pre.0" },
+      { speaker: "velmora", key: "dlg.10.pre.1" },
+      { speaker: "thorgar", key: "dlg.10.pre.2" },
+    ],
+    post: [
+      { speaker: "aldric", key: "dlg.10.post.0" },
+      { speaker: "velmora", key: "dlg.10.post.1" },
+    ],
+  },
+  11: {
+    pre: [
+      { speaker: "iskar", key: "dlg.11.pre.0" },
+      { speaker: "velmora", key: "dlg.11.pre.1" },
+      { speaker: "sarya", key: "dlg.11.pre.2" },
+    ],
+    post: [
+      { speaker: "iskar", key: "dlg.11.post.0" },
+      { speaker: "aldric", key: "dlg.11.post.1" },
+    ],
+  },
+  12: {
+    pre: [
+      { speaker: "varhol", key: "dlg.12.pre.v" },
+      { speaker: "villager", key: "dlg.12.pre.0" },
+      { speaker: "aldric", key: "dlg.12.pre.1" },
+      { speaker: "thorgar", key: "dlg.12.pre.2" },
+    ],
+    post: [
+      { speaker: "villager", key: "dlg.12.post.0" },
+      { speaker: "aldric", key: "dlg.12.post.1" },
+    ],
+  },
+  13: {
+    pre: [
+      { speaker: "thorgar", key: "dlg.13.pre.0" },
+      { speaker: "sarya", key: "dlg.13.pre.1" },
+      { speaker: "thorgar", key: "dlg.13.pre.2" },
+    ],
+    post: [
+      { speaker: "thorgar", key: "dlg.13.post.0" },
+      { speaker: "velmora", key: "dlg.13.post.1" },
+    ],
+  },
+  14: {
+    pre: [
+      { speaker: "velmora", key: "dlg.14.pre.0" },
+      { speaker: "velmora", key: "dlg.14.pre.1" },
+      { speaker: "sarya", key: "dlg.14.pre.2" },
+    ],
+    post: [
+      { speaker: "velmora", key: "dlg.14.post.0" },
+      { speaker: "aldric", key: "dlg.14.post.1" },
+    ],
+  },
+  15: {
+    pre: [
+      { speaker: "varhol", key: "dlg.15.pre.v" },
+      { speaker: "aldric", key: "dlg.15.pre.0" },
+      { speaker: "sarya", key: "dlg.15.pre.1" },
+      { speaker: "thorgar", key: "dlg.15.pre.2" },
+    ],
+    post: [
+      { speaker: "aldric", key: "dlg.15.post.0" },
+      { speaker: "velmora", key: "dlg.15.post.1" },
+    ],
+  },
+  16: {
+    pre: [
+      { speaker: "kemikKral", key: "dlg.16.pre.0" },
+      { speaker: "iskar", key: "dlg.16.pre.1" },
+      { speaker: "aldric", key: "dlg.16.pre.2" },
+      { speaker: "velmora", key: "dlg.16.pre.3" },
+    ],
+    post: [
+      { speaker: "aldric", key: "dlg.16.post.0" },
+      { speaker: "sarya", key: "dlg.16.post.1" },
+      { speaker: "velmora", key: "dlg.16.post.2" },
+    ],
+  },
   1: {
     pre: [
       { speaker: "aldric", key: "dlg.1.pre.0" },
@@ -12682,6 +14057,7 @@ class Os extends Phaser.Scene {
       i = t.bestStars[e.stageId] ?? 0,
       { rewards: r, newStars: n } = e.victory ? za(e.stageId, i, e.stars) : { rewards: [], newStars: [] };
     if (((t.heroXp[s] = (t.heroXp[s] ?? 0) + a), e.victory)) t.bestStars[e.stageId] = Math.max(i, e.stars);
+    if (e.victory && !i && M("vaka_" + String(e.stageId).padStart(2, "0"))) t.yeniVaka = e.stageId;
     for (let f of r) {
       if (
         ((t.treasure += f.treasure ?? 0),

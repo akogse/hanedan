@@ -6,7 +6,7 @@ const stageId=+process.argv[2], plan=JSON.parse(process.argv[3]), out=process.ar
   const p = await b.newPage({viewport:{width:1280,height:720}});
   const errs=[]; p.on('pageerror',e=>errs.push('PAGEERR '+e.message)); p.on('console',m=>{ if(m.type()==='error') errs.push(m.text().slice(0,200)); });
   await p.addInitScript(()=>{ let G; Object.defineProperty(window,'Phaser',{configurable:true,get(){return G},set(v){ const O=v.Game; v.Game=function(c){const g=new O(c); window.__g=g; return g}; v.Game.prototype=O.prototype; G=v; }});
-    localStorage.setItem('hanedan-kusatmasi-save-v1',JSON.stringify({version:1,lang:'tr',identity:'commander',kingdom:'Test',bestStars:{1:3,2:3,3:3},tutorialDone:{basics:true,burn:true,combo:true,spell:true,hero:true,mine:true}}));});
+    localStorage.setItem('hanedan-kusatmasi-save-v1',JSON.stringify({version:1,lang:'tr',identity:'commander',kingdom:'Test',bestStars:{1:5,2:5,3:5,4:5,5:5,6:5,7:5,8:5,9:5,10:5,11:5,12:5,13:5,14:5,15:5},tutorialDone:{basics:true,burn:true,combo:true,spell:true,hero:true,mine:true,flying:true,branch:true}}));});
   await p.goto('http://localhost:8765/index.html');
   for(let i=0;i<60;i++){ await p.waitForTimeout(3000); if(await p.evaluate(()=>window.__g&&['Opening','Intro','Map'].some(k=>window.__g.scene.isActive(k)))) break; } await p.waitForTimeout(5000);
   await p.evaluate((id)=>{ const g=window.__g; g.scene.scenes.forEach(s=>{ const k=s.sys.settings.key; if(k!=='Battle'&&k!=='Hud'&&s.sys.isActive()) g.scene.stop(k)}); const H=g.scene.getScene('Hud'); Object.getPrototypeOf(H).modal=function(){return Promise.resolve();}; g.scene.start('Battle',{stageId:id}); },stageId);
@@ -27,8 +27,10 @@ const stageId=+process.argv[2], plan=JSON.parse(process.argv[3]), out=process.ar
         let cost;
         if(kind==='build'){ if(t){pi++;continue;} const tmp=sc.placeTower(spot,tower,1); cost=tmp.def.levels[0].cost; tmp.destroy(); sc.towers[spot]=null; sc.spotImgs[spot]?.setVisible(true);
           if(sc.gold<cost) return; sc.gold-=cost; sc.placeTower(spot,tower,1); log.events.push(`${(step*dt/1000).toFixed(0)}s kur ${tower}@${spot}`); pi++; }
+        else if(kind==='dal'){ const DC={sniper:190,arrowRain:180,guards:190,berserkers:190,hellCatapult:230,flameBreath:220,iceSeal:200,blizzard:210,piercingSpear:240,hook:230,mint:200,treasureGuard:210,chainLightning:250,thunder:250,griffinRiders:220,eagleFlock:210,plague:220,acid:220,warRune:240,quakeRune:240};
+          if(!t||t.level!==3||t.branch){pi++;continue;} cost=DC[tower]; if(sc.gold<cost) return; sc.gold-=cost; t.takeBranch(tower); log.events.push(`dal ${tower}`); pi++; }
         else { if(!t||t.level>=3){pi++;continue;} cost=t.def.levels[t.level].cost; if(sc.gold<cost) return; sc.gold-=cost; t.upgrade(); log.events.push(`${(step*dt/1000).toFixed(0)}s yükselt ${t.def.id}@${spot}->${t.level}`); pi++; } } };
-    while(step<12000 && !sc.ended){
+    while(step<24000 && !sc.ended){
       act();
       if(!sc.waves.spawning && !sc.enemies.length && sc.waves.index+1<sc.waves.total) { try{ sc.startNextWave(); log.events.push(`${(step*dt/1000).toFixed(0)}s dalga ${sc.waves.index+1}`);}catch(e){log.events.push('wave err '+e.message);} }
       sc.paused=false; sc.update(0,dt); step++;
