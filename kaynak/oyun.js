@@ -3161,7 +3161,8 @@ function V(e, t = {}) {
   let s = js(e);
   if (!s.length) return;
   let a = performance.now();
-  if (a - (Ws[e] ?? -1e9) < (t.minGapMs ?? 45)) return;
+  let hz = ke.scene.isActive("Battle") ? ke.scene.getScene("Battle").speed || 1 : 1;
+  if (a - (Ws[e] ?? -1e9) < (t.minGapMs ?? 45) * Math.max(1, hz)) return;
   if ((Ct[e] ?? 0) >= (t.maxLive ?? 5)) return;
   Ws[e] = a;
   let i = t.anahtar && s.includes(t.anahtar) ? t.anahtar : s[Math.floor(Math.random() * s.length)],
@@ -7265,6 +7266,9 @@ var re = 2304,
   };
 // I. ve II. Çağ haritalarının üst üste bindiği genişlik
 var DIKIS = 260;
+// Savaşın temel temposu: her şey (düşman, atış, efekt, dalga) aynı oranda yavaşlar; denge birebir korunur.
+var OYUN_TEMPO = 0.85;
+window.OYUN_TEMPO = OYUN_TEMPO;
 var si = [
   b(999, 513),
   b(808, 312),
@@ -8239,9 +8243,9 @@ var oe = {
     unlockStage: 1,
     implemented: !0,
     levels: [
-      { cost: 70, damage: [14, 22], rate: 1.5, range: 300, critChance: 0.1, critMult: 2 },
-      { cost: 60, damage: [26, 39], rate: 1.4, range: 320, critChance: 0.12, critMult: 2 },
-      { cost: 100, damage: [45, 66], rate: 1.3, range: 345, critChance: 0.15, critMult: 2.2 },
+      { cost: 70, damage: [21, 33], rate: 2.1, range: 300, critChance: 0.1, critMult: 2 },
+      { cost: 60, damage: [39, 59], rate: 1.96, range: 320, critChance: 0.12, critMult: 2 },
+      { cost: 100, damage: [68, 99], rate: 1.82, range: 345, critChance: 0.15, critMult: 2.2 },
     ],
     branches: [
       { id: "sniper", nameKey: "branch.sniper", descKey: "branch.sniper.desc", target: "both" },
@@ -8285,9 +8289,9 @@ var oe = {
     unlockStage: 2,
     implemented: !0,
     levels: [
-      { cost: 110, damage: [12, 19], rate: 2.2, range: 280, splash: 95, burnDps: 3, burnTime: 3 },
-      { cost: 90, damage: [20, 31], rate: 2.1, range: 295, splash: 105, burnDps: 5, burnTime: 3 },
-      { cost: 140, damage: [32, 48], rate: 2, range: 310, splash: 115, burnDps: 8, burnTime: 3.5 },
+      { cost: 110, damage: [18, 29], rate: 3.08, range: 280, splash: 95, burnDps: 3, burnTime: 3.5 },
+      { cost: 90, damage: [30, 46], rate: 2.94, range: 295, splash: 105, burnDps: 5, burnTime: 3.5 },
+      { cost: 140, damage: [48, 72], rate: 2.8, range: 310, splash: 115, burnDps: 8, burnTime: 3.5 },
     ],
     branches: [
       { id: "hellCatapult", nameKey: "branch.hellCatapult", descKey: "branch.hellCatapult.desc", target: "ground" },
@@ -8305,9 +8309,9 @@ var oe = {
     unlockStage: 3,
     implemented: !0,
     levels: [
-      { cost: 90, damage: [9, 14], rate: 1.8, range: 285, slow: 0.3, slowTime: 3.6 },
-      { cost: 80, damage: [15, 22], rate: 1.75, range: 300, slow: 0.4, slowTime: 4.1 },
-      { cost: 120, damage: [23, 34], rate: 1.7, range: 320, slow: 0.5, slowTime: 4.7 },
+      { cost: 90, damage: [14, 21], rate: 2.52, range: 285, slow: 0.3, slowTime: 3.6 },
+      { cost: 80, damage: [22, 33], rate: 2.45, range: 300, slow: 0.4, slowTime: 4.1 },
+      { cost: 120, damage: [34, 51], rate: 2.38, range: 320, slow: 0.5, slowTime: 4.7 },
     ],
     branches: [
       { id: "iceSeal", nameKey: "branch.iceSeal", descKey: "branch.iceSeal.desc", target: "both" },
@@ -8318,9 +8322,9 @@ var oe = {
     ...ct("ballista", 4, "ground", "mostArmored", "none", "physical", ["piercingSpear", "hook"]),
     implemented: !0,
     levels: [
-      { cost: 120, damage: [38, 52], rate: 2.4, range: 330, pierce: 0.5 },
-      { cost: 100, damage: [62, 84], rate: 2.3, range: 345, pierce: 0.6 },
-      { cost: 150, damage: [98, 130], rate: 2.2, range: 365, pierce: 0.7 },
+      { cost: 120, damage: [57, 78], rate: 3.36, range: 330, pierce: 0.5 },
+      { cost: 100, damage: [93, 126], rate: 3.22, range: 345, pierce: 0.6 },
+      { cost: 150, damage: [147, 195], rate: 3.08, range: 365, pierce: 0.7 },
     ],
   },
   mine: {
@@ -8336,27 +8340,27 @@ var oe = {
     ...ct("storm", 5, "both", "densest", "lightning", "magic", ["chainLightning", "thunder"]),
     implemented: !0,
     levels: [
-      { cost: 130, damage: [16, 22], rate: 2.2, range: 290, chains: 3, bounce: 160 },
-      { cost: 110, damage: [26, 36], rate: 2.1, range: 300, chains: 4, bounce: 170 },
-      { cost: 160, damage: [40, 54], rate: 2, range: 315, chains: 4, bounce: 180 },
+      { cost: 130, damage: [24, 33], rate: 3.08, range: 290, chains: 3, bounce: 160 },
+      { cost: 110, damage: [39, 54], rate: 2.94, range: 300, chains: 4, bounce: 170 },
+      { cost: 160, damage: [60, 81], rate: 2.8, range: 315, chains: 4, bounce: 180 },
     ],
   },
   eagle: {
     ...ct("eagle", 6, "air", "first", "none", "physical", ["griffinRiders", "eagleFlock"]),
     implemented: !0,
     levels: [
-      { cost: 100, damage: [26, 36], rate: 1.3, range: 380 },
-      { cost: 90, damage: [44, 58], rate: 1.25, range: 395 },
-      { cost: 130, damage: [70, 92], rate: 1.2, range: 410 },
+      { cost: 100, damage: [39, 54], rate: 1.82, range: 380 },
+      { cost: 90, damage: [66, 87], rate: 1.75, range: 395 },
+      { cost: 130, damage: [105, 138], rate: 1.68, range: 410 },
     ],
   },
   alchemist: {
     ...ct("alchemist", 7, "ground", "unpoisoned", "poison", "magic", ["plague", "acid"]),
     implemented: !0,
     levels: [
-      { cost: 110, damage: [8, 12], rate: 1.7, range: 280, splash: 70, poisonDps: 7, poisonTime: 4, armorBreak: 3 },
-      { cost: 95, damage: [12, 18], rate: 1.65, range: 295, splash: 75, poisonDps: 11, poisonTime: 4, armorBreak: 3.5 },
-      { cost: 140, damage: [18, 26], rate: 1.6, range: 310, splash: 85, poisonDps: 16, poisonTime: 4.5, armorBreak: 4 },
+      { cost: 110, damage: [12, 18], rate: 2.38, range: 280, splash: 70, poisonDps: 7, poisonTime: 4, armorBreak: 3 },
+      { cost: 95, damage: [18, 27], rate: 2.31, range: 295, splash: 75, poisonDps: 11, poisonTime: 4, armorBreak: 3.5 },
+      { cost: 140, damage: [27, 39], rate: 2.24, range: 310, splash: 85, poisonDps: 16, poisonTime: 4.5, armorBreak: 4 },
     ],
   },
   rune: {
@@ -8422,8 +8426,8 @@ function tacKule(e) {
   return 1;
 }
 var DAL = {
-  sniper: { art: "kule_gozcu_dal_keskin", cost: 190, damage: [120, 165], rate: 2.6, range: 430, critChance: 0.25, critMult: 2.5 },
-  arrowRain: { art: "kule_gozcu_dal_okyagmuru", cost: 180, damage: [20, 28], rate: 2.2, range: 340, arrows: 7, splash: 120, target: "ground" },
+  sniper: { art: "kule_gozcu_dal_keskin", cost: 190, damage: [180, 248], rate: 3.64, range: 430, critChance: 0.25, critMult: 2.5 },
+  arrowRain: { art: "kule_gozcu_dal_okyagmuru", cost: 180, damage: [30, 42], rate: 3.08, range: 340, arrows: 7, splash: 120, target: "ground" },
   guards: {
     art: "kule_kisla_dal_muhafiz",
     cost: 190,
@@ -8440,20 +8444,20 @@ var DAL = {
     range: 260,
     soldiers: { hp: 170, damage: [22, 30], armor: 0.2, respawn: 6, rate: 0.65, img: "asker", tint: 16756880 },
   },
-  hellCatapult: { art: "kule_ejder_dal_mancinik", cost: 230, damage: [75, 105], rate: 3.2, range: 410, splash: 150, burnDps: 12, burnTime: 4 },
+  hellCatapult: { art: "kule_ejder_dal_mancinik", cost: 230, damage: [112, 158], rate: 4.48, range: 410, splash: 150, burnDps: 12, burnTime: 5 },
   flameBreath: { art: "kule_ejder_dal_nefes", cost: 220, damage: [13, 18], rate: 0.55, range: 250, splash: 110, burnDps: 10, burnTime: 2 },
-  iceSeal: { art: "kule_ayaz_dal_muhur", cost: 200, damage: [34, 48], rate: 1.6, range: 330, slow: 0.5, slowTime: 4.7, sealHits: 4, freeze: 2 },
-  blizzard: { art: "kule_ayaz_dal_firtina", cost: 210, damage: [22, 30], rate: 1.9, range: 330, slow: 0.55, slowTime: 3, splash: 150 },
-  piercingSpear: { art: "kule_balista_dal_mizrak", cost: 240, damage: [150, 200], rate: 2.4, range: 390, pierce: 0.85, line: 260 },
-  hook: { art: "kule_balista_dal_kanca", cost: 230, damage: [110, 145], rate: 2.6, range: 370, pierce: 0.7, pull: 130, stun: 0.8 },
+  iceSeal: { art: "kule_ayaz_dal_muhur", cost: 200, damage: [51, 72], rate: 2.24, range: 330, slow: 0.5, slowTime: 4.7, sealHits: 3, freeze: 2 },
+  blizzard: { art: "kule_ayaz_dal_firtina", cost: 210, damage: [33, 45], rate: 2.66, range: 330, slow: 0.55, slowTime: 3.5, splash: 150 },
+  piercingSpear: { art: "kule_balista_dal_mizrak", cost: 240, damage: [225, 300], rate: 3.36, range: 390, pierce: 0.85, line: 260 },
+  hook: { art: "kule_balista_dal_kanca", cost: 230, damage: [165, 218], rate: 3.64, range: 370, pierce: 0.7, pull: 130, stun: 0.8 },
   mint: { art: "kule_maden_dal_darphane", cost: 200, damage: [0, 0], rate: 8, range: 0, income: 42, interval: 8 },
-  treasureGuard: { art: "kule_maden_dal_muhafiz", cost: 210, damage: [34, 46], rate: 1.4, range: 300, income: 28, interval: 8, target: "both" },
-  chainLightning: { art: "kule_firtina_dal_zincir", cost: 250, damage: [46, 60], rate: 2, range: 330, chains: 7, bounce: 230, decay: 0.82 },
-  thunder: { art: "kule_firtina_dal_gokgurultusu", cost: 250, damage: [130, 170], rate: 3.2, range: 330, splash: 140, stun: 1 },
-  griffinRiders: { art: "kule_kartal_dal_grifon", cost: 220, damage: [80, 104], rate: 1.3, range: 420, target: "both" },
-  eagleFlock: { art: "kule_kartal_dal_suru", cost: 210, damage: [50, 64], rate: 1.15, range: 430, shots: 3 },
-  plague: { art: "kule_simyaci_dal_veba", cost: 220, damage: [16, 24], rate: 1.7, range: 320, splash: 125, poisonDps: 30, poisonTime: 6, armorBreak: 4 },
-  acid: { art: "kule_simyaci_dal_asit", cost: 220, damage: [42, 58], rate: 1.6, range: 320, splash: 85, poisonDps: 14, poisonTime: 4, armorBreak: 7 },
+  treasureGuard: { art: "kule_maden_dal_muhafiz", cost: 210, damage: [51, 69], rate: 1.96, range: 300, income: 28, interval: 8, target: "both" },
+  chainLightning: { art: "kule_firtina_dal_zincir", cost: 250, damage: [69, 90], rate: 2.8, range: 330, chains: 7, bounce: 230, decay: 0.82 },
+  thunder: { art: "kule_firtina_dal_gokgurultusu", cost: 250, damage: [195, 255], rate: 4.48, range: 330, splash: 140, stun: 1 },
+  griffinRiders: { art: "kule_kartal_dal_grifon", cost: 220, damage: [120, 156], rate: 1.82, range: 420, target: "both" },
+  eagleFlock: { art: "kule_kartal_dal_suru", cost: 210, damage: [75, 96], rate: 1.61, range: 430, shots: 3 },
+  plague: { art: "kule_simyaci_dal_veba", cost: 220, damage: [24, 36], rate: 2.38, range: 320, splash: 125, poisonDps: 30, poisonTime: 6, armorBreak: 4 },
+  acid: { art: "kule_simyaci_dal_asit", cost: 220, damage: [63, 87], rate: 2.24, range: 320, splash: 85, poisonDps: 14, poisonTime: 4, armorBreak: 7 },
   warRune: { art: "kule_run_dal_savas", cost: 240, damage: [0, 0], rate: 3, range: 320, buff: 0.45 },
   quakeRune: { art: "kule_run_dal_sarsinti", cost: 240, damage: [40, 60], rate: 4, range: 310, buff: 0.3, slow: 0.35, slowTime: 1.5 },
 };
@@ -10089,14 +10093,15 @@ class ws {
     let o = t.frozen
       ? 10478335
       : this.hitFlash > 0
-        ? 16765120
+        ? 16751242
         : t.slowTotal(this.boss) > 0
           ? 13036799
           : t.burning
             ? 16762522
             : 16777215;
-    if (this.body) this.body.setTint(o === 16777215 ? this.baseTint : o);
-    if ((this.legs.forEach((l) => l.setTint(o)), this.eliteRing))
+    let beyaz = !t.frozen && this.hitFlash > 0.1;
+    if (this.body) beyaz ? this.body.setTintFill(16774368) : this.body.setTint(o === 16777215 ? this.baseTint : o);
+    if ((this.legs.forEach((l) => (beyaz ? l.setTintFill(16774368) : l.setTint(o))), this.eliteRing))
       this.eliteRing.setAlpha(0.6 + Math.sin(this.walkT * 0.7) * 0.3);
   }
   playDeath() {
@@ -10157,7 +10162,7 @@ class vs {
       s.kind === "physical" && s.element === "none")
     )
       this.s.fx.hitSpark(e.x + (Math.random() - 0.5) * 16, e.y - 50 * e.scale);
-    if (((e.hitFlash = 0.08), s.element !== "none")) this.applyElement(e, s.element);
+    if (((e.hitFlash = 0.17), s.element !== "none")) this.applyElement(e, s.element);
     return a;
   }
   tickDamage(e, t, s) {
@@ -10170,7 +10175,7 @@ class vs {
       let r = Math.min(e.shieldHp, t);
       ((e.shieldHp -= r), (t -= r));
     }
-    if (((e.hp -= t), !a)) e.hitFlash = 0.08;
+    if (((e.hp -= t), !a)) e.hitFlash = 0.17;
     let i = P().elementUsage;
     if (((i[s] = (i[s] ?? 0) + t), e.hp <= 0 && e.alive)) ((e.hp = 0), (e.alive = !1), this.s.enemyKilled(e));
   }
@@ -10512,7 +10517,7 @@ class Ss {
       s.anims.create({ key: r, frames: s.anims.generateFrameNumbers(t, {}), frameRate: a / i, repeat: 0 });
     return (
       be(this.sprite, t, this.artKey(), 0.92),
-      (this.sprite.anims.timeScale = s.speed),
+      (this.sprite.anims.timeScale = s.speed * OYUN_TEMPO),
       (this.attacking = !0),
       this.sprite.off("animationcomplete"),
       this.sprite.once("animationcomplete", () => {
@@ -11313,8 +11318,8 @@ class Ps {
         targets: i,
         y: t - (a ? 70 : 50),
         alpha: 0,
-        delay: a ? 420 : 260,
-        duration: 520,
+        delay: a ? 520 : 380,
+        duration: 560,
         onComplete: () => this.release(i),
       }));
   }
@@ -11854,7 +11859,7 @@ class Rs extends Phaser.Scene {
       this.scene.launch("Hud", { battle: this }),
       (this.hud = this.scene.get("Hud")),
       this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.scene.stop("Hud")),
-      (this.tweens.timeScale = this.speed));
+      (this.tweens.timeScale = this.speed * OYUN_TEMPO));
   }
   drawMap() {
     let e = this.stage,
@@ -13046,10 +13051,10 @@ class Rs extends Phaser.Scene {
     this.projectiles.push(e);
   }
   sfx(e) {
-    V(e);
+    V(e, ["arrow", "fire", "ice"].includes(e) ? { minGapMs: 80, maxLive: 3, volume: 0.85 } : {});
   }
   setSpeed(e) {
-    ((this.speed = e), (this.tweens.timeScale = e), (P().speed = e), j());
+    ((this.speed = e), (this.tweens.timeScale = e * OYUN_TEMPO), (P().speed = e), j());
   }
   setPaused(e) {
     if (((this.paused = e), e)) this.tweens.pauseAll();
@@ -13058,7 +13063,7 @@ class Rs extends Phaser.Scene {
   }
   update(e, t) {
     if (this.paused || this.ended) return;
-    let s = Math.min(t / 1000, 0.05) * this.speed;
+    let s = Math.min(t / 1000, 0.05) * this.speed * OYUN_TEMPO;
     (this.waves.update(s),
       Vs(
         this.enemies.some((i) => i.alive && i.boss)

@@ -33,7 +33,7 @@ const stageId=+process.argv[2], plan=JSON.parse(process.argv[3]), out=process.ar
     while(step<24000 && !sc.ended){
       act();
       if(!sc.waves.spawning && !sc.enemies.length && sc.waves.index+1<sc.waves.total) { try{ sc.startNextWave(); log.events.push(`${(step*dt/1000).toFixed(0)}s dalga ${sc.waves.index+1}`);}catch(e){log.events.push('wave err '+e.message);} }
-      sc.paused=false; sc.update(0,dt); step++;
+      sc.paused=false; sc.speed=1/(window.OYUN_TEMPO||1); sc.update(0,dt); step++;
     }
     const hp=sc.castleHp; log.wave=sc.waves.index+1; log.alive=sc.enemies.length;
     return {ended:sc.ended, victory:sc.victory, time:(step*dt/1000).toFixed(0), castle:hp, gold:sc.gold, ...log};
