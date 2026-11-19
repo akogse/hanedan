@@ -6728,6 +6728,21 @@ function xpOran(e) {
   while (a >= s && t < 20) ((a -= s), t++, (s = Math.round(s * 1.35)));
   return t >= 20 ? 1 : a / s;
 }
+// bildirim: altın çerçeveli kadife şerit (harita ve savaş ortak)
+function bildirim(e, x, y, yazi, gen = 1000) {
+  let c = e.add.container(x, y),
+    t = e.add.text(0, 0, yazi, { ...z(30, "#f1e7cd", "800"), wordWrap: { width: gen, useAdvancedWrap: !0 }, align: "center" }).setOrigin(0.5).setShadow(0, 2, "#000", 4, !1, !0),
+    W = t.width + 90,
+    H = t.height + 46;
+  if (M("panel_kucuk")) {
+    let g = e.add.graphics();
+    (g.fillStyle(0, 0.45), g.fillRoundedRect(-W / 2 + 6, -H / 2 + 8, W, H, 14), c.add([g, us(e, W, H)]));
+  } else {
+    let g = e.add.graphics();
+    (g.fillStyle(1840142, 0.92), g.fillRoundedRect(-W / 2, -H / 2, W, H, 16), c.add(g));
+  }
+  return (c.add(t), c.setAlpha(0).setScale(0.92), e.tweens.add({ targets: c, alpha: 1, scale: 1, duration: 180, ease: "Back.Out" }), c);
+}
 function us(e, t, s) {
   let a = e.textures.get("panel_kucuk").getSourceImage(),
     i = Math.round(a.width * 0.15),
@@ -7224,6 +7239,8 @@ class ms extends Phaser.Scene {
     (this.input0?.remove(), (this.input0 = null));
   }
   stepHero() {
+    let TAM = vt.map((h) => "kh_tam_" + h).filter((k) => zt[k]);
+    if (TAM.some((k) => !this.textures.exists(k))) return void sayfaIste(this, TAM, () => this.stepHero());
     (this.clear(m("intro.chooseHero"), 2),
       this.layer.add(this.add.text(T / 2, 222, m("intro.heroNote"), z(26, X.muted, "700")).setOrigin(0.5)));
     let e = [],
@@ -7248,10 +7265,17 @@ class ms extends Phaser.Scene {
       if (
         (h.getData("glow").setAlpha(0),
         d.add(h),
-        d.add(Ae(this, 0, -190, 104, "kahraman_" + r + "_portre", o.color)),
-        M("madalyon_cerceve"))
-      )
-        d.add(this.add.image(0, -196, "madalyon_cerceve").setDisplaySize(262, 262));
+        M("kh_tam_" + r))
+      ) {
+        // tam boy kahraman: kartın üst bölmesinde, ayakları ad yazısının hemen üstünde
+        let kz = this.add.graphics();
+        (kz.fillGradientStyle(0, 0, 0, 0, 0, 0, 0.5, 0.5), kz.fillRect(-a / 2 + 30, -150, a - 60, 90), d.add(kz));
+        let kh = this.add.image(0, -62, "kh_tam_" + r).setOrigin(0.5, 1);
+        (kh.setScale(Math.min(268 / kh.height, (a - 50) / kh.width)), d.add(kh));
+      } else {
+        d.add(Ae(this, 0, -190, 104, "kahraman_" + r + "_portre", o.color));
+        if (M("madalyon_cerceve")) d.add(this.add.image(0, -196, "madalyon_cerceve").setDisplaySize(262, 262));
+      }
       (d.add(
         this.add
           .text(0, -50, m(o.nameKey), {
@@ -9470,7 +9494,11 @@ class _s extends Phaser.Scene {
           delay: 70,
           repeat: Math.max(0, n.length - 4),
           callback: () => {
-            if (l % 2 === 0 && l < n.length - 2) (o.fillStyle(7216405, 0.95), o.fillCircle(n[l].x, n[l].y, 6));
+            if (l % 2 === 0 && l < n.length - 2) {
+              (o.fillStyle(0, 0.35), o.fillCircle(n[l].x + 1, n[l].y + 2, 7), o.fillStyle(14200904, 1), o.fillCircle(n[l].x, n[l].y, 6), o.fillStyle(16771530, 0.9), o.fillCircle(n[l].x - 1.5, n[l].y - 1.5, 2.5));
+              let pk = this.add.image(n[l].x, n[l].y, "parcacik").setTint(16766080).setBlendMode(Phaser.BlendModes.ADD).setScale(2.2).setAlpha(0.9);
+              (this.world.add(pk), this.tweens.add({ targets: pk, scale: 0.4, alpha: 0, duration: 500, onComplete: () => pk.destroy() }));
+            }
             l++;
           },
         }),
@@ -9567,11 +9595,7 @@ class _s extends Phaser.Scene {
         .setOrigin(0, 0.5),
       i = Math.min(T - 120, a.width + 900),
       r = this.add.graphics();
-    (r.fillStyle(660528, 0.95),
-      r.fillRoundedRect(-i / 2, -60, i, 120, 18),
-      r.lineStyle(3, 14200904, 1),
-      r.strokeRoundedRect(-i / 2, -60, i, 120, 18),
-      s.add(r),
+    (M("panel_kucuk") ? (r.fillStyle(0, 0.45), r.fillRoundedRect(-i / 2 + 6, -56, i, 124, 16), s.add([r, us(this, i + 10, 128)])) : (r.fillStyle(660528, 0.95), r.fillRoundedRect(-i / 2, -60, i, 120, 18), r.lineStyle(3, 14200904, 1), r.strokeRoundedRect(-i / 2, -60, i, 120, 18), s.add(r)),
       a.setX(-i / 2 + 30),
       s.add(a),
       s.add(
@@ -9616,11 +9640,9 @@ class _s extends Phaser.Scene {
     ((this.agirAcik = this.agirYeni ?? null), (this.agirYeni = null));
   }
   toast(e) {
-    let t = this.add
-      .text(T / 2, w - 190, e, { ...Z(32), backgroundColor: "#2a1d14", padding: { x: 24, y: 12 } })
-      .setOrigin(0.5)
-      .setDepth(90);
-    this.tweens.add({ targets: t, alpha: 0, delay: 1800, duration: 400, onComplete: () => t.destroy() });
+    this.toastC?.destroy();
+    let t = (this.toastC = bildirim(this, T / 2, w - 196, e).setDepth(90));
+    this.tweens.add({ targets: t, alpha: 0, delay: 2200, duration: 400, onComplete: () => t.destroy() });
   }
   stagePanel(e) {
     this.openModal(() => {
@@ -9935,11 +9957,11 @@ class _s extends Phaser.Scene {
     this.openModal(() => {
       let s = this.add.container(T / 2, w / 2);
       return (
-        s.add(pe(this, 0, 0, 900, 460, e)),
-        s.add(this.add.zone(0, 0, 900, 460).setInteractive()),
-        s.add(C(this, -330, -10, "ikon_kilit", 2.6)),
-        s.add(ne(this, -230, -130, t, 600, 30)),
-        s.add(F(this, 0, 150, 260, 90, m("common.ok"), () => this.closeModal(), "gold")),
+        s.add(pe(this, 0, 0, 900, 480, e)),
+        s.add(this.add.zone(0, 0, 900, 480).setInteractive()),
+        s.add(wt(C(this, -300, -20, "ikon_kilit", 1), 150)),
+        ((tx) => (tx.setY(-20 - tx.height / 2), s.add(tx)))(this.add.text(-190, 0, t, { ...z(28, "#e9e1cc", "700"), wordWrap: { width: 520, useAdvancedWrap: !0 }, lineSpacing: 6 })),
+        s.add(F(this, 0, 168, 260, 90, m("common.ok"), () => this.closeModal(), "gold")),
         [s]
       );
     });
@@ -14209,18 +14231,8 @@ class Os extends Phaser.Scene {
   }
   toast(e) {
     this.toastC?.destroy();
-    let t = this.add.container(O / 2, 150),
-      s = this.add
-        .text(0, 0, e, { ...z(32, I.cream, "800"), wordWrap: { width: 1000 }, align: "center" })
-        .setOrigin(0.5),
-      a = this.add.graphics();
-    (a.fillStyle(1840142, 0.9),
-      a.fillRoundedRect(-s.width / 2 - 30, -s.height / 2 - 16, s.width + 60, s.height + 32, 18),
-      a.lineStyle(3, 13081150, 1),
-      a.strokeRoundedRect(-s.width / 2 - 30, -s.height / 2 - 16, s.width + 60, s.height + 32, 18),
-      t.add([a, s]),
-      t.setAlpha(0),
-      this.tweens.add({ targets: t, alpha: 1, y: 160, duration: 180 }),
+    let t = bildirim(this, O / 2, 160, e);
+    (
       this.tweens.add({ targets: t, alpha: 0, delay: 2600, duration: 400, onComplete: () => t.destroy() }),
       (this.toastC = t));
   }
@@ -14545,18 +14557,14 @@ class Os extends Phaser.Scene {
   showHeroHint() {
     if (P().tutorialDone.hero || this.heroHint || !this.b.hero.alive) return;
     let t = this.add.container(0, 0).setDepth(400),
-      s = this.add.ellipse(0, 0, 170, 70).setStrokeStyle(6, 15255674, 1);
-    this.tweens.add({ targets: s, scale: 1.3, alpha: 0.3, yoyo: !0, repeat: -1, duration: 600 });
+      s = M("sv_hedef") ? this.add.container(0, 0, [this.add.image(0, 0, "sv_hedef").setDisplaySize(180, 180)]).setScale(1, 0.4) : this.add.ellipse(0, 0, 170, 70).setStrokeStyle(6, 15255674, 1);
+    this.tweens.add(s.type === "Container" ? { targets: s.list[0], scaleX: s.list[0].scaleX * 1.18, scaleY: s.list[0].scaleY * 1.18, alpha: 0.5, yoyo: !0, repeat: -1, duration: 600, ease: "Sine.InOut" } : { targets: s, scale: 1.3, alpha: 0.3, yoyo: !0, repeat: -1, duration: 600 });
     let a = m(he[this.b.hero.def.id].nameKey),
-      i = this.add
-        .text(0, -330, m("tut.hero", { name: a }), {
-          ...z(28, I.cream, "800"),
-          align: "center",
-          wordWrap: { width: 560 },
-          backgroundColor: "#0a1430",
-          padding: { x: 22, y: 14 },
-        })
-        .setOrigin(0.5, 1);
+      i = bildirim(this, 0, -380, m("tut.hero", { name: a }), 560);
+    if (M("sv_el")) {
+      let el = this.add.image(0, -200, "sv_el").setOrigin(0.344, 0.99).setDisplaySize(58, 120);
+      (t.add(el), this.tweens.add({ targets: el, y: -180, yoyo: !0, repeat: -1, duration: 420, ease: "Sine.InOut" }));
+    }
     (t.add([s, i]), t.setAlpha(0), this.tweens.add({ targets: t, alpha: 1, duration: 300 }), (this.heroHint = t));
   }
   updateHeroHint() {
@@ -14580,15 +14588,22 @@ class Os extends Phaser.Scene {
       i.setY(260 + i.height).setOrigin(0.5, 1);
     else i.setY(-330);
   }
+  pencereGizle() {
+    let g = [this.toastC, this.tut?.box, this.tut?.marker, this.heroHint].filter((x) => x?.active && x.visible);
+    g.forEach((x) => x.setVisible(!1));
+    return () => g.forEach((x) => x.active && x.setVisible(!0));
+  }
   modal(e) {
     return new Promise((t) => {
       ((this.modalOpen = !0), this.b.setPaused(!0), this.children.list.forEach((r) => r.getData?.("duyuru") && r.setVisible(!1)));
+      // açık pencere varken bildirim ve öğretici kutusu arkada görünmesin
+      let gizli = this.pencereGizle();
       // perde savaş sahnesine çizilir: Hud kamerası güvenli alanla sınırlı, kenarlar karartılmadan kalıyordu
       let s = [],
         perde = this.b.add.rectangle(-4000, -4000, 2e4, 2e4, 854535, 0.5).setOrigin(0).setDepth(1e7),
         a = (i) => {
           for (let r of s) r.destroy();
-          (perde.destroy(), (this.modalOpen = !1), this.b.setPaused(!1), t(i));
+          (perde.destroy(), gizli(), (this.modalOpen = !1), this.b.setPaused(!1), t(i));
         };
       (s.push(Tt(this, 0.001)), s.push(...e(a)));
     });
@@ -14729,14 +14744,9 @@ class Os extends Phaser.Scene {
       a = ne(this, -440, -50, t.text, 700, 30),
       i = Math.max(120, a.height + 44),
       r = this.add.graphics();
-    (r.fillStyle(0, 0.5),
-      r.fillRoundedRect(-466, -i / 2 + 8, 940, i, 20),
-      r.fillStyle(660528, 0.97),
-      r.fillRoundedRect(-470, -i / 2, 940, i, 20),
-      r.lineStyle(4, 14200904, 1),
-      r.strokeRoundedRect(-470, -i / 2, 940, i, 20),
-      a.setY(-a.height / 2),
-      s.add([r, a]));
+    if (M("panel_kucuk")) (r.fillStyle(0, 0.5), r.fillRoundedRect(-466, -i / 2 + 8, 940, i, 20), s.add([r, us(this, 952, i + 12)]));
+    else (r.fillStyle(0, 0.5), r.fillRoundedRect(-466, -i / 2 + 8, 940, i, 20), r.fillStyle(660528, 0.97), r.fillRoundedRect(-470, -i / 2, 940, i, 20), r.lineStyle(4, 14200904, 1), r.strokeRoundedRect(-470, -i / 2, 940, i, 20), s.add(r));
+    (a.setY(-a.height / 2), a.setColor("#f1e7cd"), s.add(a));
     let n = F(this, 365, 0, 160, 68, m("common.skip"), () => this.endTut(), "stone", { size: 26 });
     if ((s.add(n), s.setAlpha(0), this.tweens.add({ targets: s, alpha: 1, duration: 200 }), (e.box = s), t.auto))
       this.time.delayedCall(t.auto * 1000, () => this.tut && this.tut.steps[this.tut.i] === t && this.nextTut());
