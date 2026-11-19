@@ -39,6 +39,11 @@ var zt = {
     harita_stage2_tam: "assets/harita_stage2_tam.webp",
     harita_stage3_tam: "assets/harita_stage3_tam.webp",
     harita_stage4_tam: "assets/harita_stage4_tam.webp",
+    ui_bilgi_karti: "assets/ui_bilgi_karti.webp",
+    ui_bolum_seridi: "assets/ui_bolum_seridi.webp",
+    ui_dugme_yuvarlak: "assets/ui_dugme_yuvarlak.webp",
+    ui_ipucu_seridi: "assets/ui_ipucu_seridi.webp",
+    ui_yildiz_tepsisi: "assets/ui_yildiz_tepsisi.webp",
     vaka_01: "assets/vaka_01.webp",
     vaka_02: "assets/vaka_02.webp",
     vaka_03: "assets/vaka_03.webp",
@@ -1984,7 +1989,8 @@ function Ks(e) {
   });
 }
 var D = "'Cinzel', 'Trajan Pro', Georgia, serif",
-  Gs = "'Alegreya Sans', 'Gill Sans', 'Trebuchet MS', sans-serif",
+  DD = "'Cinzel Decorative', 'Cinzel', Georgia, serif",
+  Gs = "'Alegreya', Georgia, serif",
   I = {
     ink: "#ece2c8",
     stroke: "#1c140e",
@@ -1999,18 +2005,18 @@ var D = "'Cinzel', 'Trajan Pro', Georgia, serif",
   };
 function z(e = 30, t = I.ink, s = "800") {
   return {
-    fontFamily: "'Alegreya Sans', 'Gill Sans', 'Trebuchet MS', sans-serif",
+    fontFamily: "'Alegreya', Georgia, serif",
     fontSize: e + "px",
     color: t,
     fontStyle: s,
   };
 }
 function ge(e = 48, t = I.ink) {
-  return { fontFamily: "'Cinzel', 'Trajan Pro', Georgia, serif", fontSize: e + "px", color: t, fontStyle: "700" };
+  return { fontFamily: "'Cinzel Decorative', 'Cinzel', Georgia, serif", fontSize: e + "px", color: t, fontStyle: "700" };
 }
 function Z(e = 34, t = I.cream, s = 5) {
   return {
-    fontFamily: "'Alegreya Sans', 'Gill Sans', 'Trebuchet MS', sans-serif",
+    fontFamily: "'Alegreya', Georgia, serif",
     fontSize: e + "px",
     color: t,
     fontStyle: "900",
@@ -6016,7 +6022,7 @@ class ls extends Phaser.Scene {
         .setLetterSpacing(8),
       n = this.add
         .text(T / 2, i + 44, "", {
-          fontFamily: "'Alegreya Sans', 'Gill Sans', sans-serif",
+          fontFamily: "'Alegreya', Georgia, serif",
           fontStyle: "700",
           fontSize: "26px",
           color: "#9a8a70",
@@ -6064,10 +6070,11 @@ async function Ua() {
     "900 40px 'Cinzel'",
     "700 40px 'Cinzel'",
     "600 40px 'Cinzel'",
-    "800 30px 'Alegreya Sans'",
-    "900 30px 'Alegreya Sans'",
-    "700 30px 'Alegreya Sans'",
-    "500 30px 'Alegreya Sans'",
+    "700 40px 'Cinzel Decorative'",
+    "800 30px 'Alegreya'",
+    "900 30px 'Alegreya'",
+    "700 30px 'Alegreya'",
+    "500 30px 'Alegreya'",
   ].map((s) => e.load(s, "ĞğŞşİıÇçÖöÜü").catch(() => null));
   await Promise.race([Promise.all(t), new Promise((s) => setTimeout(s, 2500))]);
 }
@@ -6343,7 +6350,7 @@ function pe(e, t, s, a, i, r) {
     r)
   ) {
     let l = e.add
-        .text(0, -i / 2, G(r), { fontFamily: D, fontStyle: "700", fontSize: "34px", color: "#e9dcc0" })
+        .text(0, -i / 2, G(r), { fontFamily: DD, fontStyle: "700", fontSize: "34px", color: "#e9dcc0" })
         .setOrigin(0.5)
         .setLetterSpacing(4),
       d = Math.min(a - 60, l.width + 90),
@@ -6453,7 +6460,7 @@ function yd(e, t, s, a, i, r) {
   // yuvarlak simge düğmesi: koyu lacivert, altın kenar
   let n = e.add.container(t, s),
     o = e.add.circle(0, 4, a, 0, 0.45),
-    l = e.add.circle(0, 0, a, 660528, 0.96).setStrokeStyle(Math.max(3, a * 0.09), 14200904, 1),
+    l = M("ui_dugme_yuvarlak") ? e.add.image(0, 0, "ui_dugme_yuvarlak").setDisplaySize(a * 2.3, a * 2.3) : e.add.circle(0, 0, a, 660528, 0.96).setStrokeStyle(Math.max(3, a * 0.09), 14200904, 1),
     d = e.add.text(0, -a * 0.06, i, { fontFamily: "Georgia, serif", fontStyle: "700", fontSize: Math.round(a * 1.1) + "px", color: "#f4dc90" }).setOrigin(0.5);
   n.add([o, l, d]);
   let h = e.add.zone(0, 0, a * 2.2, a * 2.2).setInteractive({ useHandCursor: !0 });
@@ -8490,7 +8497,7 @@ class _s extends Phaser.Scene {
           N = ce.find((L) => L.id === x),
           U = { fontFamily: D, fontStyle: "900", color: "#4a2a10" };
         (_.add(this.add.text(S, R, m("vaka.cag", { c: m("era." + (N?.era ?? 1)), n: x }), { ...U, fontSize: Math.round(30 * h) + "px", color: "#7a5326" }).setOrigin(0.5)),
-          _.add(this.add.text(S, R + 58 * h, y ? m("vaka." + x) : "? ? ?", { ...U, fontSize: Math.round(54 * h) + "px" }).setOrigin(0.5)));
+          _.add(this.add.text(S, R + 58 * h, y ? m("vaka." + x) : "? ? ?", { ...U, fontFamily: DD, fontSize: Math.round(52 * h) + "px" }).setOrigin(0.5)));
         {
           let L = this.add.graphics();
           (L.lineStyle(3 * h, 7951654, 0.8), L.lineBetween(S - 220 * h, R + 112 * h, S - 24 * h, R + 112 * h), L.lineBetween(S + 24 * h, R + 112 * h, S + 220 * h, R + 112 * h), L.fillStyle(7951654, 0.9), L.fillTriangle(S, R + 100 * h, S + 12 * h, R + 112 * h, S, R + 124 * h), L.fillTriangle(S, R + 100 * h, S - 12 * h, R + 112 * h, S, R + 124 * h), _.add(L));
@@ -8559,7 +8566,8 @@ class _s extends Phaser.Scene {
       let d = () => {
         n.removeAll(!0);
         let o = bt() - tacHarcanan();
-        n.add(this.add.text(T / 2, 64, m("tac.puan", { n: o }), { ...Z(46, "#ffe39a", 7) }).setOrigin(0.5));
+        (n.add(this.add.text(T / 2, 60, m("tac.puan", { n: o }), { ...Z(46, "#ffe39a", 7) }).setOrigin(0.5)),
+          M("ui_ipucu_seridi") && n.add(this.add.image(T / 2, 98, "ui_ipucu_seridi").setDisplaySize(620, 27)));
         n.add(this.add.text(T / 2, 112, m("tac.aciklama"), { ...z(25, "#f1e6cc", "700"), align: "center", wordWrap: { width: T * 0.62 }, stroke: "#120c06", strokeThickness: 5 }).setOrigin(0.5, 0));
         a.forEach((l, h) => {
           let [u, f] = i[h],
@@ -8946,7 +8954,15 @@ class _s extends Phaser.Scene {
       _.strokeRoundedRect(-f / 2, g, f, H, 8),
       _.lineStyle(1, s ? 16771530 : 8421504, 0.55),
       _.strokeRoundedRect(-f / 2 + 5, g + 5, f - 10, H - 10, 5),
-      M("ui_bolum_seridi") && (_.setVisible(!1), n.add(this.add.image(0, g + H / 2, "ui_bolum_seridi").setDisplaySize(f + 90, (f + 90) / 4))),
+      r &&
+        M("ui_bolum_seridi") &&
+        (() => {
+          _.setVisible(!1);
+          let K = Math.max(330, u.width / 0.58),
+            L = (K * 153) / 900,
+            Y = g + H / 2 - L * 0.1;
+          (n.add(this.add.image(0, Y, "ui_bolum_seridi").setDisplaySize(K, L)), u.setY(Y + L * 0.1));
+        })(),
       n.add([_, u]),
       !s)
     )
@@ -8963,15 +8979,20 @@ class _s extends Phaser.Scene {
         y.lineStyle(1, 16771530, 0.5),
         y.strokeRoundedRect(-87, 65, 174, 32, 16),
         n.add(y));
-      if (M("ui_yildiz_tepsisi")) (y.setVisible(!1), n.add(this.add.image(0, 81, "ui_yildiz_tepsisi").setDisplaySize(200, 50)));
+      let YT = M("ui_yildiz_tepsisi"),
+        YW = 236,
+        YH = (YW * 159) / 600;
+      if (YT) (y.setVisible(!1), n.add(this.add.image(0, 84, "ui_yildiz_tepsisi").setDisplaySize(YW, YH)));
       for (let k = 0; k < 5; k++)
-        n.add(
-          de(
-            this.add.image((k - 2) * 32, 81, k < a ? "ikon_yildiz" : "ikon_yildiz_bos"),
-            k < a ? "ikon_yildiz" : "ikon_yildiz_bos",
-            0.56,
-          ).setTint(k < a ? 16771210 : 11053224).setAlpha(k < a ? 1 : 0.7),
-        );
+        if (YT) {
+          // tepside: kazanılan yıldız parlak altın, kazanılmayan yuva boş kalır
+          if (k < a) n.add(wt(C(this, (0.228 + k * 0.1357 - 0.5) * YW, 84 + (0.487 - 0.5) * YH, M("ikon_yildiz_hud") ? "ikon_yildiz_hud" : "ikon_yildiz", 1), YW * 0.122));
+        } else
+          n.add(
+            de(this.add.image((k - 2) * 32, 81, k < a ? "ikon_yildiz" : "ikon_yildiz_bos"), k < a ? "ikon_yildiz" : "ikon_yildiz_bos", 0.56)
+              .setTint(k < a ? 16771210 : 11053224)
+              .setAlpha(k < a ? 1 : 0.7),
+          );
     }
     if (i && M("harita_bayragi")) {
       let y = this.add.image(66, 34, "harita_bayragi").setOrigin(0.2, 1);
@@ -13617,12 +13638,13 @@ class Os extends Phaser.Scene {
     let t = Te[e];
     if (t.boss) return;
     let s = this.add.container(O / 2, -170),
-      W = 860,
-      H = 220;
-    if (M("ui_bilgi_karti")) s.add(this.add.image(0, 0, "ui_bilgi_karti").setDisplaySize(W, (W * 560) / 1920));
+      BK = M("ui_bilgi_karti"),
+      W = BK ? 940 : 860,
+      H = BK ? (W * 270) / 1200 : 220;
+    if (BK) s.add(this.add.image(0, 0, "ui_bilgi_karti").setDisplaySize(W, H));
     else s.add(pe(this, 0, 0, W, H));
     // portre yuvası: resim her zaman yuvanın içinde ve ortalı
-    let a = -W / 2 + 118,
+    let a = BK ? (0.1625 - 0.5) * W : -W / 2 + 118,
       i = this.add.graphics();
     (i.fillStyle(0, 0.5),
       i.fillCircle(a + 3, 5, 86),
@@ -13634,9 +13656,9 @@ class Os extends Phaser.Scene {
       i.strokeCircle(a, 0, 78),
       M("ui_bilgi_karti") && i.setVisible(!1),
       s.add(i));
-    let r = wt(C(this, a, 0, Ha(e), 1), 136);
+    let r = wt(C(this, a, BK ? (0.48 - 0.5) * H : 0, Ha(e), 1), BK ? H * 0.58 : 136);
     (r.setY(r.y + (r.originY - 0.5) * r.displayHeight), s.add(r));
-    let n = a + 118,
+    let n = BK ? (0.31 - 0.5) * W : a + 118,
       o = W / 2 - n - 40,
       l = this.add.text(n, 0, G(m("hud.newEnemy")), { ...z(21, "#ff9a7a", "900"), letterSpacing: 3 }),
       d = this.add.text(n, 0, m(t.nameKey), ge(38)),
@@ -14149,7 +14171,7 @@ class Os extends Phaser.Scene {
       let g = f.height * f.scaleY,
         p = this.add
           .text(0, -392 + g * 0.305, G(e.victory ? m("end.victory") : m("end.defeat")), {
-            fontFamily: D,
+            fontFamily: DD,
             fontStyle: "900",
             fontSize: "34px",
             color: "#ffe6a0",
