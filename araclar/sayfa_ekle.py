@@ -13,7 +13,7 @@ for line in sorted(open(man)):
     m = json.loads(js)
     if f'    {key}: {{\n' in s:
         print('zaten var', key); continue
-    base = re.match(r'(kule_[a-z]+(?:_dal_[a-z]+|_\d))', key).group(1)
+    base = re.match(r'(kule_[a-z_]+?(?:_dal_[a-z]+|_\d))', key).group(1)
     oy = float(re.search(base + r': \{ w: \d+, ox: [\d.]+, oy: ([\d.]+) \}', s).group(1))
     fh, bh = m['frameHeight'], m['bodyHeight']
     origin_y = round((m['originY'] * fh - bh + oy * bh) / fh, 4)
