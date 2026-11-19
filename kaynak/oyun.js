@@ -67,6 +67,18 @@ var zt = {
     brf_kahraman_yuva_secili: "assets/brf_kahraman_yuva_secili.webp",
     brf_kahraman_yuva: "assets/brf_kahraman_yuva.webp",
     brf_seviye_rozeti: "assets/brf_seviye_rozeti.webp",
+    z_yildiz: "assets/z_yildiz.webp",
+    z_yildiz_yuva: "assets/z_yildiz_yuva.webp",
+    z_insa_halkasi: "assets/z_insa_halkasi.webp",
+    z_secenek_yuvasi: "assets/z_secenek_yuvasi.webp",
+    z_altin_yaprak: "assets/z_altin_yaprak.webp",
+    z_odul_karti: "assets/z_odul_karti.webp",
+    z_zafer_sancagi: "assets/z_zafer_sancagi.webp",
+    z_yenilgi_sancagi: "assets/z_yenilgi_sancagi.webp",
+    z_xp_cerceve: "assets/z_xp_cerceve.webp",
+    z_fiyat_plakasi: "assets/z_fiyat_plakasi.webp",
+    z_isik: "assets/z_isik.webp",
+    z_xp_dolgu: "assets/z_xp_dolgu.webp",
     ui_bolum_seridi: "assets/ui_bolum_seridi.webp",
     ui_dugme_yuvarlak: "assets/ui_dugme_yuvarlak.webp",
     ui_ipucu_seridi: "assets/ui_ipucu_seridi.webp",
@@ -2479,6 +2491,9 @@ var $t = {
   "end.next": "Sonraki bölüm",
   "end.tip": "İpucu: Kuleleri yükseltmek, yeni kule kurmaktan çoğu zaman daha verimlidir. Kışlayı kavşaklara kur.",
   "end.heroXp": "{hero} +{n} deneyim",
+  "end.xpWord": "deneyim",
+  "end.levelUp": "Seviye {n}!",
+  "hero.levelShort": "Seviye {n}",
   "reward.treasure": "{n} Krallık Hazinesi",
   "reward.mastery": "{n} Kule ustalık parçası",
   "reward.diamonds": "{n} Elmas",
@@ -3001,6 +3016,9 @@ var Ls = {
   "end.next": "Next stage",
   "end.tip": "Tip: upgrading towers often beats building new ones. Put barracks at road bends.",
   "end.heroXp": "{hero} +{n} XP",
+  "end.xpWord": "XP",
+  "end.levelUp": "Level {n}!",
+  "hero.levelShort": "Level {n}",
   "reward.treasure": "{n} Royal Treasury",
   "reward.mastery": "{n} Tower mastery shard",
   "reward.diamonds": "{n} Diamonds",
@@ -6604,6 +6622,27 @@ function hs(e, t, s, a, i, r) {
     n
   );
 }
+// kılıçlı kızıl savaş düğmesi (brifing ve zafer ekranı ortak)
+function savasDugmesi(e, x, y, gen, yazi, cb) {
+  if (!M("brf_dugme_savas")) return F(e, x, y, gen * 0.9, 104, yazi, cb, "red", { icon: "ikon_kilic", size: 34 });
+  let c = e.add.container(x, y),
+    im = e.add.image(0, 0, "brf_dugme_savas");
+  im.setScale(gen / im.width);
+  let y0 = (0.537 - 0.5) * im.displayHeight,
+    t = e.add.text(0, y0, G(yazi), { fontFamily: D, fontStyle: "700", fontSize: "32px", color: "#fff1c8" }).setOrigin(0.5).setLetterSpacing(3).setShadow(0, 3, "#2a0505", 6, !0, !0);
+  if (t.width > gen * 0.6) t.setScale((gen * 0.6) / t.width);
+  let z0 = e.add.zone(0, y0, gen * 0.8, im.displayHeight * 0.55).setInteractive({ useHandCursor: !0 });
+  (z0.on("pointerdown", () => im.setTint(14737632)), z0.on("pointerout", () => im.clearTint()), z0.on("pointerup", () => (im.clearTint(), V("click", { volume: 0.7 }), cb())));
+  return (c.add([im, t, z0]), c);
+}
+// kahraman deneyiminin seviye içindeki oranı (Ne ile aynı eğri)
+function xpOran(e) {
+  let t = 1,
+    s = 60,
+    a = e;
+  while (a >= s && t < 20) ((a -= s), t++, (s = Math.round(s * 1.35)));
+  return t >= 20 ? 1 : a / s;
+}
 function us(e, t, s) {
   let a = e.textures.get("panel_kucuk").getSourceImage(),
     i = Math.round(a.width * 0.15),
@@ -6612,8 +6651,9 @@ function us(e, t, s) {
   n.setScale(r);
   // panelin parlak kraliyet mavisi damask içini koyulaştır (ui_bilgi_karti tonuna yaklaşsın), kenar çerçeveye dokunma
   let k = Math.round(a.width * 0.085 * r),
-    g = e.add.graphics();
-  (g.fillStyle(330770, 0.7), g.fillRect(-t / 2 + k, -s / 2 + k, t - 2 * k, s - 2 * k));
+    g;
+  if (M("brf_zemin")) g = e.add.image(0, 0, "brf_zemin").setDisplaySize(t - 2 * k, s - 2 * k);
+  else ((g = e.add.graphics()), g.fillStyle(330770, 0.7), g.fillRect(-t / 2 + k, -s / 2 + k, t - 2 * k, s - 2 * k));
   let c = e.add.container(0, 0, [n, g]);
   c.ic = { x: -t / 2 + k, y: -s / 2 + k, w: t - 2 * k, h: s - 2 * k };
   return c;
@@ -9506,12 +9546,6 @@ class _s extends Phaser.Scene {
         t = this.add.container(T / 2, w / 2 + 14),
         pan = pe(this, 0, 0, PW, PH, m(e.nameKey));
       t.add(pan);
-      let icK = pan.list.find((x) => x.ic);
-      if (icK && M("brf_zemin")) {
-        let r = icK.ic,
-          z0 = this.add.image(r.x + r.w / 2, r.y + r.h / 2, "brf_zemin").setDisplaySize(r.w, r.h);
-        icK.add(z0);
-      }
       t.add(this.add.zone(0, 0, PW, PH).setInteractive());
       let ALTIN = "#e8c87a",
         KREM = "#e9e1cc",
@@ -11925,10 +11959,16 @@ class Zt {
     this.scene = e;
     this.x = t;
     this.y = s;
-    let ft = a.length > 4 ? Math.max(178, 245 / (2 * Math.sin(Math.PI / a.length))) : 178;
+    let ft = a.length > 4 ? Math.max(190, 262 / (2 * Math.sin(Math.PI / a.length))) : 190;
     let n = e.add.container(t, s).setDepth(6000);
     this.container = n;
-    let o = e.add.circle(0, 0, ft, 0, 0).setStrokeStyle(5, 14200904, 0.7);
+    // inşa halkası: rünlü altın halka açılırken döner, sonra çok yavaş döner
+    let o = M("z_insa_halkasi") ? e.add.image(0, 0, "z_insa_halkasi").setAlpha(0.92) : e.add.circle(0, 0, ft, 0, 0).setStrokeStyle(5, 14200904, 0.7);
+    if (o.texture) {
+      (o.setDisplaySize((2 * ft) / 0.935, (2 * ft) / 0.935), o.setAngle(-40));
+      (e.tweens.add({ targets: o, angle: 0, duration: 320, ease: "Cubic.Out" }), e.tweens.add({ targets: o, angle: 360, duration: 90000, delay: 320, repeat: -1 }));
+      this.halka = o;
+    }
     if ((n.add(o), r)) {
       let l = q / i,
         d = e.cameras.main.worldView.y,
@@ -11939,13 +11979,16 @@ class Zt {
       let d = (l.angle * Math.PI) / 180,
         h = Math.cos(d) * ft,
         u = Math.sin(d) * ft,
-        f = e.add.circle(h, u, Pe, 858168).setStrokeStyle(6, 14200904, 1);
+        YV = M("z_secenek_yuvasi"),
+        f = e.add.circle(h, u, Pe, 858168).setStrokeStyle(YV ? 0 : 6, 14200904, 1);
       n.add(f);
-      let _ = e.textures.exists("dugme_yuvarlak")
-        ? e.add.image(h, u, "dugme_yuvarlak").setDisplaySize(Pe * 2.3, Pe * 2.35)
-        : void 0;
+      let _ = YV
+        ? e.add.image(h, u, "z_secenek_yuvasi").setDisplaySize((Pe * 1.78) / 0.697, (Pe * 1.78) / 0.697)
+        : e.textures.exists("dugme_yuvarlak")
+          ? e.add.image(h, u, "dugme_yuvarlak").setDisplaySize(Pe * 2.3, Pe * 2.35)
+          : void 0;
       if (_) n.add(_);
-      let g = C(e, h, u - (l.label ? 6 : 0), l.icon, 1);
+      let g = C(e, h, u - (l.pips ? 14 : l.label ? 6 : 0), l.icon, 1);
       if (
         (g.setOrigin(0.5),
         g.setScale(
@@ -11957,14 +12000,21 @@ class Zt {
         let [y, k] = l.pips;
         for (let v = 0; v < k; v++) {
           let R = -Math.PI / 2 + (v - (k - 1) / 2) * 0.42,
-            J = h + Math.cos(R) * (Pe + 6),
-            B = u + Math.sin(R) * (Pe + 6);
-          if ((n.add(e.add.circle(J, B, 12, 858168).setStrokeStyle(2.5, 14200904)), v < y))
-            n.add(e.add.circle(J, B, 7.5, 15255674));
+            J = h + (v - (k - 1) / 2) * 26,
+            B = u + Pe * 0.6;
+          // seviye işaretleri: fiyat plakasının altında küçük yıldız sırası
+          if (M("z_yildiz")) n.add(wt(C(e, J, B, v < y ? "z_yildiz" : "z_yildiz_yuva", 1), 24));
+          else if ((n.add(e.add.circle(J, B, 12, 858168).setStrokeStyle(2.5, 14200904)), v < y)) n.add(e.add.circle(J, B, 7.5, 15255674));
         }
       }
       let p = { b: l, x: h, y: u, bg: f, ic: g, on: l.enabled, skin: _ };
-      if (l.label)
+      if (l.label && M("z_fiyat_plakasi")) {
+        // fiyat plakası: altın sikke + sayı
+        let py = u + Pe + 12;
+        ((p.pill = e.add.image(h, py, "z_fiyat_plakasi").setDisplaySize(156, 52)), n.add(p.pill));
+        if (M("ikon_altin")) ((p.sikke = wt(C(e, h - 44, py, "ikon_altin", 1), 34)), n.add(p.sikke));
+        ((p.text = e.add.text(h + 14, py, l.label, z(33, "#f4dc90", "900")).setOrigin(0.5).setShadow(0, 2, "#000", 3, !1, !0)), n.add(p.text));
+      } else if (l.label)
         ((p.pill = e.add
           .rectangle(h, u + 68, Math.max(84, l.label.length * 24 + 30), 48, 858168)
           .setStrokeStyle(3, 14200904)),
@@ -11998,7 +12048,10 @@ class Zt {
       else e.skin.setTint(7829376);
     if (e.on) e.ic.clearTint();
     else e.ic.setTint(7829367);
-    (e.pill?.setFillStyle(e.on ? 858168 : 2764086), e.text?.setColor(e.on ? "#e8c87a" : "#c9bda5"));
+    if (e.pill?.setFillStyle) e.pill.setFillStyle(e.on ? 858168 : 2764086);
+    else if (e.pill) (e.on ? e.pill.clearTint() : e.pill.setTint(8421504), e.sikke && (e.on ? e.sikke.clearTint() : e.sikke.setTint(8421504)));
+    // parası yetmeyen seçenek: soluk ve fiyatı kırmızı
+    e.text?.setColor(e.on ? "#f4dc90" : "#ff8a7a");
   }
   refresh(e) {
     for (let t of this.buttons) {
@@ -12023,7 +12076,7 @@ class Zt {
     return !1;
   }
   destroy() {
-    (this.container.destroy(), this.bag?.destroy());
+    (this.halka && this.scene.tweens.killTweensOf(this.halka), this.container.destroy(), this.bag?.destroy());
   }
 }
 function mi(e) {
@@ -14168,16 +14221,19 @@ class Os extends Phaser.Scene {
       l = 1020,
       d = 124,
       h = this.add.graphics();
-    (h.fillStyle(660528, 0.94),
-      h.fillRoundedRect(-l / 2, -d / 2, l, d, 16),
-      h.lineStyle(3, 14200904, 1),
-      h.strokeRoundedRect(-l / 2, -d / 2, l, d, 14),
-      o.add(h));
+    // bilgi şeridi: panellerle aynı altın çerçeve ve kadife zemin
+    if (M("panel_kucuk")) (h.fillStyle(0, 0.45), h.fillRoundedRect(-l / 2 + 6, -d / 2 + 10, l, d, 14), o.add([h, us(this, l + 16, d + 16)]));
+    else
+      (h.fillStyle(660528, 0.94),
+        h.fillRoundedRect(-l / 2, -d / 2, l, d, 16),
+        h.lineStyle(3, 14200904, 1),
+        h.strokeRoundedRect(-l / 2, -d / 2, l, d, 14),
+        o.add(h));
     let u = di[e] ?? "kule_gozcu";
     o.add(wt(C(this, -l / 2 + 66, 40, u + "_" + Math.max(1, s || t), 1), 112));
     let f = m(a.nameKey) + " · " + m("hud.level", { n: s || t }) + (r && t > 0 ? "  ▲" : "");
     o.add(this.add.text(-l / 2 + 132, -46, f, z(34, "#f4dc90", "900")));
-    let _ = (k) => m(k <= 0.6 ? "speed.vfast" : k <= 0.9 ? "speed.fast" : k <= 1.5 ? "speed.medium" : "speed.slow"),
+    let _ = (k) => m(k <= 0.85 ? "speed.vfast" : k <= 1.3 ? "speed.fast" : k <= 2.15 ? "speed.medium" : "speed.slow"),
       g = (k) => m(k < 260 ? "reach.short" : k < 300 ? "reach.medium" : k < 330 ? "reach.long" : "reach.vlong"),
       p = [],
       y = (k, v) => !!i && !!r && JSON.stringify(k) !== JSON.stringify(v);
@@ -14217,12 +14273,9 @@ class Os extends Phaser.Scene {
       r = 1020,
       n = 140,
       o = this.add.graphics();
-    (o.fillStyle(660528, 0.94),
-      o.fillRoundedRect(-r / 2, -n / 2, r, n, 16),
-      o.lineStyle(3, 14200904, 1),
-      o.strokeRoundedRect(-r / 2, -n / 2, r, n, 14),
-      i.add(o),
-      i.add(wt(C(this, -r / 2 + 66, 48, a.art, 1), 124)));
+    if (M("panel_kucuk")) (o.fillStyle(0, 0.45), o.fillRoundedRect(-r / 2 + 6, -n / 2 + 10, r, n, 14), i.add([o, us(this, r + 16, n + 16)]));
+    else (o.fillStyle(660528, 0.94), o.fillRoundedRect(-r / 2, -n / 2, r, n, 16), o.lineStyle(3, 14200904, 1), o.strokeRoundedRect(-r / 2, -n / 2, r, n, 14), i.add(o));
+    i.add(wt(C(this, -r / 2 + 66, 48, a.art, 1), 124));
     let l = m("branch." + t) + " · " + (s ? m("hud.branch") + " · " + a.cost + " " + m("hud.goldShort") : m(oe[e].nameKey));
     (i.add(this.add.text(-r / 2 + 136, -56, l, z(32, "#f4dc90", "900"))),
       i.add(ne(this, -r / 2 + 136, -12, m("branch." + t + ".desc"), r - 160, 25, "#ece2c8")),
@@ -14609,10 +14662,10 @@ class Os extends Phaser.Scene {
       if (f && f.post.length) await this.dialogue(f.post);
     }
     ((this.modalOpen = !0), V(e.victory ? "zafer" : "yenilgi", { volume: 0.85 }), Tt(this, 0.62));
-    let o = this.add.container(O / 2, w / 2),
+    let o = this.add.container(O / 2, w / 2).setDepth(2),
       l = e.victory ? "zafer_afisi" : "yenilgi_afisi",
       d = M(l);
-    let kisa = !e.victory || r.length <= 3 ? 130 : 0;
+    let kisa = e.victory ? 0 : 130;
     if ((o.add(pe(this, 0, 40 - kisa / 2, 1100, 720 - kisa, d ? void 0 : e.victory ? m("end.victory") : m("end.defeat"))), d)) {
       let f = this.add.image(0, -392, l),
         _ = 500;
@@ -14634,99 +14687,176 @@ class Os extends Phaser.Scene {
       let y = f.scale;
       (f.setScale(0), this.tweens.add({ targets: f, scale: y, duration: 520, ease: "Back.Out" }));
     }
+    let PH0 = 720 - kisa,
+      PY0 = 40 - kisa / 2;
+    // yan sancaklar: zaferde gururla dalgalanır, yenilgide yanık ve sarkık
+    let sk = e.victory ? "z_zafer_sancagi" : "z_yenilgi_sancagi";
+    if (M(sk))
+      for (let yon of [-1, 1]) {
+        let sn = this.add.image(yon * 600, PY0 - PH0 / 2 - 10, sk).setOrigin(0.5, 0.04);
+        (sn.setScale(330 / sn.height), yon > 0 && sn.setFlipX(!0), o.addAt(sn, 0));
+        this.tweens.add({ targets: sn, angle: { from: -yon * (e.victory ? 2.2 : 0.8), to: yon * (e.victory ? 2.2 : 0.8) }, duration: e.victory ? 1700 : 3400, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
+      }
+    if (e.victory && d && M("z_isik")) {
+      // armanın arkasında dönen altın ışık
+      let isk = this.add.image(0, -392, "z_isik").setBlendMode(Phaser.BlendModes.ADD).setAlpha(0);
+      isk.setScale(720 / isk.width);
+      let ai = o.list.findIndex((x) => x.texture?.key === l);
+      (ai >= 0 ? o.addAt(isk, ai) : o.add(isk), this.tweens.add({ targets: isk, alpha: 0.85, duration: 600 }), this.tweens.add({ targets: isk, angle: 360, duration: 26000, repeat: -1 }));
+    }
+    let KUC = (m2) => this.add.text(0, 0, G(m2), { fontFamily: D, fontStyle: "700", fontSize: "21px", color: "#e8c87a" }).setOrigin(0.5).setLetterSpacing(3).setShadow(0, 2, "#000", 4, !1, !0);
     if (e.victory) {
+      let YB = M("z_yildiz") && M("z_yildiz_yuva"),
+        SY = d ? -150 : -230;
       for (let g = 0; g < 5; g++) {
-        let p = (g - 2) * 130,
-          y = (d ? -170 : -230) + Math.abs(g - 2) * 14;
-        if ((o.add(C(this, p, y, "ikon_yildiz_bos", 1.9).setTint(10130576).setAlpha(0.6)), g < e.stars)) {
-          let k = C(this, p, y, "ikon_yildiz", 1.9),
+        let p = (g - 2) * 128,
+          y = SY + Math.abs(g - 2) * 12;
+        if (YB) o.add(wt(C(this, p, y, "z_yildiz_yuva", 1), 112));
+        else o.add(C(this, p, y, "ikon_yildiz_bos", 1.9).setTint(10130576).setAlpha(0.6));
+        if (g < e.stars) {
+          let k = YB ? wt(C(this, p, y, "z_yildiz", 1), 112) : C(this, p, y, "ikon_yildiz", 1.9),
             v = k.scale;
-          if (
-            (k.setScale(0),
-            o.add(k),
-            this.tweens.add({
-              targets: k,
-              scale: v,
-              delay: 300 + g * 260,
-              duration: 300,
-              ease: "Back.Out",
-              onStart: () => V("yildiz", { volume: 0.8, minGapMs: 0, anahtar: ["yildiz", "yildiz", "yildiz_2", "yildiz_3", "yildiz_3"][g], detune: [0, 200, 0, 0, 200][g] }),
-            }),
-            n.includes(g + 1))
-          ) {
-            let R = this.add
-              .text(p, y + 50, m("end.newStar"), Z(17, "#e8c87a", 4))
-              .setOrigin(0.5)
-              .setAlpha(0);
-            (o.add(R), this.tweens.add({ targets: R, alpha: 1, delay: 400 + g * 260, duration: 300 }));
+          // yıldız yukarıdan büyük gelir ve yuvasına çakılır
+          (k.setScale(v * 2.3).setAlpha(0), o.add(k));
+          this.tweens.add({
+            targets: k,
+            scale: v,
+            alpha: 1,
+            delay: 380 + g * 300,
+            duration: 260,
+            ease: "Cubic.In",
+            onStart: () => V("yildiz", { volume: 0.8, minGapMs: 0, anahtar: ["yildiz", "yildiz", "yildiz_2", "yildiz_3", "yildiz_3"][g], detune: [0, 200, 0, 0, 200][g] }),
+            onComplete: () => {
+              this.cameras.main.shake(90, 0.003);
+              let hl = this.add.circle(p, y, 40, 16771530, 0.55).setBlendMode(Phaser.BlendModes.ADD);
+              (o.add(hl), this.tweens.add({ targets: hl, scale: 2.2, alpha: 0, duration: 420, onComplete: () => hl.destroy() }));
+            },
+          });
+          if (n.includes(g + 1)) {
+            let R = this.add.text(p, y + 64, m("end.newStar"), Z(17, "#e8c87a", 4)).setOrigin(0.5).setAlpha(0);
+            (o.add(R), this.tweens.add({ targets: R, alpha: 1, delay: 700 + g * 300, duration: 300 }));
           }
         }
       }
-      o.add(this.add.text(0, d ? -62 : -104, m("end.castleLeft", { n: e.hpPct }), z(28)).setOrigin(0.5));
-      let f = d ? 20 : 0;
-      o.add(
-        this.add.text(-440, -60 + f, G(n.length ? m("end.rewards") : m("end.replayReward")), z(24, I.muted, "900")),
-      );
-      let _ = -20 + f,
-        bir = [];
+      o.add(this.add.text(0, d ? -50 : -120, m("end.castleLeft", { n: e.hpPct }), z(28, "#e9e1cc")).setOrigin(0.5));
+      // --- sol: ödül kartları ---
+      let bir = [];
       for (let g of r) {
         let es = bir.find((x) => g.treasure && x.treasure);
         if (es) es.treasure += g.treasure;
         else bir.push({ ...g });
       }
-      for (let g of bir) {
-        let [p, y] = yi(g);
-        (o.add(C(this, -410, _ + 18, p, 0.75)), o.add(this.add.text(-370, _ + 4, y, z(28))), (_ += r.length > 3 ? 44 : 56));
+      let CX = -270,
+        CY = d ? 92 : 60,
+        bs = KUC(n.length ? m("end.rewards") : m("end.replayReward"));
+      (bs.setPosition(CX, CY - 128), o.add(bs));
+      bir.slice(0, 3).forEach((g, k) => {
+        let [ik, yz] = yi(g),
+          x = CX + (k - (Math.min(bir.length, 3) - 1) / 2) * 168,
+          kart = this.add.container(x, CY);
+        if (M("z_odul_karti")) {
+          let ki = this.add.image(0, 0, "z_odul_karti");
+          ki.setScale(150 / ki.width);
+          let kh = ki.displayHeight;
+          kart.add(ki);
+          let ic = C(this, 0, (0.398 - 0.5) * kh, ik, 1);
+          (wt(ic, 62), kart.add(ic));
+          let sayi = (yz.match(/\d+/) || [""])[0],
+            ad = yz.replace(/\d+\s*/, "");
+          kart.add(this.add.text(0, kh * 0.33, sayi || "★", { fontFamily: D, fontStyle: "700", fontSize: "24px", color: "#f4dc90" }).setOrigin(0.5));
+          kart.add(this.add.text(0, kh * 0.5 + 16, ad, { ...z(19, "#e9e1cc", "800"), align: "center", wordWrap: { width: 160 } }).setOrigin(0.5, 0));
+        } else (kart.add(C(this, 0, -20, ik, 0.75)), kart.add(this.add.text(0, 30, yz, z(22)).setOrigin(0.5)));
+        (kart.setScale(0, 1), o.add(kart));
+        this.tweens.add({ targets: kart, scaleX: 1, delay: 1500 + k * 220, duration: 320, ease: "Back.Out" });
+      });
+      // --- sağ: kahraman ve deneyim çubuğu ---
+      let HX = 250,
+        HY0 = CY - 40,
+        onceki = (t.heroXp[s] ?? 0) - a,
+        lv0 = Ne(onceki),
+        lv1 = Ne(t.heroXp[s] ?? 0);
+      o.add(Ae(this, HX - 150, HY0, 58, "kahraman_" + s + "_portre", he[s].color));
+      if (M("brf_kahraman_yuva_secili")) {
+        let fr = this.add.image(HX - 150, 0, "brf_kahraman_yuva_secili");
+        (fr.setScale(120 / 0.645 / fr.width), fr.setY(HY0 - (0.521 - 0.5) * fr.displayHeight), o.add(fr));
       }
-      o.add(
-        this.add.text(
-          120,
-          -60 + f,
-          m("end.heroXp", {
-            hero: m(he[s].nameKey)
-              .replace(/^(Sir|Sör) /, "")
-              .split(" ")[0],
-            n: a,
-          }),
-          z(30, I.blue, "900"),
-        ),
-      );
-      o.add(Ae(this, 300, 90 + f, 80, "kahraman_" + s + "_portre", he[s].color));
-    } else
-      (o.add(this.add.text(0, d ? -100 : -190, m("end.castleLeft", { n: 0 }), z(34)).setOrigin(0.5)),
-        o.add(ne(this, -430, d ? -40 : -120, m("end.tip"), 860, 32)),
-        a > 0 && o.add(
-          this.add.text(
-            -430,
-            (d ? -40 : -120) + o.list[o.list.length - 1].height + 22,
-            m("end.heroXp", {
-              hero: m(he[s].nameKey)
-                .replace(/^(Sir|Sör) /, "")
-                .split(" ")[0],
-              n: a,
-            }),
-            z(30, I.blue, "900"),
-          ),
-        ));
+      o.add(this.add.text(HX - 70, HY0 - 30, m(he[s].nameKey), { fontFamily: D, fontStyle: "700", fontSize: "24px", color: "#f4dc90" }).setOrigin(0, 0.5).setShadow(0, 2, "#000", 4, !1, !0));
+      let xpY = this.add.text(HX - 70, HY0 + 12, "+" + a + " " + G(m("end.xpWord")), z(24, "#9fd0ff", "900")).setOrigin(0, 0.5);
+      o.add(xpY);
+      let BW = 470,
+        BX = HX + 5,
+        BY = HY0 + 92;
+      if (M("z_xp_cerceve") && M("z_xp_dolgu")) {
+        let fr = this.add.image(BX, BY, "z_xp_cerceve");
+        fr.setScale(BW / fr.width);
+        let iw = BW * 0.859,
+          ih = fr.displayHeight * 0.413,
+          dol = this.add.tileSprite(BX - iw / 2, BY, iw, ih, "z_xp_dolgu").setOrigin(0, 0.5);
+        dol.tileScaleY = ih / 32;
+        let bas = lv1 > lv0 ? 0 : xpOran(onceki),
+          son = xpOran(t.heroXp[s] ?? 0);
+        let doldur = (v) => dol.setSize(Math.max(1, iw * v), ih);
+        doldur(bas);
+        let dk = { v: bas };
+        (o.add([dol, fr]),
+          this.tweens.add({
+            targets: dk,
+            v: lv1 > lv0 ? 1 : son,
+            delay: 1300,
+            duration: 1100,
+            ease: "Cubic.Out",
+            onUpdate: () => ((dol.tilePositionX -= 1.2), doldur(dk.v)),
+            onComplete: () => {
+              if (lv1 > lv0) {
+                let lu = this.add.text(BX, BY - 44, G(m("end.levelUp", { n: lv1 })), { fontFamily: D, fontStyle: "700", fontSize: "26px", color: "#ffe6a0" }).setOrigin(0.5).setShadow(0, 2, "#000", 6, !1, !0).setScale(0);
+                (o.add(lu), this.tweens.add({ targets: lu, scale: 1, duration: 300, ease: "Back.Out" }), V("upgrade", { volume: 0.7 }));
+                ((dk.v = 0), this.tweens.add({ targets: dk, v: son, duration: 700, onUpdate: () => doldur(dk.v) }));
+              }
+            },
+          }));
+        o.add(this.add.text(BX + BW / 2, BY + 40, G(m("hero.levelShort", { n: lv1 })), z(20, "#b9b29e", "900")).setOrigin(1, 0.5));
+      }
+      // ekrana yağan altın yapraklar
+      if (M("z_altin_yaprak"))
+        for (let k = 0; k < 34; k++) {
+          let yp = this.add.image(O * Math.random(), -60 - Math.random() * 300, "z_altin_yaprak").setDepth(1);
+          (yp.setScale((18 + Math.random() * 14) / yp.height), yp.setAngle(Math.random() * 360));
+          this.tweens.add({ targets: yp, y: w + 80, x: yp.x + (Math.random() - 0.5) * 260, angle: yp.angle + (Math.random() < 0.5 ? -1 : 1) * (240 + Math.random() * 300), delay: 300 + Math.random() * 2600, duration: 3200 + Math.random() * 2200, ease: "Sine.In", onComplete: () => yp.destroy() });
+        }
+    } else {
+      o.add(this.add.text(0, d ? -150 : -190, m("end.castleLeft", { n: 0 }), z(32, "#e9e1cc")).setOrigin(0.5));
+      // ipucu mühürlü parşömende
+      let PY = d ? -10 : -60;
+      if (M("brf_parsomen_tomari")) o.add(wt(C(this, 0, PY, "brf_parsomen_tomari", 1), 880));
+      let ip = this.add.text(-18, PY, m("end.tip"), { ...z(27, M("brf_parsomen_tomari") ? "#3b2412" : "#e9e1cc", "800"), align: "center", wordWrap: { width: 640, useAdvancedWrap: !0 }, lineSpacing: 4 }).setOrigin(0.5);
+      if (ip.height > 150) ip.setScale(150 / ip.height);
+      o.add(ip);
+      if (a > 0)
+        o.add(
+          this.add
+            .text(0, PY + 150, m("end.heroXp", { hero: m(he[s].nameKey).replace(/^(Sir|Sör) /, "").split(" ")[0], n: a }), z(26, "#9fd0ff", "900"))
+            .setOrigin(0.5),
+        );
+      // soğuk ton ve yükselen kül
+      let sg = this.add.rectangle(-2000, -2000, 8000, 8000, 1189433, 0.22).setOrigin(0).setDepth(-2);
+      sg.setAlpha(0);
+      this.tweens.add({ targets: sg, alpha: 1, duration: 900 });
+      if (M("efekt_kul_tanesi"))
+        for (let k = 0; k < 26; k++) {
+          let kl = this.add.image(O * Math.random(), w + 40, "efekt_kul_tanesi").setDepth(1).setAlpha(0);
+          kl.setScale((10 + Math.random() * 12) / kl.height);
+          this.tweens.add({ targets: kl, y: w * (0.1 + Math.random() * 0.5), x: kl.x + (Math.random() - 0.5) * 200, alpha: { from: 0.7, to: 0 }, delay: Math.random() * 3000, duration: 4000 + Math.random() * 3000, repeat: -1 });
+        }
+    }
     let h = ce.find((f) => f.id === e.stageId + 1),
-      u = e.victory && h?.playable;
-    if (
-      (o.add(F(this, u ? -340 : -200, 290 - kisa, 300, 100, m("end.retry"), () => this.restart(), "stone")),
-      o.add(
-        F(
-          this,
-          u ? 0 : 200,
-          290 - kisa,
-          300,
-          100,
-          m("end.map"),
-          () => this.b.scene.start("Map"),
-          "stone",
-        ),
-      ),
-      u)
-    )
-      o.add(F(this, 340, 290 - kisa, 300, 100, m("end.next"), () => this.b.scene.start("Battle", { stageId: h.id }), "stone"));
+      u = e.victory && h?.playable,
+      BYB = PY0 + PH0 / 2 - 70;
+    (o.add(F(this, u ? -380 : -180, BYB, 280, 96, m("end.retry"), () => this.restart(), "stone")),
+      o.add(F(this, u ? -80 : 180, BYB, 280, 96, m("end.map"), () => this.b.scene.start("Map"), "stone")));
+    if (u) {
+      let sd = savasDugmesi(this, 300, BYB - 6, 400, m("end.next"), () => this.b.scene.start("Battle", { stageId: h.id }));
+      (o.add(sd), this.tweens.add({ targets: sd, scale: 1.035, duration: 900, yoyo: !0, repeat: -1, ease: "Sine.InOut", delay: 2200 }));
+    }
     (o.setScale(0.7), this.tweens.add({ targets: o, scale: 1, duration: 260, ease: "Back.Out" }));
   }
 }
