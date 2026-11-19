@@ -2633,6 +2633,27 @@ var $t = {
   "end.tip": "İpucu: Kuleleri yükseltmek, yeni kule kurmaktan çoğu zaman daha verimlidir. Kışlayı kavşaklara kur.",
   "end.heroXp": "{hero} +{n} deneyim",
   "end.xpWord": "deneyim",
+  "daily.title": "Günlük Meydan Okuma",
+  "daily.today": "Bugünün kuralı",
+  "daily.done": "Bugün kazanıldı ✓",
+  "daily.locked": "İlk bölümü geçince açılır",
+  "daily.reward": "Ödül: Günlük rozeti, hazine ve elmas (ilk 10 zafer +1 Taç Puanı)",
+  "daily.streak": "Seri: {n} gün",
+  "daily.k.kitlik": "Altın Kıtlığı",
+  "daily.k.kitlik.d": "%40 daha az altınla başlarsın.",
+  "daily.k.akin": "Yıldırım Akını",
+  "daily.k.akin.d": "Düşmanlar %30 daha hızlı.",
+  "daily.k.elit": "Seçkin Ordu",
+  "daily.k.elit.d": "Her beş düşmandan biri seçkin gelir.",
+  "daily.k.cam": "Cam Kale",
+  "daily.k.cam.d": "Kalenin yalnızca 5 canı var.",
+  "daily.k.kislasiz": "Askersiz Savunma",
+  "daily.k.kislasiz.d": "Kışla kurulamaz.",
+  "daily.k.oksuz": "Okçusuz Şafak",
+  "daily.k.oksuz.d": "Gözcü Kulesi ve Kartal Yuvası kurulamaz.",
+  "daily.k.devler": "Devler Yürüyor",
+  "daily.k.devler.d": "Düşman canı %50 fazla, ama %50 daha fazla altınla başlarsın.",
+  "mode.gunluk": "Günlük",
   "tut.fusion": "Füzyon açıldı! Birbirine yakın iki 3. seviye element kulesi (Ejder Ocağı, Ayaz, Fırtına, Simyacı) birleşebilir. Birine dokun, menüde ortağının birleşik resmini seç: iki kule tek ve çok daha güçlü bir kuleye dönüşür.",
   "branch.fz_buhar": "Buhar Kazanı",
   "branch.fz_buhar.desc": "Ateş ve buz birleşti: yanan alev topu düştüğü yerde yavaşlatan bir buhar bulutu bırakır.",
@@ -3265,6 +3286,27 @@ var Ls = {
   "end.tip": "Tip: upgrading towers often beats building new ones. Put barracks at road bends.",
   "end.heroXp": "{hero} +{n} XP",
   "end.xpWord": "XP",
+  "daily.title": "Daily Challenge",
+  "daily.today": "Today's rule",
+  "daily.done": "Won today ✓",
+  "daily.locked": "Unlocks after the first stage",
+  "daily.reward": "Reward: Daily badge, treasure and diamonds (first 10 wins +1 Crown Point)",
+  "daily.streak": "Streak: {n} days",
+  "daily.k.kitlik": "Gold Famine",
+  "daily.k.kitlik.d": "You start with 40% less gold.",
+  "daily.k.akin": "Lightning Raid",
+  "daily.k.akin.d": "Enemies are 30% faster.",
+  "daily.k.elit": "Elite Host",
+  "daily.k.elit.d": "One in every five enemies is elite.",
+  "daily.k.cam": "Glass Keep",
+  "daily.k.cam.d": "The castle has only 5 lives.",
+  "daily.k.kislasiz": "No Soldiers",
+  "daily.k.kislasiz.d": "Barracks cannot be built.",
+  "daily.k.oksuz": "Arrowless Dawn",
+  "daily.k.oksuz.d": "Watch Towers and Eagle Nests cannot be built.",
+  "daily.k.devler": "Giants March",
+  "daily.k.devler.d": "Enemy health +50%, but you start with 50% more gold.",
+  "mode.gunluk": "Daily",
   "tut.fusion": "Fusion unlocked! Two nearby level-3 elemental towers (Dragon Forge, Frost, Storm, Alchemist) can merge. Tap one and pick its partner's fused image in the menu: the two towers become a single, far stronger one.",
   "branch.fz_buhar": "Steam Cauldron",
   "branch.fz_buhar.desc": "Fire and ice combined: the burning fireball leaves a slowing steam cloud where it lands.",
@@ -8644,6 +8686,25 @@ var SONSUZ = {
   newEnemies: [],
   waves: [{ groups: [{ enemy: "goblin", count: 1, interval: 1, delay: 0 }] }],
 };
+// ===== GÜNLÜK MEYDAN OKUMA: her gün bir bölüm ve bir kural, herkes için aynı =====
+var GUNLUK_KURAL = ["kitlik", "akin", "elit", "cam", "kislasiz", "oksuz", "devler"];
+function gunTarih(d = new Date()) {
+  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+}
+function gunluk() {
+  let t = gunTarih(),
+    h = 0;
+  for (let c of t) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  let acik = ce.filter((c) => c.playable && (P().bestStars[c.id] ?? 0) > 0).map((c) => c.id);
+  if (!acik.length) acik = [1];
+  return { tarih: t, bolum: acik[h % acik.length], kural: GUNLUK_KURAL[(h >>> 7) % GUNLUK_KURAL.length] };
+}
+function gunlukAcik() {
+  return (P().bestStars[1] ?? 0) > 0;
+}
+function gunlukBitti() {
+  return P().gunlukSon === gunTarih();
+}
 function bolumBul(id) {
   if (id === 99) return ((SONSUZ.waves = sonsuzDalgalar()), SONSUZ);
   return ce.find((r) => r.id === id);
@@ -9136,7 +9197,7 @@ function rozetSayisi() {
   return n;
 }
 function tacPuan() {
-  return bt() + (P().basarimlar ?? []).length + rozetSayisi();
+  return bt() + (P().basarimlar ?? []).length + rozetSayisi() + Math.min(10, ist("gunluk"));
 }
 // yeni kazanılan başarımları kaydeder ve duyurur
 function basarimKontrol(sahne, ek) {
@@ -9341,6 +9402,7 @@ class _s extends Phaser.Scene {
       this.drawTopBar(),
       this.drawBottomBar(),
       this.drawSonsuz(),
+      this.drawGunluk(),
       this.drawResume(),
       this.setupScroll(),
       this.revealNewStage());
@@ -10085,6 +10147,44 @@ class _s extends Phaser.Scene {
           .setDepth(61));
     });
   }
+  drawGunluk() {
+    let acik = gunlukAcik(),
+      bitti = gunlukBitti(),
+      g0 = gunluk(),
+      x = T - Be - 140,
+      y = w - 560,
+      c = this.add.container(x, y).setDepth(61);
+    if (acik && !bitti && M("z_isik")) {
+      let isk = this.add.image(0, 0, "z_isik").setBlendMode(Phaser.BlendModes.ADD).setAlpha(0.75).setTint(16760960);
+      (isk.setScale(240 / isk.width), c.add(isk), this.tweens.add({ targets: isk, angle: -360, duration: 14000, repeat: -1 }));
+    }
+    let g = this.add.graphics();
+    (g.fillStyle(0, 0.55), g.fillCircle(0, 4, 70), g.fillStyle(acik ? 2759194 : 1315860, 1), g.fillCircle(0, 0, 66), c.add(g));
+    if (M("rozet_gunluk")) {
+      let r = wt(C(this, 0, -2, "rozet_gunluk", 1), 100);
+      (acik || r.setTint(5263440), bitti && r.setAlpha(0.6), c.add(r));
+    }
+    if (M("brf_madalyon_kule")) {
+      let fr = this.add.image(0, 0, "brf_madalyon_kule");
+      (fr.setScale(142 / 0.72 / fr.width), fr.setY(-(0.538 - 0.5) * fr.displayHeight), acik || fr.setTint(8421504), c.add(fr));
+    }
+    if (bitti) c.add(this.add.text(36, 34, "✓", { fontFamily: D, fontStyle: "700", fontSize: "38px", color: "#9fe08a", stroke: "#000", strokeThickness: 6 }).setOrigin(0.5));
+    let ad = this.add.text(0, 92, G(m("daily.title")), { fontFamily: D, fontStyle: "700", fontSize: "20px", color: acik ? "#f4dc90" : "#9c958a" }).setOrigin(0.5).setLetterSpacing(2).setShadow(0, 2, "#000", 5, !1, !0),
+      alt = this.add.text(0, 118, !acik ? m("daily.locked") : bitti ? m("daily.done") : m("daily.k." + g0.kural), z(18, bitti ? "#9fe08a" : acik ? "#ffcf7a" : "#8d8676", "800")).setOrigin(0.5).setShadow(0, 2, "#000", 4, !1, !0);
+    let sig = Math.min(240, 2 * (Be + 140) - 28);
+    for (let q of [ad, alt]) q.width > sig && q.setScale(sig / q.width);
+    c.add([ad, alt]);
+    if (acik && !bitti) this.tweens.add({ targets: c, scale: 1.04, duration: 1100, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
+    let zn = this.add.zone(0, 30, 170, 210).setInteractive({ useHandCursor: !0 });
+    (zn.on("pointerup", () => {
+      if (this.modal.length || this.drag?.moved) return;
+      if (!acik) return this.toast(m("daily.locked"));
+      if (bitti) return this.toast(m("daily.done") + " · " + m("daily.streak", { n: P().gunlukSeri ?? 1 }));
+      let st = ce.find((q) => q.id === g0.bolum);
+      (V("ui_tik"), this.stagePanel({ ...st, gunluk: g0.kural }));
+    }),
+      c.add(zn));
+  }
   drawSonsuz() {
     let acik = sonsuzAcik(),
       x = T - Be - 140,
@@ -10106,6 +10206,7 @@ class _s extends Phaser.Scene {
     }
     let ad = this.add.text(0, 96, G(m("map.endless")), { fontFamily: D, fontStyle: "700", fontSize: "22px", color: acik ? "#f4dc90" : "#9c958a" }).setOrigin(0.5).setLetterSpacing(2).setShadow(0, 2, "#000", 5, !1, !0),
       alt = this.add.text(0, 124, acik ? m("map.endlessRecord", { n: P().sonsuzRekor ?? 0 }) : m("map.endlessLocked"), z(18, acik ? "#cfc6ae" : "#8d8676", "800")).setOrigin(0.5).setShadow(0, 2, "#000", 4, !1, !0);
+    { let sig = Math.min(240, 2 * (Be + 140) - 28); for (let q of [ad, alt]) q.width > sig && q.setScale(sig / q.width); }
     c.add([ad, alt]);
     if (acik) this.tweens.add({ targets: c, scale: 1.04, duration: 1300, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
     let zn = this.add.zone(0, 30, 170, 220).setInteractive({ useHandCursor: !0 });
@@ -10206,7 +10307,7 @@ class _s extends Phaser.Scene {
       let PW = 1560,
         PH = 790,
         t = this.add.container(T / 2, w / 2 + 14),
-        pan = pe(this, 0, 0, PW, PH, m(e.nameKey));
+        pan = pe(this, 0, 0, PW, PH, e.gunluk ? m("daily.title") + " · " + m(e.nameKey) : m(e.nameKey));
       t.add(pan);
       t.add(this.add.zone(0, 0, PW, PH).setInteractive());
       let ALTIN = "#e8c87a",
@@ -10282,13 +10383,13 @@ class _s extends Phaser.Scene {
         PWd = 660;
       if (M("brf_parsomen_tomari")) t.add(resim("brf_parsomen_tomari", LX, PY, PWd));
       let oy = this.add
-        .text(LX - PWd * 0.03, PY, m(e.eventKey), { ...z(27, M("brf_parsomen_tomari") ? "#3b2412" : KREM, "800"), align: "center", wordWrap: { width: PWd * 0.78, useAdvancedWrap: !0 }, lineSpacing: 4 })
+        .text(LX - PWd * 0.03, PY, e.gunluk ? m("daily.k." + e.gunluk) + ": " + m("daily.k." + e.gunluk + ".d") : m(e.eventKey), { ...z(27, M("brf_parsomen_tomari") ? "#3b2412" : KREM, "800"), align: "center", wordWrap: { width: PWd * 0.78, useAdvancedWrap: !0 }, lineSpacing: 4 })
         .setOrigin(0.5);
       if (oy.height > PWd * 0.25 * 0.7) oy.setScale((PWd * 0.25 * 0.7) / oy.height);
       t.add(oy);
       // zorluk seçimi: harita önizlemesinin sağ üstünde üç madalyon (Normal / Kahramanca / Demir)
       {
-        let acikMod = (P().bestStars[e.id] ?? 0) > 0 && !e.sonsuz,
+        let acikMod = (P().bestStars[e.id] ?? 0) > 0 && !e.sonsuz && !e.gunluk,
           modlar = ["normal", "kahramanca", "demir"],
           mk = this.add.container(0, 0);
         if (!acikMod) this.secMod = "normal";
@@ -10325,7 +10426,14 @@ class _s extends Phaser.Scene {
           if (this.secMod !== "normal")
             mk.add(this.add.text(LX, PY + PWd * 0.125 + 6, m("mode." + this.secMod + ".d"), { ...z(20, "#ff9a7a", "800"), align: "center" }).setOrigin(0.5, 0).setShadow(0, 2, "#000", 4, !1, !0));
         };
-        e.sonsuz || modCiz();
+        if (e.gunluk) {
+          this.secMod = "normal";
+          mk.add(this.add.text(LX, PY + PWd * 0.125 + 6, m("daily.reward"), { ...z(19, "#ffcf7a", "800"), align: "center", wordWrap: { width: PWd } }).setOrigin(0.5, 0).setShadow(0, 2, "#000", 4, !1, !0));
+          if (M("rozet_gunluk")) {
+            let rg = wt(C(this, LX + GW / 2 - 60, GY - GH / 2 + 56, "rozet_gunluk", 1), 84);
+            (mk.add(rg), this.tweens.add({ targets: rg, angle: { from: -6, to: 6 }, yoyo: !0, repeat: -1, duration: 1400, ease: "Sine.InOut" }));
+          }
+        } else e.sonsuz || modCiz();
       }
       // --- sağ sütun ---
       let RX = 24,
@@ -10455,9 +10563,9 @@ class _s extends Phaser.Scene {
         let bz = this.add.zone(0, by0, 440 * 0.8, bim.displayHeight * 0.55).setInteractive({ useHandCursor: !0 });
         (bz.on("pointerdown", () => bim.setTint(14737632)),
           bz.on("pointerout", () => bim.clearTint()),
-          bz.on("pointerup", () => (bim.clearTint(), V("click", { volume: 0.7 }), this.scene.start("Battle", { stageId: e.id, mod: this.secMod ?? "normal" }))));
+          bz.on("pointerup", () => (bim.clearTint(), V("click", { volume: 0.7 }), this.scene.start("Battle", { stageId: e.id, mod: this.secMod ?? "normal", gunluk: e.gunluk ?? null }))));
         sb.add([bim, yz, bz]);
-      } else sb = F(this, BX, BY, 400, 110, m("map.play"), () => this.scene.start("Battle", { stageId: e.id, mod: this.secMod ?? "normal" }), "red", { icon: "ikon_kilic", size: 38 });
+      } else sb = F(this, BX, BY, 400, 110, m("map.play"), () => this.scene.start("Battle", { stageId: e.id, mod: this.secMod ?? "normal", gunluk: e.gunluk ?? null }), "red", { icon: "ikon_kilic", size: 38 });
       this.tweens.add({ targets: sb, scale: 1.035, duration: 900, yoyo: !0, repeat: -1, ease: "Sine.InOut", delay: 400 });
       t.once("destroy", () => this.time.delayedCall(0, () => this.tweens.getTweens().forEach((tw) => tw.targets.some((x) => !x.scene) && tw.remove())));
       return (
@@ -13237,9 +13345,12 @@ class Rs extends Phaser.Scene {
     });
     let t = this.init0.resume ?? null;
     this.mod = t?.mod ?? this.init0.mod ?? "normal";
+    this.gunluk = t?.gunluk ?? this.init0.gunluk ?? null;
     this.hizliKaldi = !0;
-    let kaleCan = this.mod === "demir" ? 1 : e.castleHp + tac("kale") + (emanetEtkin("kemik_tac") ? 3 : 0);
-    ((this.gold = t?.gold ?? Math.round((e.startGold + tac("ekonomi") * 30) * (emanetEtkin("haydut_muhru") ? 1.2 : 1))),
+    let gk = this.gunluk,
+      kaleCan = this.mod === "demir" ? 1 : gk === "cam" ? 5 : e.castleHp + tac("kale") + (emanetEtkin("kemik_tac") ? 3 : 0),
+      altinK = gk === "kitlik" ? 0.6 : gk === "devler" ? 1.5 : 1;
+    ((this.gold = t?.gold ?? Math.round((e.startGold + tac("ekonomi") * 30) * (emanetEtkin("haydut_muhru") ? 1.2 : 1) * altinK)),
       (this.castleMax = kaleCan),
       (this.castleHp = t?.castleHp ?? kaleCan),
       (this.speed = P().speed ?? 1),
@@ -13783,8 +13894,9 @@ class Rs extends Phaser.Scene {
     return this.stage.buildSpots.findIndex((s, a) => !this.towers[a] && Math.hypot(s.x - e, (s.y + 20 - t) * 1.3) < 80);
   }
   availableTowers() {
+    let yasak = { kislasiz: ["barracks"], oksuz: ["archer", "eagle"] }[this.gunluk] ?? [];
     let ust = this.stage.sonsuz ? Math.max(1, ...ce.filter((c) => (P().bestStars[c.id] ?? 0) > 0).map((c) => c.id + 1)) : this.stage.id;
-    return Object.keys(oe).filter((e) => oe[e].implemented && oe[e].unlockStage <= ust);
+    return Object.keys(oe).filter((e) => oe[e].implemented && oe[e].unlockStage <= ust && !yasak.includes(e));
   }
   openBuildMenu(e, t = null) {
     this.closeMenu();
@@ -14133,8 +14245,8 @@ class Rs extends Phaser.Scene {
     let n = Te[e],
       o = this.stage.sonsuz ? { hp: (1 + 0.09 * a) * 1.03 ** a, speed: 1 + 0.008 * Math.min(a, 40) } : _a(this.stage.id, a + 1),
       l = this.paths[t % this.paths.length],
-      zm = { kahramanca: [1.5, 1.1], demir: [1.25, 1] }[this.mod] ?? [1, 1],
-      d = new ws(this, n, l, t, o.hp * zm[0], o.speed * zm[1], s, i);
+      zm = { kahramanca: [1.5, 1.1], demir: [1.25, 1] }[this.mod] ?? { akin: [1, 1.3], devler: [1.5, 1] }[this.gunluk] ?? [1, 1],
+      d = new ws(this, n, l, t, o.hp * zm[0], o.speed * zm[1], s ?? (this.gunluk === "elit" && !n.boss && (this.elitSay = (this.elitSay ?? 0) + 1) % 5 === 0 ? fs[Math.floor(Math.random() * fs.length)] : s), i);
     if (n.boss) muzikDurum("boss");
     if (r) d.view.setAlpha(0);
     if ((this.enemies.push(d), r)) this.tweens.add({ targets: d.view, alpha: 1, duration: 300 });
@@ -14572,6 +14684,7 @@ class Rs extends Phaser.Scene {
       gold: this.gold,
       castleHp: this.castleHp,
       mod: this.mod,
+      gunluk: this.gunluk ?? void 0,
       hero: this.heroId,
       towers: this.towers.flatMap((s) =>
         s ? [{ spot: s.spot, type: s.def.id, level: s.level, rally: s.rally ?? void 0, branch: s.branch ?? void 0 }] : [],
@@ -15830,7 +15943,7 @@ class Os extends Phaser.Scene {
   }
   restart() {
     let e = this.b.stage.id;
-    ((P().snapshot = null), j(), this.b.scene.restart({ stageId: e, mod: this.b.mod }));
+    ((P().snapshot = null), j(), this.b.scene.restart({ stageId: e, mod: this.b.mod, gunluk: this.b.gunluk }));
   }
   emanetToreni(k, bitti) {
     // ganimet sahnesi: dönen altın ışık, yerden yükselen emanet, kıvılcımlar
@@ -15951,6 +16064,11 @@ class Os extends Phaser.Scene {
         if (!rz[md]) ((rz[md] = !0), r.unshift({ rozet: md }));
       }
       ((t.zaferKahraman ??= []).includes(s) || t.zaferKahraman.push(s), istat("zafer"));
+      if (this.b.gunluk && t.gunlukSon !== gunTarih()) {
+        let dun = gunTarih(new Date(Date.now() - 864e5));
+        ((t.gunlukSeri = t.gunlukSon === dun ? (t.gunlukSeri ?? 0) + 1 : 1), (t.gunlukSon = gunTarih()), istat("gunluk"));
+        ((t.treasure += 40), (t.diamonds += 5), r.unshift({ rozet: "gunluk" }, { treasure: 40 }, { diamonds: 5 }));
+      }
     }
     let basarimEk = { zafer: e.victory, can: this.b.castleHp, canMax: this.b.castleMax, hizli: this.b.hizliKaldi },
       basarimSonra = () => basarimKontrol(this, basarimEk);
@@ -16052,7 +16170,7 @@ class Os extends Phaser.Scene {
       }
       let CX = -270,
         CY = d ? 128 : 60,
-        bs = KUC(n.length ? m("end.rewards") : m("end.replayReward"));
+        bs = KUC(this.b.gunluk ? m("daily.title") : n.length ? m("end.rewards") : m("end.replayReward"));
       (bs.setPosition(CX, CY - 122), o.add(bs));
       let NK = Math.min(bir.length, 4),
         KA = NK > 3 ? 138 : 168;
