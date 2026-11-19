@@ -176,6 +176,7 @@
     kh_rol_destek: "assets/kh_rol_destek.webp?v=081d0b9f",
     kh_anahtar_yatak: "assets/kh_anahtar_yatak.webp?v=d6dcdddd",
     kh_anahtar_topuz: "assets/kh_anahtar_topuz.webp?v=08dd9b18",
+    acilis_logo: "assets/acilis_logo.webp?v=af57bed3",
     ui_bolum_seridi: "assets/ui_bolum_seridi.webp?v=b0f5cb39",
     ui_dugme_yuvarlak: "assets/ui_dugme_yuvarlak.webp?v=fd71954d",
     ui_ipucu_seridi: "assets/ui_ipucu_seridi.webp?v=9c2ed02b",
@@ -3585,6 +3586,10 @@ class Ze extends Phaser.Scene {
   static menuScene() {
     return P().identity ? "Map" : "Intro";
   }
+  preload() {
+    // video oynatılamazsa (iPhone düşük güç modu vb.) gösterilecek son kare
+    zt.acilis_logo && this.load.image("acilis_logo", zt.acilis_logo);
+  }
   create() {
     (Ge(this),
       this.cameras.main.setBackgroundColor("#000000"),
@@ -3644,10 +3649,20 @@ class Ze extends Phaser.Scene {
       .setOrigin(0.5)
       .setLetterSpacing(8)
       .setVisible(!1);
+    // Sessiz başlar: iOS sessiz videoyu dokunmadan oynatır ("başlamak için dokun" ekranı çıkmaz).
+    // İlk dokunuşta ses açılır. Video hiç oynatılamazsa (düşük güç modu) doğrudan logo + Başla ekranına geçilir.
     (e.on("locked", () => {
-      (t.setVisible(!0), this.tweens.add({ targets: t, alpha: 0.35, yoyo: !0, repeat: -1, duration: 900 }));
+      if (this.waiting || this.leaving) return;
+      (t.destroy(), e.setVisible(!1), this.gecT?.destroy());
+      if (this.textures.exists("acilis_logo")) {
+        let lg = this.add.image(0, 0, "acilis_logo");
+        (lg.setScale(w / lg.height), this.stage.addAt(lg, 0));
+      }
+      this.toWaiting();
     }),
       e.on("unlocked", () => t.destroy()),
+      e.setMute(!0),
+      this.input.once("pointerdown", () => !this.leaving && e.isPlaying() && e.setMute(!1)),
       e.play(!1),
       this.stage.add(this.softEdges()));
     let s = this.add
@@ -3661,6 +3676,7 @@ class Ze extends Phaser.Scene {
       .setLetterSpacing(4)
       .setAlpha(0)
       .setInteractive({ useHandCursor: !0 });
+    this.gecT = s;
     (s.input.hitArea.setTo(-30, -24, s.width + 60, s.height + 48),
       this.tweens.add({ targets: s, alpha: 0.75, delay: 900, duration: 500 }),
       s.on("pointerup", () => {
@@ -3698,7 +3714,7 @@ class Ze extends Phaser.Scene {
     if (this.waiting || this.leaving) return;
     this.waiting = !0;
     let e = this.intro;
-    if (e.isPlaying()) {
+    if (e && e.isPlaying()) {
       let o = e.getDuration();
       if (o > 0) e.setCurrentTime(Math.max(0, o - 0.05));
       e.setPaused(!0);
@@ -6208,7 +6224,7 @@ function Va(e) {
 }
 // Bellek: iPhone Safari sekmesi ~1,5 GB'ı aşınca sayfayı öldürüp yeniden açıyor.
 // Ağır görseller (bölüm haritaları, kitap sayfaları, ağaç) ve tüm animasyon sayfaları gerektiği an yüklenir, iş bitince bırakılır.
-var AGIR = /^harita_stage\d+_(tam|arka)$|^vaka_\d+$|^vakayiname_cerceve$|^tac_agaci_arka$|^kh_tam_/;
+var AGIR = /^harita_stage\d+_(tam|arka)$|^vaka_\d+$|^vakayiname_cerceve$|^tac_agaci_arka$|^kh_tam_|^acilis_logo$/;
 function sayfaIste(e, t, s) {
   // e: sahne, t: anahtar listesi (et ya da zt), s: hepsi gelince çağrılır
   let a = t.filter((i) => !e.textures.exists(i));
