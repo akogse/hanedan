@@ -3744,7 +3744,7 @@ function It(e) {
 }
 function Ns(e) {
   if (!ke || pt === e) return;
-  (Xs(), (pt = e), (Et = "kesif"));
+  (Xs(), (pt = e), (Et = "kesif"), (muzikNefesT = 0), (muzikNefesAlt = !1));
   for (let s of ["kesif", "savas", "boss"]) {
     let a = e + "_" + s;
     if (!(a in tt)) a = "muzik_" + s;
@@ -3759,10 +3759,20 @@ function Vs(e) {
   if (e === Et || !Le[e]) return;
   let t = Le[Et];
   if (((Et = e), t)) yt(t, 0, 1400);
-  yt(Le[e], Ee.music, 1400);
+  yt(Le[e], Ee.music * (muzikNefesAlt ? 0.4 : 1), 1400);
 }
 function muzikDurum(e) {
   if (Le[e]) Vs(e);
+}
+// uzun savaşta aynı döngü yormasın: çalan katman her 75 sn'de bir 25 sn boyunca %40'a çekilir,
+// savaş sesleri ve ortam öne çıkar, sonra müzik geri gelir
+var muzikNefesT = 0, muzikNefesAlt = !1;
+function muzikNefes(dt) {
+  let k = Le[Et];
+  if (!k || !Ee.music) return;
+  muzikNefesT = (muzikNefesT + dt) % 100;
+  let alt = muzikNefesT > 75;
+  if (alt !== muzikNefesAlt) ((muzikNefesAlt = alt), yt(k, Ee.music * (alt ? 0.4 : 1), 4000));
 }
 function We(e = "light") {
   let s = window.Capacitor?.Plugins?.Haptics;
@@ -14702,6 +14712,7 @@ class Rs extends Phaser.Scene {
     if (this.paused || this.ended) return;
     if (this.speed < 2 && this.waves.running) this.hizliKaldi = !1;
     let s = Math.min(t / 1000, 0.05) * this.speed * OYUN_TEMPO;
+    muzikNefes(Math.min(t / 1000, 0.05));
     (this.waves.update(s),
       Vs(
         this.enemies.some((i) => i.alive && i.boss)
@@ -16022,6 +16033,8 @@ class Os extends Phaser.Scene {
     this.time.delayedCall(2600, () => basarimKontrol(this, {}));
   }
   async endSequence(e) {
+    // savaş müziği susar; zafer/yenilgi ezgisinden sonra harita müziği usulca gelir
+    (Xs(1600), this.time.delayedCall(6500, () => It("muzik_harita")));
     if (this.b.stage.sonsuz) return this.sonsuzSon(e);
     (this.endTut(), this.closeInfo());
     let t = P(),
