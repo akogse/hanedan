@@ -24,11 +24,38 @@ GOLD = '--altin' in args
 if GOLD: args.remove('--altin')
 WHITE = '--beyaz' in args
 if WHITE: args.remove('--beyaz')
+# --aralik: kareleri tüm videodan değil, yalnızca hareketin olduğu bölümden al (saldırılarda atış anı).
+#   Flow saldırı videoları 10 sn; asıl atış ~4 sn. Tüm videodan 18 kare almak atışa 6-7 kare bırakıyordu.
+ARALIK = '--aralik' in args
+if ARALIK: args.remove('--aralik')
 vid, out, N, BODY = args[0], args[1], int(args[2]), int(args[3])
 dur = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', vid]))
 tmp = tempfile.mkdtemp()
+t0 = 0.0
+if ARALIK:
+    raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', vid, '-vf', 'scale=192:108,format=gray', '-f', 'rawvideo', '-'], capture_output=True).stdout
+    g = np.frombuffer(raw, np.uint8).reshape(-1, 108, 192).astype(np.float32)
+    fps_v = len(g) / dur
+    mo = np.convolve(np.abs(np.diff(g, axis=0)).mean((1, 2)), np.ones(5) / 5, 'same')
+    # en yoğun anın çevresindeki kesintisiz hareket: başlangıç hareketin başladığı an (hazırlık dahil, en fazla 2.2 sn),
+    # bitiş en fazla 2 sn sonra
+    pk = int(np.argmax(mo))
+    i0 = pk
+    bos = 0  # hazırlıkta 0.3 sn'ye kadar kısa duraksamaları atla
+    while i0 > 0 and bos <= 0.3 * fps_v:
+        i0 -= 1; bos = 0 if mo[i0] > mo.max() * 0.10 else bos + 1
+    i0 += bos
+    i1 = pk
+    while i1 < len(mo) - 1 and mo[i1 + 1] > mo.max() * 0.15: i1 += 1
+    pt = pk / fps_v
+    t0 = max(0.0, max(i0 / fps_v - 0.25, pt - 2.2))
+    t1 = min(dur, min((i1 + 1) / fps_v, pt + 2.0) + 0.25)
+    dur = t1 - t0
+    # vuruş anı: hareketin en yoğun olduğu an (mermi bu karede çıkar)
+    HIT = round(min(0.9, max(0.1, (pt - t0) / dur)), 3)
+    print(f'aralik {t0:.2f}-{t1:.2f} sn', file=sys.stderr)
 # N evenly spaced frames over the clip (last frame == first for loops, so it is excluded)
-subprocess.check_call(['ffmpeg', '-v', 'error', '-i', vid, '-vf', f'fps={N}/{dur},scale=1920:1080:flags=area', '-frames:v', str(N), f'{tmp}/f_%03d.png'])
+subprocess.check_call(['ffmpeg', '-v', 'error', '-ss', f'{t0:.3f}', '-t', f'{dur:.3f}', '-i', vid, '-vf', f'fps={N}/{dur},scale=1920:1080:flags=area', '-frames:v', str(N), f'{tmp}/f_%03d.png'])
 paths = sorted(glob.glob(f'{tmp}/f_*.png'))
 assert len(paths) == N, (len(paths), N)
 frames = [np.asarray(Image.open(p).convert('RGB')).astype(np.float32) for p in paths]
@@ -106,6 +133,7 @@ entry = dict(frameWidth=fw, frameHeight=fh, frames=N,
              originX=round(((bx0 + bx1) / 2 - cx0) / (cx1 - cx0), 4),
              originY=round((by1 - cy0) / (cy1 - cy0), 4),
              bodyHeight=round((by1 - by0) * s, 1))
+if ARALIK: entry['hit'] = HIT
 print(json.dumps(entry))
 for p in paths: os.remove(p)
 os.rmdir(tmp)

@@ -1,6 +1,6 @@
 # Araçlar
 
-- `video_sprite.py video.mp4 cikti.webp KARE GOVDE_PX [seçenekler]` — magenta (veya yeşil) arka planlı 4K Flow videosunu ayıklanmış sprite sayfasına çevirir (bekleme 36, saldırı 18 kare; kule boyu 270 px). Çıktı satırı manifest bilgisidir. Seçenekler:
+- `video_sprite.py video.mp4 cikti.webp KARE GOVDE_PX [seçenekler]` — magenta (veya yeşil) arka planlı 4K Flow videosunu ayıklanmış sprite sayfasına çevirir (bekleme 36 kare; saldırı 30 kare ve `--aralik` ile — yalnızca atış anı alınır, vuruş karesi `hit` olarak yazılır; kule boyu 270 px; sonra `saldiri_hiza.py --yaz`). Çıktı satırı manifest bilgisidir. Seçenekler:
   - `--kenar SOL,SAG,UST,ALT` — efekt video kenarına değip kesiliyorsa o kenarı yumuşakça söndürür (px, 1920×1080 ölçeğinde). Kule gövdesi çoğu videoda üst/alt kenara yalnızca 20–40 px uzak: önce gövde payını ölçün, ona dokunmayın.
   - `--karisim` — yarı saydam buhar/duman/bulut/ışık halkalarında saydamlığı perde renginin baskınlığından hesaplar; pembe/mor hale bırakmaz. Kulede magenta/mor yoksa kullanın.
   - `--altin` / `--beyaz` — perdeyle karışıp pembeleşmiş efekt piksellerini parlaklığı koruyarak altın ya da nötr beyaz tona çeker (rün halkaları, maden tozu / buhar, bulut).
