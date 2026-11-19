@@ -140,6 +140,7 @@
     harita_stage14_kucuk: "assets/harita_stage14_kucuk.webp?v=2427735e",
     harita_stage15_kucuk: "assets/harita_stage15_kucuk.webp?v=71f2670e",
     harita_stage16_kucuk: "assets/harita_stage16_kucuk.webp?v=4788ca73",
+    harita_stage99_kucuk: "assets/harita_stage99_kucuk.webp?v=63c936d6",
     ui_bilgi_karti: "assets/ui_bilgi_karti.webp?v=e0a2ab7a",
     brf_zemin: "assets/brf_zemin.webp?v=a3c2ad76",
     brf_brifing_harita_cercevesi: "assets/brf_brifing_harita_cercevesi.webp?v=345374a0",
@@ -261,6 +262,7 @@
     harita_stage14_tam: "assets/harita_stage14_tam.webp?v=5d09cc81",
     harita_stage15_tam: "assets/harita_stage15_tam.webp?v=e4f1c726",
     harita_stage16_tam: "assets/harita_stage16_tam.webp?v=94f4a3af",
+    harita_stage99_tam: "assets/harita_stage99_tam.webp?v=a559f635",
     kahraman_garrik_portre: "assets/kahraman_garrik_portre.webp?v=25252083",
     kahraman_iskar_portre: "assets/kahraman_iskar_portre.webp?v=99c18f79",
     kahraman_varhol_portre: "assets/kahraman_varhol_portre.webp?v=0119063f",
@@ -2631,6 +2633,24 @@ var $t = {
   "end.tip": "İpucu: Kuleleri yükseltmek, yeni kule kurmaktan çoğu zaman daha verimlidir. Kışlayı kavşaklara kur.",
   "end.heroXp": "{hero} +{n} deneyim",
   "end.xpWord": "deneyim",
+  "endless.r1": "Dalgalar bitmez; her dalga bir öncekinden güçlü.",
+  "endless.r2": "Her 5 dalgada bir komutan saldırır.",
+  "endless.r3": "20 dalgaya dayan: Sonsuz rozeti (+1 Taç Puanı).",
+  "stage.99": "Sonsuz Kuşatma",
+  "stage.99.event": "Ölüler diyarının sınırında savaş hiç bitmez. Ne kadar dayanabilirsin?",
+  "hud.waveEndless": "Dalga {n}",
+  "end.sonsuz": "Kuşatma Sona Erdi",
+  "end.sonsuzDalga": "dalga dayandın",
+  "end.rekorYeni": "Yeni Rekor!",
+  "end.rekorEski": "Önceki rekor: {n} dalga",
+  "end.rekor": "Rekor: {n} dalga",
+  "end.olduruldu": "{n} düşman yok edildi",
+  "map.endless": "Sonsuz Kuşatma",
+  "map.endlessLocked": "8. bölümü geçince açılır",
+  "map.endlessRecord": "Rekor: {n}",
+  "map.endlessWaves": "Sonsuz dalga · Rekor {n}",
+  "mode.sonsuz": "Sonsuz",
+  "feat.sonsuz20": "20 dalga",
   "map.glory": "Şan Salonu",
   "glory.relics": "Emanetler",
   "glory.feats": "Başarımlar",
@@ -3219,6 +3239,24 @@ var Ls = {
   "end.tip": "Tip: upgrading towers often beats building new ones. Put barracks at road bends.",
   "end.heroXp": "{hero} +{n} XP",
   "end.xpWord": "XP",
+  "endless.r1": "The waves never end; each is stronger than the last.",
+  "endless.r2": "A commander attacks every 5 waves.",
+  "endless.r3": "Hold 20 waves: Endless badge (+1 Crown Point).",
+  "stage.99": "Endless Siege",
+  "stage.99.event": "At the border of the land of the dead the war never ends. How long can you hold?",
+  "hud.waveEndless": "Wave {n}",
+  "end.sonsuz": "The Siege Ends",
+  "end.sonsuzDalga": "waves held",
+  "end.rekorYeni": "New Record!",
+  "end.rekorEski": "Previous record: {n} waves",
+  "end.rekor": "Record: {n} waves",
+  "end.olduruldu": "{n} enemies defeated",
+  "map.endless": "Endless Siege",
+  "map.endlessLocked": "Unlocks after stage 8",
+  "map.endlessRecord": "Record: {n}",
+  "map.endlessWaves": "Endless waves · Record {n}",
+  "mode.sonsuz": "Endless",
+  "feat.sonsuz20": "20 waves",
   "map.glory": "Hall of Glory",
   "glory.relics": "Relics",
   "glory.feats": "Feats",
@@ -8507,6 +8545,60 @@ var BOLUM_16 = {
   decor: [],
   ground: 7315263,
 };
+// ===== SONSUZ KUŞATMA =====
+var SONSUZ_HAVUZ = [
+  ["goblin", 1], ["wolf", 1], ["shieldBandit", 3], ["raven", 4], ["armoredBandit", 5], ["goblinShaman", 6], ["swampSlime", 7],
+  ["skeleton", 8], ["fireImp", 9], ["ghost", 11], ["gargoyle", 12], ["necromancer", 13], ["iceTroll", 14], ["runeGuard", 16],
+  ["varholKnight", 18], ["ram", 19], ["boneGiant", 22],
+];
+var SONSUZ_BOSS = ["goblinChief", "alphaWolf", "banditCaptain", "garrik", "iskar", "kemikKral"];
+function sonsuzDalgalar(n = 150) {
+  // görülmüş düşmanlardan karışık dalgalar; her 5. dalgada boss, giderek kalabalık ve sık
+  let gor = new Set(P().seenEnemies ?? []),
+    havuz = SONSUZ_HAVUZ.filter(([e]) => e === "goblin" || e === "wolf" || gor.has(e)),
+    bosslar = SONSUZ_BOSS.filter((e) => e === "goblinChief" || gor.has(e)),
+    r = (k) => Math.floor(Math.random() * k),
+    out = [];
+  for (let w = 1; w <= n; w++) {
+    let uygun = havuz.filter(([, d]) => d <= w + 2).map(([e]) => e),
+      gk = Math.min(4, 2 + Math.floor(w / 7)),
+      groups = [],
+      yogun = 1 + w * 0.09;
+    for (let g = 0; g < gk; g++) {
+      let e = uygun[uygun.length - 1 - r(Math.min(uygun.length, 5))],
+        agir = ["armoredBandit", "swampSlime", "iceTroll", "runeGuard", "varholKnight", "ram", "boneGiant", "gargoyle"].includes(e),
+        c = Math.round((agir ? 2 : 7) * yogun * (0.8 + Math.random() * 0.5));
+      groups.push({ enemy: e, count: Math.max(1, c), interval: Math.max(0.35, (agir ? 2 : 0.8) - w * 0.012), delay: g * 6, elite: w > 6 && Math.random() < 0.35 ? 1 + r(2) : 0 });
+    }
+    if (w % 5 === 0) groups.push({ enemy: bosslar[(w / 5 - 1) % bosslar.length], count: 1, interval: 1, delay: 8 });
+    out.push({ groups });
+  }
+  return out;
+}
+var SONSUZ = {
+  id: 99,
+  era: 2,
+  sonsuz: !0,
+  nameKey: "stage.99",
+  eventKey: "stage.99.event",
+  playable: !0,
+  startGold: 900,
+  castleHp: 20,
+  paths: [[b(-80, 220), b(-24, 223), b(45, 243), b(228, 237), b(326, 243), b(409, 257), b(461, 278), b(624, 316), b(682, 368), b(718, 412), b(777, 452), b(820, 493), b(868, 568), b(891, 586), b(914, 593), b(1132, 526), b(1188, 498), b(1219, 462), b(1227, 402), b(1239, 377), b(1302, 320), b(1391, 292), b(1472, 285), b(1511, 290), b(1573, 315), b(1599, 334), b(1630, 380), b(1650, 435), b(1665, 511), b(1670, 601), b(1661, 644), b(1638, 703), b(1627, 821), b(1632, 865), b(1684, 985), b(1709, 1006), b(1768, 1029), b(1828, 1039), b(1874, 1038), b(1970, 1005), b(2095, 919), b(2182, 872), b(2236, 850), b(2285, 814), b(2330, 800)], [b(-80, 1040), b(-24, 1042), b(32, 1056), b(144, 1060), b(299, 1049), b(480, 1017), b(679, 936), b(711, 893), b(758, 859), b(806, 776), b(850, 719), b(904, 605), b(927, 592), b(1074, 540), b(1132, 526), b(1174, 507), b(1200, 487), b(1219, 462), b(1232, 389), b(1278, 336), b(1317, 315), b(1417, 288), b(1498, 286), b(1573, 315), b(1607, 344), b(1636, 393), b(1664, 496), b(1671, 586), b(1665, 630), b(1638, 703), b(1628, 806), b(1629, 851), b(1636, 879), b(1664, 929), b(1675, 972), b(1709, 1006), b(1753, 1025), b(1812, 1037), b(1859, 1039), b(1903, 1030), b(1982, 999), b(2095, 919), b(2182, 872), b(2236, 850), b(2285, 814), b(2330, 800)]],
+  buildSpots: [b(515, 181), b(820, 319), b(304, 392), b(622, 542), b(634, 710), b(304, 902), b(521, 1111), b(815, 942), b(1094, 393), b(1303, 183), b(1255, 554), b(1043, 692), b(1175, 872), b(1495, 464), b(1463, 752), b(1514, 1053), b(1694, 223), b(1824, 493), b(1774, 812), b(1994, 712), b(2064, 1072), b(1874, 1173), b(160, 658), b(1300, 1118)],
+  mineSpots: [22, 23],
+  castle: b(2290, 780),
+  newTowers: [],
+  newEnemies: [],
+  waves: [{ groups: [{ enemy: "goblin", count: 1, interval: 1, delay: 0 }] }],
+};
+function bolumBul(id) {
+  if (id === 99) return ((SONSUZ.waves = sonsuzDalgalar()), SONSUZ);
+  return ce.find((r) => r.id === id);
+}
+function sonsuzAcik() {
+  return (P().bestStars[8] ?? 0) > 0;
+}
 var ce = [Qa, ei, ti, BOLUM_4, BOLUM_5, BOLUM_6, BOLUM_7, BOLUM_8, BOLUM_9, BOLUM_10, BOLUM_11, BOLUM_12, BOLUM_13, BOLUM_14, BOLUM_15, BOLUM_16];
 function ya(e) {
   return e <= 2 ? 3 : e;
@@ -9165,6 +9257,7 @@ class _s extends Phaser.Scene {
       this.add.image(0, 0, "vinyet").setOrigin(0).setDisplaySize(T, w).setAlpha(0.75).setDepth(50),
       this.drawTopBar(),
       this.drawBottomBar(),
+      this.drawSonsuz(),
       this.drawResume(),
       this.setupScroll(),
       this.revealNewStage());
@@ -9909,6 +10002,37 @@ class _s extends Phaser.Scene {
           .setDepth(61));
     });
   }
+  drawSonsuz() {
+    let acik = sonsuzAcik(),
+      x = T - Be - 140,
+      y = w - 300,
+      c = this.add.container(x, y).setDepth(61);
+    if (acik && M("z_isik")) {
+      let isk = this.add.image(0, 0, "z_isik").setBlendMode(Phaser.BlendModes.ADD).setAlpha(0.75);
+      (isk.setScale(250 / isk.width), c.add(isk), this.tweens.add({ targets: isk, angle: 360, duration: 16000, repeat: -1 }));
+    }
+    let g = this.add.graphics();
+    (g.fillStyle(0, 0.55), g.fillCircle(0, 4, 74), g.fillStyle(acik ? 1312304 : 1315860, 1), g.fillCircle(0, 0, 70), c.add(g));
+    if (M("rozet_sonsuz")) {
+      let r = wt(C(this, 0, -4, "rozet_sonsuz", 1), 104);
+      (acik || r.setTint(5263440), c.add(r));
+    }
+    if (M("brf_madalyon_kule")) {
+      let fr = this.add.image(0, 0, "brf_madalyon_kule");
+      (fr.setScale(150 / 0.72 / fr.width), fr.setY(-(0.538 - 0.5) * fr.displayHeight), acik || fr.setTint(8421504), c.add(fr));
+    }
+    let ad = this.add.text(0, 96, G(m("map.endless")), { fontFamily: D, fontStyle: "700", fontSize: "22px", color: acik ? "#f4dc90" : "#9c958a" }).setOrigin(0.5).setLetterSpacing(2).setShadow(0, 2, "#000", 5, !1, !0),
+      alt = this.add.text(0, 124, acik ? m("map.endlessRecord", { n: P().sonsuzRekor ?? 0 }) : m("map.endlessLocked"), z(18, acik ? "#cfc6ae" : "#8d8676", "800")).setOrigin(0.5).setShadow(0, 2, "#000", 4, !1, !0);
+    c.add([ad, alt]);
+    if (acik) this.tweens.add({ targets: c, scale: 1.04, duration: 1300, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
+    let zn = this.add.zone(0, 30, 170, 220).setInteractive({ useHandCursor: !0 });
+    (zn.on("pointerup", () => {
+      if (this.modal.length || this.drag?.moved) return;
+      if (!acik) return this.toast(m("map.endlessLocked"));
+      (V("ui_tik"), this.stagePanel(SONSUZ));
+    }),
+      c.add(zn));
+  }
   drawBottomBar() {
     let e = [
         ["ikon_kalkan", m("map.hero"), () => this.heroPanel()],
@@ -9935,7 +10059,7 @@ class _s extends Phaser.Scene {
   drawResume() {
     let e = P().snapshot;
     if (!e) return;
-    let t = ce.find((n) => n.id === e.stageId);
+    let t = bolumBul(e.stageId);
     if (!t) return;
     let s = this.add.container(T / 2, w - 228).setDepth(62),
       a = this.add
@@ -10056,7 +10180,7 @@ class _s extends Phaser.Scene {
       }
       t.add(
         this.add
-          .text(LX - GW / 2 + 22, GY - GH / 2 + 28, G(m("map.waves", { n: e.waves?.length ?? ya(e.id) })), { fontFamily: D, fontStyle: "700", fontSize: "24px", color: "#f4dc90" })
+          .text(LX - GW / 2 + 22, GY - GH / 2 + 28, G(e.sonsuz ? m("map.endlessWaves", { n: P().sonsuzRekor ?? 0 }) : m("map.waves", { n: e.waves?.length ?? ya(e.id) })), { fontFamily: D, fontStyle: "700", fontSize: "24px", color: "#f4dc90" })
           .setOrigin(0, 0.5)
           .setLetterSpacing(3)
           .setShadow(0, 2, "#000", 5, !1, !0),
@@ -10065,7 +10189,7 @@ class _s extends Phaser.Scene {
         YW = 320,
         YH = (YW * 159) / 600,
         YY = GY + GH / 2 + 22;
-      if (M("ui_yildiz_tepsisi")) {
+      if (M("ui_yildiz_tepsisi") && !e.sonsuz) {
         t.add(this.add.image(LX, YY, "ui_yildiz_tepsisi").setDisplaySize(YW, YH));
         for (let k = 0; k < a; k++)
           t.add(wt(C(this, LX + (0.228 + k * 0.1357 - 0.5) * YW, YY + (0.487 - 0.5) * YH, M("ikon_yildiz_hud") ? "ikon_yildiz_hud" : "ikon_yildiz", 1), YW * 0.122));
@@ -10081,7 +10205,7 @@ class _s extends Phaser.Scene {
       t.add(oy);
       // zorluk seçimi: harita önizlemesinin sağ üstünde üç madalyon (Normal / Kahramanca / Demir)
       {
-        let acikMod = (P().bestStars[e.id] ?? 0) > 0,
+        let acikMod = (P().bestStars[e.id] ?? 0) > 0 && !e.sonsuz,
           modlar = ["normal", "kahramanca", "demir"],
           mk = this.add.container(0, 0);
         if (!acikMod) this.secMod = "normal";
@@ -10118,7 +10242,7 @@ class _s extends Phaser.Scene {
           if (this.secMod !== "normal")
             mk.add(this.add.text(LX, PY + PWd * 0.125 + 6, m("mode." + this.secMod + ".d"), { ...z(20, "#ff9a7a", "800"), align: "center" }).setOrigin(0.5, 0).setShadow(0, 2, "#000", 4, !1, !0));
         };
-        modCiz();
+        e.sonsuz || modCiz();
       }
       // --- sağ sütun ---
       let RX = 24,
@@ -10162,6 +10286,17 @@ class _s extends Phaser.Scene {
         e.newEnemies.forEach((u, f) => madalyon(dx + 92 + f * ADIM, HY + 116, Yt(Te[u].art), m(Te[u].nameKey), !0));
       }
       let KY = yeni.length ? HY + 296 : HY;
+      if (e.sonsuz) {
+        // sonsuz kuşatma kuralları: üç satır, altın simgelerle
+        KY = HY + 296;
+        baslik(RX, HY, m("map.endless"), 0);
+        [["ikon_dalga", m("endless.r1")], ["ikon_tac", m("endless.r2")], ["rozet_sonsuz", m("endless.r3")]].forEach(([ik, yz], i) => {
+          let yy = HY + 62 + i * 68;
+          if (M(ik)) t.add(wt(C(this, RX + 30, yy + 16, ik, 1), 44));
+          t.add(this.add.text(RX + 66, yy + 16, yz, { ...z(22, "#e9e1cc", "800"), wordWrap: { width: RW - 80, useAdvancedWrap: !0 } }).setOrigin(0, 0.5));
+        });
+        if (M("brf_susleme_ayirici")) t.add(resim("brf_susleme_ayirici", RX + RW / 2, KY - 34, RW));
+      }
       if (yeni.length && M("brf_susleme_ayirici")) t.add(resim("brf_susleme_ayirici", RX + RW / 2, KY - 34, RW));
       baslik(RX, KY, m("map.selectHero"), 0);
       let d = this.add.container(0, 0);
@@ -12826,8 +12961,9 @@ class Rs extends Phaser.Scene {
     return this.hero?.def.id ?? P().hero;
   }
   preload() {
-    let e = ce.find((r) => r.id === this.init0.stageId),
+    let e = bolumBul(this.init0.stageId),
       t = this.init0.resume?.hero ?? P().hero;
+    if (e.sonsuz) this.sonsuzHazir = e;
     this.yuklenen = bolumSayfalari(e, t);
     let s = this.yuklenen.filter((n) => !this.textures.exists(n));
     for (let n of s)
@@ -12878,7 +13014,8 @@ class Rs extends Phaser.Scene {
     (r(0), this.load.on("progress", r), this.load.once("complete", () => ogeler.forEach((x) => x.destroy())));
   }
   create() {
-    let e = (this.stage = ce.find((r) => r.id === this.init0.stageId));
+    let e = (this.stage = this.init0.stageId === 99 && this.sonsuzHazir ? this.sonsuzHazir : bolumBul(this.init0.stageId));
+    this.sonsuzHazir = null;
     (Ns("muzik_stage" + e.id), (this.paths = e.paths.map((r) => new ks(r))));
     this.time.delayedCall(400, () => Ie("bolum_baslangic", "wave", { volume: 0.8 }));
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -13433,7 +13570,8 @@ class Rs extends Phaser.Scene {
     return this.stage.buildSpots.findIndex((s, a) => !this.towers[a] && Math.hypot(s.x - e, (s.y + 20 - t) * 1.3) < 80);
   }
   availableTowers() {
-    return Object.keys(oe).filter((e) => oe[e].implemented && oe[e].unlockStage <= this.stage.id);
+    let ust = this.stage.sonsuz ? Math.max(1, ...ce.filter((c) => (P().bestStars[c.id] ?? 0) > 0).map((c) => c.id + 1)) : this.stage.id;
+    return Object.keys(oe).filter((e) => oe[e].implemented && oe[e].unlockStage <= ust);
   }
   openBuildMenu(e, t = null) {
     this.closeMenu();
@@ -13680,7 +13818,7 @@ class Rs extends Phaser.Scene {
   }
   spawnEnemy(e, t, s, a, i = 0, r) {
     let n = Te[e],
-      o = _a(this.stage.id, a + 1),
+      o = this.stage.sonsuz ? { hp: (1 + 0.09 * a) * 1.03 ** a, speed: 1 + 0.008 * Math.min(a, 40) } : _a(this.stage.id, a + 1),
       l = this.paths[t % this.paths.length],
       zm = { kahramanca: [1.5, 1.1], demir: [1.25, 1] }[this.mod] ?? [1, 1],
       d = new ws(this, n, l, t, o.hp * zm[0], o.speed * zm[1], s, i);
@@ -14692,12 +14830,12 @@ class Os extends Phaser.Scene {
       this.hpText.setText(String(e.castleHp)),
       this.speedBtn.setLabel(e.speed + "x"),
       this.goldText.setText(String(e.gold)),
-      this.waveText.setText(m("hud.wave", { n: Math.max(0, e.waves.index + 1), m: e.waves.total })));
+      this.waveText.setText(e.stage.sonsuz ? m("hud.waveEndless", { n: Math.max(0, e.waves.index + 1) }) : m("hud.wave", { n: Math.max(0, e.waves.index + 1), m: e.waves.total })));
     let t = e.canCallWave();
     if (e.waves.index < 0) this.waveBtn.setLabel(m("hud.startWave"));
     else if (e.waves.countdown > 0)
       this.waveBtn.setLabel(m("hud.nextWave") + " · " + m("hud.nextIn", { n: Math.ceil(e.waves.countdown) }));
-    else this.waveBtn.setLabel(m("hud.wave", { n: e.waves.index + 1, m: e.waves.total }));
+    else this.waveBtn.setLabel(e.stage.sonsuz ? m("hud.waveEndless", { n: e.waves.index + 1 }) : m("hud.wave", { n: e.waves.index + 1, m: e.waves.total }));
     if ((this.waveBtn.setEnabled(t && !e.ended), this.wavePreview.setVisible(t && !e.ended), t)) this.refreshPreview();
     let s = e.hero,
       a = this.heroRing;
@@ -15428,7 +15566,43 @@ class Os extends Phaser.Scene {
     let dg = F(this, 0, 330, 300, 96, m("common.ok"), kapa, "gold");
     (dg.setAlpha(0), c.add(dg), this.tweens.add({ targets: dg, alpha: 1, delay: 1500, duration: 400 }));
   }
+  sonsuzSon(e) {
+    // Sonsuz Kuşatma sonu: dayanılan dalga sayısı, rekor töreni
+    let t = P(),
+      s = this.b.hero.def.id,
+      dalga = Math.max(0, this.b.waves.index + (e.victory ? 1 : 0)),
+      eski = t.sonsuzRekor ?? 0,
+      rekor = dalga > eski,
+      xp = Math.round(12 * dalga);
+    ((t.heroXp[s] = (t.heroXp[s] ?? 0) + xp), rekor && (t.sonsuzRekor = dalga), (t.snapshot = null));
+    if (dalga >= 20) ((t.rozetler ??= {})[99] ??= {}).sonsuz = !0;
+    (istat("sonsuzOyun"), j());
+    ((this.modalOpen = !0), V(rekor ? "zafer" : "yenilgi", { volume: 0.85 }), Tt(this, 0.62));
+    let o = this.add.container(O / 2, w / 2).setDepth(2);
+    o.add(pe(this, 0, 30, 1000, 640, m("end.sonsuz")));
+    if (M("z_isik")) {
+      let isk = this.add.image(0, -70, "z_isik").setBlendMode(Phaser.BlendModes.ADD).setAlpha(rekor ? 0.95 : 0.45);
+      (isk.setScale((rekor ? 560 : 420) / isk.width), o.add(isk), this.tweens.add({ targets: isk, angle: 360, duration: 26000, repeat: -1 }));
+    }
+    if (M("rozet_sonsuz")) o.add(wt(C(this, 0, -205, "rozet_sonsuz", 1), 120));
+    let sayi = this.add.text(0, -70, "0", { fontFamily: DD, fontStyle: "900", fontSize: "120px", color: "#ffe6a0", stroke: "#1a1206", strokeThickness: 10 }).setOrigin(0.5).setShadow(0, 6, "#000", 14, !1, !0);
+    o.add(sayi);
+    let sy = { v: 0 };
+    this.tweens.add({ targets: sy, v: dalga, duration: Math.min(2200, 300 + dalga * 60), ease: "Cubic.Out", onUpdate: () => sayi.setText(String(Math.round(sy.v))) });
+    o.add(this.add.text(0, 10, G(m("end.sonsuzDalga")), { fontFamily: D, fontStyle: "700", fontSize: "26px", color: "#c9a24a" }).setOrigin(0.5).setLetterSpacing(5));
+    if (rekor) {
+      let rk = this.add.text(0, 66, G(m("end.rekorYeni")), { fontFamily: DD, fontStyle: "900", fontSize: "40px", color: "#ff9a5a", stroke: "#1a0806", strokeThickness: 6 }).setOrigin(0.5).setLetterSpacing(4).setScale(0);
+      (o.add(rk), this.tweens.add({ targets: rk, scale: 1, delay: 1700, duration: 420, ease: "Back.Out", onStart: () => (V("upgrade", { volume: 0.8 }), this.cameras.main.shake(140, 0.004)) }));
+      this.tweens.add({ targets: rk, scale: 1.06, delay: 2200, duration: 700, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
+      if (eski > 0) o.add(this.add.text(0, 110, m("end.rekorEski", { n: eski }), z(22, "#b9b29e", "800")).setOrigin(0.5));
+    } else o.add(this.add.text(0, 70, m("end.rekor", { n: eski }), z(26, "#e9e1cc", "800")).setOrigin(0.5));
+    o.add(this.add.text(0, 150, m("end.olduruldu", { n: this.b.kills }) + "   ·   " + m("end.heroXp", { hero: m(he[s].nameKey).replace(/^(Sir|Sör) /, "").split(" ")[0], n: xp }), z(22, "#9fd0ff", "800")).setOrigin(0.5));
+    (o.add(F(this, -170, 272, 300, 96, m("end.retry"), () => this.restart(), "stone")), o.add(F(this, 170, 272, 300, 96, m("end.map"), () => this.b.scene.start("Map"), "stone")));
+    (o.setScale(0.7), this.tweens.add({ targets: o, scale: 1, duration: 260, ease: "Back.Out" }));
+    this.time.delayedCall(2600, () => basarimKontrol(this, {}));
+  }
   async endSequence(e) {
+    if (this.b.stage.sonsuz) return this.sonsuzSon(e);
     (this.endTut(), this.closeInfo());
     let t = P(),
       s = this.b.hero.def.id,
