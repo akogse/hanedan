@@ -2633,6 +2633,32 @@ var $t = {
   "end.tip": "İpucu: Kuleleri yükseltmek, yeni kule kurmaktan çoğu zaman daha verimlidir. Kışlayı kavşaklara kur.",
   "end.heroXp": "{hero} +{n} deneyim",
   "end.xpWord": "deneyim",
+  "tut.fusion": "Füzyon açıldı! Birbirine yakın iki 3. seviye element kulesi (Ejder Ocağı, Ayaz, Fırtına, Simyacı) birleşebilir. Birine dokun, menüde ortağının birleşik resmini seç: iki kule tek ve çok daha güçlü bir kuleye dönüşür.",
+  "branch.fz_buhar": "Buhar Kazanı",
+  "branch.fz_buhar.desc": "Ateş ve buz birleşti: yanan alev topu düştüğü yerde yavaşlatan bir buhar bulutu bırakır.",
+  "branch.fz_simsek": "Ateş Fırtınası",
+  "branch.fz_simsek.desc": "Kızıl şimşek düşmandan düşmana sıçrar ve vurduğu her şeyi tutuşturur.",
+  "branch.fz_duman": "Zehirli Duman",
+  "branch.fz_duman.desc": "Zehir iksiri alevle tutuşur: her atış zehirler, yakar ve patlatır.",
+  "branch.fz_kutup": "Kutup Kulesi",
+  "branch.fz_kutup.desc": "Buz mavisi şimşek yavaşlatır; her üç atışta bir ilk hedefi dondurur.",
+  "branch.fz_curuk": "Çürük Buz",
+  "branch.fz_curuk.desc": "Donmuş zehir zırhı çürütür, düşmanları yavaşlatır ve uzun süre zehirler.",
+  "branch.fz_asit": "Asit Fırtınası",
+  "branch.fz_asit.desc": "Asit yağmuru ıslatır ve zehirler; ardından yeşil şimşek zehirlilerin arasında sıçrar.",
+  "branch.fz_buhar2": "Büyük Buhar Kazanı",
+  "branch.fz_buhar2.desc": "Daha geniş ateş, daha yoğun buhar, daha uzun yavaşlatma.",
+  "branch.fz_simsek2": "Cehennem Fırtınası",
+  "branch.fz_simsek2.desc": "Şimşek yedi düşmana sıçrar, alevleri daha da harlıdır.",
+  "branch.fz_duman2": "Kara Duman",
+  "branch.fz_duman2.desc": "Daha geniş alan, daha ağır zehir.",
+  "branch.fz_kutup2": "Ebedi Kış",
+  "branch.fz_kutup2.desc": "Altı düşmana sıçrar, daha uzun dondurur.",
+  "branch.fz_curuk2": "Kara Buz",
+  "branch.fz_curuk2.desc": "Zırhı daha uzun süre çürütür, zehri ağırlaştırır.",
+  "branch.fz_asit2": "Asit Tufanı",
+  "branch.fz_asit2.desc": "Şimşek altı zehirli düşmana sıçrar.",
+  "hud.fusion": "Füzyon",
   "endless.r1": "Dalgalar bitmez; her dalga bir öncekinden güçlü.",
   "endless.r2": "Her 5 dalgada bir komutan saldırır.",
   "endless.r3": "20 dalgaya dayan: Sonsuz rozeti (+1 Taç Puanı).",
@@ -3239,6 +3265,32 @@ var Ls = {
   "end.tip": "Tip: upgrading towers often beats building new ones. Put barracks at road bends.",
   "end.heroXp": "{hero} +{n} XP",
   "end.xpWord": "XP",
+  "tut.fusion": "Fusion unlocked! Two nearby level-3 elemental towers (Dragon Forge, Frost, Storm, Alchemist) can merge. Tap one and pick its partner's fused image in the menu: the two towers become a single, far stronger one.",
+  "branch.fz_buhar": "Steam Cauldron",
+  "branch.fz_buhar.desc": "Fire and ice combined: the burning fireball leaves a slowing steam cloud where it lands.",
+  "branch.fz_simsek": "Firestorm",
+  "branch.fz_simsek.desc": "Crimson lightning leaps from foe to foe and sets everything it strikes ablaze.",
+  "branch.fz_duman": "Toxic Smoke",
+  "branch.fz_duman.desc": "The poison potion ignites: every shot poisons, burns and explodes.",
+  "branch.fz_kutup": "Polar Spire",
+  "branch.fz_kutup.desc": "Ice-blue lightning slows; every third shot freezes the first target.",
+  "branch.fz_curuk": "Rotting Ice",
+  "branch.fz_curuk.desc": "Frozen poison rots armor, slows enemies and poisons them for a long time.",
+  "branch.fz_asit": "Acid Storm",
+  "branch.fz_asit.desc": "Acid rain soaks and poisons, then green lightning leaps between the poisoned.",
+  "branch.fz_buhar2": "Great Steam Cauldron",
+  "branch.fz_buhar2.desc": "Wider fire, thicker steam, longer slow.",
+  "branch.fz_simsek2": "Hellstorm",
+  "branch.fz_simsek2.desc": "Lightning leaps to seven foes, flames burn hotter.",
+  "branch.fz_duman2": "Black Smoke",
+  "branch.fz_duman2.desc": "Wider area, heavier poison.",
+  "branch.fz_kutup2": "Eternal Winter",
+  "branch.fz_kutup2.desc": "Leaps to six foes, freezes longer.",
+  "branch.fz_curuk2": "Black Ice",
+  "branch.fz_curuk2.desc": "Rots armor longer, poison grows heavier.",
+  "branch.fz_asit2": "Acid Deluge",
+  "branch.fz_asit2.desc": "Lightning leaps between six poisoned foes.",
+  "hud.fusion": "Fusion",
   "endless.r1": "The waves never end; each is stronger than the last.",
   "endless.r2": "A commander attacks every 5 waves.",
   "endless.r3": "Hold 20 waves: Endless badge (+1 Crown Point).",
@@ -9201,10 +9253,41 @@ var DAL = {
   warRune: { art: "kule_run_dal_savas", cost: 240, damage: [0, 0], rate: 3, range: 320, buff: 0.45 },
   quakeRune: { art: "kule_run_dal_sarsinti", cost: 240, damage: [40, 60], rate: 4, range: 310, buff: 0.3, slow: 0.35, slowTime: 1.5 },
 };
+// ===== FÜZYON KULELERİ: iki 3. seviye element kulesi birleşir =====
+var FUZYON = {
+  buhar: ["fire", "frost"],
+  simsek: ["fire", "storm"],
+  duman: ["fire", "alchemist"],
+  kutup: ["frost", "storm"],
+  curuk: ["frost", "alchemist"],
+  asit: ["alchemist", "storm"],
+};
+Object.assign(DAL, {
+  fz_buhar: { art: "kule_fuzyon_buhar_1", cost: 180, damage: [70, 100], rate: 2.6, range: 330, splash: 140, burnDps: 10, burnTime: 4, slow: 0.45, slowTime: 3, target: "ground" },
+  fz_buhar2: { art: "kule_fuzyon_buhar_2", cost: 260, damage: [110, 150], rate: 2.5, range: 350, splash: 160, burnDps: 15, burnTime: 4, slow: 0.55, slowTime: 3.5, target: "ground" },
+  fz_simsek: { art: "kule_fuzyon_simsek_1", cost: 180, damage: [80, 105], rate: 2.6, range: 340, chains: 5, bounce: 210, decay: 0.86, burnDps: 10, burnTime: 3 },
+  fz_simsek2: { art: "kule_fuzyon_simsek_2", cost: 260, damage: [120, 160], rate: 2.5, range: 360, chains: 7, bounce: 230, decay: 0.88, burnDps: 15, burnTime: 3.5 },
+  fz_duman: { art: "kule_fuzyon_duman_1", cost: 180, damage: [55, 75], rate: 2.4, range: 320, splash: 130, poisonDps: 18, poisonTime: 5, burnDps: 10, burnTime: 3, target: "ground" },
+  fz_duman2: { art: "kule_fuzyon_duman_2", cost: 260, damage: [85, 115], rate: 2.3, range: 340, splash: 150, poisonDps: 26, poisonTime: 5, burnDps: 14, burnTime: 3.5, target: "ground" },
+  fz_kutup: { art: "kule_fuzyon_kutup_1", cost: 180, damage: [70, 95], rate: 2.4, range: 340, chains: 4, bounce: 190, decay: 0.85, slow: 0.5, slowTime: 2.5, freeze: 1.4 },
+  fz_kutup2: { art: "kule_fuzyon_kutup_2", cost: 260, damage: [105, 140], rate: 2.3, range: 360, chains: 6, bounce: 210, decay: 0.87, slow: 0.6, slowTime: 3, freeze: 1.8 },
+  fz_curuk: { art: "kule_fuzyon_curuk_1", cost: 180, damage: [60, 80], rate: 2.2, range: 320, splash: 120, poisonDps: 16, poisonTime: 5, armorBreak: 6, slow: 0.4, slowTime: 3, target: "ground" },
+  fz_curuk2: { art: "kule_fuzyon_curuk_2", cost: 260, damage: [90, 120], rate: 2.1, range: 340, splash: 140, poisonDps: 24, poisonTime: 5, armorBreak: 8, slow: 0.5, slowTime: 3.5, target: "ground" },
+  fz_asit: { art: "kule_fuzyon_asit_1", cost: 180, damage: [65, 85], rate: 2.4, range: 330, splash: 110, poisonDps: 16, poisonTime: 4, chains: 4, bounce: 190, target: "ground" },
+  fz_asit2: { art: "kule_fuzyon_asit_2", cost: 260, damage: [100, 130], rate: 2.3, range: 350, splash: 130, poisonDps: 24, poisonTime: 4.5, chains: 6, bounce: 210, target: "ground" },
+});
+function fuzyonTuru(a, b) {
+  for (let k in FUZYON) {
+    let [x, y] = FUZYON[k];
+    if ((a === x && b === y) || (a === y && b === x)) return k;
+  }
+  return null;
+}
 function ps(e, t, b) {
   let s = 0;
   for (let a = 0; a < Math.min(t, 3); a++) s += oe[e].levels[a].cost;
   if (b && DAL[b]) s += DAL[b].cost;
+  if (b && b.startsWith("fz_") && b.endsWith("2")) s += DAL[b.slice(0, -1)].cost;
   return s;
 }
 var ii = { archer: "kule_gozcu_1", barracks: "kule_kisla_1", fire: "kule_ejder_1", frost: "kule_ayaz_1", ballista: "kule_balista_1", mine: "kule_maden_1", storm: "kule_firtina_1", eagle: "kule_kartal_1", alchemist: "kule_simyaci_1", rune: "kule_run_1" },
@@ -11937,8 +12020,137 @@ class Ss {
       ),
         this.s.sfx("ice"));
   }
+  zincir(e, t, n) {
+    // e'den başlayarak en yakın düşmanlara sıçrayan zincir
+    let r = [e],
+      c = e;
+    for (let d = 1; d < n; d++) {
+      let h = null,
+        u = t;
+      for (let f of this.s.enemies) {
+        if (!f.alive || r.includes(f)) continue;
+        let _ = Math.hypot(f.x - c.x, f.y - c.y);
+        if (_ < u) ((u = _), (h = f));
+      }
+      if (!h) break;
+      (r.push(h), (c = h));
+    }
+    return r;
+  }
+  fuzyonAtes(e, t, s, a, i) {
+    let S = this.s,
+      tur = this.branch.replace(/^fz_/, "").replace(/2$/, ""),
+      zehir = (u, k = 1) =>
+        u.alive && ((u.status.poisonDps = Math.max(u.status.poisonT > 0 ? u.status.poisonDps : 0, t.poisonDps * k)), (u.status.poisonT = Math.max(u.status.poisonT, t.poisonTime)), t.armorBreak && (u.status.armorBrokenT = Math.max(u.status.armorBrokenT, t.armorBreak))),
+      yavas = (u) => u.alive && u.def.immune?.includes("ice") !== !0 && u.status.addSlow("frost", t.slow, t.slowTime),
+      hedef = (r) => {
+        let n = e.blockedBy || e.status.stunned ? 0 : e.speed * (1 - e.status.slowTotal(e.boss)) * 0.75;
+        return e.path.at(e.dist + n * r);
+      },
+      parlama = (x, y, renk, r) => {
+        let g = S.add.image(x, y, "parcacik").setTint(renk).setBlendMode(Phaser.BlendModes.ADD).setDepth(4100).setScale(r / 10).setAlpha(0.9);
+        S.tweens.add({ targets: g, scale: (r / 10) * 2.2, alpha: 0, duration: 420, ease: "Cubic.Out", onComplete: () => g.destroy() });
+      };
+    switch (tur) {
+      case "buhar": {
+        // ateş ve buz birlikte: alev topu yere düşer, buhar bulutu kalır (ıslatır, yavaşlatır)
+        let o = hedef(1),
+          l = t.splash;
+        S.addProjectile(
+          new Me(S, "fireball", s, a - 10, null, { x: o.x, y: o.y }, 0, (d, h) => {
+            (S.fx.fireImpact(d, h, l * 0.8), S.fx.frostImpact(d, h), parlama(d, h, 14745599, l * 0.7), S.spawnSteam(d, h, l * 0.8, 2.6));
+            for (let u of S.enemiesNear(d, h, l)) {
+              if (u.flying) continue;
+              let f = 1 - 0.3 * (Math.hypot(u.x - d, u.y - h) / l);
+              (S.combat.hit(u, i * f, { kind: "magic", element: "fire" }), u.alive && u.status.burn(t.burnDps, t.burnTime), yavas(u));
+            }
+            (S.sfx("fire"), S.sfx("ice"));
+          }, 0.75),
+        );
+        return;
+      }
+      case "duman": {
+        // zehirli iksir alevle tutuşur: önce zehir, ardından ateş (patlama kombosu)
+        let o = hedef(1),
+          l = t.splash;
+        S.addProjectile(
+          new Me(S, "potion", s, a - 10, null, { x: o.x, y: o.y }, 900, (d, h) => {
+            (S.fx.ring(d, h, l, 9500544, 380, 6), S.fx.fireImpact(d, h, l * 0.7), S.fx.dust(d, h), parlama(d, h, 11206570, l * 0.6));
+            for (let u of S.enemiesNear(d, h, l)) {
+              if (u.flying) continue;
+              (S.combat.hit(u, i * 0.5, { kind: "magic", element: "poison" }), zehir(u));
+              if (u.alive) (S.combat.hit(u, i * 0.5, { kind: "magic", element: "fire" }), u.alive && u.status.burn(t.burnDps, t.burnTime));
+            }
+            Ie("iksir", "muhur", { volume: 0.6, minGapMs: 160, maxLive: 2 });
+          }),
+        );
+        return;
+      }
+      case "curuk": {
+        // donmuş zehir: zırhı çürütür, yavaşlatır, zehirler
+        let l = t.splash;
+        S.addProjectile(
+          new Me(S, "potion", s, a - 10, e, null, 900, (d, h) => {
+            (S.fx.ring(d, h, l, 10541055, 380, 6), S.fx.frostImpact(d, h), S.fx.burst(d, h - 10, "kirik_buz", 8, 11206570, 60, 420, 1.2, h + 50), parlama(d, h, 10541055, l * 0.6));
+            for (let u of S.enemiesNear(d, h, l)) {
+              if (u.flying) continue;
+              (S.combat.hit(u, i, { kind: "magic", element: "poison" }), zehir(u), yavas(u));
+            }
+            (Ie("iksir", "muhur", { volume: 0.6, minGapMs: 160, maxLive: 2 }), S.sfx("ice"));
+          }),
+        );
+        return;
+      }
+      case "asit": {
+        // asit yağmuru ıslatır ve zehirler, ardından yeşil şimşek zehirlilerin arasında sıçrar (aşırı yük)
+        let l = t.splash;
+        S.addProjectile(
+          new Me(S, "potion", s, a - 10, e, null, 900, (d, h) => {
+            (S.fx.ring(d, h, l, 9500544, 380, 6), parlama(d, h, 9500544, l * 0.6));
+            let vurulan = [];
+            for (let u of S.enemiesNear(d, h, l)) {
+              if (u.flying) continue;
+              (S.combat.hit(u, i * 0.5, { kind: "magic", element: "poison" }), zehir(u), u.alive && ((u.status.wetT = Math.max(u.status.wetT ?? 0, 3)), vurulan.push(u)));
+            }
+            let ilk = vurulan[0] ?? (e.alive ? e : null);
+            if (ilk) {
+              let z0 = this.zincir(ilk, t.bounce, t.chains),
+                o = [{ x: d, y: h - 20 }],
+                g = i * 0.6;
+              for (let u of z0) (o.push({ x: u.x, y: u.y - 34 * u.scale }), S.combat.hit(u, g, { kind: "magic", element: "lightning" }), (g *= 0.85));
+              S.fx.lightning(o, [3381555, 10092390]);
+            }
+            (Ie("iksir", "muhur", { volume: 0.5, minGapMs: 160, maxLive: 2 }), Ie("simsek", "muhur", { volume: 0.5, minGapMs: 140, maxLive: 2 }));
+          }),
+        );
+        return;
+      }
+      case "simsek":
+      case "kutup": {
+        // ateş fırtınası: yakan kızıl zincir · kutup: donduran mavi zincir (donana çarpan şimşek parçalar)
+        let z0 = this.zincir(e, t.bounce, t.chains),
+          o = [{ x: s, y: a - 30 }],
+          g = i;
+        this.zSay = (this.zSay ?? 0) + 1;
+        for (let [k, u] of z0.entries()) {
+          o.push({ x: u.x, y: u.y - 34 * u.scale - (u.flying ? 70 : 0) });
+          S.combat.hit(u, g, { kind: "magic", element: "lightning" });
+          if (tur === "simsek") u.alive && u.status.burn(t.burnDps, t.burnTime);
+          else {
+            yavas(u);
+            if (k === 0 && this.zSay % 3 === 0 && u.alive && u.status.freezeImmuneT <= 0 && u.def.immune?.includes("ice") !== !0)
+              ((u.status.frozenT = u.boss ? 0.6 : t.freeze), (u.status.freezeImmuneT = u.status.frozenT + 2.5), S.fx.ring(u.x, u.y - 20, 70, 10541055, 420, 6));
+          }
+          g *= t.decay;
+        }
+        (S.fx.lightning(o, tur === "simsek" ? [13382451, 16747571] : [6732799, 13434879]), Ie("simsek", "muhur", { volume: 0.6, minGapMs: 140, maxLive: 2 }));
+        return;
+      }
+    }
+  }
   dalAtes(e, t, s, a, i) {
     let S = this.s;
+    if (this.branch.startsWith("fz_")) return (this.fuzyonAtes(e, t, s, a, i), !0);
     switch (this.branch) {
       case "arrowRain": {
         let r = S.enemiesNear(e.x, e.y, t.splash).filter((n) => !n.flying);
@@ -12543,7 +12755,7 @@ class Ps {
       onComplete: () => r.destroy(),
     });
   }
-  lightning(e) {
+  lightning(e, renk) {
     let t = this.s.add.graphics().setDepth(3001),
       s = [];
     for (let a = 0; a < e.length - 1; a++) {
@@ -12562,8 +12774,9 @@ class Ps {
       for (let o of s) t.lineTo(o.x, o.y);
       t.strokePath();
     };
-    (a(16, 7062015, 0.28), a(7, 11587583, 0.75), a(3, 16777215, 1));
-    for (let i of e.slice(1)) this.ring(i.x, i.y, 34, 11587583, 220, 4);
+    let [r1, r2] = renk ?? [7062015, 11587583];
+    (a(16, r1, 0.28), a(7, r2, 0.75), a(3, 16777215, 1));
+    for (let i of e.slice(1)) this.ring(i.x, i.y, 34, r2, 220, 4);
     this.s.tweens.add({ targets: t, alpha: 0, duration: 240, onComplete: () => t.destroy() });
   }
   hitSpark(e, t) {
@@ -13677,6 +13890,54 @@ class Rs extends Phaser.Scene {
           },
         });
       });
+    // füzyon: yakındaki farklı elementli 3. seviye kuleyle birleş (II. Çağ ve Sonsuz Kuşatma)
+    if (s.level === 3 && !s.branch && this.stage.id >= 9) {
+      let acilar = [0, 45, 135],
+        n = 0;
+      this.towers.forEach((p, pi) => {
+        if (!p || p === s || p.level !== 3 || p.branch || n >= 3) return;
+        let tur = fuzyonTuru(s.def.id, p.def.id);
+        if (!tur || Math.hypot(p.x - s.x, (p.y - s.y) * 1.15) > 340) return;
+        let k = "fz_" + tur,
+          d = DAL[k],
+          sec = t === k + ":" + pi;
+        a.push({
+          id: "fz_" + pi,
+          icon: sec ? "ikon_tamam" : d.art,
+          angle: acilar[n++],
+          label: String(d.cost),
+          enabled: this.gold >= d.cost,
+          cost: d.cost,
+          selected: sec,
+          action: () => {
+            if (this.gold < d.cost) return void this.fx.floatText(s.x, s.y - 160, m("hud.notEnoughGold"), "#ffb0a0", 30);
+            if (!sec) return void this.openTowerMenu(e, k + ":" + pi);
+            ((this.gold -= d.cost), this.closeMenu(), this.fuzyonYap(e, pi, k));
+          },
+        });
+      });
+    }
+    // füzyon kulesi ikinci kademe
+    if (s.branch?.startsWith("fz_") && !s.branch.endsWith("2")) {
+      let k = s.branch + "2",
+        r = DAL[k].cost,
+        sec = t === k;
+      a.push({
+        id: "fz_up",
+        icon: sec ? "ikon_tamam" : "ikon_yukselt",
+        iconScale: sec ? 1.4 : 1,
+        angle: -90,
+        label: String(r),
+        enabled: this.gold >= r,
+        cost: r,
+        selected: sec,
+        action: () => {
+          if (this.gold < r) return void this.fx.floatText(s.x, s.y - 160, m("hud.notEnoughGold"), "#ffb0a0", 30);
+          if (!sec) return void this.openTowerMenu(e, k);
+          ((this.gold -= r), s.takeBranch(k), this.closeMenu(), this.events.emit("towerUpgraded", s));
+        },
+      });
+    }
     let i = Math.floor(ps(s.def.id, s.level, s.branch) * gs);
     if (
       (a.push({
@@ -13716,11 +13977,63 @@ class Rs extends Phaser.Scene {
         this.cameras.main.zoom,
         s.branch ? m("branch." + s.branch) : m("hud.level", { n: s.level }) + " · " + m(s.def.nameKey),
       )),
-      this.showRange(s.x, s.y, typeof t === "string" ? DAL[t].range || s.range : t && s.level < 3 ? s.def.levels[s.level].range : s.range),
-      this.events.emit("towerSelected", s, t));
+      this.showRange(s.x, s.y, typeof t === "string" ? DAL[t.split(":")[0]].range || s.range : t && s.level < 3 ? s.def.levels[s.level].range : s.range),
+      this.fuzyonIsaret(typeof t === "string" && t.includes(":") ? this.towers[+t.split(":")[1]] : null),
+      this.events.emit("towerSelected", s, typeof t === "string" ? t.split(":")[0] : t));
+  }
+  fuzyonIsaret(p) {
+    // seçilen füzyon ortağının altında dönen ışık
+    (this.fzIs?.destroy(), (this.fzIs = null));
+    if (!p) return;
+    let c = this.add.container(p.x, p.y + 10).setDepth(-400),
+      g = this.add.ellipse(0, 0, 170, 70, 16766080, 0.18).setStrokeStyle(4, 16771530, 0.9);
+    c.add(g);
+    if (M("sv_menzil")) {
+      let r = this.add.image(0, 0, "sv_menzil").setDisplaySize(200, 200);
+      (c.add(this.add.container(0, 0, [r]).setScale(1, 0.4)), this.tweens.add({ targets: r, angle: 360, duration: 6000, repeat: -1 }));
+    }
+    (this.tweens.add({ targets: g, scale: 1.12, alpha: 0.6, yoyo: !0, repeat: -1, duration: 500 }), (this.fzIs = c));
+  }
+  fuzyonYap(e, pi, k) {
+    // ortak kule ışığa dönüşüp birleşir; ana kule füzyon kulesine dönüşür
+    let s = this.towers[e],
+      p = this.towers[pi];
+    if (!s || !p) return;
+    (this.fuzyonIsaret(null), V("muhur", { volume: 0.9 }));
+    let isin = this.add.graphics().setDepth(s.y + 200).setBlendMode(Phaser.BlendModes.ADD),
+      t0 = { v: 0 };
+    this.tweens.add({
+      targets: t0,
+      v: 1,
+      duration: 650,
+      onUpdate: () => {
+        isin.clear();
+        let x = p.x + (s.x - p.x) * t0.v,
+          y = p.y - 80 + (s.y - 80 - (p.y - 80)) * t0.v;
+        (isin.lineStyle(18, 16766080, 0.25), isin.lineBetween(p.x, p.y - 80, x, y), isin.lineStyle(6, 16771530, 0.9), isin.lineBetween(p.x, p.y - 80, x, y));
+      },
+      onComplete: () => this.tweens.add({ targets: isin, alpha: 0, duration: 300, onComplete: () => isin.destroy() }),
+    });
+    let ps0 = p.sprite ?? p.view;
+    if (ps0) this.tweens.add({ targets: ps0, scaleX: 0, scaleY: ps0.scaleY * 1.4, alpha: 0, duration: 650, ease: "Cubic.In" });
+    this.time.delayedCall(650, () => {
+      (p.destroy(), (this.towers[pi] = null), this.spotImgs[pi]?.setVisible(!0), this.fx.dust(p.x, p.y + 20));
+      (s.takeBranch(k), this.fx.explosion?.(s.x, s.y - 60, 120), this.cameras.main.shake(220, 0.006), V("upgrade", { volume: 0.9 }));
+      if (M("z_isik")) {
+        let isk = this.add.image(s.x, s.y - 90, "z_isik").setBlendMode(Phaser.BlendModes.ADD).setDepth(s.y + 300);
+        (isk.setScale(60 / isk.width), this.tweens.add({ targets: isk, scale: 420 / isk.width, angle: 120, alpha: 0, duration: 900, ease: "Cubic.Out", onComplete: () => isk.destroy() }));
+      }
+      for (let n = 0; n < 26; n++) {
+        let pk = this.add.image(s.x, s.y - 90, "parcacik").setTint(n % 2 ? 16766080 : 10541055).setBlendMode(Phaser.BlendModes.ADD).setDepth(s.y + 301).setScale(1.3);
+        let a = Math.random() * Math.PI * 2,
+          r = 80 + Math.random() * 140;
+        this.tweens.add({ targets: pk, x: s.x + Math.cos(a) * r, y: s.y - 90 + Math.sin(a) * r * 0.7, alpha: 0, scale: 0.2, duration: 700 + Math.random() * 400, onComplete: () => pk.destroy() });
+      }
+      (istat("fuzyon"), this.events.emit("towerUpgraded", s));
+    });
   }
   closeMenu() {
-    (this.menu?.destroy(),
+    (this.fuzyonIsaret(null), this.menu?.destroy(),
       (this.menu = null),
       (this.menuTarget = null),
       (this.pendingBuild = null),
@@ -15156,7 +15469,7 @@ class Os extends Phaser.Scene {
     if (M("panel_kucuk")) (o.fillStyle(0, 0.45), o.fillRoundedRect(-r / 2 + 6, -n / 2 + 10, r, n, 14), i.add([o, us(this, r + 16, n + 16)]));
     else (o.fillStyle(660528, 0.94), o.fillRoundedRect(-r / 2, -n / 2, r, n, 16), o.lineStyle(3, 14200904, 1), o.strokeRoundedRect(-r / 2, -n / 2, r, n, 14), i.add(o));
     i.add(wt(C(this, -r / 2 + 66, 48, a.art, 1), 124));
-    let l = m("branch." + t) + " · " + (s ? m("hud.branch") + " · " + a.cost + " " + m("hud.goldShort") : m(oe[e].nameKey));
+    let l = m("branch." + t) + " · " + (s ? m(t.startsWith("fz_") ? "hud.fusion" : "hud.branch") + " · " + a.cost + " " + m("hud.goldShort") : t.startsWith("fz_") ? m("hud.fusion") : m(oe[e].nameKey));
     (i.add(this.add.text(-r / 2 + 136, -56, l, z(32, "#f4dc90", "900"))),
       i.add(ne(this, -r / 2 + 136, -12, m("branch." + t + ".desc"), r - 160, 25, "#ece2c8")),
       i.setAlpha(0).setY(w - 62),
@@ -15209,6 +15522,8 @@ class Os extends Phaser.Scene {
         if (!t.seenTowers.includes(a)) (await this.towerCard(a), t.seenTowers.push(a), j());
       if (e.stage.id >= ka && !t.tutorialDone.branch)
         (await this.messageCard(m("tut.branch"), "kule_gozcu_dal_keskin"), (t.tutorialDone.branch = !0), j());
+      if (e.stage.id >= 9 && !t.tutorialDone.fusion && M("kule_fuzyon_buhar_1"))
+        (await this.messageCard(m("tut.fusion"), "kule_fuzyon_buhar_1"), (t.tutorialDone.fusion = !0), j());
       if (e.stage.mineSpots.length && !t.tutorialDone.mine)
         (await this.messageCard(m("tut.mine"), "kule_maden_1"), (t.tutorialDone.mine = !0), j());
       if (e.stage.tutorial === "flying" && !t.tutorialDone.flying)

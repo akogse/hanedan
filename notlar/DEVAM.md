@@ -5,5 +5,5 @@ Sıra:
 2. [x] Başarımlar — 12 (assets/basarim_*.webp). Her biri +1 Taç Puanı; oyun içinde altın şerit duyurusu.
 3. [x] Zorluk modları — Kahramanca / Demir (rozet_*.webp); brifingde seçim, haritada düğüm rozetleri.
 4. [x] Sonsuz Kuşatma — harita assets/harita_sonsuz_tam_a/b.webp, yerleşim notlar/harita_sonsuz.json; yollar araclar/yol_uydur.py ile uydurulacak.
-5. [ ] Füzyon kuleleri — kule_fuzyon_*.webp sabit resimler var, saldırı videoları kısmen.
+5. [x] Füzyon kuleleri — kule_fuzyon_*.webp sabit resimler var, saldırı videoları kısmen.
 Test: scratchpad t_*.js sürücüleri; yerel sunucu `python3 -m http.server 8765`.
