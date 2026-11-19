@@ -177,6 +177,23 @@
     kh_anahtar_yatak: "assets/kh_anahtar_yatak.webp?v=d6dcdddd",
     kh_anahtar_topuz: "assets/kh_anahtar_topuz.webp?v=08dd9b18",
     acilis_logo: "assets/acilis_logo.webp?v=af57bed3",
+    sv_durum_yanma: "assets/sv_durum_yanma.webp?v=0d0f121e",
+    sv_durum_yavas: "assets/sv_durum_yavas.webp?v=24d70e2d",
+    sv_durum_islak: "assets/sv_durum_islak.webp?v=133d2e8c",
+    sv_durum_sersem: "assets/sv_durum_sersem.webp?v=14481744",
+    sv_durum_kor: "assets/sv_durum_kor.webp?v=963f7b22",
+    sv_durum_kalkan: "assets/sv_durum_kalkan.webp?v=9d30a12c",
+    sv_kombo_buhar: "assets/sv_kombo_buhar.webp?v=e0bd013e",
+    sv_kombo_parcalanma: "assets/sv_kombo_parcalanma.webp?v=a09dc16f",
+    sv_kombo_patlama: "assets/sv_kombo_patlama.webp?v=5b982ae0",
+    sv_kombo_erime: "assets/sv_kombo_erime.webp?v=d12aa68a",
+    sv_kombo_asiri_yuk: "assets/sv_kombo_asiri_yuk.webp?v=7c2cee88",
+    sv_menzil: "assets/sv_menzil.webp?v=803e1471",
+    sv_secim: "assets/sv_secim.webp?v=6d7be689",
+    sv_boss_cerceve: "assets/sv_boss_cerceve.webp?v=9959444d",
+    sv_boss_dolgu: "assets/sv_boss_dolgu.webp?v=58bdb4f5",
+    sv_el: "assets/sv_el.webp?v=cac55a98",
+    sv_hedef: "assets/sv_hedef.webp?v=1c5c7aec",
     ui_bolum_seridi: "assets/ui_bolum_seridi.webp?v=b0f5cb39",
     ui_dugme_yuvarlak: "assets/ui_dugme_yuvarlak.webp?v=fd71954d",
     ui_ipucu_seridi: "assets/ui_ipucu_seridi.webp?v=9c2ed02b",
@@ -3796,15 +3813,28 @@ class Ze extends Phaser.Scene {
     });
   }
   playBurst() {
-    // eski geçiş videosu logoyu ~1 sn tamamen beyaza patlatıyordu; yerine logodan karartmaya yumuşak geçiş
-    let e = this.intro,
-      t = this.cameras.main;
-    if (e) this.tweens.add({ targets: e, scale: (e.scale ?? 1) * 1.06, duration: 900, ease: "Sine.easeIn" });
-    let a = this.add.graphics().setDepth(10).setBlendMode(Phaser.BlendModes.ADD).setAlpha(0);
-    (a.fillStyle(16766080, 1), a.fillCircle(T / 2, w * 0.45, Math.max(T, w) * 0.42));
-    (this.tweens.add({ targets: a, alpha: 0.18, duration: 380, yoyo: !0, ease: "Sine.easeInOut" }),
-      this.time.delayedCall(380, () => t.fadeOut(520, 0, 0, 0)),
-      this.time.delayedCall(920, () => this.goMenu()));
+    // Başla'ya basınca logonun arkasında patlayan ışık (geçiş videosu); logo ile aynı sahnede, aynı ölçekte
+    let e = this.pickUrl(_e.gecis);
+    if (!e) {
+      this.flashOut();
+      return;
+    }
+    let t = this.add.video(0, 0).setVisible(!1);
+    (this.stage.addAt(t, 1), (this.burst = t), t.loadURL(e, !1));
+    let s = () => {
+        (this.fit(t), t.setVisible(!0), this.intro?.setVisible(!1));
+      },
+      a = this.time.addEvent({
+        delay: 16,
+        loop: !0,
+        callback: () => {
+          if (t.getCurrentTime() > 0.04) (a.remove(), s());
+        },
+      });
+    (t.once("complete", () => this.goMenu()),
+      t.once("error", () => this.flashOut()),
+      t.play(!1),
+      this.time.delayedCall(12000, () => this.goMenu()));
   }
   pickUrl(e) {
     if (!e?.length) return null;
@@ -11535,9 +11565,15 @@ class Ms {
       (this.ring = e.add.ellipse(0, 2, 90, 30).setStrokeStyle(5, 15255674, 1).setVisible(!1)),
       this.view.add(this.ring));
     let r = e.add.ellipse(0, 4, 120, 40, 16762976, 0.32).setBlendMode(Phaser.BlendModes.ADD),
-      n = e.add.ellipse(0, 4, 104, 34).setStrokeStyle(3, 15255674, 0.85);
+      n;
+    if (M("sv_secim")) {
+      // altın zemin işareti: yerde yassı, yavaşça döner
+      let si = e.add.image(0, 0, "sv_secim");
+      (si.setDisplaySize(124, 124 * (256 / 233)), e.tweens.add({ targets: si, angle: 360, duration: 14000, repeat: -1 }));
+      n = e.add.container(0, 4, [si]).setScale(1, 0.32);
+    } else n = e.add.ellipse(0, 4, 104, 34).setStrokeStyle(3, 15255674, 0.85);
     (e.tweens.add({
-      targets: [r, n],
+      targets: n.type === "Container" ? [r] : [r, n],
       scaleX: 1.12,
       scaleY: 1.12,
       alpha: { from: 1, to: 0.55 },
@@ -11550,7 +11586,8 @@ class Ms {
       this.view.add(e.add.ellipse(0, 2, 70, 20, 0, 0.3)),
       (this.marker = e.add.container(0, -205)));
     let o = e.add.graphics();
-    (o.fillStyle(1840142, 0.9),
+    if (M("ikon_tac")) this.marker.add(wt(C(e, 0, -2, "ikon_tac", 1), 46));
+    else (o.fillStyle(1840142, 0.9),
       o.fillRoundedRect(-17, -22, 34, 36, 6),
       o.fillTriangle(-17, 12, 17, 12, 0, 26),
       o.lineStyle(3, 15255674, 1),
@@ -11850,6 +11887,16 @@ class Ps {
     )
       return;
     this.recentCombos.push({ x: e, y: t, t: a });
+    // kombo rozeti: düşmanın üstünde patlayarak büyür, altında kombo adı
+    let rk = "sv_kombo_" + { steam: "buhar", shatter: "parcalanma", explosion: "patlama", melt: "erime", overload: "asiri_yuk" }[s];
+    if (M(rk)) {
+      let rc = this.s.add.container(e, t - 150).setDepth(5200),
+        ri = this.s.add.image(0, 0, rk).setDisplaySize(96, 96),
+        rt = this.s.add.text(0, 58, G(m("combo." + s)), { fontFamily: D, fontStyle: "700", fontSize: "24px", color: ci[s], stroke: "#120c06", strokeThickness: 6 }).setOrigin(0.5).setLetterSpacing(2);
+      (rc.add([ri, rt]), rc.setScale(0.3).setAlpha(0));
+      (this.s.tweens.add({ targets: rc, scale: 1, alpha: 1, duration: 220, ease: "Back.Out" }),
+        this.s.tweens.add({ targets: rc, y: rc.y - 40, alpha: 0, delay: 800, duration: 420, ease: "Cubic.In", onComplete: () => rc.destroy() }));
+    }
     let i = Phaser.Display.Color.HexStringToColor(ci[s]).color,
       r = this.s.add
         .image(e, t - 10, "parcacik")
@@ -13050,6 +13097,18 @@ class Rs extends Phaser.Scene {
       this.events.emit("menuClosed"));
   }
   showRange(e, t, s) {
+    if (M("sv_menzil")) {
+      // rün çemberi: yerde yassı, içi hafif altın tül, yavaşça döner
+      this.rangeCircle?.destroy();
+      let c = this.add.container(e, t).setDepth(-500),
+        ic = this.add.ellipse(0, 0, s * 2, (s * 2) / 1.15, 16766080, 0.07),
+        hl = this.add.image(0, 0, "sv_menzil");
+      hl.setDisplaySize((s * 2) / 0.871, (s * 2) / 0.882);
+      let sar = this.add.container(0, 0, [hl]).setScale(1, 1 / 1.15);
+      (c.add([ic, sar]), this.tweens.add({ targets: hl, angle: 360, duration: 40000, repeat: -1 }));
+      ((this.rangeCircle = c), c.setScale(0.85).setAlpha(0), this.tweens.add({ targets: c, scale: 1, alpha: 1, duration: 180, ease: "Back.Out" }));
+      return;
+    }
     (this.rangeCircle?.destroy(),
       (this.rangeCircle = this.add
         .ellipse(e, t, s * 2, (s * 2) / 1.15, 13168778, 0.16)
@@ -13633,7 +13692,7 @@ class Rs extends Phaser.Scene {
   }
   drawBars() {
     let e = this.bars;
-    e.clear();
+    (e.clear(), (this.durumHavuz ??= []), (this.durumN = 0));
     let t = (s, a, i, r, n, o) => {
       if (
         (e.fillStyle(1840142, 1),
@@ -13651,18 +13710,23 @@ class Rs extends Phaser.Scene {
       let a = s.y - (s.boss ? 178 : s.def.id === "wolf" ? 100 : 132) * s.scale;
       if (s.hp < s.maxHp || s.elite || s.shieldHp > 0)
         t(s.x, a, s.boss ? 110 : 56, s.hp / s.maxHp, s.elite ? 13081150 : 11024940, s.shieldHp / s.maxHp);
-      let i = s.x - 24,
-        r = a - 14,
-        n = (o) => {
-          (e.fillStyle(1840142, 1), e.fillCircle(i, r, 9), e.fillStyle(o, 1), e.fillCircle(i, r, 6), (i += 18));
+      let i = s.x - 26,
+        r = a - 17,
+        n = (o, k) => {
+          // durum rozeti (görsel varsa), yoksa renkli nokta
+          if (M(k)) {
+            let im = this.durumHavuz[this.durumN] ?? (this.durumHavuz[this.durumN] = this.add.image(0, 0, k).setDepth(4501));
+            (im.setTexture(k).setPosition(i, r).setDisplaySize(28, 28).setVisible(!0), this.durumN++, (i += 26));
+          } else (e.fillStyle(1840142, 1), e.fillCircle(i, r, 9), e.fillStyle(o, 1), e.fillCircle(i, r, 6), (i += 18));
         };
-      if (s.status.burning) n(16747050);
-      if (s.status.slowTotal(s.boss) > 0) n(9426677);
-      if (s.status.wet) n(6273023);
-      if (s.status.stunned) n(16771174);
-      if (s.status.blindT > 0) n(3814736);
-      if (this.combat.shieldAuraFactor(s) < 1) n(13156528);
+      if (s.status.burning) n(16747050, "sv_durum_yanma");
+      if (s.status.slowTotal(s.boss) > 0) n(9426677, "sv_durum_yavas");
+      if (s.status.wet) n(6273023, "sv_durum_islak");
+      if (s.status.stunned) n(16771174, "sv_durum_sersem");
+      if (s.status.blindT > 0) n(3814736, "sv_durum_kor");
+      if (this.combat.shieldAuraFactor(s) < 1) n(13156528, "sv_durum_kalkan");
     }
+    for (let k = this.durumN; k < this.durumHavuz.length; k++) this.durumHavuz[k].setVisible(!1);
     for (let s of this.allFighters()) {
       let a = s === this.hero;
       if (!a && s.hp >= s.maxHp) continue;
@@ -14178,12 +14242,15 @@ class Os extends Phaser.Scene {
       this.boss && this.bossBar)
     ) {
       let n = Math.max(0, this.boss.hp / this.boss.maxHp);
+      if (this.bossYeni) {
+        let b = this.bossYeni;
+        (b.dol.setSize(Math.max(1, b.iw * n), b.dol.height), (b.dol.tilePositionX += 0.6));
+        // hasar izi kanın gerisinden yavaşça gelir
+        b.iz.setSize(Math.max(b.dol.width, b.iz.width - b.iw * 0.012), b.iz.height);
+      }
       if (
         (this.bossFill.clear(),
-        this.bossFill.fillStyle(11541026, 1),
-        this.bossFill.fillRect(this.bossBarX[0], -16, (this.bossBarX[1] - this.bossBarX[0]) * n, 32),
-        this.bossFill.fillStyle(16742485, 0.55),
-        this.bossFill.fillRect(this.bossBarX[0], -16, (this.bossBarX[1] - this.bossBarX[0]) * n, 8),
+        this.bossYeni || (this.bossFill.fillStyle(11541026, 1), this.bossFill.fillRect(this.bossBarX[0], -16, (this.bossBarX[1] - this.bossBarX[0]) * n, 32), this.bossFill.fillStyle(16742485, 0.55), this.bossFill.fillRect(this.bossBarX[0], -16, (this.bossBarX[1] - this.bossBarX[0]) * n, 8)),
         !this.boss.alive)
       ) {
         let o = this.bossBar;
@@ -14283,6 +14350,25 @@ class Os extends Phaser.Scene {
       bw = 720,
       bx0 = -bw / 2 + bw * 0.36,
       bx1 = -bw / 2 + bw * 0.84;
+    if (M("sv_boss_cerceve") && M("sv_boss_dolgu")) {
+      // dikenli çerçeve + akan kan dolgusu; arkada beyaz hasar izi
+      let fr = this.add.image(0, 46, "sv_boss_cerceve");
+      fr.setScale(640 / fr.width);
+      let iw = 640 * 0.839,
+        ih = fr.displayHeight * 0.384,
+        x0 = -320 + 640 * 0.08,
+        yc = 46 + (0.496 - 0.5) * fr.displayHeight,
+        zemin = this.add.rectangle(x0, yc, iw, ih, 1311753).setOrigin(0, 0.5),
+        iz = this.add.rectangle(x0, yc, iw, ih, 15909238, 0.55).setOrigin(0, 0.5),
+        dol = this.add.tileSprite(x0, yc, iw, ih, "sv_boss_dolgu").setOrigin(0, 0.5);
+      dol.tileScaleY = ih / 32;
+      s.add([zemin, iz, dol, fr]);
+      let ad = this.add.text(0, -6, m(e.def.nameKey), { fontFamily: D, fontStyle: "700", fontSize: "28px", color: "#f4dc90" }).setOrigin(0.5).setLetterSpacing(3).setShadow(0, 2, "#000", 6, !1, !0);
+      s.add(ad);
+      (this.bossYeni = { dol, iz, iw }), (this.bossBarX = [0, 0]), (this.bossBar = s), (this.bossFill = this.add.graphics());
+      return;
+    }
+    this.bossYeni = null;
     (a.fillStyle(2363404, 1), a.fillRect(bx0, -16, bx1 - bx0, 32), s.add(a), (this.bossFill = this.add.graphics()), s.add(this.bossFill));
     if (M("hud_kaynak_plakasi")) {
       let pl = this.add.image(0, 0, "hud_kaynak_plakasi");
@@ -14710,8 +14796,8 @@ class Os extends Phaser.Scene {
       this.time.delayedCall(t.auto * 1000, () => this.tut && this.tut.steps[this.tut.i] === t && this.nextTut());
     if (t.waitFor === "waveStarted") {
       let o = this.add.container(this.waveBtn.x, this.waveBtn.y - 120),
-        l = this.add.text(0, 0, "▼", { ...ge(80, "#e8c87a"), stroke: I.stroke, strokeThickness: 10 }).setOrigin(0.5);
-      (o.add(l), this.tweens.add({ targets: l, y: 20, yoyo: !0, repeat: -1, duration: 400 }), (e.marker = o));
+        l = M("sv_el") ? this.add.image(0, 0, "sv_el").setOrigin(0.344, 0.99).setDisplaySize(58, 120) : this.add.text(0, 0, "▼", { ...ge(80, "#e8c87a"), stroke: I.stroke, strokeThickness: 10 }).setOrigin(0.5);
+      (o.add(l), this.tweens.add({ targets: l, y: 20, yoyo: !0, repeat: -1, duration: 400, ease: "Sine.InOut" }), (e.marker = o));
     }
   }
   updateTutMarker() {
@@ -14726,11 +14812,12 @@ class Os extends Phaser.Scene {
     }
     if (!e.marker) {
       let r = this.add.container(0, 0),
-        n = this.add.ellipse(0, 0, 160, 90).setStrokeStyle(8, 15255674, 1),
-        o = this.add.text(0, -150, "▼", { ...ge(80, "#e8c87a"), stroke: I.stroke, strokeThickness: 10 }).setOrigin(0.5);
+        n = M("sv_hedef") ? this.add.container(0, 0, [this.add.image(0, 0, "sv_hedef").setDisplaySize(170, 170)]).setScale(1, 0.56) : this.add.ellipse(0, 0, 160, 90).setStrokeStyle(8, 15255674, 1),
+        o = M("sv_el") ? this.add.image(0, -50, "sv_el").setOrigin(0.344, 0.99).setDisplaySize(64, 133) : this.add.text(0, -150, "▼", { ...ge(80, "#e8c87a"), stroke: I.stroke, strokeThickness: 10 }).setOrigin(0.5),
+        oy = o.y;
       (r.add([n, o]),
-        this.tweens.add({ targets: n, scale: 1.25, alpha: 0.4, yoyo: !0, repeat: -1, duration: 500 }),
-        this.tweens.add({ targets: o, y: -130, yoyo: !0, repeat: -1, duration: 400 }),
+        this.tweens.add(n.type === "Container" ? { targets: n.list[0], scaleX: n.list[0].scaleX * 1.15, scaleY: n.list[0].scaleY * 1.15, alpha: 0.45, yoyo: !0, repeat: -1, duration: 600, ease: "Sine.InOut" } : { targets: n, scale: 1.25, alpha: 0.4, yoyo: !0, repeat: -1, duration: 500 }),
+        this.tweens.add({ targets: o, y: oy + 20, yoyo: !0, repeat: -1, duration: 420, ease: "Sine.InOut" }),
         (e.marker = r));
     }
     let a = this.b.worldToScreen(s.x, s.y + 20),
