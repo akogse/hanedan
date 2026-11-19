@@ -1,5 +1,5 @@
 // Çevrimdışı oynanış: sayfa her güncellemede yenilenir; görsel/ses/video bir kez iner ve güncellemelerde korunur.
-const V = 'hanedan-1795107533';
+const V = 'hanedan-1795108892';
 self.addEventListener('install', (e) => { self.skipWaiting(); e.waitUntil(caches.open(V).then((c) => c.addAll(['./', './index.html', './manifest.webmanifest']))); });
 const VARLIK = 'hanedan-varliklar-1'; // görsel, ses, video: güncellemelerde silinmez
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== V && k !== VARLIK).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
