@@ -9,3 +9,10 @@
 - `kule_yeri_oner.py bolum.json onizleme.png` — yola 115–160 px uzaklıkta, birbirinden en az 185 px ayrık kule yerleri önerir.
 - `harita_rehber.py bolum.json cikti.png` — çizilecek harita için 3840×2160 yerleşim görseli.
 - `bolum_simulasyonu.js BOLUM 'PLAN' cikti.png` — oyunu Playwright ile açar, bölümü çizimden bağımsız 0,05 sn adımlarla oynatan basit bir botla denge ölçer (yerel sunucu: `python3 -m http.server 8765`).
+
+## Ortak çalışma notları (paralel oturumlar için)
+- Push etmeden önce: `git pull --rebase origin main`, çakışmada `python3 kaynak/derle.py` ile index.html/sw.js yeniden üret.
+- Savaş temposu: `OYUN_TEMPO` (0.85). Savaşta zamanla ilerleyen her şey `this.speed * OYUN_TEMPO` ile ölçeklenmeli
+  (update dt, tweens.timeScale, kule saldırı animasyonu `anims.timeScale`). Yeni animasyon/efekt eklerken buna uy.
+- Kule `rate` değerleri saniye cinsinden bekleme; 2026-11-19'da tüm saldırı kulelerinde ×1.4, hasar ×1.5 yapıldı.
+- Sesler: ElevenLabs ücretsiz plan denemeleri `notlar/ucretsiz_sesler.txt` içinde listeli; yayından önce ücretli üretilecek.
