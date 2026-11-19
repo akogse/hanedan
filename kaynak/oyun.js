@@ -2556,7 +2556,7 @@ var $t = {
   "settings.off": "Kapalı",
   "settings.reset": "İlerlemeyi sıfırla",
   "settings.resetConfirm": "Tüm ilerleme silinsin mi?",
-  "settings.version": "Sürüm 0.1 · 1. aşama",
+  "settings.version": "Sürüm 0.2 · Erken erişim",
   "phase2.title": "Yakında",
   "phase2.body": "Yakında: kule güçlendirmeleri, Taç Ağacı, ganimet ve hikâye vakayinamesi.",
   "rotate.hint": "Yatay ekran önerilir",
@@ -3079,7 +3079,7 @@ var Ls = {
   "settings.off": "Off",
   "settings.reset": "Reset progress",
   "settings.resetConfirm": "Delete all progress?",
-  "settings.version": "Version 0.1 · Phase 1",
+  "settings.version": "Version 0.2 · Early access",
   "phase2.title": "Coming soon",
   "phase2.body": "Coming soon: tower upgrades, the Crown Tree, loot and the story chronicle.",
   "rotate.hint": "Landscape recommended",
@@ -6472,8 +6472,10 @@ function $a(e, t, s, a, i, r) {
       .setShadow(0, 3, "#000000", 6, !1, !0);
     if (M("baslik_seridi")) {
       let d = e.add.image(0, -i / 2 - 10, "baslik_seridi"),
-        h = Math.min(a + 40, Math.max(l.width + 300, 520));
+        h = Math.min(a + 40, Math.max(l.width / 0.56, 520));
       (d.setDisplaySize(h, (h * d.height) / d.width), l.setY(-i / 2 + 2), n.add(d));
+      // şeridin düz orta kısmı ~%56; uzun başlık sığmazsa küçülür
+      if (l.width > h * 0.56) l.setScale((h * 0.56) / l.width);
     }
     n.add(l);
   }
@@ -8521,7 +8523,7 @@ class _s extends Phaser.Scene {
   vakayiname(e, t = !1) {
     let K = ["vakayiname_cerceve", ...ce.map((x) => "vaka_" + String(x.id).padStart(2, "0")).filter((x) => zt[x])];
     if (K.some((x) => !this.textures.exists(x))) return void (this.toast(m("common.loading")), sayfaIste(this, K, () => this.vakayiname(e, t)));
-    this.agirAcik = K;
+    this.agirYeni = K;
     let s = ce.filter((d) => M("vaka_" + String(d.id).padStart(2, "0"))).map((d) => d.id),
       a = (d) => (P().bestStars[d] ?? 0) > 0,
       i = e ?? s.filter(a).pop() ?? 1,
@@ -8562,9 +8564,9 @@ class _s extends Phaser.Scene {
         let [O2, W2] = f(0.53, 0.12);
         (_.add(
           this.add.text(O2, W2, y ? m("vaka." + x + ".metin") : m("vaka.kilitli", { n: x }), {
-            fontFamily: D,
+            fontFamily: Gs,
             fontStyle: "700",
-            fontSize: Math.round(33 * h) + "px",
+            fontSize: Math.round(36 * h) + "px",
             color: "#3a2614",
             lineSpacing: 12 * h,
             wordWrap: { width: 1920 * h * 0.35, useAdvancedWrap: !0 },
@@ -8605,7 +8607,7 @@ class _s extends Phaser.Scene {
   }
   tacAgaci() {
     if (!this.textures.exists("tac_agaci_arka")) return void sayfaIste(this, ["tac_agaci_arka"], () => this.tacAgaci());
-    this.agirAcik = ["tac_agaci_arka"];
+    this.agirYeni = ["tac_agaci_arka"];
     this.openModal(() => {
       let e = this.add.container(0, 0),
         t = this.add.image(T / 2, w / 2, "tac_agaci_arka");
@@ -9314,7 +9316,9 @@ class _s extends Phaser.Scene {
   closeModal() {
     for (let e of this.modal) e.destroy();
     this.modal = [];
-    if (this.agirAcik) (sayfaBirak(this, this.agirAcik), (this.agirAcik = null));
+    // açılan pencerenin ağır görselleri yalnız o pencere kapanınca bırakılır
+    if (this.agirAcik) sayfaBirak(this, this.agirAcik);
+    ((this.agirAcik = this.agirYeni ?? null), (this.agirYeni = null));
   }
   toast(e) {
     let t = this.add
@@ -9486,14 +9490,14 @@ class _s extends Phaser.Scene {
       let e = this.add.container(T / 2, w / 2);
       (e.add(pe(this, 0, 0, 760, 760, m("settings.title"))),
         e.add(this.add.zone(0, 0, 760, 760).setInteractive()));
-      let a = F(this, -125, -230, 230, 90, sesEtiket("music"), () => (sesDegistir("music"), a.setLabel(sesEtiket("music"))), "blue", { size: 24 }),
-        i = F(this, 125, -230, 230, 90, sesEtiket("sfx"), () => (sesDegistir("sfx"), i.setLabel(sesEtiket("sfx"))), "blue", { size: 24 });
+      let a = F(this, -125, -230, 240, 96, sesEtiket("music"), () => (sesDegistir("music"), a.setLabel(sesEtiket("music"))), "blue", { size: 26 }),
+        i = F(this, 125, -230, 240, 96, sesEtiket("sfx"), () => (sesDegistir("sfx"), i.setLabel(sesEtiket("sfx"))), "blue", { size: 26 });
       (e.add([a, i]),
         e.add(
           F(
             this,
             0,
-            -110,
+            -100,
             480,
             100,
             m("hud.language"),
@@ -9508,7 +9512,7 @@ class _s extends Phaser.Scene {
         s = F(
           this,
           0,
-          20,
+          30,
           480,
           100,
           m("settings.reset"),
@@ -9524,8 +9528,8 @@ class _s extends Phaser.Scene {
         );
       return (
         e.add(s),
-        e.add(this.add.text(0, 150, m("settings.version"), z(26, I.muted, "800")).setOrigin(0.5)),
-        e.add(F(this, 0, 260, 240, 84, m("common.close"), () => this.closeModal(), "stone", { size: 28 })),
+        e.add(this.add.text(0, 140, m("settings.version"), z(24, "#c9d2ea", "700")).setOrigin(0.5)),
+        e.add(F(this, 0, 250, 300, 96, m("common.close"), () => this.closeModal(), "stone", { size: 30 })),
         [e]
       );
     });
@@ -11818,7 +11822,14 @@ class Rs extends Phaser.Scene {
       this.ortamKur());
     let s = t?.hero ?? P().hero,
       a = this.paths[0],
-      i = a.at(a.length - 330);
+      i = (() => {
+        // kahraman bir inşa noktasının üstünde başlamasın
+        for (let r = 330; r < 900; r += 20) {
+          let n = a.at(a.length - r);
+          if (e.buildSpots.every((o) => Math.hypot(o.x - n.x, o.y - (n.y - 40)) > 120)) return n;
+        }
+        return a.at(a.length - 330);
+      })();
     if (
       ((this.hero = new Ms(this, he[s], Ne(P().heroXp[s] ?? 0), i.x, i.y - 40)),
       (this.towers = e.buildSpots.map(() => null)),
