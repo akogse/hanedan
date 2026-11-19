@@ -8894,31 +8894,59 @@ class _s extends Phaser.Scene {
           .setOrigin(0.5),
       );
     else n.add(de(this.add.image(0, 0, "ikon_kilit"), "ikon_kilit", 0.8).setAlpha(0.85));
+    // bölüm adı şeridi: her düğümde aynı kural; üst çubuğa çarpacak düğümlerde yıldızların altına
     let h = G(m(e.nameKey)),
+      H = 46,
+      g = (() => {
+        // üstte mi altta mı: komşu düğümlere ve üst çubuğa çarpmayan ilk konum
+        let L = 130,
+          q = (y) => {
+            let c = 0,
+              ty = e.mapPos.y + y;
+            if (ty < 150 || ty + H > w - 170) c += 10;
+            for (let x of ce) {
+              if (x === e) continue;
+              let dx = Math.abs(x.mapPos.x - e.mapPos.x),
+                dy = ty + H / 2 - x.mapPos.y;
+              if (dx < L + 100 && dy > -110 && dy < 120) c++;
+            }
+            return c;
+          };
+        return q(-134) <= q(108) ? -134 : 108;
+      })(),
       u = this.add
-        .text(0, M(d) ? -100 : -78, h, {
+        .text(0, g + H / 2, h, {
           fontFamily: D,
           fontStyle: "700",
-          fontSize: "19px",
-          color: s ? "#f1e3c2" : "#c8bca4",
+          fontSize: "22px",
+          color: s ? "#f8e8c0" : "#c8bca4",
+          stroke: "#120c06",
+          strokeThickness: 4,
         })
         .setOrigin(0.5)
-        .setLetterSpacing(2),
-      f = u.width + 40,
+        .setLetterSpacing(2)
+        .setShadow(0, 2, "#000", 4, !1, !0),
+      f = Math.max(150, u.width + 48),
       _ = this.add.graphics();
-    _.fillStyle(s ? 3808276 : 2827808, s ? 0.92 : 0.75);
-    let g = M(d) ? -118 : -96;
-    // 6 ve 7 birbirine ve üst çubuğa çok yakın: etiketleri düğümün sağına
-    let yan = [6, 7].includes(e.id) ? (M(d) ? 86 : 70) + f / 2 + 14 : 0;
-    if (yan) ((g = -18), u.setPosition(yan, 0), (_.x = yan));
-    if (!s && !i) (u.setVisible(!1), _.setVisible(!1));
+    if (!r) (u.setVisible(!1), _.setVisible(!1));
     if (
-      (_.fillStyle(s ? 858168 : 1842984, s ? 0.92 : 0.75),
-      _.fillRoundedRect(-f / 2, g, f, 36, 6),
-      _.fillTriangle(-f / 2, g, -f / 2 - 14, g + 18, -f / 2, g + 36),
-      _.fillTriangle(f / 2, g, f / 2 + 14, g + 18, f / 2, g + 36),
-      _.lineStyle(1.5, s ? 14200904 : 6971992, 0.9),
-      _.strokeRoundedRect(-f / 2, g, f, 36, 6),
+      (_.fillStyle(0, 0.45),
+      _.fillRoundedRect(-f / 2 + 3, g + 5, f, H, 8),
+      _.fillStyle(s ? 1250856 : 1842984, 1),
+      _.fillRoundedRect(-f / 2, g, f, H, 8),
+      _.fillStyle(14200904, 1),
+      _.fillTriangle(-f / 2 + 2, g + 2, -f / 2 - 24, g + H / 2, -f / 2 + 2, g + H - 2),
+      _.fillTriangle(f / 2 - 2, g + 2, f / 2 + 24, g + H / 2, f / 2 - 2, g + H - 2),
+      _.fillStyle(1250856, 1),
+      _.fillTriangle(-f / 2 + 2, g + 7, -f / 2 - 15, g + H / 2, -f / 2 + 2, g + H - 7),
+      _.fillTriangle(f / 2 - 2, g + 7, f / 2 + 15, g + H / 2, f / 2 - 2, g + H - 7),
+      _.fillGradientStyle(s ? 2241356 : 2829099, s ? 2241356 : 2829099, s ? 1250856 : 1842984, s ? 1250856 : 1842984, 1),
+      _.fillRoundedRect(-f / 2 + 4, g + 4, f - 8, H / 2 - 2, { tl: 5, tr: 5, bl: 0, br: 0 }),
+      _.lineStyle(3, s ? 14200904 : 6971992, 1),
+      _.strokeRoundedRect(-f / 2, g, f, H, 8),
+      _.lineStyle(1, s ? 16771530 : 8421504, 0.55),
+      _.strokeRoundedRect(-f / 2 + 5, g + 5, f - 10, H - 10, 5),
+      M("ui_bolum_seridi") && (_.setVisible(!1), n.add(this.add.image(0, g + H / 2, "ui_bolum_seridi").setDisplaySize(f + 90, (f + 90) / 4))),
       n.add([_, u]),
       !s)
     )
@@ -8926,13 +8954,22 @@ class _s extends Phaser.Scene {
     if (e.era === 2 && bt() < Nt[1].starsRequired) n.setAlpha(0.3);
     if (s) {
       let y = this.add.graphics();
-      (y.fillStyle(660528, 0.9), y.fillRoundedRect(-78, 62, 156, 34, 17), y.lineStyle(1.5, 14200904, 0.7), y.strokeRoundedRect(-78, 62, 156, 34, 17), n.add(y));
+      (y.fillStyle(0, 0.45),
+        y.fillRoundedRect(-90, 64, 184, 42, 21),
+        y.fillStyle(1250856, 1),
+        y.fillRoundedRect(-92, 60, 184, 42, 21),
+        y.lineStyle(3, 14200904, 1),
+        y.strokeRoundedRect(-92, 60, 184, 42, 21),
+        y.lineStyle(1, 16771530, 0.5),
+        y.strokeRoundedRect(-87, 65, 174, 32, 16),
+        n.add(y));
+      if (M("ui_yildiz_tepsisi")) (y.setVisible(!1), n.add(this.add.image(0, 81, "ui_yildiz_tepsisi").setDisplaySize(200, 50)));
       for (let k = 0; k < 5; k++)
         n.add(
           de(
-            this.add.image((k - 2) * 28, 79, k < a ? "ikon_yildiz" : "ikon_yildiz_bos"),
+            this.add.image((k - 2) * 32, 81, k < a ? "ikon_yildiz" : "ikon_yildiz_bos"),
             k < a ? "ikon_yildiz" : "ikon_yildiz_bos",
-            0.48,
+            0.56,
           ).setTint(k < a ? 16771210 : 11053224).setAlpha(k < a ? 1 : 0.7),
         );
     }
@@ -13579,15 +13616,38 @@ class Os extends Phaser.Scene {
   newEnemyCard(e) {
     let t = Te[e];
     if (t.boss) return;
-    let s = this.add.container(O / 2, -160),
-      a = pe(this, 0, 0, 760, 200);
-    (s.add(a),
-      s.add(C(this, -290, 70, Ha(e), 0.9)),
-      s.add(this.add.text(-200, -62, G(m("hud.newEnemy")), z(24, I.red, "900"))),
-      s.add(this.add.text(-200, -32, m(t.nameKey), ge(40))),
-      s.add(ne(this, -200, 18, m(t.descKey), 540, 26)),
-      this.tweens.add({ targets: s, y: 320, duration: 350, ease: "Back.Out" }),
-      this.tweens.add({ targets: s, y: -200, delay: 4200, duration: 350, onComplete: () => s.destroy() }));
+    let s = this.add.container(O / 2, -170),
+      W = 860,
+      H = 220;
+    if (M("ui_bilgi_karti")) s.add(this.add.image(0, 0, "ui_bilgi_karti").setDisplaySize(W, (W * 560) / 1920));
+    else s.add(pe(this, 0, 0, W, H));
+    // portre yuvası: resim her zaman yuvanın içinde ve ortalı
+    let a = -W / 2 + 118,
+      i = this.add.graphics();
+    (i.fillStyle(0, 0.5),
+      i.fillCircle(a + 3, 5, 86),
+      i.fillStyle(661544, 1),
+      i.fillCircle(a, 0, 86),
+      i.lineStyle(6, 14200904, 1),
+      i.strokeCircle(a, 0, 86),
+      i.lineStyle(1.5, 16771530, 0.6),
+      i.strokeCircle(a, 0, 78),
+      M("ui_bilgi_karti") && i.setVisible(!1),
+      s.add(i));
+    let r = wt(C(this, a, 0, Ha(e), 1), 136);
+    (r.setY(r.y + (r.originY - 0.5) * r.displayHeight), s.add(r));
+    let n = a + 118,
+      o = W / 2 - n - 40,
+      l = this.add.text(n, 0, G(m("hud.newEnemy")), { ...z(21, "#ff9a7a", "900"), letterSpacing: 3 }),
+      d = this.add.text(n, 0, m(t.nameKey), ge(38)),
+      h = this.add.text(n, 0, m(t.descKey), { ...z(25, "#ece2c8", "600"), wordWrap: { width: o, useAdvancedWrap: !0 }, lineSpacing: 4 });
+    d.setScale(Math.min(1, o / d.width));
+    let u = l.height + d.height * d.scaleY + h.height + 10,
+      f = -u / 2;
+    (l.setY(f), d.setY(f + l.height + 2), h.setY(f + l.height + d.height * d.scaleY + 10));
+    (s.add([l, d, h]),
+      this.tweens.add({ targets: s, y: 300, duration: 350, ease: "Back.Out" }),
+      this.tweens.add({ targets: s, y: -220, delay: 4200, duration: 350, onComplete: () => s.destroy() }));
   }
   buildGates() {
     let e = [];
@@ -13905,10 +13965,15 @@ class Os extends Phaser.Scene {
     return this.modal((s) => {
       let a = this.add.container(O / 2, w / 2);
       return (
-        a.add(pe(this, 0, 0, 1040, 480)),
-        a.add(t.startsWith("buyu_") ? wt(C(this, -380, 90, t, 1), 190) : C(this, -380, 90, t, t.startsWith("kule") ? 0.9 : 2.2)),
-        a.add(ne(this, -220, -170, e, 640, 34)),
-        a.add(F(this, 250, 160, 300, 96, m("common.ok"), () => s(), "gold")),
+        a.add(pe(this, 0, 0, 1080, 500)),
+        (() => {
+          // resim sol bölmenin ortasına sığdırılır, metin sağda dikey ortalanır
+          let i = wt(C(this, -340, -20, t, 1), t.startsWith("buyu_") ? 200 : 290);
+          (i.setY(-20 + (i.originY - 0.5) * i.displayHeight), a.add(i));
+          let r = ne(this, -170, 0, e, 640, 31);
+          (r.setY(-60 - r.height / 2), a.add(r));
+        })(),
+        a.add(F(this, 200, 170, 300, 96, m("common.ok"), () => s(), "gold")),
         [a]
       );
     });
