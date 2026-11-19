@@ -11810,11 +11810,29 @@ class Ss {
       }
     }
     if (Q(t)) {
-      let a = "dongu_" + t;
-      if (!this.s.anims.exists(a))
-        this.s.anims.create({ key: a, frames: this.s.anims.generateFrameNumbers(t, {}), frameRate: 5, repeat: -1 });
-      (be(s, t, e, 0.92), s.play({ key: a, startFrame: Math.floor(Math.random() * 6) }));
-    } else (s.stop(), s.setTexture(e), de(s, e, 0.92));
+      // bekleme döngüsü elle sürülür: iki kare arasında yumuşak geçiş (saniyede 5 kare akıcı görünsün, bellek artmasın)
+      (s.stop(), be(s, t, e, 0.92));
+      if (this.bekle !== t) ((this.bekle = t), (this.idleT = Math.random() * 1.2));
+      this.harmanla(0);
+    } else (s.stop(), s.setTexture(e), de(s, e, 0.92), (this.bekle = null), this.harmanla(0));
+  }
+  harmanla(e) {
+    let s = this.sprite,
+      h = this.harman,
+      t = this.bekle;
+    if (!t || this.attacking || !s.active || s.texture.key !== t) {
+      if (h) h.setVisible(!1);
+      return;
+    }
+    let N = et[t].frames,
+      k = (this.idleT = (this.idleT ?? 0) + e) * 5,
+      i = Math.floor(k) % N,
+      f = k - Math.floor(k);
+    s.setFrame(i);
+    if (!h) h = this.harman = this.s.add.sprite(s.x, s.y, t, 0);
+    (h.setTexture(t, (i + 1) % N).setOrigin(s.originX, s.originY).setPosition(s.x, s.y).setScale(s.scaleX, s.scaleY).setDepth(s.depth + 0.01),
+      h.setAlpha(f * s.alpha).setVisible(s.visible),
+      s.isTinted ? h.setTint(s.tintTopLeft) : h.clearTint());
   }
   attackKey(e) {
     let t = this.artKey() + "_saldiri";
@@ -11841,6 +11859,7 @@ class Ss {
     if (!s.anims.exists(r))
       s.anims.create({ key: r, frames: s.anims.generateFrameNumbers(t, {}), frameRate: a / i, repeat: 0 });
     if (this.ezme) (this.ezme.stop(), (this.ezme = null));
+    this.harman?.setVisible(!1);
     return (
       be(this.sprite, t, this.artKey(), 0.92),
       (this.sprite.anims.timeScale = s.speed * OYUN_TEMPO),
@@ -11920,6 +11939,7 @@ class Ss {
     ((this.silencedT = Math.max(this.silencedT, e)), this.sprite.setTint(10127048));
   }
   update(e) {
+    this.harmanla(e / Math.max(1, this.s.speed || 1));
     if (this.silencedT > 0) {
       if (((this.silencedT -= e), this.silencedT <= 0)) this.sprite.clearTint();
     }
@@ -12435,7 +12455,7 @@ class Ss {
     return !1;
   }
   destroy() {
-    (this.sprite.off("animationcomplete"), this.sprite.destroy());
+    (this.sprite.off("animationcomplete"), this.sprite.destroy(), this.harman?.destroy());
     for (let e of this.soldiers) {
       if (e.engaged && e.engaged.blockedBy === e) e.engaged.blockedBy = null;
       e.destroy();
