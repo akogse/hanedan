@@ -1,0 +1,121 @@
+DYNASTY SIEGE — GÖRSEL PAKETİ 7: ZAFER / YENİLGİ EKRANI, KULE KURMA HALKASI, KULE MENÜSÜ (12 görsel)
+
+NEDEN: Brifing penceresinden sonra en çok görülen yerler bunlar.
+- Zafer ekranı: üstteki arma güzel ama altı sönük. Yıldızlar küçük düz ikonlar, ödül tek satır yazı, kahraman deneyimi
+  küçük bir yazı, kutlama hissi (ışık, sancak, yağan altın) yok.
+- Yenilgi ekranı: düz pencere ve iki satır yazı. Ağırlık ve hüzün yok.
+- Kule kurma halkası ve kule menüsü: savaşın her dakikasında açılıyor. Seçenekler küçük daireler, fiyatlar düz koyu
+  kutucuklar; ekranın en "ucuz" duran parçası bu.
+Yerleşim rehberleri: "rehber_zafer.png" ve "rehber_kurma_halkasi.png". Numaralar aşağıdakilerle aynı.
+
+AYNI KALANLAR (yeni görsel gerekmiyor): zafer ve "Kale Düştü" armaları, panel çerçevesi, duraklatma menüsü düğmeleri,
+"Sonraki bölüm" için brifingdeki kılıçlı düğme, yenilgi ipucu için brifingdeki parşömen, kule bilgi şeridi için mevcut
+ui_bilgi_karti, ikon_yukselt / ikon_sat / ikon_altin ikonları. Bunları ben bağlayacağım.
+
+KESİN KURALLAR (paket 6 ile aynı)
+- Yazı, harf, sayı, yıldız sayısı, karakter YOK. Hepsini kod basıyor.
+- Arka plan düz magenta #FF00FF; boş bırakılacak iç kısımlar da magenta. İSTİSNA: 3 ve 6 (aşağıda yazıyor).
+- Her görselden 2 çeşit üret.
+- Oranlar kodun ölçüsü; tutmazsa yeniden üretmek gerekir.
+
+STİL KİTABI: Paket 6 ile birebir aynı aile (brifing penceresinde seçtiğimiz A takımı: defne, yuvarlak safir, antika
+altın #D8B048 / vurgu #F4DC90, çok koyu lacivert #0D1838–#0A1120). Işık sol üstten sıcak mum ışığı, önden düz,
+simetrik, resimsel ama keskin kenar, kalın ve okunur kabartma.
+
+ORTAK EK — 3 ve 6 HARİÇ her promptun sonuna ekle:
+"premium dark fantasy mobile strategy game UI element, antique warm gold (not lemon yellow) with gold laurel leaves and
+small round deep blue sapphires, very dark royal navy enamel or velvet where navy is used, heavy readable embossed
+ornament, lit by warm candlelight from the top left with soft shadow to the bottom right, painterly but crisp edges,
+perfectly symmetrical, straight front view, no text, no letters, no numbers, no characters, isolated on a flat solid pure
+magenta #FF00FF background, no pink or magenta reflections on the metal, no glow or smoke around the object,
+no shadow on the background"
+
+════════════════════════ ZAFER / YENİLGİ ════════════════════════
+
+1) zafer_yildiz.png — 1:1 (1024×1024)
+   Yeri: zafer ekranında kazanılan yıldızlar; 5 yuvanın içine sırayla "çakılarak" iner. Ekranda ~120 px.
+   ÖLÇÜ: klasik 5 köşeli yıldız, dik duruyor (bir uç tam yukarıda), görselin %88'ini kaplıyor, tam ortada.
+   Prompt: "A single large ornate five-pointed star, upright with one point straight up, faceted polished antique gold
+   with engraved filigree along the edges, a small round sapphire in the center, bright warm highlights, the star fills
+   88 percent of the image and is centered" + ORTAK EK
+
+2) zafer_yildiz_yuvasi.png — 1:1 (1024×1024)
+   Yeri: kazanılmayan yıldızların yeri; kazanılan yıldız bunun ÜSTÜNE oturur, o yüzden 1 ile AYNI silüet ve boyut.
+   ÖLÇÜ: 1 ile birebir aynı yıldız biçimi, aynı %88, aynı merkez.
+   Prompt: "An empty star-shaped socket: a five-pointed star recess of dark blackened iron with a thin antique gold rim,
+   upright with one point straight up, dim and empty, the star shape fills 88 percent of the image and is centered"
+   + ORTAK EK
+
+3) zafer_isik.png — 1:1 (1024×1024) — ARKA PLAN DÜZ SİYAH (#000000), magenta DEĞİL, ortak ek EKLEME
+   Yeri: zafer armasının arkasında yavaşça döner; oyunda "ışık ekleme" modunda basılacağı için siyah = görünmez.
+   Prompt: "A radiant burst of soft golden god rays radiating from the exact center, long thin and wide rays alternating,
+   warm gold light fading smoothly to nothing toward the edges, glowing center, isolated on a pure flat black #000000
+   background, no objects, no text"
+
+4) odul_karti.png — 3:4 (768×1024)
+   Yeri: kazanılan her ödül için bir kart (hazine, elmas, kahraman parçası...). Ekranda ~180×240 px, yan yana 1–3 tane.
+   ÖLÇÜ: üstteki yuvarlak boşluk (ödül ikonu için) kart genişliğinin %62'si çapında, merkezi yüksekliğin %40'ında;
+         altta düz lacivert plaka (miktar yazısı için) yüksekliğin %18'i.
+   Prompt: "A vertical reward card: rich dark navy velvet card with a thick antique gold frame and laurel corner
+   ornaments, a large round empty socket in the upper part filled with flat magenta #FF00FF, below it a plain dark navy
+   plaque with a thin gold border for a number, a small gold crown on top of the card" + ORTAK EK
+
+5) xp_cubugu_cerceve.png — 8:1 (2048×256)
+   Yeri: zafer ekranında kahramanın deneyim çubuğu; çubuk dolarken sayı artar. Ekranda ~620×78 px.
+   ÖLÇÜ: içteki boşluk düz bir dikdörtgen, genişliğin %86'sı, yüksekliğin %42'si, tam ortada (dolgu oraya akacak).
+   Prompt: "A long horizontal progress bar frame: antique gold frame with laurel ornaments on both ends and small
+   sapphires, the inside is a straight empty rectangular slot filled with flat magenta #FF00FF" + ORTAK EK
+
+6) xp_cubugu_dolgu.png — 16:1 (1024×64) — OPAK, magenta YOK, ortak ek EKLEME
+   Yeri: 5'in içindeki dolan kısım; yatay olarak kesilip uzatılacak.
+   Prompt: "Seamless horizontal texture strip of glowing molten gold liquid, bright warm gold with soft lighter highlight
+   along the top and slightly darker amber along the bottom, subtle flowing streaks, horizontally tileable, no frame,
+   no text"
+
+7) yenilgi_sancagi.png — 3:4 (768×1024)
+   Yeri: "Kale Düştü" penceresinin iki yanında (biri aynalanır), pencerenin arkasından taşar. Ekranda ~230×300 px.
+   Prompt: "A torn and burnt royal navy war banner with a faded gold fleur-de-lis, hanging from a broken spear shaft,
+   ragged scorched edges with a few dim glowing embers, heavy and defeated, hanging straight down, front view"
+   + ORTAK EK
+
+8) zafer_sancagi.png — 3:4 (768×1024)
+   Yeri: zafer penceresinin iki yanında (biri aynalanır); 7'nin zafer eşi, aynı boyut ve duruş.
+   Prompt: "A proud triumphant royal navy war banner with a bright gold fleur-de-lis and gold fringe, hanging from a
+   gold-tipped spear with a small crown finial, clean and splendid, hanging straight down, front view" + ORTAK EK
+
+9) altin_yaprak.png — 1:1 (256×256)
+   Yeri: zaferde ekrana yağan küçük altın yapraklar (kod çoğaltıp döndürerek düşürür). Ekranda ~20–30 px.
+   Prompt: "A single small gold laurel leaf, polished antique gold, simple clear silhouette, centered" + ORTAK EK
+
+════════════════════════ KULE KURMA HALKASI / KULE MENÜSÜ ════════════════════════
+
+10) insa_halkasi.png — 1:1 (1024×1024)
+   Yeri: boş kule yerine dokununca yerin etrafında açılan halka; seçenekler bunun çevresine dizilir. Ekranda ~500 px.
+   Dikkat: haritanın üstüne biniyor; ince ve zarif olmalı, haritayı örtmemeli. Ortası tamamen boş.
+   ÖLÇÜ: halka çizgisi görselin dış %8'lik şeridinde; içi tamamen magenta.
+   Prompt: "A thin elegant circular ring of antique gold engraved with small runic marks, four small sapphires at the
+   top, bottom, left and right, delicate laurel accents, the whole inside of the ring is empty and filled with flat
+   magenta #FF00FF, the ring band is thin" + ORTAK EK
+
+11) secenek_yuvasi.png — 1:1 (512×512)
+   Yeri: halkadaki her kule seçeneği ve kule menüsündeki yükselt/sat/dal düğmelerinin çerçevesi. Ekranda ~120 px,
+   parmakla basılacak.
+   ÖLÇÜ: ortadaki yuvarlak boşluk %70 çapında, tam ortada. Brifingdeki kule madalyonunun daha sade ve küçük kardeşi.
+   Prompt: "A round button frame: a solid antique gold ring with a slim laurel band and four tiny sapphires, a small
+   crown on top, compact and sturdy, the round center is EMPTY and filled with flat magenta #FF00FF, the opening is
+   70 percent of the image width" + ORTAK EK
+
+12) fiyat_plakasi.png — 3:1 (768×256)
+   Yeri: her seçeneğin altında asılı fiyat plakası; solda küçük altın ikonu, yanında sayı (kodla). Ekranda ~110×38 px.
+   Dikkat: çok küçük görünecek; sade ve tok olsun, ortası düz lacivert.
+   Prompt: "A small horizontal price plaque: plain dark navy enamel center with a bold antique gold rim and tiny
+   rounded scroll ends, simple and chunky so it reads at very small size, the center is plain and empty" + ORTAK EK
+
+────────────────────────────────────────────────────────────────────────
+KODDA BENİM YAPACAKLARIM (görseller gelince)
+- Zafer: ışık yavaşça döner, yıldızlar tek tek yuvaya çakılır (ses + ufak sarsıntı), deneyim çubuğu akarak dolar,
+  ödül kartları sırayla döner gelir, altın yapraklar yağar, sancaklar hafifçe sallanır.
+- Yenilgi: ekran soğuk tona kayar, kül taneleri yükselir, yanık sancaklar sarkık durur; ipucu parşömende.
+- Kurma halkası: halka açılırken döner gelir, seçenekler sırayla çıkar; parası yetmeyen seçenek soluk ve fiyatı kırmızı.
+- Kule menüsü: aynı yuva ve plakalar; alttaki bilgi şeridi mevcut kart görseline geçer.
+- Hepsini ekran görüntüsüyle kontrol edeceğim.
