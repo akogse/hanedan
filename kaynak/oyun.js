@@ -15085,7 +15085,7 @@ function yi(e) {
 function Oa(e) {
   let t = document.createElement("div");
   ((t.style.cssText =
-    "position:fixed;left:calc(env(safe-area-inset-left,0px) + 8px);top:calc(env(safe-area-inset-top,0px) + 8px);z-index:50;font:700 12px ui-monospace,Menlo,monospace;color:#e8f0c8;background:rgba(10,8,6,.72);padding:6px 8px;border-radius:6px;pointer-events:none;white-space:pre;display:none"),
+    "position:fixed;left:calc(env(safe-area-inset-left,0px) + 8px);top:calc(env(safe-area-inset-top,0px) + 8px);z-index:50;font:700 11px ui-monospace,Menlo,monospace;color:#e8f0c8;background:rgba(10,8,6,.72);padding:6px 8px;border-radius:6px;pointer-events:none;white-space:pre;display:none"),
     document.body.appendChild(t));
   let s = !1;
   try {
@@ -15113,13 +15113,21 @@ function Oa(e) {
     o = 0;
   e.events.on("poststep", (l, d) => {
     if (!s) return;
+    let sk = e.scene.getScenes(!0).map((x) => x.sys.settings.key).find((x) => x !== "Hud") ?? "?",
+      pf = ((e.__perf ??= {})[sk] ??= { n: 0, ms: 0, uzun: 0, max: 0 });
+    if (d < 1000) ((pf.n += 1), (pf.ms += d), d > 34 && (pf.uzun += 1), (pf.max = Math.max(pf.max, d)));
     if ((i++, (r = Math.max(r, d)), (o += d), o >= 1000)) {
       let h = Math.round((i * 1000) / o),
         u = 0;
       for (let _ of e.scene.getScenes(!0)) u += _.children.length;
-      let f = e.canvas;
+      let f = e.canvas,
+        // ekran başına özet: ortalama fps, takılma (34 ms'den uzun kare) oranı, en kötü kare
+        rap = Object.entries(e.__perf ?? {})
+          .map(([k, v]) => `${k.padEnd(8)} ${String(Math.round((v.n * 1000) / v.ms)).padStart(3)} fps · takılma %${((v.uzun * 100) / v.n).toFixed(1)} · en kötü ${Math.round(v.max)} ms`)
+          .join("\n");
       ((t.textContent = `${h} fps · en yavaş ${Math.round(r)} ms
-${u} nesne · ${f.width}×${f.height}`),
+${u} nesne · ${f.width}×${f.height}
+${rap}`),
         (t.style.color = h >= 55 ? "#c8f0a0" : h >= 40 ? "#f0d890" : "#f0a090"),
         (i = 0),
         (r = 0),
