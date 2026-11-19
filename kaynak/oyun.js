@@ -14296,7 +14296,7 @@ class Os extends Phaser.Scene {
       let f = Hs[e.stageId];
       if (f && f.post.length) await this.dialogue(f.post);
     }
-    ((this.modalOpen = !0), V(e.victory ? "zafer" : "yenilgi", { volume: 0.6 }), Tt(this, 0.62));
+    ((this.modalOpen = !0), V(e.victory ? "zafer" : "yenilgi", { volume: 0.85 }), Tt(this, 0.62));
     let o = this.add.container(O / 2, w / 2),
       l = e.victory ? "zafer_afisi" : "yenilgi_afisi",
       d = M(l);

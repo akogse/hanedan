@@ -1912,7 +1912,7 @@
     arrow: "ses/arrow.mp3?v=8ef9a20b",
     arrow_2: "ses/arrow_2.mp3?v=b8252185",
     arrow_3: "ses/arrow_3.mp3?v=7d1c9d05",
-    boss_uyari: "ses/boss_uyari.mp3?v=bdc2208f",
+    boss_uyari: "ses/boss_uyari.mp3?v=74c7c446",
     build: "ses/build.mp3?v=e07161c9",
     build_2: "ses/build_2.mp3?v=6fcb07bc",
     click: "ses/click.mp3?v=d2a308c0",
@@ -1990,11 +1990,11 @@
     upgrade: "ses/upgrade.mp3?v=61fbc827",
     wave: "ses/wave.mp3?v=869370b2",
     bolum_baslangic: "ses/bolum_baslangic.mp3?v=991c4b1b",
-    yenilgi: "ses/yenilgi.mp3?v=72624947",
+    yenilgi: "ses/yenilgi.mp3?v=61519d84",
     yildiz: "ses/yildiz.mp3?v=32a00a1f",
     yildiz_2: "ses/yildiz_2.mp3?v=a16b4bda",
     yildiz_3: "ses/yildiz_3.mp3?v=07afee40",
-    zafer: "ses/zafer.mp3?v=b0c52927",
+    zafer: "ses/zafer.mp3?v=c585f766",
   },
   Rt = {
     harita_stage1_canli: {
@@ -14381,7 +14381,7 @@ class Os extends Phaser.Scene {
       let f = Hs[e.stageId];
       if (f && f.post.length) await this.dialogue(f.post);
     }
-    ((this.modalOpen = !0), V(e.victory ? "zafer" : "yenilgi", { volume: 0.6 }), Tt(this, 0.62));
+    ((this.modalOpen = !0), V(e.victory ? "zafer" : "yenilgi", { volume: 0.85 }), Tt(this, 0.62));
     let o = this.add.container(O / 2, w / 2),
       l = e.victory ? "zafer_afisi" : "yenilgi_afisi",
       d = M(l);
