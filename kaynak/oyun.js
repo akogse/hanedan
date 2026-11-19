@@ -2012,7 +2012,7 @@ function z(e = 30, t = I.ink, s = "800") {
   };
 }
 function ge(e = 48, t = I.ink) {
-  return { fontFamily: "'Cinzel Decorative', 'Cinzel', Georgia, serif", fontSize: e + "px", color: t, fontStyle: "700" };
+  return { fontFamily: "'Cinzel', Georgia, serif", fontSize: e + "px", color: t, fontStyle: "700" };
 }
 function Z(e = 34, t = I.cream, s = 5) {
   return {
@@ -2030,6 +2030,7 @@ var $t = {
   "common.continue": "Devam",
   "common.skip": "Atla",
   "opening.skip": "Geç",
+  "opening.start": "Başla",
   "opening.tap": "BAŞLAMAK İÇİN DOKUN",
   "common.close": "Kapat",
   "common.back": "Geri",
@@ -2048,7 +2049,7 @@ var $t = {
   "identity.exiledHeir.desc": "Hanedanın yıllar önce tahttan indirildi. Kuzeyi savunarak itibar kazanıyorsun.",
   "intro.kingdomName": "Krallığının adını yaz",
   "intro.kingdomDefault": "Kuzeyhan",
-  "intro.kingdomNote": "Adı sonradan değiştirmek için Hanedan Fermanı gerekir.",
+  "intro.kingdomNote": "Dokun ve yaz. Krallığının adı haritada ve hikâyede görünür.",
   "identity.exiledHeir.tag": "İhanet",
   "identity.commander.tag": "Kuşatma",
   "identity.youngRuler.tag": "İntikam",
@@ -2548,6 +2549,7 @@ var Ls = {
   "game.subtitle": "Tower Defense",
   "common.continue": "Continue",
   "common.skip": "Skip",
+  "opening.start": "Start",
   "opening.skip": "Skip",
   "opening.tap": "TAP TO BEGIN",
   "common.close": "Close",
@@ -2567,7 +2569,7 @@ var Ls = {
   "identity.exiledHeir.desc": "Your dynasty was overthrown years ago. Defending the north wins back your name.",
   "intro.kingdomName": "Name your kingdom",
   "intro.kingdomDefault": "Northhold",
-  "intro.kingdomNote": "Renaming it later takes a Dynasty Edict.",
+  "intro.kingdomNote": "Tap to type. Your kingdom's name appears on the map and in the story.",
   "identity.exiledHeir.tag": "Betrayed",
   "identity.commander.tag": "Besieged",
   "identity.youngRuler.tag": "Avenged",
@@ -3412,7 +3414,7 @@ class Ze extends Phaser.Scene {
       (r.fillTriangle(o * (t / 2 + 10), 0, o * (t / 2 + 30), -10, o * (t / 2 + 30), 10),
         r.fillTriangle(o * (t / 2 + 30), -10, o * (t / 2 + 30), 10, o * (t / 2 + 50), 0));
     let n = this.add
-      .text(0, 2, "START", { fontFamily: D, fontStyle: "900", fontSize: "46px", color: "#f4dc90" })
+      .text(0, 2, G(m("opening.start")), { fontFamily: D, fontStyle: "900", fontSize: "46px", color: "#f4dc90" })
       .setOrigin(0.5)
       .setLetterSpacing(14)
       .setShadow(0, 3, "#000000", 8, !1, !0);
@@ -6016,16 +6018,21 @@ class ls extends Phaser.Scene {
           fontFamily: "Cinzel, 'Trajan Pro', Georgia, serif",
           fontStyle: "700",
           fontSize: "76px",
-          color: "#e8c87a",
+          color: "#f4dc90",
+          stroke: "#140c04",
+          strokeThickness: 8,
         })
         .setOrigin(0.5)
-        .setLetterSpacing(8),
+        .setLetterSpacing(8)
+        .setShadow(0, 4, "#000", 12, !0, !0),
       n = this.add
         .text(T / 2, i + 44, "", {
           fontFamily: "'Alegreya', Georgia, serif",
           fontStyle: "700",
-          fontSize: "26px",
-          color: "#9a8a70",
+          fontSize: "30px",
+          color: "#efe3c4",
+          stroke: "#140c04",
+          strokeThickness: 5,
         })
         .setOrigin(0.5);
     (r.setAlpha(0), this.tweens.add({ targets: r, alpha: 1, duration: 600 }));
@@ -6368,7 +6375,8 @@ function pe(e, t, s, a, i, r) {
   return n;
 }
 function ds(e, t, s, a, i = 92) {
-  if (!M("dugme_kapat")) return F(e, t, s, i, i, "✕", a, "stone", { size: 36 });
+  // kapatma her yerde aynı: altın halkalı yuvarlak düğme içinde ✕ (çapraz kılıç "savaş" gibi okunuyordu)
+  if (M("ui_dugme_yuvarlak") || !M("dugme_kapat")) return yd(e, t, s, i / 2.2, "✕", a);
   let r = e.add.container(t, s);
   r.add(e.add.image(0, 0, "dugme_kapat").setDisplaySize(i, i));
   let n = e.add.zone(0, 0, i + 20, i + 20).setInteractive({ useHandCursor: !0 });
@@ -6763,16 +6771,17 @@ class ms extends Phaser.Scene {
           u.add(this.add.image(0, 0, "kimlik_kart_cercevesi").setDisplaySize(i, r)),
           u.add(
             this.add
-              .text(0, r * 0.284, m("identity." + o), {
+              .text(0, r * 0.284, G(m("identity." + o)), {
                 fontFamily: D,
                 fontStyle: "900",
-                fontSize: "29px",
-                color: "#3a2508",
+                fontSize: "28px",
+                color: "#2a1604",
               })
               .setOrigin(0.5)
-              .setScale(Math.min(1, (i * 0.56) / Math.max(1, m("identity." + o).length * 21)))
-              .setShadow(0, 1, "#f8e7b0", 0, !1, !0),
+              .setLetterSpacing(1)
+              .setShadow(0, 1, "#fff2c4", 1, !1, !0),
           ),
+          ((v) => v.setScale(Math.min(1, (i * 0.5) / v.width)))(u.list[u.list.length - 1]),
           u.add(
             this.add
               .text(0, -r * 0.5 - 16, G(m("identity." + o + ".tag")), {
@@ -6848,7 +6857,7 @@ class ms extends Phaser.Scene {
       this.layer.add(
         this.add
           .text(T / 2, 650, m("intro.kingdomNote"), {
-            ...z(26, X.muted, "700"),
+            ...z(28, "#d9dfee", "700"),
             align: "center",
             wordWrap: { width: 720, useAdvancedWrap: !0 },
           })
@@ -6866,7 +6875,8 @@ class ms extends Phaser.Scene {
       let a = this.game.canvas.getBoundingClientRect();
       ((t.style.top = a.top + a.height * (545 / w) + "px"),
         (t.style.left = a.left + a.width / 2 + "px"),
-        (t.style.width = Math.min(a.width * 0.36, 520) + "px"),
+        (t.style.boxSizing = "border-box"),
+        (t.style.width = (a.width * 740) / T + "px"),
         (t.style.fontSize = Math.max(16, a.height * 0.045) + "px"));
     };
     (s(),
@@ -6913,23 +6923,23 @@ class ms extends Phaser.Scene {
         d.add(this.add.image(0, -196, "madalyon_cerceve").setDisplaySize(262, 262));
       (d.add(
         this.add
-          .text(0, -60, m(o.nameKey), {
+          .text(0, -50, m(o.nameKey), {
             fontFamily: D,
             fontStyle: "700",
-            fontSize: "26px",
+            fontSize: "28px",
             color: X.cream,
-            align: "center",
-            wordWrap: { width: a - 100 },
           })
-          .setOrigin(0.5, 0),
+          .setOrigin(0.5, 0)
+          .setShadow(0, 2, "#000", 4, !1, !0),
       ),
+        ((v) => v.setScale(Math.min(1, (a - 80) / v.width)))(d.list[d.list.length - 1]),
         d.add(
           this.add
             .text(0, 6, G(m(o.titleKey) + " · " + m(o.roleKey)), {
               fontFamily: D,
               fontStyle: "700",
-              fontSize: "16px",
-              color: "#c9a24a",
+              fontSize: "17px",
+              color: "#d8b45a",
             })
             .setOrigin(0.5, 0)
             .setLetterSpacing(2),
@@ -9283,7 +9293,7 @@ class _s extends Phaser.Scene {
       if (e.newTowers.length)
         (t.add(this.add.text(i, -150, G(m("map.newTowers")), z(22, I.red, "900"))),
           e.newTowers.forEach((u, f) => {
-            (t.add(C(this, i + 75 + f * 160, 25, ii[u] ?? "ikon_kilit", 0.5)),
+            (t.add(((v) => (v.setScale(v.scaleX * Math.min(150 / v.displayWidth, 130 / v.displayHeight)), v))(C(this, i + 75 + f * 160, 25, ii[u] ?? "ikon_kilit", 0.5))),
               t.add(this.add.text(i + 75 + f * 160, 40, m(oe[u].nameKey), { ...z(19, I.ink, "800"), align: "center", wordWrap: { width: 150 } }).setOrigin(0.5, 0)));
           }),
           (i += Math.max(300, e.newTowers.length * 160 + 30)));
@@ -11586,11 +11596,20 @@ class Zt {
       (this.paint(p), this.buttons.push(p));
     }
     {
+      // yalnız taşan düğmeler kadar kaydır (menü noktadan gereksiz kopmasın)
       let v = e.cameras.main.worldView,
-        rr = (ft + Pe + 70) * (q / i),
-        nx = Phaser.Math.Clamp(t, v.x + rr, v.right - rr),
-        ny = Phaser.Math.Clamp(s, v.y + rr + 120 / i, v.bottom - rr - 40 / i);
-      if (v.width > 2 * rr && v.height > 2 * rr) n.setPosition(nx, ny);
+        k = q / i,
+        x0 = Math.min(...this.buttons.map((b) => b.x - Pe - 10)) * k,
+        x1 = Math.max(...this.buttons.map((b) => b.x + Pe + 10)) * k,
+        y0 = Math.min(...this.buttons.map((b) => b.y - Pe - 14)) * k,
+        y1 = Math.max(...this.buttons.map((b) => b.y + Pe + (b.pill ? 100 : 14))) * k,
+        dx = Math.max(0, v.x + 10 / i - (t + x0)) - Math.max(0, t + x1 - (v.right - 10 / i)),
+        dy = Math.max(0, v.y + 130 / i - (s + y0)) - Math.max(0, s + y1 - (v.bottom - 20 / i));
+      if (dx || dy) {
+        n.setPosition(t + dx, s + dy);
+        let g = e.add.graphics().setDepth(5999);
+        (g.lineStyle(4 / i, 14200904, 0.8), g.lineBetween(t, s, t + dx, s + dy), g.fillStyle(14200904, 1), g.fillCircle(t, s, 8 / i), (this.bag = g));
+      }
     }
     (n.setScale((0.2 * q) / i), e.tweens.add({ targets: n, scale: q / i, duration: 160, ease: "Back.Out" }));
   }
@@ -11619,14 +11638,14 @@ class Zt {
   tap(e, t) {
     let s = this.container.scale;
     for (let { b: a, x: i, y: r } of this.buttons) {
-      let n = this.x + i * s,
-        o = this.y + r * s;
+      let n = this.container.x + i * s,
+        o = this.container.y + r * s;
       if (Math.hypot(e - n, t - o) <= (Pe + 12) * s) return (a.action(), !0);
     }
     return !1;
   }
   destroy() {
-    this.container.destroy();
+    (this.container.destroy(), this.bag?.destroy());
   }
 }
 function mi(e) {
@@ -13561,7 +13580,17 @@ class Os extends Phaser.Scene {
       this.tweens.add({ targets: t, alpha: 0, delay: 2600, duration: 400, onComplete: () => t.destroy() }),
       (this.toastC = t));
   }
+  duyuru(e, t) {
+    ((this.duyuruQ = this.duyuruQ ?? []), this.duyuruQ.push([e, t]), this.duyuruSur());
+  }
+  duyuruSur() {
+    if (this.duyuruMesgul || !this.duyuruQ?.length) return;
+    if (this.modalOpen) return void this.time.delayedCall(300, () => this.duyuruSur());
+    let [e, t] = this.duyuruQ.shift();
+    ((this.duyuruMesgul = !0), e(), this.time.delayedCall(t, () => ((this.duyuruMesgul = !1), this.duyuruSur())));
+  }
   showBoss(e) {
+    if (!this.duyuruIc) return void this.duyuru(() => ((this.duyuruIc = !0), this.showBoss(e), (this.duyuruIc = !1)), 2600);
     ((this.boss = e), V("boss_uyari", { volume: 0.9 }));
     let t = this.add.container(0, w / 2 - 40).setAlpha(0);
     if (M("boss_seridi")) {
@@ -13637,6 +13666,7 @@ class Os extends Phaser.Scene {
   newEnemyCard(e) {
     let t = Te[e];
     if (t.boss) return;
+    if (!this.duyuruIc) return void this.duyuru(() => ((this.duyuruIc = !0), this.newEnemyCard(e), (this.duyuruIc = !1)), 4900);
     let s = this.add.container(O / 2, -170),
       BK = M("ui_bilgi_karti"),
       W = BK ? 940 : 860,
@@ -13889,7 +13919,7 @@ class Os extends Phaser.Scene {
   }
   modal(e) {
     return new Promise((t) => {
-      ((this.modalOpen = !0), this.b.setPaused(!0));
+      ((this.modalOpen = !0), this.b.setPaused(!0), this.children.list.forEach((r) => r.getData?.("duyuru") && r.setVisible(!1)));
       let s = [],
         a = (i) => {
           for (let r of s) r.destroy();
@@ -14019,8 +14049,8 @@ class Os extends Phaser.Scene {
         { text: m("tut.2"), waitFor: "built:archer" },
         { text: m("tut.3"), waitFor: "built:barracks", highlight: a },
         { text: m("tut.4"), waitFor: "next", auto: 7 },
-        { text: m("tut.5"), waitFor: "waveStarted" },
-        { text: m("tut.6"), waitFor: "next", auto: 8 },
+        { text: m("tut.5"), waitFor: "waveStarted", auto: 14 },
+        { text: m("tut.6"), waitFor: "next", auto: 7 },
       ];
     ((this.tut = { steps: i, i: -1, box: null, marker: null }), this.nextTut());
   }
@@ -14075,6 +14105,11 @@ class Os extends Phaser.Scene {
       .setVisible(!0)
       .setPosition(i.x, i.y)
       .setScale(this.b.cameras.main.zoom / this.b.minZoom);
+    // vurgulanan nokta kutunun altında kalmasın: kutu ekranın üstüne geçer
+    if (e.box) {
+      let r = i.y > w - 400 ? 250 : w - 230;
+      if (Math.abs(e.box.y - r) > 2) e.box.setY(r);
+    }
   }
   tutEvent(e) {
     let t = this.tut;
@@ -14249,7 +14284,7 @@ class Os extends Phaser.Scene {
         a > 0 && o.add(
           this.add.text(
             -430,
-            d ? 110 : 40,
+            (d ? -40 : -120) + o.list[o.list.length - 1].height + 22,
             m("end.heroXp", {
               hero: m(he[s].nameKey)
                 .replace(/^(Sir|Sör) /, "")
