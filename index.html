@@ -141,6 +141,17 @@
     harita_stage15_kucuk: "assets/harita_stage15_kucuk.webp?v=71f2670e",
     harita_stage16_kucuk: "assets/harita_stage16_kucuk.webp?v=4788ca73",
     ui_bilgi_karti: "assets/ui_bilgi_karti.webp?v=e0a2ab7a",
+    brf_zemin: "assets/brf_zemin.webp?v=a3c2ad76",
+    brf_brifing_harita_cercevesi: "assets/brf_brifing_harita_cercevesi.webp?v=345374a0",
+    brf_dugme_savas: "assets/brf_dugme_savas.webp?v=234f9b06",
+    brf_parsomen_tomari: "assets/brf_parsomen_tomari.webp?v=32e1ce27",
+    brf_baslik_kurdelesi: "assets/brf_baslik_kurdelesi.webp?v=5942695b",
+    brf_susleme_ayirici: "assets/brf_susleme_ayirici.webp?v=946f928d",
+    brf_madalyon_kule: "assets/brf_madalyon_kule.webp?v=957120fa",
+    brf_madalyon_dusman: "assets/brf_madalyon_dusman.webp?v=3b473ef2",
+    brf_kahraman_yuva_secili: "assets/brf_kahraman_yuva_secili.webp?v=dfb10d09",
+    brf_kahraman_yuva: "assets/brf_kahraman_yuva.webp?v=e559da04",
+    brf_seviye_rozeti: "assets/brf_seviye_rozeti.webp?v=17970607",
     ui_bolum_seridi: "assets/ui_bolum_seridi.webp?v=b0f5cb39",
     ui_dugme_yuvarlak: "assets/ui_dugme_yuvarlak.webp?v=fd71954d",
     ui_ipucu_seridi: "assets/ui_ipucu_seridi.webp?v=9c2ed02b",
@@ -6689,6 +6700,7 @@ function us(e, t, s) {
     g = e.add.graphics();
   (g.fillStyle(330770, 0.7), g.fillRect(-t / 2 + k, -s / 2 + k, t - 2 * k, s - 2 * k));
   let c = e.add.container(0, 0, [n, g]);
+  c.ic = { x: -t / 2 + k, y: -s / 2 + k, w: t - 2 * k, h: s - 2 * k };
   return c;
 }
 function $a(e, t, s, a, i, r) {
@@ -9572,45 +9584,53 @@ class _s extends Phaser.Scene {
   }
   stagePanel(e) {
     this.openModal(() => {
-      // Düzen: solda büyük harita önizlemesi (üstünde dalga, altında yıldız tepsisi) ve olay metni;
-      // sağda yeni kule/düşman madalyonları, kahraman seçimi ve savaş düğmesi.
+      // Brifing penceresi (görsel paketi 6): kadife zemin, altın çerçeveli harita, mühürlü parşömen,
+      // defneli madalyonlar, kahraman yuvaları ve kılıçlı savaş düğmesi. Yazılar kodla basılır.
       let PW = 1560,
         PH = 790,
-        t = this.add.container(T / 2, w / 2 + 14);
-      t.add(pe(this, 0, 0, PW, PH, m(e.nameKey)));
+        t = this.add.container(T / 2, w / 2 + 14),
+        pan = pe(this, 0, 0, PW, PH, m(e.nameKey));
+      t.add(pan);
+      let icK = pan.list.find((x) => x.ic);
+      if (icK && M("brf_zemin")) {
+        let r = icK.ic,
+          z0 = this.add.image(r.x + r.w / 2, r.y + r.h / 2, "brf_zemin").setDisplaySize(r.w, r.h);
+        icK.add(z0);
+      }
       t.add(this.add.zone(0, 0, PW, PH).setInteractive());
       let ALTIN = "#e8c87a",
         KREM = "#e9e1cc",
         SOLUK = "#b9b29e",
-        baslik = (x, y, metin, gen) => {
-          let k = this.add.text(x, y, G(metin), { fontFamily: D, fontStyle: "700", fontSize: "22px", color: ALTIN }).setOrigin(0, 0.5).setLetterSpacing(3);
-          if (gen < 0) return (k.destroy(), 0);
-          let g = this.add.graphics();
-          gen = Math.max(gen, k.width + 50);
-          g.lineStyle(2, 14200904, 0.55);
-          g.lineBetween(x + k.width + 16, y, x + gen, y);
-          g.fillStyle(14200904, 0.8);
-          g.fillCircle(x + gen, y, 3);
-          t.add([g, k]);
-          return gen;
+        resim = (k, x, y, gw) => {
+          let im = this.add.image(x, y, k);
+          return (im.setScale(gw / im.width), im);
+        },
+        baslik = (x, y, metin, gen, ortala) => {
+          // altın uçlu lacivert kurdele üstünde başlık; kurdele yoksa ince çizgi
+          let k = this.add.text(0, y, G(metin), { fontFamily: D, fontStyle: "700", fontSize: "20px", color: ALTIN }).setOrigin(0.5, 0.5).setLetterSpacing(3).setShadow(0, 2, "#000", 4, !1, !0);
+          if (M("brf_baslik_kurdelesi")) {
+            let kw = Math.max(250, k.width / 0.64),
+              cx = ortala ? x : x + kw / 2,
+              im = this.add.image(cx, y, "brf_baslik_kurdelesi").setDisplaySize(kw, kw / 6);
+            (k.setX(cx), t.add([im, k]));
+            return kw;
+          }
+          (k.setOrigin(0, 0.5).setX(x), t.add(k));
+          return k.width;
         };
-      // --- sol: harita önizlemesi ---
+      // --- sol: harita önizlemesi altın çerçevede ---
       let LX = -390,
-        GW = 700,
+        GW = 640,
         GH = Math.round((GW * 9) / 16),
-        GY = -PH / 2 + 96 + GH / 2,
-        hk = "harita_stage" + e.id + "_kucuk",
-        cer = this.add.graphics();
-      cer.fillStyle(0, 0.55);
-      cer.fillRoundedRect(LX - GW / 2 - 10, GY - GH / 2 - 6, GW + 20, GH + 20, 14);
-      cer.fillStyle(527380, 1);
-      cer.fillRoundedRect(LX - GW / 2 - 8, GY - GH / 2 - 8, GW + 16, GH + 16, 12);
-      t.add(cer);
+        GY = -PH / 2 + 110 + GH / 2,
+        hk = "harita_stage" + e.id + "_kucuk";
+      let arka = this.add.graphics();
+      (arka.fillStyle(0, 0.6), arka.fillRect(LX - GW / 2, GY - GH / 2, GW, GH), t.add(arka));
       if (M(hk)) {
         let im = this.add.image(LX, GY, hk);
         im.setScale(Math.max(GW / im.width, GH / im.height));
         let mk = this.make.graphics({}, !1);
-        (mk.fillStyle(16777215), mk.fillRoundedRect(0, 0, GW, GH, 8));
+        (mk.fillStyle(16777215), mk.fillRect(0, 0, GW, GH));
         let mask = mk.createGeometryMask();
         let sync = () => {
           let mx = t.getWorldTransformMatrix();
@@ -9618,106 +9638,119 @@ class _s extends Phaser.Scene {
         };
         (sync(), this.events.on("postupdate", sync), im.on("destroy", () => this.events.off("postupdate", sync)), im.setMask(mask), t.add(im));
       }
-      // önizlemenin üst ve alt kenarını karart: yazı ve tepsi okunsun
       let gol = this.add.graphics();
-      gol.fillGradientStyle(0, 0, 0, 0, 0.62, 0.62, 0, 0);
-      gol.fillRect(LX - GW / 2, GY - GH / 2, GW, 70);
-      gol.fillGradientStyle(0, 0, 0, 0, 0, 0, 0.7, 0.7);
-      gol.fillRect(LX - GW / 2, GY + GH / 2 - 90, GW, 90);
-      gol.lineStyle(3, 14200904, 1);
-      gol.strokeRoundedRect(LX - GW / 2 - 4, GY - GH / 2 - 4, GW + 8, GH + 8, 10);
-      gol.lineStyle(1, 16771530, 0.35);
-      gol.strokeRoundedRect(LX - GW / 2 + 3, GY - GH / 2 + 3, GW - 6, GH - 6, 7);
+      gol.fillGradientStyle(0, 0, 0, 0, 0.6, 0.6, 0, 0);
+      gol.fillRect(LX - GW / 2, GY - GH / 2, GW, 64);
+      gol.fillGradientStyle(0, 0, 0, 0, 0, 0, 0.65, 0.65);
+      gol.fillRect(LX - GW / 2, GY + GH / 2 - 80, GW, 80);
       t.add(gol);
+      if (M("brf_brifing_harita_cercevesi")) {
+        let fw = GW / 0.879,
+          fr = resim("brf_brifing_harita_cercevesi", LX, 0, fw);
+        (fr.setY(GY - (0.509 - 0.5) * fr.displayHeight), t.add(fr));
+      }
       t.add(
         this.add
-          .text(LX - GW / 2 + 24, GY - GH / 2 + 30, G(m("map.waves", { n: e.waves?.length ?? ya(e.id) })), { fontFamily: D, fontStyle: "700", fontSize: "24px", color: "#f4dc90" })
+          .text(LX - GW / 2 + 22, GY - GH / 2 + 28, G(m("map.waves", { n: e.waves?.length ?? ya(e.id) })), { fontFamily: D, fontStyle: "700", fontSize: "24px", color: "#f4dc90" })
           .setOrigin(0, 0.5)
           .setLetterSpacing(3)
           .setShadow(0, 2, "#000", 5, !1, !0),
       );
       let a = P().bestStars[e.id] ?? 0,
-        YW = 330,
+        YW = 320,
         YH = (YW * 159) / 600,
-        YY = GY + GH / 2 - 8;
+        YY = GY + GH / 2 + 22;
       if (M("ui_yildiz_tepsisi")) {
         t.add(this.add.image(LX, YY, "ui_yildiz_tepsisi").setDisplaySize(YW, YH));
         for (let k = 0; k < a; k++)
           t.add(wt(C(this, LX + (0.228 + k * 0.1357 - 0.5) * YW, YY + (0.487 - 0.5) * YH, M("ikon_yildiz_hud") ? "ikon_yildiz_hud" : "ikon_yildiz", 1), YW * 0.122));
-      } else for (let k = 0; k < 5; k++) t.add(C(this, LX - 104 + k * 52, YY, k < a ? "ikon_yildiz" : "ikon_yildiz_bos", 0.85));
-      // olay metni: önizlemenin altında, ortalı
+      }
+      // olay metni mühürlü parşömende, koyu mürekkep
+      let PY = YY + YH / 2 + 92,
+        PWd = 660;
+      if (M("brf_parsomen_tomari")) t.add(resim("brf_parsomen_tomari", LX, PY, PWd));
       let oy = this.add
-        .text(LX, YY + YH / 2 + 46, m(e.eventKey), { ...z(31, KREM, "700"), align: "center", wordWrap: { width: GW - 40, useAdvancedWrap: !0 }, lineSpacing: 8 })
-        .setOrigin(0.5, 0);
+        .text(LX - PWd * 0.03, PY, m(e.eventKey), { ...z(27, M("brf_parsomen_tomari") ? "#3b2412" : KREM, "800"), align: "center", wordWrap: { width: PWd * 0.78, useAdvancedWrap: !0 }, lineSpacing: 4 })
+        .setOrigin(0.5);
+      if (oy.height > PWd * 0.25 * 0.7) oy.setScale((PWd * 0.25 * 0.7) / oy.height);
       t.add(oy);
-      // metnin altına ince süs çizgisi: boşlukta asılı kalmasın
-      let sc = this.add.graphics(),
-        sy = oy.y + oy.height + 26;
-      (sc.lineStyle(2, 14200904, 0.5), sc.lineBetween(LX - 150, sy, LX - 14, sy), sc.lineBetween(LX + 14, sy, LX + 150, sy));
-      (sc.fillStyle(14200904, 0.9), sc.fillPoints([{ x: LX, y: sy - 7 }, { x: LX + 7, y: sy }, { x: LX, y: sy + 7 }, { x: LX - 7, y: sy }], !0));
-      t.add(sc);
       // --- sağ sütun ---
-      let RX = 40,
+      let RX = 24,
         RW = 680,
         madalyon = (x, y, anahtar, ad, kizil) => {
-          let g = this.add.graphics();
-          g.fillStyle(0, 0.45);
-          g.fillCircle(x, y + 5, 66);
+          let g = this.add.graphics(),
+            R = 56;
           g.fillStyle(kizil ? 2759194 : 659744, 1);
-          g.fillCircle(x, y, 64);
-          // içten hafif ışık: koyu boyanmış figürler zemine gömülmesin
+          g.fillCircle(x, y, R + 4);
           g.fillStyle(kizil ? 7356986 : 3818350, 0.35);
           g.fillCircle(x, y - 6, 44);
           g.fillStyle(kizil ? 9136448 : 5266830, 0.2);
           g.fillCircle(x, y - 10, 28);
-          g.lineStyle(4, kizil ? 12088115 : 14200904, 1);
-          g.strokeCircle(x, y, 64);
-          g.lineStyle(1.5, 16771530, 0.4);
-          g.strokeCircle(x, y, 57);
           t.add(g);
           let im = C(this, x, y, anahtar, 1);
-          (wt(im, 100), im.setY(y + (im.originY - 0.5) * im.displayHeight), t.add(im));
-          t.add(this.add.text(x, y + 80, ad, { ...z(22, KREM, "800"), align: "center", wordWrap: { width: 160 } }).setOrigin(0.5, 0));
+          (wt(im, 90), im.setY(y + (im.originY - 0.5) * im.displayHeight), t.add(im));
+          let fk = kizil ? "brf_madalyon_dusman" : "brf_madalyon_kule";
+          if (M(fk)) {
+            let oran = kizil ? [0.652, 0.516] : [0.72, 0.538],
+              fr = resim(fk, x, 0, (R * 2 + 6) / oran[0]);
+            (fr.setY(y - (oran[1] - 0.5) * fr.displayHeight), t.add(fr));
+          } else {
+            let h2 = this.add.graphics();
+            (h2.lineStyle(4, kizil ? 12088115 : 14200904, 1), h2.strokeCircle(x, y, R), t.add(h2));
+          }
+          t.add(this.add.text(x, y + 92, ad, { ...z(22, KREM, "800"), align: "center", wordWrap: { width: 160 } }).setOrigin(0.5, 0).setShadow(0, 2, "#000", 4, !1, !0));
         },
-        yeni = [...e.newTowers.map((u) => ["k", u]), ...e.newEnemies.map((u) => ["d", u])],
+        yeni = [...e.newTowers, ...e.newEnemies],
         HY = -PH / 2 + 78;
       if (yeni.length) {
-        // her grup kendi başlığının genişliği kadar yer kaplar; düşman grubu kule grubundan sonra başlar
         let tk = e.newTowers.length,
           dk = e.newEnemies.length,
-          ADIM = 172,
-          kg = tk ? baslik(RX, HY, m("map.newTowers"), tk * ADIM - 30) : 0,
-          dx = RX + (tk ? Math.max(tk * ADIM, kg + 40) : 0);
-        if (dk) baslik(dx, HY, m("map.newEnemies"), dk * ADIM - 30);
-        e.newTowers.forEach((u, f) => madalyon(RX + 86 + f * ADIM, HY + 110, ii[u] ?? "ikon_kilit", m(oe[u].nameKey), !1));
-        e.newEnemies.forEach((u, f) => madalyon(dx + 86 + f * ADIM, HY + 110, Yt(Te[u].art), m(Te[u].nameKey), !0));
+          ADIM = 188,
+          dx = RX + tk * ADIM;
+        // grup başlıkları kendi madalyonlarının üstünde ortalanır (sağdaki çarpıya taşmasın)
+        if (tk) baslik(RX + (tk * ADIM) / 2, HY, m("map.newTowers"), 0, !0);
+        if (dk) baslik(dx + (dk * ADIM) / 2, HY, m("map.newEnemies"), 0, !0);
+        e.newTowers.forEach((u, f) => madalyon(RX + 92 + f * ADIM, HY + 116, ii[u] ?? "ikon_kilit", m(oe[u].nameKey), !1));
+        e.newEnemies.forEach((u, f) => madalyon(dx + 92 + f * ADIM, HY + 116, Yt(Te[u].art), m(Te[u].nameKey), !0));
       }
-      let KY = yeni.length ? HY + 290 : HY;
-      baslik(RX, KY, m("map.selectHero"), RW);
+      let KY = yeni.length ? HY + 296 : HY;
+      if (yeni.length && M("brf_susleme_ayirici")) t.add(resim("brf_susleme_ayirici", RX + RW / 2, KY - 34, RW));
+      baslik(RX, KY, m("map.selectHero"), 0);
       let d = this.add.container(0, 0);
       t.add(d);
       let h = () => {
         (d.removeAll(!0),
           vt.forEach((u, f) => {
             let _ = P().hero === u,
-              g = RX + 70 + f * 150,
-              py = KY + 92;
+              g = RX + 74 + f * 152,
+              py = KY + 96,
+              r = _ ? 54 : 46;
             if (_) {
               let hl = this.add.graphics();
-              (hl.fillStyle(15255674, 0.22), hl.fillCircle(g, py, 74), d.add(hl));
-              this.tweens.add({ targets: hl, alpha: 0.45, duration: 1100, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
+              (hl.fillStyle(15255674, 0.18), hl.fillCircle(g, py, 80), d.add(hl));
+              this.tweens.add({ targets: hl, alpha: 0.5, duration: 1100, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
             }
-            let y = Ae(this, g, py, _ ? 58 : 52, "kahraman_" + u + "_portre", _ ? 15255674 : 5260872);
-            if (!_) y.setAlpha(0.55);
+            let y = Ae(this, g, py, r, "kahraman_" + u + "_portre", _ ? 15255674 : 5260872);
+            if (!_) y.setAlpha(0.6);
             d.add(y);
-            // seviye rozeti: portrenin sağ altında kendi madalyonu (önceden sayı halkanın üstüne biniyordu)
+            let fk = _ ? "brf_kahraman_yuva_secili" : "brf_kahraman_yuva";
+            if (M(fk)) {
+              let oran = _ ? [0.645, 0.521] : [0.743, 0.494],
+                fr = this.add.image(g, 0, fk);
+              (fr.setScale((r * 2 + 4) / oran[0] / fr.width), fr.setY(py - (oran[1] - 0.5) * fr.displayHeight), !_ && fr.setAlpha(0.85), d.add(fr));
+            }
             let k = Ne(P().heroXp[u] ?? 0),
-              bx = g + 42,
-              by = py + 42,
-              rz = this.add.graphics();
-            (rz.fillStyle(527380, 1), rz.fillCircle(bx, by, 19), rz.lineStyle(2.5, 14200904, 1), rz.strokeCircle(bx, by, 19), d.add(rz));
-            d.add(this.add.text(bx, by, String(k), { ...z(22, "#f4dc90", "900") }).setOrigin(0.5).setAlpha(_ ? 1 : 0.7));
-            let v = this.add.zone(g, py, 130, 130).setInteractive({ useHandCursor: !0 });
+              bx = g + r * 0.8,
+              by = py + r * 0.8;
+            if (M("brf_seviye_rozeti")) {
+              let rz = this.add.image(bx, by, "brf_seviye_rozeti");
+              (rz.setScale(46 / rz.height), d.add(rz));
+            } else {
+              let rz = this.add.graphics();
+              (rz.fillStyle(527380, 1), rz.fillCircle(bx, by, 19), rz.lineStyle(2.5, 14200904, 1), rz.strokeCircle(bx, by, 19), d.add(rz));
+            }
+            d.add(this.add.text(bx, by - 2, String(k), { ...z(k > 9 ? 19 : 22, "#f4dc90", "900") }).setOrigin(0.5).setAlpha(_ ? 1 : 0.8));
+            let v = this.add.zone(g, py, 140, 140).setInteractive({ useHandCursor: !0 });
             (v.on("pointerup", () => {
               P().hero !== u && V("ui_tik");
               ((P().hero = u), j(), h());
@@ -9725,37 +9758,41 @@ class _s extends Phaser.Scene {
               d.add(v));
           }));
         let hh = he[P().hero],
-          ay = KY + 182;
-        d.add(this.add.text(RX, ay, m(hh.nameKey), { fontFamily: D, fontStyle: "700", fontSize: "28px", color: "#f4dc90" }).setLetterSpacing(2));
+          ay = KY + 172;
+        d.add(this.add.text(RX, ay, m(hh.nameKey), { fontFamily: D, fontStyle: "700", fontSize: "28px", color: "#f4dc90" }).setLetterSpacing(2).setShadow(0, 2, "#000", 4, !1, !0));
         let ps = m(hh.passiveKey),
           ik = ps.indexOf(":");
         if (ik > 0) {
-          let et = this.add.text(RX, ay + 44, ps.slice(0, ik + 1), z(25, ALTIN, "900"));
-          d.add([et, ne(this, RX + et.width + 8, ay + 44, ps.slice(ik + 1).trim(), RW - et.width - 8, 25, SOLUK)]);
-        } else d.add(ne(this, RX, ay + 44, ps, RW, 25, SOLUK));
+          let et = this.add.text(RX, ay + 40, ps.slice(0, ik + 1), z(25, ALTIN, "900"));
+          d.add([et, ne(this, RX + et.width + 8, ay + 40, ps.slice(ik + 1).trim(), RW - et.width - 8, 25, SOLUK)]);
+        } else d.add(ne(this, RX, ay + 40, ps, RW, 25, SOLUK));
       };
-      // pencereye canlılık: içte yavaşça yükselen altın toz zerreleri, savaş düğmesinde nabız
+      // altın toz zerreleri
       for (let k = 0; k < 16; k++) {
         let zx = (Math.random() - 0.5) * (PW - 160),
           zy = (Math.random() - 0.5) * (PH - 160),
           z0 = this.add.circle(zx, zy, 1.5 + Math.random() * 2, 16045174, 0);
         t.add(z0);
-        this.tweens.add({
-          targets: z0,
-          y: zy - 60 - Math.random() * 80,
-          alpha: { from: 0, to: 0.25 + Math.random() * 0.3 },
-          duration: 2600 + Math.random() * 2600,
-          delay: Math.random() * 2500,
-          yoyo: !0,
-          repeat: -1,
-          ease: "Sine.InOut",
-        });
+        this.tweens.add({ targets: z0, y: zy - 60 - Math.random() * 80, alpha: { from: 0, to: 0.25 + Math.random() * 0.3 }, duration: 2600 + Math.random() * 2600, delay: Math.random() * 2500, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
       }
-      let sb = F(this, RX + RW - 200, PH / 2 - 92, 400, 110, m("map.play"), () => this.scene.start("Battle", { stageId: e.id }), "red", {
-        icon: "ikon_kilic",
-        size: 38,
-      });
-      this.tweens.add({ targets: sb, scale: 1.04, duration: 900, yoyo: !0, repeat: -1, ease: "Sine.InOut", delay: 400 });
+      // savaş düğmesi: kılıçlı kızıl plaka
+      let BX = RX + RW - 210,
+        BY = PH / 2 - 90,
+        sb;
+      if (M("brf_dugme_savas")) {
+        sb = this.add.container(BX, BY);
+        let bim = this.add.image(0, 0, "brf_dugme_savas");
+        bim.setScale(440 / bim.width);
+        let by0 = (0.537 - 0.5) * bim.displayHeight,
+          yz = this.add.text(0, by0, G(m("map.play")), { fontFamily: D, fontStyle: "700", fontSize: "32px", color: "#fff1c8" }).setOrigin(0.5).setLetterSpacing(3).setShadow(0, 3, "#2a0505", 6, !0, !0);
+        if (yz.width > 440 * 0.6) yz.setScale((440 * 0.6) / yz.width);
+        let bz = this.add.zone(0, by0, 440 * 0.8, bim.displayHeight * 0.55).setInteractive({ useHandCursor: !0 });
+        (bz.on("pointerdown", () => bim.setTint(14737632)),
+          bz.on("pointerout", () => bim.clearTint()),
+          bz.on("pointerup", () => (bim.clearTint(), V("click", { volume: 0.7 }), this.scene.start("Battle", { stageId: e.id }))));
+        sb.add([bim, yz, bz]);
+      } else sb = F(this, BX, BY, 400, 110, m("map.play"), () => this.scene.start("Battle", { stageId: e.id }), "red", { icon: "ikon_kilic", size: 38 });
+      this.tweens.add({ targets: sb, scale: 1.035, duration: 900, yoyo: !0, repeat: -1, ease: "Sine.InOut", delay: 400 });
       t.once("destroy", () => this.time.delayedCall(0, () => this.tweens.getTweens().forEach((tw) => tw.targets.some((x) => !x.scene) && tw.remove())));
       return (
         h(),
