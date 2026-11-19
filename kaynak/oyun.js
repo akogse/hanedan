@@ -1130,9 +1130,9 @@ var zt = {
       frameWidth: 156,
       frameHeight: 273,
       frames: 18,
-      originX: 0.5066,
-      originY: 0.8411,
-      bodyHeight: 270.0,
+      originX: 0.5072,
+      originY: 0.8475,
+      bodyHeight: 259.5,
     },
     kule_firtina_2_bekle: {
       url: "assets/anim_kule_firtina_2_bekle.webp",
@@ -1211,9 +1211,9 @@ var zt = {
       frameWidth: 413,
       frameHeight: 281,
       frames: 18,
-      originX: 0.4499,
-      originY: 0.8323,
-      bodyHeight: 270.0,
+      originX: 0.4735,
+      originY: 0.8365,
+      bodyHeight: 261.3,
     },
     kule_simyaci_2_bekle: {
       url: "assets/anim_kule_simyaci_2_bekle.webp",
@@ -1229,9 +1229,9 @@ var zt = {
       frameWidth: 204,
       frameHeight: 294,
       frames: 18,
-      originX: 0.5486,
-      originY: 0.8737,
-      bodyHeight: 270.0,
+      originX: 0.5528,
+      originY: 0.8791,
+      bodyHeight: 259.1,
     },
     kule_simyaci_3_bekle: {
       url: "assets/anim_kule_simyaci_3_bekle.webp",
@@ -1634,9 +1634,9 @@ var zt = {
       frameWidth: 277,
       frameHeight: 283,
       frames: 18,
-      originX: 0.5168,
-      originY: 0.7967,
-      bodyHeight: 270.0,
+      originX: 0.5147,
+      originY: 0.8007,
+      bodyHeight: 264.2,
     },
     kule_ejder_3_bekle: {
       url: "assets/anim_kule_ejder_3_bekle.webp",
@@ -8598,7 +8598,7 @@ class _s extends Phaser.Scene {
       return (
         d.add(yd(this, b1, b2, 56, "‹", () => p(-1))),
         d.add(yd(this, c1, b2, 56, "›", () => p(1))),
-        d.add(yd(this, ...f(0.955, 0.075), 46, "✕", () => this.closeModal())),
+        d.add(yd(this, ...f(0.94, 0.1), 50, "✕", () => this.closeModal())),
         u.setAlpha(0),
         this.tweens.add({ targets: u, alpha: 1, duration: 250 }),
         [d]
@@ -8609,11 +8609,13 @@ class _s extends Phaser.Scene {
     if (!this.textures.exists("tac_agaci_arka")) return void sayfaIste(this, ["tac_agaci_arka"], () => this.tacAgaci());
     this.agirYeni = ["tac_agaci_arka"];
     this.openModal(() => {
-      let e = this.add.container(0, 0),
-        t = this.add.image(T / 2, w / 2, "tac_agaci_arka");
-      (t.setScale(Math.max(T / t.width, w / t.height)), e.add([t, this.add.zone(T / 2, w / 2, T, w).setInteractive()]));
+      let V = this.cameras.main.worldView,
+        CX = V.centerX,
+        e = this.add.container(0, 0),
+        t = this.add.image(CX, w / 2, "tac_agaci_arka");
+      (t.setScale(Math.max(V.width / t.width, w / t.height)), e.add([t, this.add.zone(CX, w / 2, V.width, w).setInteractive()]));
       let s = this.add.graphics();
-      (s.fillGradientStyle(0, 0, 0, 0, 0.9, 0.9, 0, 0), s.fillRect(0, 0, T, 230), s.fillGradientStyle(0, 0, 0, 0, 0, 0, 0.85, 0.85), s.fillRect(0, w - 260, T, 260), e.add(s));
+      (s.fillGradientStyle(0, 0, 0, 0, 0.9, 0.9, 0, 0), s.fillRect(V.x, 0, V.width, 230), s.fillGradientStyle(0, 0, 0, 0, 0, 0, 0.85, 0.85), s.fillRect(V.x, w - 260, V.width, 260), e.add(s));
       let a = Object.keys(TAC),
         i = [];
       for (let o = 0; o < 9; o++) {
@@ -8627,12 +8629,12 @@ class _s extends Phaser.Scene {
       let d = () => {
         n.removeAll(!0);
         let o = bt() - tacHarcanan();
-        (n.add(this.add.text(T / 2, 60, m("tac.puan", { n: o }), { ...Z(46, "#ffe39a", 7) }).setOrigin(0.5)),
-          M("ui_ipucu_seridi") && n.add(this.add.image(T / 2, 98, "ui_ipucu_seridi").setDisplaySize(620, 27)));
-        n.add(this.add.text(T / 2, 112, m("tac.aciklama"), { ...z(25, "#f1e6cc", "700"), align: "center", wordWrap: { width: T * 0.62 }, stroke: "#120c06", strokeThickness: 5 }).setOrigin(0.5, 0));
+        (n.add(this.add.text(CX, 92, m("tac.puan", { n: o }), { ...Z(46, "#ffe39a", 7) }).setOrigin(0.5)),
+          M("ui_ipucu_seridi") && n.add(this.add.image(CX, 130, "ui_ipucu_seridi").setDisplaySize(620, 27)));
+        n.add(this.add.text(CX, 146, m("tac.aciklama"), { ...z(25, "#f1e6cc", "700"), align: "center", wordWrap: { width: T * 0.62 }, stroke: "#120c06", strokeThickness: 5 }).setOrigin(0.5, 0));
         a.forEach((l, h) => {
           let [u, f] = i[h],
-            _ = T * u,
+            _ = V.x + V.width * u,
             g = w * f + 40,
             p = tac(l),
             y = this.add.container(_, g),
@@ -8648,7 +8650,7 @@ class _s extends Phaser.Scene {
         });
         if (r) {
           let l = tac(r),
-            h = this.add.container(T / 2, w - 112),
+            h = this.add.container(CX, w - 112),
             u = this.add.graphics();
           (u.fillStyle(660528, 0.95), u.fillRoundedRect(-640, -82, 1280, 164, 18), u.lineStyle(3, 14200904, 1), u.strokeRoundedRect(-640, -82, 1280, 164, 18), h.add(u));
           (h.add(wt(C(this, -560, 0, "tac_" + r, 1), 120)),
@@ -8663,10 +8665,10 @@ class _s extends Phaser.Scene {
             );
           else h.add(this.add.text(440, 0, m("tac.maks"), z(32, "#a8d070", "900")).setOrigin(0.5));
           n.add(h);
-        } else n.add(this.add.text(T / 2, w - 112, m("tac.sec"), Z(34, "#e9dcc0", 5)).setOrigin(0.5));
+        } else n.add(this.add.text(CX, w - 112, m("tac.sec"), Z(34, "#e9dcc0", 5)).setOrigin(0.5));
         if (tacHarcanan() > 0)
-          n.add(F(this, 220, 64, 360, 84, m("tac.sifirla"), () => ((P().tac = {}), j(), d()), "stone", { size: 26 }));
-        n.add(yd(this, T - 90, 70, 46, "✕", () => this.closeModal()));
+          n.add(F(this, V.x + Be + 220, 100, 360, 84, m("tac.sifirla"), () => ((P().tac = {}), j(), d()), "stone", { size: 26 }));
+        n.add(yd(this, V.right - Be - 110, 104, 50, "✕", () => this.closeModal()));
       };
       return (d(), (e.alpha = 0), this.tweens.add({ targets: e, alpha: 1, duration: 220 }), [e]);
     });
@@ -14286,7 +14288,7 @@ class Os extends Phaser.Scene {
       let f = Hs[e.stageId];
       if (f && f.post.length) await this.dialogue(f.post);
     }
-    ((this.modalOpen = !0), V(e.victory ? "zafer" : "yenilgi", { volume: 0.9 }), Tt(this, 0.62));
+    ((this.modalOpen = !0), V(e.victory ? "zafer" : "yenilgi", { volume: 0.6 }), Tt(this, 0.62));
     let o = this.add.container(O / 2, w / 2),
       l = e.victory ? "zafer_afisi" : "yenilgi_afisi",
       d = M(l);
