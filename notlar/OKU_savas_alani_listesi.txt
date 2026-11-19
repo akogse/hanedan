@@ -1,0 +1,73 @@
+DYNASTY SIEGE — GÖRSEL PAKETİ 10: SAVAŞ ALANI AYRINTILARI (15 görsel)
+
+NEDEN: Pencereler ve menüler bitti. Savaşın İÇİNDE hâlâ kodla çizilmiş ucuz parçalar var ve oyuncu en çok savaşı görüyor:
+- Düşmanların üstündeki durum işaretleri (yanıyor, yavaşladı, ıslak, sersem, kör, kalkanlı) şu an RENKLİ NOKTALAR.
+- Element kombolarında (Buhar, Parçalanma, Patlama, Erime, Aşırı Yük) yalnızca renkli bir parlama var; oyuncu ne olduğunu
+  anlamıyor.
+- Kuleye dokununca çıkan menzil dairesi düz açık yeşil bir elips.
+- Boss can çubuğunun dolgusu düz kırmızı dikdörtgen.
+- Kahramanın altındaki seçim işareti düz sarı elips.
+
+KURALLAR: paket 6–9 ile aynı. Yazı/harf/sayı YOK. Arka plan düz magenta #FF00FF (istisnalar aşağıda yazıyor).
+Her görselden 2 çeşit üret.
+
+ORTAK EK (istisna yazmayanlara):
+"premium dark fantasy mobile strategy game UI element, antique warm gold (not lemon yellow) with small round deep blue
+sapphires, heavy readable embossed ornament, lit by warm candlelight from the top left, painterly but crisp edges,
+straight front view, no text, no letters, no numbers, isolated on a flat solid pure magenta #FF00FF background,
+no pink or magenta reflections on the metal, no glow or smoke around the object, no shadow on the background"
+
+════════ A) DURUM İŞARETLERİ — 6 küçük rozet, her biri 1:1 (512×512) ════════
+Yeri: düşmanın can çubuğunun yanında yan yana küçük rozetler. Ekranda ~26–30 px — ÇOK küçük; tek, kalın, net bir simge.
+Ortak biçim: "A tiny round status badge: a dark navy enamel disc with a thick antique gold rim, one single bold simple
+emblem filling the center: ..." + ORTAK EK
+1) durum_yanma.png     ...: "a bright orange-red flame"
+2) durum_yavas.png     ...: "a pale icy blue snowflake"
+3) durum_islak.png     ...: "a single deep blue water droplet"
+4) durum_sersem.png    ...: "three small yellow stars circling"
+5) durum_kor.png       ...: "a dark purple closed eye with a slash"
+6) durum_kalkan.png    ...: "a pale silver-blue rune shield"
+
+════════ B) KOMBO ROZETLERİ — 5 rozet, her biri 1:1 (1024×1024) ════════
+Yeri: kombo olunca düşmanın üstünde patlayarak büyüyen rozet + altında kombo adı (kodla). Ekranda ~120 px, 1 saniye.
+Ortak biçim: "A dramatic round combo emblem medallion: antique gold rim with small sapphires, a dynamic burst shape behind
+it, the center shows ..." + ORTAK EK
+7)  kombo_buhar.png       ...: "swirling white steam clouds rising from where fire meets ice, white and pale cyan"
+8)  kombo_parcalanma.png  ...: "a shattering ice crystal breaking into sharp shards, icy blue"
+9)  kombo_patlama.png     ...: "a fiery orange explosion blast with sparks"
+10) kombo_erime.png       ...: "molten armor plate melting and dripping, glowing orange-red"
+11) kombo_asiri_yuk.png   ...: "crackling yellow-white lightning overloading a sapphire core"
+
+════════ C) ZEMİN İŞARETLERİ ════════
+12) menzil_halkasi.png — 1:1 (1024×1024)
+   Yeri: kuleye dokununca yerde menzili gösterir; kod bunu perspektif için yatayda yassıltır. Ekranda 500–800 px genişlik.
+   Dikkat: haritanın üstünde duracak; İNCE ve yarı saydam hissi veren zarif bir rün çemberi olmalı, içi BOŞ.
+   Prompt: "A thin magical rune circle seen from directly above, a single fine ring of glowing pale gold light with small
+   evenly spaced engraved runes along it, very delicate, the whole inside is empty and filled with flat magenta #FF00FF"
+   + ORTAK EK
+
+13) secim_isareti.png — 1:1 (1024×1024)
+   Yeri: seçili kahramanın ve askerlerin toplanma noktasının altında yerde; yassıltılıp yavaşça döndürülür. Ekranda ~120 px.
+   Prompt: "A circular ground selection marker seen from directly above: a ring of antique gold with four small
+   pointed arrow tips facing inward and a fleur-de-lis at the top, the inside empty and filled with flat magenta
+   #FF00FF" + ORTAK EK
+
+════════ D) BOSS CAN ÇUBUĞU ════════
+14) boss_can_cerceve.png — 8:1 (2048×256)
+   Yeri: boss gelince ekranın üstünde, boss adının altında can çubuğu. Ekranda ~620×78 px.
+   ÖLÇÜ: içteki boşluk düz dikdörtgen, genişliğin %84'ü, yüksekliğin %40'ı, tam ortada (magenta).
+   Prompt: "A long menacing horizontal health bar frame for a boss: blackened iron and dark antique gold frame with
+   thorny spikes and a small horned skull at the left end, small blood-red rubies, the inside is a straight empty
+   rectangular slot filled with flat magenta #FF00FF" + ORTAK EK
+
+15) boss_can_dolgu.png — 16:1 (1024×64) — OPAK, magenta YOK, ortak ek EKLEME
+   Yeri: 14'ün içindeki azalan can; yatay kayarak akar.
+   Prompt: "Seamless horizontal texture strip of glowing dark crimson blood-red liquid, deep red with a brighter
+   highlight along the top and darker along the bottom, subtle flowing streaks, horizontally tileable, no frame, no text"
+
+────────────────────────────────────────────────────────────────────────
+KODDA BENİM YAPACAKLARIM
+- Durum noktaları yerine rozetler; kombo olunca rozet patlayarak büyür, altında kombo adı yazar (ilk görüşte kısa açıklama).
+- Menzil: rün çemberi yassılıp yavaşça döner; yükseltme önizlemesinde yeni menzil ikinci çember olarak görünür.
+- Seçim işareti kahramanın ve toplanma bayrağının altında döner.
+- Boss çubuğu akan kan dolgusu; can azaldıkça arkasında beyaz "hasar izi" geriden gelir.

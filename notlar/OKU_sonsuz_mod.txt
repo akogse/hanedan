@@ -1,0 +1,31 @@
+DYNASTY SIEGE — PAKET 11: SONSUZ MOD HARİTASI (1 görsel, 2 çeşit)
+Çıktı dosya adı: harita_sonsuz_tam.png   (3840×2160, yatay 16:9)
+
+NE İÇİN: Hikâye bittikten sonra açılan "Sonsuz Kuşatma" modu: dalgalar bitmez, her 5 dalgada güçlenir, en uzun
+dayanma rekoru tutulur. Bu harita yalnızca bu mod için; I. ve II. çağın düşmanları karışık gelir.
+
+NASIL KULLANILIR
+- harita_sonsuz_yerlesim.png yapı görselidir: iki yolun, 22 gri platformun ve 2 altın maden yerinin YERİ ve BOYUTU
+  birebir korunmalı.
+- İki yol sol üst ve sol alt kenardan girer, ortada birleşir, büyük bir S çizip sağ kenardaki kaleye çıkar.
+- Sağ kenardaki gri dikdörtgen = bizim kalemiz; kenarda yarım görünsün.
+- Altın renkli iki oval = maden yerleri (altın parıltılı kaya/maden ağzı hissi, üstü boş ve düz).
+
+PROMPT (İngilizce)
+Painterly dark-fantasy top-down 3/4 view tower defense battlefield, same art style as the previous maps: rich
+hand-painted texture. An eternal battleground at the border between the living kingdom and the land of the dead:
+the LEFT half is a scorched, ash-grey wasteland under a violet twilight sky glow, with dead trees, bone piles, broken
+Varhol banners and faint purple mist; the RIGHT half turns into the kingdom's green highlands with pine trees, stone
+walls and warm torchlight near our castle. Ancient battle remains everywhere: half-buried giant swords, toppled
+statues, old rune stones with faint blue glow, abandoned siege engines, craters. Two muddy cobbled war roads enter
+from the upper left and lower left edges, merge in the middle, then make a big S-curve to our stone castle gate on the
+right edge. Twenty-two flat round grey cobblestone tower platforms beside the roads exactly where the layout shows, each
+clearly readable and empty; two round flat gold-ore mine spots with glittering gold nuggets where the layout shows gold
+ovals. Nothing blocking the roads or platforms. No characters, no towers on platforms, no text, no UI, no border.
+Follow the layout image exactly for road paths and platform positions and sizes.
+
+NEGATIVE
+text, letters, numbers, UI, frame, characters, soldiers, towers on platforms, extra roads, platforms on the road,
+fisheye, tilt-shift blur
+
+Not: Haritanın küçük önizlemesini (brifing ve harita düğümü için) ben bu görselden üretirim.

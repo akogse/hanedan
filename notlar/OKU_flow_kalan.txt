@@ -1,0 +1,25 @@
+DYNASTY SIEGE — FLOW'DA KALANLAR (güncel durum, 19.11)
+
+Arkadaşının gönderdiği 15 animasyon oyuna girdi. Aşağıdakiler HÂLÂ eksik.
+
+A) KAHRAMAN + ASKER ANİMASYONLARI — 29 video  (EN ÖNEMLİ)
+   Liste, promptlar ve başlangıç kareleri: flow_paketi.zip (OKU_flow.txt + karakter_baslangic_kareleri/).
+   Sarya 7, Velmora 7, Thorgar 7, asker 4, şövalye 4. Hiçbiri gelmedi; savaşta bu karakterler hâlâ kıpırdamıyor.
+   Not: kahraman salonundaki yeni tam boy resimler (kahraman_tam_*.png) yüz/zırh referansı olarak da verilebilir,
+   ama BAŞLANGIÇ KARESİ olarak flow_paketi'ndeki *_16x9.png kullanılmalı (oyundaki boyut ve duruş onlara göre).
+
+B) KULE VİDEOLARI — 25 video (Kalan_Videolar.txt'deki bağlantılar geçerli)
+   kule_ayaz_2_saldiri                          (Flow bağlantısı yok, önce üretilmeli; başlangıç: kule_ayaz_2_16x9_ref.png)
+   kule_ayaz_dal_muhur_bekle, kule_ayaz_dal_muhur_saldiri
+   kule_balista_2_saldiri_sag
+   kule_balista_dal_mizrak_saldiri_sag
+   kule_ejder_dal_nefes_saldiri
+   kule_kisla_dal_berserk_saldiri
+   kule_run_dal_sarsinti_bekle
+   kule_kartal_1/2/3_saldiri_sag + _sol          (6)
+   kule_kartal_dal_grifon_saldiri_sag + _sol     (2)
+   kule_fuzyon_asit_2_saldiri
+   kule_fuzyon_curuk_1/2, duman_1/2, kutup_1/2, simsek_1/2 _saldiri   (8)
+
+ÖNCELİK: önce A (kahramanlar), sonra kartal ve dal kuleleri, en son füzyon kuleleri
+(füzyon kuleleri oyunda henüz açılmadı; sırası gelince kodlayacağım).
