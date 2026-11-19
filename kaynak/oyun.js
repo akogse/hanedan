@@ -1963,7 +1963,6 @@ var zt = {
     arrow_2: "ses/arrow_2.mp3",
     boss_uyari: "ses/boss_uyari.mp3",
     build: "ses/build.mp3",
-    build_2: "ses/build_2.mp3",
     click: "ses/click.mp3",
     click_2: "ses/click_2.mp3",
     click_3: "ses/click_3.mp3",
@@ -1977,8 +1976,6 @@ var zt = {
     menu_ac: "ses/menu_ac.mp3",
     muhur: "ses/muhur.mp3",
     sell: "ses/sell.mp3",
-    sell_2: "ses/sell_2.mp3",
-    sell_3: "ses/sell_3.mp3",
     ses_boss_garrik_olum: "ses/ses_boss_garrik_olum.mp3",
     ses_boss_garrik_saldiri: "ses/ses_boss_garrik_saldiri.mp3",
     ses_boss_garrik_yetenek: "ses/ses_boss_garrik_yetenek.mp3",
@@ -12801,7 +12798,7 @@ class Rs extends Phaser.Scene {
         duration: 260,
         onComplete: () => e.destroy(),
       });
-    Ie("ses_" + e.def.art + "_olum", "death", { volume: e.boss ? 0.9 : 0.5, minGapMs: 90, maxLive: 3 });
+    Ie("ses_" + e.def.art + "_olum", "death", { volume: e.boss ? 0.9 : 0.6, minGapMs: 90, maxLive: 3 });
   }
   enemyReachedCastle(e) {
     if (
