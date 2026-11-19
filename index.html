@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Dynasty Siege"><meta name="theme-color" content="#000000"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="simge_180.png"><link rel="icon" type="image/png" href="simge_192.png"></head><body style="margin:0;background:#000">
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Dynasty Siege"><meta name="theme-color" content="#000000"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="simge_180.png"><link rel="icon" type="image/png" href="simge_192.png"></head><body style="margin:0;background:#070b18 url(assets/brf_zemin.webp) center/cover fixed">
 <meta charset="utf-8">
 <title>Hanedan Kuşatması</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -10160,7 +10160,7 @@ class _s extends Phaser.Scene {
       bitti = gunlukBitti(),
       g0 = gunluk(),
       x = T - Be - 140,
-      y = w - 560,
+      y = w - 590,
       c = this.add.container(x, y).setDepth(61);
     if (acik && !bitti && M("z_isik")) {
       let isk = this.add.image(0, 0, "z_isik").setBlendMode(Phaser.BlendModes.ADD).setAlpha(0.75).setTint(16760960);
@@ -10177,13 +10177,13 @@ class _s extends Phaser.Scene {
       (fr.setScale(142 / 0.72 / fr.width), fr.setY(-(0.538 - 0.5) * fr.displayHeight), acik || fr.setTint(8421504), c.add(fr));
     }
     if (bitti) c.add(this.add.text(36, 34, "✓", { fontFamily: D, fontStyle: "700", fontSize: "38px", color: "#9fe08a", stroke: "#000", strokeThickness: 6 }).setOrigin(0.5));
-    let ad = this.add.text(0, 92, G(m("daily.title")), { fontFamily: D, fontStyle: "700", fontSize: "20px", color: acik ? "#f4dc90" : "#9c958a" }).setOrigin(0.5).setLetterSpacing(2).setShadow(0, 2, "#000", 5, !1, !0),
-      alt = this.add.text(0, 118, !acik ? m("daily.locked") : bitti ? m("daily.done") : m("daily.k." + g0.kural), z(18, bitti ? "#9fe08a" : acik ? "#ffcf7a" : "#8d8676", "800")).setOrigin(0.5).setShadow(0, 2, "#000", 4, !1, !0);
+    let ad = this.add.text(0, 118, G(m("daily.title")), { fontFamily: D, fontStyle: "700", fontSize: "20px", color: acik ? "#f4dc90" : "#9c958a" }).setOrigin(0.5).setLetterSpacing(2).setShadow(0, 2, "#000", 5, !1, !0),
+      alt = this.add.text(0, 144, !acik ? m("daily.locked") : bitti ? m("daily.done") : m("daily.k." + g0.kural), z(18, bitti ? "#9fe08a" : acik ? "#ffcf7a" : "#8d8676", "800")).setOrigin(0.5).setShadow(0, 2, "#000", 4, !1, !0);
     let sig = Math.min(240, 2 * (Be + 140) - 28);
     for (let q of [ad, alt]) q.width > sig && q.setScale(sig / q.width);
     c.add([ad, alt]);
     if (acik && !bitti) this.tweens.add({ targets: c, scale: 1.04, duration: 1100, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
-    let zn = this.add.zone(0, 30, 170, 210).setInteractive({ useHandCursor: !0 });
+    let zn = this.add.zone(0, 42, 180, 240).setInteractive({ useHandCursor: !0 });
     (zn.on("pointerup", () => {
       if (this.modal.length || this.drag?.moved) return;
       if (!acik) return this.toast(m("daily.locked"));
@@ -10196,7 +10196,7 @@ class _s extends Phaser.Scene {
   drawSonsuz() {
     let acik = sonsuzAcik(),
       x = T - Be - 140,
-      y = w - 300,
+      y = w - 318,
       c = this.add.container(x, y).setDepth(61);
     if (acik && M("z_isik")) {
       let isk = this.add.image(0, 0, "z_isik").setBlendMode(Phaser.BlendModes.ADD).setAlpha(0.75);
@@ -10212,12 +10212,12 @@ class _s extends Phaser.Scene {
       let fr = this.add.image(0, 0, "brf_madalyon_kule");
       (fr.setScale(150 / 0.72 / fr.width), fr.setY(-(0.538 - 0.5) * fr.displayHeight), acik || fr.setTint(8421504), c.add(fr));
     }
-    let ad = this.add.text(0, 96, G(m("map.endless")), { fontFamily: D, fontStyle: "700", fontSize: "22px", color: acik ? "#f4dc90" : "#9c958a" }).setOrigin(0.5).setLetterSpacing(2).setShadow(0, 2, "#000", 5, !1, !0),
-      alt = this.add.text(0, 124, acik ? m("map.endlessRecord", { n: P().sonsuzRekor ?? 0 }) : m("map.endlessLocked"), z(18, acik ? "#cfc6ae" : "#8d8676", "800")).setOrigin(0.5).setShadow(0, 2, "#000", 4, !1, !0);
+    let ad = this.add.text(0, 118, G(m("map.endless")), { fontFamily: D, fontStyle: "700", fontSize: "22px", color: acik ? "#f4dc90" : "#9c958a" }).setOrigin(0.5).setLetterSpacing(2).setShadow(0, 2, "#000", 5, !1, !0),
+      alt = this.add.text(0, 146, acik ? m("map.endlessRecord", { n: P().sonsuzRekor ?? 0 }) : m("map.endlessLocked"), z(18, acik ? "#cfc6ae" : "#8d8676", "800")).setOrigin(0.5).setShadow(0, 2, "#000", 4, !1, !0);
     { let sig = Math.min(240, 2 * (Be + 140) - 28); for (let q of [ad, alt]) q.width > sig && q.setScale(sig / q.width); }
     c.add([ad, alt]);
     if (acik) this.tweens.add({ targets: c, scale: 1.04, duration: 1300, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
-    let zn = this.add.zone(0, 30, 170, 220).setInteractive({ useHandCursor: !0 });
+    let zn = this.add.zone(0, 42, 180, 240).setInteractive({ useHandCursor: !0 });
     (zn.on("pointerup", () => {
       if (this.modal.length || this.drag?.moved) return;
       if (!acik) return this.toast(m("map.endlessLocked"));
@@ -11794,6 +11794,7 @@ class Ss {
     return this.lv.range * (this.s.menzilCarpani ?? 1);
   }
   applyArt() {
+    if (this.ezme) (this.ezme.stop(), (this.ezme = null));
     let e = this.artKey(),
       t = e + "_bekle",
       s = this.sprite;
@@ -11839,6 +11840,7 @@ class Ss {
       r = "vurus_" + t + "_" + Math.round(i * 100);
     if (!s.anims.exists(r))
       s.anims.create({ key: r, frames: s.anims.generateFrameNumbers(t, {}), frameRate: a / i, repeat: 0 });
+    if (this.ezme) (this.ezme.stop(), (this.ezme = null));
     return (
       be(this.sprite, t, this.artKey(), 0.92),
       (this.sprite.anims.timeScale = s.speed * OYUN_TEMPO),
@@ -11864,7 +11866,8 @@ class Ss {
         ease: "Quad.In",
         onComplete: () => {
           (this.s.fx.buildImpact(this.x, this.y + 22),
-            this.s.tweens.add({ targets: e, scaleY: e.scaleY * 0.9, scaleX: e.scaleX * 1.06, yoyo: !0, duration: 90 }));
+            // ezilme bitince ölçeği resimden yeniden hesapla: bu sırada hareketli resim inerse eski ölçek geri yazılmasın
+            (this.ezme = this.s.tweens.add({ targets: e, scaleY: e.scaleY * 0.9, scaleX: e.scaleX * 1.06, yoyo: !0, duration: 90, onComplete: () => ((this.ezme = null), this.sprite?.active && !this.attacking && this.applyArt()) })));
         },
       }));
   }
@@ -12627,13 +12630,15 @@ class Ms {
     )
       this.target = null;
     let t = Math.hypot(this.guardX - this.x, this.guardY - this.y) > 30 && !this.engaged;
-    if (!this.def.ranged && !this.engaged && !t) {
+    // uzak menzilli kahraman da yanına gelen düşmanı durdurur (yanından geçip gitmesin), ama daha dar alanda
+    if (!this.engaged && !t) {
       let l = null,
-        d = 1 / 0;
+        d = 1 / 0,
+        alan = this.def.ranged ? 95 : Ma;
       for (let h of this.s.enemies) {
         if (!h.alive || h.flying || h.def.unblockable || (h.blockedBy && h.blockedBy !== this)) continue;
         let u = Math.hypot(h.x - this.guardX, h.y - this.guardY);
-        if (u < Ma && u < d) ((d = u), (l = h));
+        if (u < alan && u < d) ((d = u), (l = h));
       }
       if (l) ((this.engaged = l), (l.blockedBy = this));
     }
