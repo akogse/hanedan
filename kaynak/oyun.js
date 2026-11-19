@@ -8940,20 +8940,26 @@ class _s extends Phaser.Scene {
       if ((y.setScale(150 / y.height), r)) y.setTint(16769712);
       n.add(y);
     } else n.add(o);
-    if (M(d))
-      n.add(
-        this.add
-          .text(0, -2, String(e.id), {
+    if (M(d)) {
+      // numara madalyonun iç diskine ortalanır; altın degrade, kabartma gölge, iki hanede sığacak kadar küçülür
+      let y = { stage_madalyonu: [-2, -13, 68], stage_madalyonu_boss: [1, -15, 58], stage_madalyonu_kilitli: [0, 2, 60] }[d],
+        k = this.add
+          .text(y[0], y[1] + 2, String(e.id), {
             fontFamily: D,
             fontStyle: "900",
-            fontSize: "46px",
-            color: s || i ? "#ffe39a" : "#8d8676",
-            stroke: s || i ? "#3b2604" : "#1c1a16",
-            strokeThickness: 7,
+            fontSize: "44px",
+            color: "#ffe9a8",
+            stroke: s || i ? "#241302" : "#15130f",
+            strokeThickness: 6,
           })
           .setOrigin(0.5)
-          .setShadow(0, 2, "#000", 6, !1, !0),
-      );
+          .setShadow(0, 3, "#000", 4, !0, !0);
+      if (s || i) {
+        let A = k.context.createLinearGradient(0, k.height * 0.2, 0, k.height * 0.8);
+        (A.addColorStop(0, "#fff6d2"), A.addColorStop(0.5, "#f2c868"), A.addColorStop(1, "#b07a24"), k.setFill(A));
+      } else k.setColor("#8d8676");
+      (k.setScale(Math.min(1, (y[2] * 0.78) / k.width, (y[2] * 0.72) / (k.height * 0.8))), n.add(k));
+    }
     else if (s || i)
       n.add(
         this.add
@@ -9039,13 +9045,13 @@ class _s extends Phaser.Scene {
         y.strokeRoundedRect(-87, 65, 174, 32, 16),
         n.add(y));
       let YT = M("ui_yildiz_tepsisi"),
-        YW = 236,
+        YW = 214,
         YH = (YW * 159) / 600;
-      if (YT) (y.setVisible(!1), n.add(this.add.image(0, 84, "ui_yildiz_tepsisi").setDisplaySize(YW, YH)));
+      if (YT) (y.setVisible(!1), n.add(this.add.image(0, 98, "ui_yildiz_tepsisi").setDisplaySize(YW, YH)));
       for (let k = 0; k < 5; k++)
         if (YT) {
           // tepside: kazanılan yıldız parlak altın, kazanılmayan yuva boş kalır
-          if (k < a) n.add(wt(C(this, (0.228 + k * 0.1357 - 0.5) * YW, 84 + (0.487 - 0.5) * YH, M("ikon_yildiz_hud") ? "ikon_yildiz_hud" : "ikon_yildiz", 1), YW * 0.122));
+          if (k < a) n.add(wt(C(this, (0.228 + k * 0.1357 - 0.5) * YW, 98 + (0.487 - 0.5) * YH, M("ikon_yildiz_hud") ? "ikon_yildiz_hud" : "ikon_yildiz", 1), YW * 0.122));
         } else
           n.add(
             de(this.add.image((k - 2) * 32, 81, k < a ? "ikon_yildiz" : "ikon_yildiz_bos"), k < a ? "ikon_yildiz" : "ikon_yildiz_bos", 0.56)

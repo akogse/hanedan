@@ -1906,18 +1906,18 @@
     muzik_kesif: "ses/muzik_kesif.mp3?v=3ca1ea02",
     muzik_savas: "ses/muzik_savas.mp3?v=5e5007a1",
     muzik_boss: "ses/muzik_boss.mp3?v=467cb60b",
-    altin: "ses/altin.mp3?v=b6200250",
-    altin_2: "ses/altin_2.mp3?v=998e58dc",
-    altin_3: "ses/altin_3.mp3?v=c8002e53",
+    altin: "ses/altin.mp3?v=7374ff8d",
+    altin_2: "ses/altin_2.mp3?v=c157f9a0",
+    altin_3: "ses/altin_3.mp3?v=691cfb48",
     arrow: "ses/arrow.mp3?v=8ef9a20b",
     arrow_2: "ses/arrow_2.mp3?v=b8252185",
     arrow_3: "ses/arrow_3.mp3?v=7d1c9d05",
     boss_uyari: "ses/boss_uyari.mp3?v=bdc2208f",
-    build: "ses/build.mp3?v=01da54b5",
-    build_2: "ses/build_2.mp3?v=6570ca16",
-    click: "ses/click.mp3?v=64a1b28b",
-    click_2: "ses/click_2.mp3?v=0f82e206",
-    click_3: "ses/click_3.mp3?v=ea6f4075",
+    build: "ses/build.mp3?v=e07161c9",
+    build_2: "ses/build_2.mp3?v=6fcb07bc",
+    click: "ses/click.mp3?v=d2a308c0",
+    click_2: "ses/click_2.mp3?v=a213e0e1",
+    click_3: "ses/click_3.mp3?v=59ce759c",
     death: "ses/death.mp3?v=1b810189",
     death_2: "ses/death_2.mp3?v=5567c4b9",
     death_3: "ses/death_3.mp3?v=697a0f2a",
@@ -1925,11 +1925,11 @@
     fire_2: "ses/fire_2.mp3?v=5851fe46",
     ice: "ses/ice.mp3?v=76e37ea5",
     ice_2: "ses/ice_2.mp3?v=b790b9d5",
-    menu_ac: "ses/menu_ac.mp3?v=ecc92eaa",
+    menu_ac: "ses/menu_ac.mp3?v=e22935ed",
     muhur: "ses/muhur.mp3?v=2e73296d",
-    sell: "ses/sell.mp3?v=4a33a31a",
-    sell_2: "ses/sell_2.mp3?v=32457506",
-    sell_3: "ses/sell_3.mp3?v=d5371b18",
+    sell: "ses/sell.mp3?v=5b411d1c",
+    sell_2: "ses/sell_2.mp3?v=95c20028",
+    sell_3: "ses/sell_3.mp3?v=f5f4598b",
     ses_boss_garrik_olum: "ses/ses_boss_garrik_olum.mp3?v=d82c1592",
     ses_boss_garrik_saldiri: "ses/ses_boss_garrik_saldiri.mp3?v=ceb349c9",
     ses_boss_garrik_yetenek: "ses/ses_boss_garrik_yetenek.mp3?v=5f20de56",
@@ -1985,9 +1985,9 @@
     ses_kahraman_aldric_olum: "ses/ses_kahraman_aldric_olum.mp3?v=282757fe",
     ses_kahraman_aldric_saldiri: "ses/ses_kahraman_aldric_saldiri.mp3?v=fba5c548",
     ses_kahraman_aldric_yetenek: "ses/ses_kahraman_aldric_yetenek.mp3?v=425f6b34",
-    ui_tik: "ses/ui_tik.mp3?v=669306fd",
-    ui_tik_2: "ses/ui_tik_2.mp3?v=2a6e48b8",
-    upgrade: "ses/upgrade.mp3?v=afdc7a89",
+    ui_tik: "ses/ui_tik.mp3?v=ed11e772",
+    ui_tik_2: "ses/ui_tik_2.mp3?v=c008b15d",
+    upgrade: "ses/upgrade.mp3?v=61fbc827",
     wave: "ses/wave.mp3?v=47fb01ee",
     bolum_baslangic: "ses/bolum_baslangic.mp3",
     yenilgi: "ses/yenilgi.mp3?v=72624947",
@@ -9025,20 +9025,26 @@ class _s extends Phaser.Scene {
       if ((y.setScale(150 / y.height), r)) y.setTint(16769712);
       n.add(y);
     } else n.add(o);
-    if (M(d))
-      n.add(
-        this.add
-          .text(0, -2, String(e.id), {
+    if (M(d)) {
+      // numara madalyonun iç diskine ortalanır; altın degrade, kabartma gölge, iki hanede sığacak kadar küçülür
+      let y = { stage_madalyonu: [-2, -13, 68], stage_madalyonu_boss: [1, -15, 58], stage_madalyonu_kilitli: [0, 2, 60] }[d],
+        k = this.add
+          .text(y[0], y[1] + 2, String(e.id), {
             fontFamily: D,
             fontStyle: "900",
-            fontSize: "46px",
-            color: s || i ? "#ffe39a" : "#8d8676",
-            stroke: s || i ? "#3b2604" : "#1c1a16",
-            strokeThickness: 7,
+            fontSize: "44px",
+            color: "#ffe9a8",
+            stroke: s || i ? "#241302" : "#15130f",
+            strokeThickness: 6,
           })
           .setOrigin(0.5)
-          .setShadow(0, 2, "#000", 6, !1, !0),
-      );
+          .setShadow(0, 3, "#000", 4, !0, !0);
+      if (s || i) {
+        let A = k.context.createLinearGradient(0, k.height * 0.2, 0, k.height * 0.8);
+        (A.addColorStop(0, "#fff6d2"), A.addColorStop(0.5, "#f2c868"), A.addColorStop(1, "#b07a24"), k.setFill(A));
+      } else k.setColor("#8d8676");
+      (k.setScale(Math.min(1, (y[2] * 0.78) / k.width, (y[2] * 0.72) / (k.height * 0.8))), n.add(k));
+    }
     else if (s || i)
       n.add(
         this.add
@@ -9124,13 +9130,13 @@ class _s extends Phaser.Scene {
         y.strokeRoundedRect(-87, 65, 174, 32, 16),
         n.add(y));
       let YT = M("ui_yildiz_tepsisi"),
-        YW = 236,
+        YW = 214,
         YH = (YW * 159) / 600;
-      if (YT) (y.setVisible(!1), n.add(this.add.image(0, 84, "ui_yildiz_tepsisi").setDisplaySize(YW, YH)));
+      if (YT) (y.setVisible(!1), n.add(this.add.image(0, 98, "ui_yildiz_tepsisi").setDisplaySize(YW, YH)));
       for (let k = 0; k < 5; k++)
         if (YT) {
           // tepside: kazanılan yıldız parlak altın, kazanılmayan yuva boş kalır
-          if (k < a) n.add(wt(C(this, (0.228 + k * 0.1357 - 0.5) * YW, 84 + (0.487 - 0.5) * YH, M("ikon_yildiz_hud") ? "ikon_yildiz_hud" : "ikon_yildiz", 1), YW * 0.122));
+          if (k < a) n.add(wt(C(this, (0.228 + k * 0.1357 - 0.5) * YW, 98 + (0.487 - 0.5) * YH, M("ikon_yildiz_hud") ? "ikon_yildiz_hud" : "ikon_yildiz", 1), YW * 0.122));
         } else
           n.add(
             de(this.add.image((k - 2) * 32, 81, k < a ? "ikon_yildiz" : "ikon_yildiz_bos"), k < a ? "ikon_yildiz" : "ikon_yildiz_bos", 0.56)
