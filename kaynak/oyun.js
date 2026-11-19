@@ -1961,7 +1961,6 @@ var zt = {
     altin_3: "ses/altin_3.mp3",
     arrow: "ses/arrow.mp3",
     arrow_2: "ses/arrow_2.mp3",
-    arrow_3: "ses/arrow_3.mp3",
     boss_uyari: "ses/boss_uyari.mp3",
     build: "ses/build.mp3",
     build_2: "ses/build_2.mp3",
@@ -2040,6 +2039,14 @@ var zt = {
     upgrade: "ses/upgrade.mp3",
     wave: "ses/wave.mp3",
     bolum_baslangic: "ses/bolum_baslangic.mp3",
+    dal_okyagmuru: "ses/dal_okyagmuru.mp3",
+    dal_alev: "ses/dal_alev.mp3",
+    dal_buzmuhur: "ses/dal_buzmuhur.mp3",
+    dal_tipi: "ses/dal_tipi.mp3",
+    dal_mizrak: "ses/dal_mizrak.mp3",
+    dal_kanca: "ses/dal_kanca.mp3",
+    dal_gok: "ses/dal_gok.mp3",
+    dal_kartal_suru: "ses/dal_kartal_suru.mp3",
     yenilgi: "ses/yenilgi.mp3",
     yildiz: "ses/yildiz.mp3",
     yildiz_2: "ses/yildiz_2.mp3",
@@ -10906,14 +10913,14 @@ class Ss {
           }
         }),
       ),
-        Ie("iksir", "muhur", { volume: 0.4, minGapMs: 160, maxLive: 2 }));
+        Ie("iksir", "muhur", { volume: 0.6, minGapMs: 160, maxLive: 2 }));
     } else if (this.def.id === "eagle") {
       (this.s.addProjectile(
         new Me(this.s, "arrow", s, a - 10, e, null, 1300, (r, n, o) => {
           if (o) this.s.combat.hit(o, i, { kind: "physical", element: "none" });
         }),
       ),
-        Ie("kartal", "arrow", { volume: 0.35, minGapMs: 1800, maxLive: 1 }));
+        Ie("kartal", "arrow", { volume: 0.55, minGapMs: 1500, maxLive: 1 }));
     } else if (this.def.id === "storm") {
       let r = [e],
         n = e;
@@ -10934,7 +10941,7 @@ class Ss {
         (o.push({ x: d.x, y: d.y - 34 * d.scale - (d.flying ? 70 : 0) }),
           this.s.combat.hit(d, l, { kind: "magic", element: "lightning" }),
           (l *= t.decay ?? 0.65));
-      (this.s.fx.lightning(o), Ie("simsek", "muhur", { volume: 0.45, minGapMs: 140, maxLive: 2 }));
+      (this.s.fx.lightning(o), Ie("simsek", "muhur", { volume: 0.6, minGapMs: 140, maxLive: 2 }));
     } else if (this.def.id === "ballista")
       (this.s.addProjectile(
         new Me(this.s, "bolt", s, a + 40, e, null, 1500, (r, n, o) => {
@@ -10966,7 +10973,7 @@ class Ss {
             }),
           );
         }
-        return (S.sfx("arrow"), !0);
+        return (Ie("dal_okyagmuru", "arrow", { volume: 0.8 }), !0);
       }
       case "flameBreath": {
         let r = t.splash;
@@ -10993,7 +11000,7 @@ class Ss {
           if (n.flying) continue;
           if ((S.combat.hit(n, i, { kind: "magic", element: "fire" }), n.alive)) n.status.burn(t.burnDps, t.burnTime);
         }
-        return (V("muhur", { volume: 0.18, minGapMs: 300 }), !0);
+        return (Ie("dal_alev", "muhur", { volume: 0.55, minGapMs: 1250, maxLive: 1 }), !0);
       }
       case "iceSeal":
         return (
@@ -11007,7 +11014,8 @@ class Ss {
                 ((o.sealN = 0),
                   (o.status.frozenT = o.boss ? 0.8 : t.freeze),
                   (o.status.freezeImmuneT = o.status.frozenT + 2.5),
-                  S.fx.ring(o.x, o.y - 20, 70, 10541055, 420, 6));
+                  S.fx.ring(o.x, o.y - 20, 70, 10541055, 420, 6),
+                  Ie("dal_buzmuhur", "ice", { volume: 0.8 }));
               }
             }),
           ),
@@ -11025,7 +11033,7 @@ class Ss {
               }
             }),
           ),
-          S.sfx("ice"),
+          Ie("dal_tipi", "ice", { volume: 0.75 }),
           !0
         );
       case "piercingSpear":
@@ -11053,7 +11061,7 @@ class Ss {
                 S.tweens.add({ targets: f, alpha: 0, duration: 260, onComplete: () => f.destroy() }));
             }),
           ),
-          S.sfx("arrow"),
+          Ie("dal_mizrak", "arrow", { volume: 0.85 }),
           !0
         );
       case "hook":
@@ -11071,7 +11079,7 @@ class Ss {
               o.status.tryStun(t.stun, o.boss);
             }),
           ),
-          S.sfx("arrow"),
+          Ie("dal_kanca", "arrow", { volume: 0.85 }),
           !0
         );
       case "treasureGuard":
@@ -11096,7 +11104,7 @@ class Ss {
           S.combat.hit(n, n === e ? i : i * 0.5, { kind: "magic", element: "lightning" });
           if (n.alive) n.status.tryStun(t.stun, n.boss);
         }
-        return (Ie("simsek", "muhur", { volume: 0.7, minGapMs: 140 }), !0);
+        return (Ie("dal_gok", "simsek", { volume: 0.85, minGapMs: 400 }), !0);
       }
       case "eagleFlock": {
         let r = S.enemies.filter((n) => this.inRange(n)).sort((n, o) => n.remaining - o.remaining).slice(0, t.shots);
@@ -11107,7 +11115,7 @@ class Ss {
               if (d) S.combat.hit(d, i, { kind: "physical", element: "none" });
             }),
           );
-        return (S.sfx("arrow"), !0);
+        return (Ie("dal_kartal_suru", "kartal", { volume: 0.7, minGapMs: 900, maxLive: 1 }), !0);
       }
     }
     return !1;
