@@ -1,0 +1,99 @@
+DYNASTY SIEGE — GÖRSEL PAKETİ 8: KAHRAMAN SALONU + AYAR ANAHTARI (11 görsel)
+
+NEDEN: Paket 7'yle birlikte bütün pencerelere kadife zemin geldi; kart, ipucu, ayarlar ve boss şeridi artık tutarlı.
+Geriye en zayıf kalan büyük ekran "Kahraman" penceresi (simdiki_kahraman_paneli.png): dört küçük yuvarlak portre ve
+altında yoğun düz yazı. Kahramanlar oyunun yüzü; burada TAM BOY, ihtişamlı birer kart olarak durmalılar.
+Yerleşim: "rehber_kahraman_salonu.png".
+
+ŞU AN VAR OLAN, YENİDEN KULLANILACAKLAR: kahramanların yuvarlak portreleri ve savaş animasyonları (yüz/zırh/renk
+referansı), 8 büyü ikonu (Kral Muhafızları, Kalkan Duvarı, Kuzgun Sürüsü, Avcı İşareti, Meteor, Element Fırtınası,
+Örs Darbesi, Demirci Ateşi), SEÇ düğmeleri, panel çerçevesi. Bunlar için yeni görsel gerekmiyor.
+
+KESİN KURALLAR (6 ve 7 ile aynı)
+- Yazı, harf, sayı YOK. Arka plan düz magenta #FF00FF (boş bırakılacak iç kısımlar da magenta).
+- Her görselden 2 çeşit üret.
+- 1–4 için: KAHRAMANLARIN YÜZÜ, SAÇI, ZIRHI ve RENKLERİ MEVCUT PORTRELERLE AYNI OLMALI (aynı kişi gibi tanınmalı).
+  Portreleri referans olarak göster (oyunda Kahraman penceresindeki dört yuvarlak resim; istersen ben ayrıca dosya veririm).
+
+STİL KİTABI: A takımı ailesi (defne, yuvarlak safir, antika altın #D8B048 / vurgu #F4DC90, çok koyu lacivert).
+Işık sol üstten sıcak mum ışığı. Resimsel ama keskin kenar.
+
+ORTAK EK — 5, 6, 7, 8, 9, 10, 11 için:
+"premium dark fantasy mobile strategy game UI element, antique warm gold (not lemon yellow) with gold laurel leaves and
+small round deep blue sapphires, very dark royal navy enamel or velvet where navy is used, heavy readable embossed
+ornament, lit by warm candlelight from the top left with soft shadow to the bottom right, painterly but crisp edges,
+perfectly symmetrical, straight front view, no text, no letters, no numbers, isolated on a flat solid pure magenta
+#FF00FF background, no pink or magenta reflections on the metal, no glow or smoke around the object,
+no shadow on the background"
+
+KARAKTER EKİ — 1, 2, 3, 4 için:
+"full body heroic character illustration for a premium dark fantasy mobile strategy game, painterly realistic style
+matching high-end game key art, standing in a confident heroic pose, three-quarter view facing slightly left,
+whole figure visible from head to boots with a little space around, warm candlelight from the top left, rich detail,
+no background scenery, no ground, no text, isolated on a flat solid pure magenta #FF00FF background, no magenta or
+pink reflections on armor or skin, crisp clean silhouette edges"
+
+════════════════════════ KAHRAMANLAR (her biri 3:4, 1536×2048) ════════════════════════
+Yeri: her kahraman kartının üst %55'i. Ekranda ~300×400 px. Figür görselin %90 yüksekliğini doldursun, ayaklar altta.
+
+1) kahraman_tam_aldric.png — Sir Aldric Ironshield, "Demir Şövalye", tank
+   "Sir Aldric Ironshield, a battle-hardened middle-aged knight with a short grey-streaked beard and stern face,
+    full polished steel plate armor with gold trim and royal navy blue tabard bearing a gold fleur-de-lis, a red cape,
+    a great kite shield with the royal fleur-de-lis on his left arm and a longsword in his right hand, open-faced
+    steel helmet" + KARAKTER EKİ
+
+2) kahraman_tam_sarya.png — Sarya Ravenseye, "Kuzgun Okçu", uzak mesafe
+   "Sarya Ravenseye, a young fierce ranger woman with long dark wavy hair and sharp eyes, dark leather and dark green
+    hooded ranger gear with small gold clasps, a tall recurve longbow drawn halfway, a quiver of black-feathered
+    arrows, a black raven perched on her shoulder" + KARAKTER EKİ
+
+3) kahraman_tam_velmora.png — Velmora, "Rün Bilgesi", büyücü
+   "Velmora, an elderly wise sorceress with long silver-white hair and pale piercing eyes, flowing deep navy and
+    silver robes embroidered with glowing pale blue runes, holding a tall carved staff topped with a floating blue
+    crystal, faint frost and fire sparks swirling around her free hand" + KARAKTER EKİ
+
+4) kahraman_tam_thorgar.png — Thorgar Anvilfist, "Dağ Demircisi", destek
+   "Thorgar Anvilfist, a broad stocky dwarf blacksmith warrior with a huge braided fiery red beard and bald head with
+    a gold circlet, heavy leather apron over chainmail and bronze plate, thick fur on the shoulders, a massive
+    war-hammer shaped like an anvil resting on his shoulder, glowing embers on the hammer head" + KARAKTER EKİ
+
+════════════════════════ KART VE ROZETLER ════════════════════════
+
+5) kahraman_karti.png — 9:20 dikey (900×2000)
+   Yeri: her kahraman için bir uzun kart; içine tam boy resim (üstte), ad, pasif, iki yetenek ve SEÇ düğmesi biner.
+   Ekranda ~360×800 px, yan yana 4 tane.
+   ÖLÇÜ: üstte büyük kemerli (gotik pencere gibi) boşluk: genişliğin %84'ü, yüksekliğin %50'si, üstten %5 aşağıda
+         başlar; magenta. Altında düz koyu lacivert alan (yazılar için) kartın geri kalanı, süsü az.
+   Prompt: "A tall vertical hero card: an antique gold frame with laurel corner ornaments and small sapphires, a small
+   gold crown on the top, the upper half has a large arched gothic-window opening that is EMPTY and filled with flat
+   magenta #FF00FF, the lower half is a plain dark navy velvet panel with a thin gold dividing line under the arch"
+   + ORTAK EK
+
+6) kahraman_karti_isik.png — 9:20 (900×2000) — ARKA PLAN DÜZ SİYAH #000000, ortak ek EKLEME
+   Yeri: seçili kahramanın kartının arkasında parlayan hale (ışık ekleme modunda basılır).
+   Prompt: "A soft warm golden glow shaped like a tall vertical rounded rectangle aura, brightest along the edges and
+   fading smoothly outward, faint upward light rays, isolated on a pure flat black #000000 background, no text"
+
+7–10) rol_tank.png, rol_menzil.png, rol_buyu.png, rol_destek.png — 1:1 (512×512)
+   Yeri: kartın sağ üst köşesinde rol rozeti; ekranda ~64 px — küçük, sade ve tok olmalı.
+   Ortak biçim: "A small round heraldic badge: dark navy enamel disc with a bold antique gold rim, one simple bold gold
+   emblem in the center: ..." + ORTAK EK
+   7) ...: "a kite shield"            (tank — Aldric)
+   8) ...: "a drawn bow with an arrow" (uzak mesafe — Sarya)
+   9) ...: "a staff with a crystal"    (büyü — Velmora)
+   10) ...: "a blacksmith hammer over an anvil" (destek — Thorgar)
+
+11) ayar_anahtari.png — 2:1 (1024×512)
+   Yeri: Ayarlar ve duraklatma penceresinde Müzik / Ses aç-kapa anahtarı. Ekranda ~140×70 px. Topuzu ben kodla
+   sağa-sola kaydırırım ve açıkken içini yeşil-altın, kapalıyken sönük yaparım; bu yüzden YALNIZCA YATAĞI çiz:
+   Prompt: "A horizontal rounded pill-shaped toggle switch track: thick antique gold rim with two tiny sapphires at
+   the ends, the inside of the track is EMPTY and filled with flat magenta #FF00FF, plus separately on the right side
+   of the image a round polished gold knob with a sapphire in its center" + ORTAK EK
+   (Görselin sol %70'i yatak, sağ %30'u ayrı duran topuz olsun; ben ikisini ayırırım.)
+
+────────────────────────────────────────────────────────────────────────
+KODDA BENİM YAPACAKLARIM
+- Kahraman penceresi: dört uzun kart; seçili kartın arkasında parlayan hale ve hafif büyüme; tam boy resim hafifçe
+  nefes alır; yetenek satırlarında mevcut büyü ikonları; rol rozeti köşede.
+- Brifing penceresinde kahramana uzun basınca aynı kart küçük önizleme olarak açılabilir (isteğe bağlı).
+- Ayarlar ve duraklatma: Müzik/Ses yazılı düğmeler yerine anahtar + ikon.
