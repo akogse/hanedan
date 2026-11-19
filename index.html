@@ -1912,7 +1912,7 @@
     arrow: "ses/arrow.mp3?v=8ef9a20b",
     arrow_2: "ses/arrow_2.mp3?v=b8252185",
     arrow_3: "ses/arrow_3.mp3?v=7d1c9d05",
-    boss_uyari: "ses/boss_uyari.mp3?v=89321bf7",
+    boss_uyari: "ses/boss_uyari.mp3?v=bdc2208f",
     build: "ses/build.mp3?v=01da54b5",
     build_2: "ses/build_2.mp3?v=6570ca16",
     click: "ses/click.mp3?v=64a1b28b",
@@ -1988,12 +1988,13 @@
     ui_tik: "ses/ui_tik.mp3?v=669306fd",
     ui_tik_2: "ses/ui_tik_2.mp3?v=2a6e48b8",
     upgrade: "ses/upgrade.mp3?v=afdc7a89",
-    wave: "ses/wave.mp3?v=6b5784f3",
-    yenilgi: "ses/yenilgi.mp3?v=3878994c",
+    wave: "ses/wave.mp3?v=47fb01ee",
+    bolum_baslangic: "ses/bolum_baslangic.mp3",
+    yenilgi: "ses/yenilgi.mp3?v=72624947",
     yildiz: "ses/yildiz.mp3?v=32a00a1f",
     yildiz_2: "ses/yildiz_2.mp3?v=a16b4bda",
     yildiz_3: "ses/yildiz_3.mp3?v=07afee40",
-    zafer: "ses/zafer.mp3?v=df9f06a6",
+    zafer: "ses/zafer.mp3?v=b0c52927",
   },
   Rt = {
     harita_stage1_canli: {
@@ -11891,6 +11892,7 @@ class Rs extends Phaser.Scene {
   create() {
     let e = (this.stage = ce.find((r) => r.id === this.init0.stageId));
     (Ns("muzik_stage" + e.id), (this.paths = e.paths.map((r) => new ks(r))));
+    this.time.delayedCall(400, () => Ie("bolum_baslangic", "wave", { volume: 0.8 }));
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       let r = [...(this.yuklenen ?? []), ...(this.kuleYuk ?? [])];
       this.time.delayedCall ? sayfaBirak(this, r) : 0;

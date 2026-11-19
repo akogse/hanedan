@@ -1904,6 +1904,7 @@ var zt = {
     ui_tik_2: "ses/ui_tik_2.mp3",
     upgrade: "ses/upgrade.mp3",
     wave: "ses/wave.mp3",
+    bolum_baslangic: "ses/bolum_baslangic.mp3",
     yenilgi: "ses/yenilgi.mp3",
     yildiz: "ses/yildiz.mp3",
     yildiz_2: "ses/yildiz_2.mp3",
@@ -11806,6 +11807,7 @@ class Rs extends Phaser.Scene {
   create() {
     let e = (this.stage = ce.find((r) => r.id === this.init0.stageId));
     (Ns("muzik_stage" + e.id), (this.paths = e.paths.map((r) => new ks(r))));
+    this.time.delayedCall(400, () => Ie("bolum_baslangic", "wave", { volume: 0.8 }));
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       let r = [...(this.yuklenen ?? []), ...(this.kuleYuk ?? [])];
       this.time.delayedCall ? sayfaBirak(this, r) : 0;
