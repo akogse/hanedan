@@ -39,6 +39,22 @@ var zt = {
     harita_stage2_tam: "assets/harita_stage2_tam.webp",
     harita_stage3_tam: "assets/harita_stage3_tam.webp",
     harita_stage4_tam: "assets/harita_stage4_tam.webp",
+    harita_stage1_kucuk: "assets/harita_stage1_kucuk.webp",
+    harita_stage2_kucuk: "assets/harita_stage2_kucuk.webp",
+    harita_stage3_kucuk: "assets/harita_stage3_kucuk.webp",
+    harita_stage4_kucuk: "assets/harita_stage4_kucuk.webp",
+    harita_stage5_kucuk: "assets/harita_stage5_kucuk.webp",
+    harita_stage6_kucuk: "assets/harita_stage6_kucuk.webp",
+    harita_stage7_kucuk: "assets/harita_stage7_kucuk.webp",
+    harita_stage8_kucuk: "assets/harita_stage8_kucuk.webp",
+    harita_stage9_kucuk: "assets/harita_stage9_kucuk.webp",
+    harita_stage10_kucuk: "assets/harita_stage10_kucuk.webp",
+    harita_stage11_kucuk: "assets/harita_stage11_kucuk.webp",
+    harita_stage12_kucuk: "assets/harita_stage12_kucuk.webp",
+    harita_stage13_kucuk: "assets/harita_stage13_kucuk.webp",
+    harita_stage14_kucuk: "assets/harita_stage14_kucuk.webp",
+    harita_stage15_kucuk: "assets/harita_stage15_kucuk.webp",
+    harita_stage16_kucuk: "assets/harita_stage16_kucuk.webp",
     ui_bilgi_karti: "assets/ui_bilgi_karti.webp",
     ui_bolum_seridi: "assets/ui_bolum_seridi.webp",
     ui_dugme_yuvarlak: "assets/ui_dugme_yuvarlak.webp",
@@ -2037,6 +2053,7 @@ var $t = {
   "common.locked": "Kilitli",
   "common.comingSoon": "Yakında",
   "common.phase2": "Yakında açılacak.",
+  "common.loading": "Yükleniyor…",
   "common.ok": "Tamam",
   "common.yes": "Evet",
   "common.no": "Hayır",
@@ -2557,6 +2574,7 @@ var Ls = {
   "common.locked": "Locked",
   "common.comingSoon": "Coming soon",
   "common.phase2": "Coming soon.",
+  "common.loading": "Loading…",
   "common.ok": "OK",
   "common.yes": "Yes",
   "common.no": "No",
@@ -5894,35 +5912,62 @@ function Va(e) {
       t.refresh());
   }
 }
-// ilk açılışı hafifletmek için sonradan gereken sayfalar arka planda iner (sıra: önce erken açılan kuleler)
-var GEC = [/^kule_balista_\d/, /^kule_maden_\d/, /^kule_firtina_\d/, /^kule_kartal_\d/, /^kule_simyaci_\d/, /^kule_run_\d/, /_dal_/, /^dusman_(ates_iblisi|buz_trolu|gargoyle|hayalet|iskelet|kemik_dev|kos|olu_buyucu|runlu_muhafiz|varhol_sovalyesi)_/, /^boss_(iskar|kemik_krali)_/];
-function gecMi(e) {
-  return GEC.findIndex((t) => t.test(e));
+// Bellek: iPhone Safari sekmesi ~1,5 GB'ı aşınca sayfayı öldürüp yeniden açıyor.
+// Ağır görseller (bölüm haritaları, kitap sayfaları, ağaç) ve tüm animasyon sayfaları gerektiği an yüklenir, iş bitince bırakılır.
+var AGIR = /^harita_stage\d+_(tam|arka)$|^vaka_\d+$|^vakayiname_cerceve$|^tac_agaci_arka$/;
+function sayfaIste(e, t, s) {
+  // e: sahne, t: anahtar listesi (et ya da zt), s: hepsi gelince çağrılır
+  let a = t.filter((i) => !e.textures.exists(i));
+  if (!a.length) return void (s && s());
+  for (let i of a)
+    if (i in et) {
+      let r = et[i];
+      e.load.spritesheet(i, r.url, { frameWidth: r.frameWidth, frameHeight: r.frameHeight, endFrame: r.frames - 1 });
+    } else if (zt[i]) e.load.image(i, zt[i]);
+  if (s) e.load.once("complete", s);
+  e.load.isLoading() || e.load.start();
 }
-function arkaYukle(e) {
-  let t = Object.keys(et)
-    .filter((s) => gecMi(s) >= 0 && !e.textures.exists(s))
-    .sort((s, a) => gecMi(s) - gecMi(a));
-  if (!t.length) return;
-  for (let s of t) {
-    let a = et[s];
-    e.load.spritesheet(s, a.url, { frameWidth: a.frameWidth, frameHeight: a.frameHeight, endFrame: a.frames - 1 });
+function sayfaBirak(e, t) {
+  let s = new Set(t.filter((a) => e.textures.exists(a)));
+  if (!s.size) return;
+  for (let a of [...e.anims.anims.keys()]) {
+    let i = e.anims.get(a);
+    if (i?.frames?.some((r) => s.has(r.textureKey))) e.anims.remove(a);
   }
-  if (!e.__yk)
-    ((e.__yk = 1),
-      e.load.on("filecomplete", (s) => {
-        if (e.towers) for (let a of e.towers) if (a && !a.attacking && s === a.artKey() + "_bekle") a.applyArt();
-      }));
-  e.load.start();
+  for (let a of s) e.textures.remove(a);
+}
+function kuleSayfalari(e) {
+  return Object.keys(et).filter((t) => t.startsWith(e + "_") && /_(bekle|saldiri)(_sag|_sol)?$/.test(t.slice(e.length)));
+}
+function bolumSayfalari(e, t) {
+  // bölümde görülebilecek her düşmanın, kahramanın ve haritanın sayfaları
+  let s = new Set();
+  for (let r of e.waves) for (let n of r.groups) s.add(n.enemy);
+  let a = !0;
+  while (a) {
+    a = !1;
+    for (let r of [...s]) {
+      let n = Te[r];
+      if (!n) continue;
+      let o = [n.split?.into, n.summon?.enemy, n.boss?.ability === "summon" ? "goblin" : null];
+      if (n.boss?.ability === "raise" || n.boss?.ability === "boneKing") o.push("skeleton", "ghost");
+      if (n.boss?.phases) o.push("boneGiant", "ghost", "varholKnight");
+      for (let l of o) if (l && !s.has(l)) (s.add(l), (a = !0));
+    }
+  }
+  if (e.mechanic === "statues") s.add("gargoyle");
+  let i = [];
+  for (let r of s) {
+    let n = Te[r]?.art;
+    if (n) i.push(...Object.keys(et).filter((o) => o.startsWith(n + "_")));
+  }
+  i.push(...Object.keys(et).filter((r) => r.startsWith("kahraman_" + t + "_")));
+  for (let r of ["harita_stage" + e.id + "_tam", "harita_stage" + e.id + "_arka"]) if (zt[r]) i.push(r);
+  return [...new Set(i)];
 }
 function da(e) {
-  for (let t in zt) e.load.image(t, zt[t]);
+  for (let t in zt) if (!AGIR.test(t)) e.load.image(t, zt[t]);
   for (let t in Rt) e.load.image(t + "_maske", Rt[t].mask);
-  for (let t in et) {
-    if (gecMi(t) >= 0) continue;
-    let s = et[t];
-    e.load.spritesheet(t, s.url, { frameWidth: s.frameWidth, frameHeight: s.frameHeight, endFrame: s.frames - 1 });
-  }
 }
 function ha(e) {
   return Rt[e] ?? null;
@@ -8456,7 +8501,6 @@ class _s extends Phaser.Scene {
   create(e) {
     if (e?.fade) this.cameras.main.fadeIn(900, 0, 0, 0);
     (Ge(this),
-      arkaYukle(this),
       It("muzik_harita"),
       (this.modal = []),
       this.nodes.clear(),
@@ -8475,6 +8519,9 @@ class _s extends Phaser.Scene {
     }
   }
   vakayiname(e, t = !1) {
+    let K = ["vakayiname_cerceve", ...ce.map((x) => "vaka_" + String(x.id).padStart(2, "0")).filter((x) => zt[x])];
+    if (K.some((x) => !this.textures.exists(x))) return void (this.toast(m("common.loading")), sayfaIste(this, K, () => this.vakayiname(e, t)));
+    this.agirAcik = K;
     let s = ce.filter((d) => M("vaka_" + String(d.id).padStart(2, "0"))).map((d) => d.id),
       a = (d) => (P().bestStars[d] ?? 0) > 0,
       i = e ?? s.filter(a).pop() ?? 1,
@@ -8557,6 +8604,8 @@ class _s extends Phaser.Scene {
     });
   }
   tacAgaci() {
+    if (!this.textures.exists("tac_agaci_arka")) return void sayfaIste(this, ["tac_agaci_arka"], () => this.tacAgaci());
+    this.agirAcik = ["tac_agaci_arka"];
     this.openModal(() => {
       let e = this.add.container(0, 0),
         t = this.add.image(T / 2, w / 2, "tac_agaci_arka");
@@ -8663,31 +8712,26 @@ class _s extends Phaser.Scene {
       t = bt() >= Nt[1].starsRequired;
     for (let n = 0; n < 2; n++) {
       let o = "harita_cag" + (n + 1);
-      // II. Çağ haritası I. Çağ'ın üstüne yumuşak geçişle biner (düz dikiş çizgisi görünmesin)
-      if (n === 1 && M(o)) {
-        if (this.textures.exists("harita_cag2_yumusak")) this.textures.remove("harita_cag2_yumusak");
-        let l = this.textures.get(o).getSourceImage(),
-          d = this.textures.createCanvas("harita_cag2_yumusak", l.width, l.height),
-          h = d.getContext(),
-          u = (l.width * DIKIS) / le,
-          f = h.createLinearGradient(0, 0, u, 0);
-        (h.drawImage(l, 0, 0),
-          (h.globalCompositeOperation = "destination-in"),
-          f.addColorStop(0, "rgba(0,0,0,0)"),
-          f.addColorStop(0.5, "rgba(0,0,0,0.55)"),
-          f.addColorStop(1, "rgba(0,0,0,1)"),
-          (h.fillStyle = f),
-          h.fillRect(0, 0, l.width, l.height),
-          d.refresh());
-        if (!(l.complete ?? !0) || h.getImageData(Math.floor(l.width / 2), Math.floor(l.height / 2), 1, 1).data[3] === 0) this.textures.remove("harita_cag2_yumusak");
+      if (M(o)) {
+        let l = this.add.image(n * (le - DIKIS), 0, o).setOrigin(0).setDisplaySize(le, w);
+        if (n === 1) {
+          // sol kenardaki DIKIS genişliği, artan saydamlıkta ince dilimlerle karışır
+          let d = l.width,
+            h = (d * DIKIS) / le,
+            u = 14;
+          l.setCrop(h, 0, d - h, l.height);
+          for (let f = 0; f < u; f++) {
+            let _ = this.add
+              .image(n * (le - DIKIS), 0, o)
+              .setOrigin(0)
+              .setDisplaySize(le, w)
+              .setCrop((h * f) / u, 0, h / u + 1, l.height)
+              .setAlpha((f + 0.5) / u);
+            e.add(_);
+          }
+        }
+        e.add(l);
       }
-      if (M(o))
-        e.add(
-          this.add
-            .image(n * (le - DIKIS), 0, n === 1 && this.textures.exists("harita_cag2_yumusak") ? "harita_cag2_yumusak" : o)
-            .setOrigin(0)
-            .setDisplaySize(le, w),
-        );
       else this.inkPanel(n);
     }
     let s = M("harita_cag1") && M("harita_cag2"),
@@ -9270,6 +9314,7 @@ class _s extends Phaser.Scene {
   closeModal() {
     for (let e of this.modal) e.destroy();
     this.modal = [];
+    if (this.agirAcik) (sayfaBirak(this, this.agirAcik), (this.agirAcik = null));
   }
   toast(e) {
     let t = this.add
@@ -9309,7 +9354,7 @@ class _s extends Phaser.Scene {
         l = this.add.graphics();
       t.add(this.add.text(-490, 95, G(m("map.selectHero")), z(22, I.muted, "900")));
     {
-      let hk = "harita_stage" + e.id + "_tam";
+      let hk = "harita_stage" + e.id + "_kucuk";
       if (M(hk)) {
         let im = this.add.image(285, -120, hk),
           gw = 430;
@@ -10410,6 +10455,17 @@ class Ss {
     let e = this.artKey(),
       t = e + "_bekle",
       s = this.sprite;
+    {
+      let a = kuleSayfalari(e).filter((i) => !this.s.textures.exists(i));
+      if (a.length) {
+        ((this.s.kuleYuk = this.s.kuleYuk ?? []), this.s.kuleYuk.push(...a));
+        let i = e;
+        sayfaIste(this.s, a);
+        this.s.load.on("filecomplete", (r) => {
+          if (r === t && this.sprite?.active && this.artKey() === i && !this.attacking) this.applyArt();
+        });
+      }
+    }
     if (Q(t)) {
       let a = "dongu_" + t;
       if (!this.s.anims.exists(a))
@@ -11720,9 +11776,34 @@ class Rs extends Phaser.Scene {
   get heroId() {
     return this.hero?.def.id ?? P().hero;
   }
+  preload() {
+    let e = ce.find((r) => r.id === this.init0.stageId),
+      t = this.init0.resume?.hero ?? P().hero;
+    this.yuklenen = bolumSayfalari(e, t);
+    let s = this.yuklenen.filter((n) => !this.textures.exists(n));
+    for (let n of s)
+      if (n in et) {
+        let o = et[n];
+        this.load.spritesheet(n, o.url, { frameWidth: o.frameWidth, frameHeight: o.frameHeight, endFrame: o.frames - 1 });
+      } else this.load.image(n, zt[n]);
+    if (!s.length) return;
+    let a = this.add.graphics(),
+      i = this.add.text(this.scale.width / 2, this.scale.height / 2 - 60, m(e.nameKey), { ...ge(44, "#f4dc90") }).setOrigin(0.5),
+      r = (n) => {
+        let o = this.scale.width * 0.4,
+          l = (this.scale.width - o) / 2,
+          d = this.scale.height / 2 + 10;
+        (a.clear(), a.fillStyle(660528, 1), a.fillRoundedRect(l, d, o, 14, 7), a.fillStyle(13081150, 1), a.fillRoundedRect(l, d, Math.max(14, o * n), 14, 7));
+      };
+    (this.cameras.main.setBackgroundColor("#0b0907"), r(0), this.load.on("progress", r), this.load.once("complete", () => (a.destroy(), i.destroy())));
+  }
   create() {
     let e = (this.stage = ce.find((r) => r.id === this.init0.stageId));
-    (Ns("muzik_stage" + e.id), (this.paths = e.paths.map((r) => new ks(r))), arkaYukle(this));
+    (Ns("muzik_stage" + e.id), (this.paths = e.paths.map((r) => new ks(r))));
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      let r = [...(this.yuklenen ?? []), ...(this.kuleYuk ?? [])];
+      this.time.delayedCall ? sayfaBirak(this, r) : 0;
+    });
     let t = this.init0.resume ?? null;
     ((this.gold = t?.gold ?? e.startGold + tac("ekonomi") * 30),
       (this.castleMax = e.castleHp + tac("kale")),
