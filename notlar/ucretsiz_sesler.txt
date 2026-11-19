@@ -3,3 +3,7 @@ wave.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden
 boss_uyari.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
 zafer.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
 yenilgi.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
+muzik_harita.mp3 — ElevenLabs ÜCRETSİZ plan, 30 sn deneme. Yayından önce ücretli planda 2–3 dk yeniden üretilecek. (2026-11-19)
+muzik_savas.mp3 — ElevenLabs ÜCRETSİZ plan, 30 sn deneme. Yayından önce ücretli planda 2–3 dk yeniden üretilecek. (2026-11-19)
+muzik_kesif.mp3 — ElevenLabs ÜCRETSİZ plan, 30 sn deneme. Yayından önce ücretli planda 2–3 dk yeniden üretilecek. (2026-11-19)
+muzik_boss.mp3 — ElevenLabs ÜCRETSİZ plan, 30 sn deneme. Yayından önce ücretli planda 2–3 dk yeniden üretilecek. (2026-11-19)
