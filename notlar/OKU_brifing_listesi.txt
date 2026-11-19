@@ -1,60 +1,133 @@
-DYNASTY SIEGE — BÖLÜM BRİFİNG EKRANI (görsel paketi 6, 11 görsel)
+DYNASTY SIEGE — BÖLÜM BRİFİNG EKRANI · GÖRSEL PAKETİ 6 (sürüm 2, ayrıntılı)
 
-Amaç: Bölüme dokununca açılan pencere oyunun en çok görülen ekranlarından biri. Şu an içi kodla çizilmiş düz daireler,
-ince çizgiler ve düz renkli zeminden oluşuyor; bu yüzden ucuz duruyor. Her parçayı el çizimi, zengin bir görselle değiştireceğiz.
-Yazılar, sayılar, yıldızlar, kule/düşman/kahraman resimleri KODLA üstüne basılacak: görsellerde YAZI, HARF, SAYI OLMASIN.
+NE İÇİN: Haritada bir bölüme dokununca açılan pencere. Oyuncunun her bölümden önce gördüğü, oyunun en çok görülen
+ekranlarından biri. Şu an içi kodla çizilmiş düz daireler, ince çizgiler ve düz renkli zeminden oluşuyor; ucuz duruyor.
+Her parça el çizimi bir görselle değişecek. Yerleşim için yanındaki "yerlesim_rehberi.png" dosyasına bak: numaralar
+aşağıdaki görsellerle aynı.
 
-ORTAK EK (1–10 numaralı görsellerin her promptuna ekle):
-"premium dark fantasy mobile strategy game UI element, ornate gold filigree with small blue sapphires and polished silver
-accents, deep navy blue velvet, same style as the rest of the UI (gold + royal navy + sapphire), rich painterly detail,
-soft rim light, perfectly symmetrical, front view, no text, no letters, no numbers, isolated on a flat solid pure magenta
-#FF00FF background, no shadow on the background, sharp clean edges"
+KESİN KURALLAR
+- Görsellerde YAZI, HARF, SAYI, YILDIZ, KAHRAMAN/KULE/DÜŞMAN RESMİ OLMAYACAK. Hepsini oyun kodla basıyor (TR/EN iki dil).
+- Arka plan düz magenta #FF00FF (1 numara hariç). Altın yüzeylerde pembe/mor yansıma olmasın (promptta yazılı).
+- İçi boş bırakılacak yerler de düz magenta olacak; ben oyuk açarım.
+- Her görselden 2 çeşit üret, ikisini de gönder; en uyumlusunu seçerim.
+- Bir parça listedeki oranı tutmazsa (ör. iç açıklık 16:9 değilse) yeniden üretmek gerekir; aşağıdaki oranlar kodun
+  ölçüleriyle birebir.
 
-1) brifing_zemin.png   1600×900   (11 numara hariç tek opak olan; MAGENTA YOK, ORTAK EK EKLEME)
-   "Seamless dark royal navy velvet fabric texture with a subtle embossed gold-thread damask pattern, very dark and rich,
-    soft vignette toward the edges, faint warm candlelight sheen from the top, no objects, no text, flat front view,
-    premium dark fantasy game UI background"
+STİL KİTABI (11 görselin tamamı aynı elden çıkmış gibi görünmeli)
+- Mevcut arayüzle aynı aile: antika altın + kraliyet lacivert + safir + az gümüş. (Haritadaki üst plakalar, alt çubuk
+  düğmeleri, panel çerçevesi ve "Yeni düşman" kartı referans.)
+- Renkler: altın sıcak ve antika (#D8B048 civarı, açık vurgu #F4DC90), sarı-limon altın DEĞİL. Lacivert çok koyu
+  (#0D1838 – #0A1120). Safir orta-koyu mavi. Kırmızı (yalnızca 4 ve 11) koyu kan kırmızısı/kızıl.
+- Işık: tüm görsellerde ışık SOL ÜSTTEN, sıcak mum ışığı; gölge sağ alta. Hafif kenar parlaması.
+- Detay yoğunluğu: süs ağır ama okunur; telefonda küçük görünecek, bu yüzden ince kırılgan çizgiler yerine dolgun,
+  kalın kabartma. 3–4 numaralı madalyonlar ekranda ~130 piksel; detay o boyutta da seçilmeli.
+- Perspektif: tamamen önden, düz (izometrik/eğik değil), simetrik.
+- Resimsel (painterly) ama keskin kenarlı; bulanık hale, duman, parıltı bulutu YOK (parıltıyı ben kodla veririm).
 
-2) brifing_harita_cercevesi.png   1600×960
-   "A grand ornate gold picture frame for a battle map, thick carved gold molding with corner brackets shaped like
-    fleur-de-lis and small sapphires, a small gold crown at the top center, the inside of the frame is EMPTY and filled
-    with flat magenta #FF00FF (it will be cut out), wide 16:9 opening"
+ORTAK EK — 2'den 11'e kadar her promptun sonuna ekle:
+"premium dark fantasy mobile strategy game UI element, antique warm gold filigree (not lemon yellow) with small deep blue
+sapphires and a little polished silver, very dark royal navy enamel or velvet where navy is used, heavy readable embossed
+ornament, lit by warm candlelight from the top left with soft shadow to the bottom right, painterly but crisp edges,
+perfectly symmetrical, straight front view, no text, no letters, no numbers, no characters, isolated on a flat solid pure
+magenta #FF00FF background, no pink or magenta reflections on the metal, no glow or smoke around the object,
+no shadow on the background"
 
-3) madalyon_kule.png   512×512
-   "A round heraldic medallion frame: thick gold ring with a laurel wreath around it, four small sapphire studs,
-    a tiny gold crown on top, the round center is EMPTY and filled with flat magenta #FF00FF"
+────────────────────────────────────────────────────────────────────────
+1) brifing_zemin.png — 16:9, en az 1600×900 — OPAK (magenta YOK, ortak ek EKLEME)
+   Yeri: panel çerçevesinin içini baştan sona kaplar; her şey bunun üstüne oturur.
+   Neden: şu anki düz/parlak mavi damask zemin pencereyi ucuz gösteren ilk şey.
+   Dikkat: üstüne krem ve altın yazı basılacak, bu yüzden ÇOK KOYU ve sakin olmalı; desen göz yormamalı.
+   Prompt:
+   "Dark royal navy velvet fabric panel interior, very dark and rich (#0A1120 to #13204A), a subtle embossed damask
+    pattern woven in faint dark-gold thread barely visible, gentle vignette darker toward all four edges, a soft warm
+    candlelight sheen in the upper left area, no objects, no frame, no text, flat front view, premium dark fantasy game
+    UI background, painterly"
 
-4) madalyon_dusman.png   512×512
-   "A round menacing medallion frame for an enemy: dark blackened iron ring with thorny spikes and small blood-red rubies,
-    thin gold inner edge, a small horned skull ornament on top, the round center is EMPTY and filled with flat magenta #FF00FF"
+2) brifing_harita_cercevesi.png — oran 16:10 (ör. 1600×1000)
+   Yeri: sol sütun, haritanın küçük önizlemesini çerçeveler. Alt kenarının ortasına mevcut yıldız tepsisi biner.
+   ÖLÇÜ: iç açıklık TAM 16:9 olmalı ve görselin ortasında durmalı; çerçeve kalınlığı görsel genişliğinin ~%6'sı.
+         Alt kenarın ortası düz ve sade kalsın (yıldız tepsisi oraya oturacak); üst ortada küçük taç olabilir.
+   Prompt:
+   "A grand ornate rectangular gold picture frame for a battle map, thick carved antique gold molding, fleur-de-lis
+    corner brackets with small sapphires, a small gold crown ornament at the top center, the bottom center of the frame
+    is plain and simple, the rectangular opening is exactly 16:9 and centered, the opening is EMPTY and filled with flat
+    magenta #FF00FF" + ORTAK EK
 
-5) kahraman_yuva_secili.png   512×512
-   "A round portrait frame for the SELECTED hero: rich gold ring with radiant engraved sunburst rays behind it,
-    a gold crown on top, sapphires, glowing warm aura, the round center is EMPTY and filled with flat magenta #FF00FF"
+3) madalyon_kule.png — 1:1 (1024×1024)
+   Yeri: "Yeni kule" bölümünde her kule resminin çerçevesi (ekranda ~130 px).
+   ÖLÇÜ: ortadaki yuvarlak boşluk görselin %62'si çapında, tam ortada. Üstteki taç dahil her şey görselin içinde kalsın.
+   Prompt:
+   "A round heraldic medallion frame: thick antique gold ring wrapped with a gold laurel wreath, four small sapphire
+    studs at top, bottom, left and right, a tiny gold crown on the top, the round center is EMPTY and filled with flat
+    magenta #FF00FF, the opening is 62 percent of the image width" + ORTAK EK
 
-6) kahraman_yuva.png   512×512
-   "A round portrait frame for an UNSELECTED hero: simple dark silver and steel ring with subtle engraving,
-    no crown, muted and darker, the round center is EMPTY and filled with flat magenta #FF00FF"
+4) madalyon_dusman.png — 1:1 (1024×1024)
+   Yeri: "Yeni düşman" bölümünde her düşman resminin çerçevesi. 3 ile AYNI boyut ve oyuk; ama düşmanca.
+   ÖLÇÜ: 3 ile birebir aynı (%62 oyuk, ortada).
+   Prompt:
+   "A round menacing medallion frame for an enemy: blackened dark iron ring with short thorny spikes, four small
+    blood-red rubies at top, bottom, left and right, a thin antique gold inner edge, a small horned skull ornament on the
+    top, the round center is EMPTY and filled with flat magenta #FF00FF, the opening is 62 percent of the image width"
+    + ORTAK EK
 
-7) seviye_rozeti.png   256×256
-   "A small heraldic shield badge, navy enamel center with a thin gold border and one tiny sapphire at the top,
-    the center is plain and empty (a number will be printed on it)"
+5) kahraman_yuva_secili.png — 1:1 (1024×1024)
+   Yeri: kahraman seçiminde SEÇİLİ kahramanın portre çerçevesi. Ekranda ~150 px, diğerlerinden büyük.
+   ÖLÇÜ: portre oyuğu %60, tam ortada. Işınlar/taç oyuğun dışında kalsın.
+   Prompt:
+   "A round portrait frame for the selected hero: rich antique gold ring with engraved sunburst rays radiating behind it,
+    a gold crown on top, small sapphires around the ring, the round center is EMPTY and filled with flat magenta #FF00FF,
+    the opening is 60 percent of the image width" + ORTAK EK
 
-8) baslik_kurdelesi.png   1024×160
-   "A small horizontal gold-bordered navy ribbon plaque for a section heading, with small curled gold filigree tips on
-    both ends, slim and elegant, empty center"
+6) kahraman_yuva.png — 1:1 (1024×1024)
+   Yeri: seçili OLMAYAN üç kahramanın portre çerçevesi (~130 px). 5 ile aynı aileden ama sade ve sönük.
+   ÖLÇÜ: 5 ile aynı (%60 oyuk).
+   Prompt:
+   "A round portrait frame for an unselected hero: a simpler darker ring of aged silver and dark steel with subtle
+    engraving and one small sapphire at the top, no crown, no rays, muted, the round center is EMPTY and filled with flat
+    magenta #FF00FF, the opening is 60 percent of the image width" + ORTAK EK
 
-9) susleme_ayirici.png   1536×96
-   "A long thin horizontal ornamental divider: delicate gold filigree scrollwork that tapers to thin points on both ends,
-    a small sapphire diamond in the middle"
+7) seviye_rozeti.png — 1:1 (512×512)
+   Yeri: her portrenin sağ alt köşesinde, kahraman seviyesi sayısının (1, 14...) zemini. Ekranda ~40 px — ÇOK küçük.
+   Dikkat: bu boyutta süs kaybolur; sade ve tok olsun. Ortası düz lacivert, sayı oraya basılacak.
+   Prompt:
+   "A small heraldic shield badge: plain dark navy enamel center, a bold antique gold border, one tiny sapphire at the
+    top, simple and chunky so it reads at very small size, the center is plain and empty" + ORTAK EK
 
-10) parsomen_tomari.png   1400×360
-   "A horizontal unrolled aged parchment scroll with rolled wooden ends capped in gold, slightly torn edges,
-    a red wax seal with a crown emblem pressed at the bottom right corner, the parchment surface is blank and empty"
+8) baslik_kurdelesi.png — 6:1 (ör. 1536×256)
+   Yeri: "YENİ KULE", "YENİ DÜŞMAN", "KAHRAMAN" başlıklarının zemini. Ekranda ~300×48 px. Yazı soldan ortalanır.
+   ÖLÇÜ: düz orta alan genişliğin en az %75'i (uzun Türkçe başlıklar sığsın).
+   Prompt:
+   "A slim horizontal heading plaque: dark navy ribbon with a thin antique gold border, small curled gold filigree tips on
+    both ends, the flat center area is wide and empty, elegant and low profile" + ORTAK EK
 
-11) dugme_savas.png   1200×360   (ORTAK EK EKLE)
-   "A large ornate call-to-action button: a crimson red lacquered plaque framed by heavy gold filigree, two crossed swords
-    behind it sticking out on both sides, a gold crown on top, sapphires, glossy highlight on the red, empty center
-    (text will be added)"
+9) susleme_ayirici.png — 16:1 (ör. 2048×128)
+   Yeri: sağ sütunda "yeni kule/düşman" ile "kahraman" bölümlerini ayıran yatay süs; ekranda ~680×40 px.
+   Prompt:
+   "A long thin horizontal ornamental divider: delicate antique gold filigree scrollwork tapering to fine points at both
+    ends, one small sapphire diamond in the middle" + ORTAK EK
 
-Not: Arka plan mutlaka düz magenta (#FF00FF). Kenarları ben temizlerim. 1 numara opak doku (magenta yok).
+10) parsomen_tomari.png — 4:1 (ör. 1600×400)
+   Yeri: sol sütunda harita önizlemesinin altında; bölümün kısa olay metni (1–2 satır) KOYU MÜREKKEP renginde üstüne
+   basılır. Ekranda ~680×170 px.
+   Dikkat: parşömen yüzeyi açık ve düz olmalı (yazı okunacak), lekeler hafif. Mühür sağ alt köşede, yazı alanının dışında.
+   Prompt:
+   "A horizontal unrolled aged parchment scroll, rolled ends capped with small antique gold caps, slightly worn edges,
+    a dark red wax seal with a crown emblem pressed at the bottom right corner, the parchment surface is light, even and
+    blank with only faint stains" + ORTAK EK
+
+11) dugme_savas.png — 10:3 (ör. 1600×480)
+   Yeri: sağ altta "SAVAŞA BAŞLA" düğmesi; ekranda ~400×120 px. Ekranın en önemli düğmesi, ilk bakışta göze çarpmalı.
+   ÖLÇÜ: ortadaki kırmızı düz alan genişliğin ~%60'ı, yüksekliğin ~%45'i (yazı oraya). Kılıçlar ve taç dışarıda.
+   Prompt:
+   "A large ornate call-to-action button: a deep crimson red lacquered plaque framed by heavy antique gold filigree,
+    two crossed swords behind the plaque with hilts and tips sticking out on both sides, a gold crown on the top center,
+    small sapphires, a glossy highlight on the upper part of the red, the flat red center is empty for text" + ORTAK EK
+
+────────────────────────────────────────────────────────────────────────
+KODDA BENİM YAPACAKLARIM (görseller gelince)
+- Hepsinin kenarlarını temizleyip yerine oturtma, ekran görüntüsüyle kontrol.
+- Kahraman seçince yuva değişimi (6 → 5) yumuşak geçişle, seçili yuvada hafif parıltı.
+- Madalyonlarda yavaş ışık süzülmesi, düğmede nabız, pencerede altın toz zerreleri (şimdiden var).
+- Yazı renkleri: zeminde krem/altın, parşömende koyu kahve mürekkep.
+
+GÖNDERİRKEN: dosya adlarını yukarıdaki gibi verirsen eşleştirmesi kolay olur; vermesen de görselden anlarım.
