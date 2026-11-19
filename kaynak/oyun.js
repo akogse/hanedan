@@ -14810,8 +14810,13 @@ class Os extends Phaser.Scene {
             onStart: () => V("yildiz", { volume: 0.8, minGapMs: 0, anahtar: ["yildiz", "yildiz", "yildiz_2", "yildiz_3", "yildiz_3"][g], detune: [0, 200, 0, 0, 200][g] }),
             onComplete: () => {
               this.cameras.main.shake(90, 0.003);
-              let hl = this.add.circle(p, y, 40, 16771530, 0.55).setBlendMode(Phaser.BlendModes.ADD);
-              (o.add(hl), this.tweens.add({ targets: hl, scale: 2.2, alpha: 0, duration: 420, onComplete: () => hl.destroy() }));
+              // yıldız yuvaya oturunca kısa ışık patlaması (düz daire değil, ışınlı parıltı)
+              if (M("z_isik")) {
+                let hl = this.add.image(p, y, "z_isik").setBlendMode(Phaser.BlendModes.ADD).setAngle(Math.random() * 360);
+                hl.setScale(150 / hl.width);
+                let s0 = hl.scale;
+                (o.add(hl), this.tweens.add({ targets: hl, scale: s0 * 2, angle: hl.angle + 40, alpha: 0, duration: 520, ease: "Cubic.Out", onComplete: () => hl.destroy() }));
+              }
             },
           });
           if (n.includes(g + 1)) {
