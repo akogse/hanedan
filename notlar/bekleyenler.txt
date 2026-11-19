@@ -1,0 +1,1 @@
+harita_sonsuz_tam_a/b.webp — paket 11 (sonsuz mod). Mod kodlanınca biri seçilip yollar araclar/yol_uydur.py ile uydurulacak; kale konumu yerleşimden biraz farklı.
