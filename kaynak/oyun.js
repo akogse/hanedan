@@ -8612,7 +8612,15 @@ function gunluk() {
   for (let c of t) h = (h * 31 + c.charCodeAt(0)) >>> 0;
   let acik = ce.filter((c) => c.playable && (P().bestStars[c.id] ?? 0) > 0).map((c) => c.id);
   if (!acik.length) acik = [1];
-  return { tarih: t, bolum: acik[h % acik.length], kural: GUNLUK_KURAL[(h >>> 7) % GUNLUK_KURAL.length] };
+  let bolum = acik[h % acik.length],
+    yasak = { kislasiz: ["barracks"], oksuz: ["archer", "eagle"] },
+    kalan = (k) => Object.keys(oe).filter((e) => e !== "mine" && oe[e].implemented && oe[e].unlockStage <= bolum && !(yasak[k] ?? []).includes(e)).length,
+    i0 = (h >>> 7) % GUNLUK_KURAL.length,
+    kural = GUNLUK_KURAL[i0];
+  // kule yasaklayan kural, elde 3'ten az kule bırakıyorsa sıradaki kurala geç
+  let esik = Math.min(3, kalan(""));
+  for (let n = 0; n < GUNLUK_KURAL.length && kalan(kural) < esik; n++) kural = GUNLUK_KURAL[(i0 + n + 1) % GUNLUK_KURAL.length];
+  return { tarih: t, bolum: bolum, kural: kural };
 }
 function gunlukAcik() {
   return (P().bestStars[1] ?? 0) > 0;
@@ -10238,8 +10246,11 @@ class _s extends Phaser.Scene {
           if (M("brf_baslik_kurdelesi")) {
             let kw = gen > 0 ? gen : Math.max(250, k.width / 0.64),
               cx = ortala ? x : x + kw / 2,
-              im = this.add.image(cx, y, "brf_baslik_kurdelesi").setDisplaySize(kw, Math.max(40, kw / 6));
-            if (gen > 0 && k.width > kw * 0.74) k.setScale((kw * 0.74) / k.width);
+              im = this.add.image(cx, y, "brf_baslik_kurdelesi").setDisplaySize(kw, gen > 0 ? 46 : Math.max(40, kw / 6));
+            if (gen > 0 && k.width > kw * 0.74) k.setLetterSpacing(1);
+            if (gen > 0 && k.width > kw * 0.8) k.setScale((kw * 0.8) / k.width);
+            // yan yana iki kurdelede yazı boyu ve yükseklik eşit olsun
+            if (gen > 0) ((this._brfOlcek = Math.min(this._brfOlcek ?? 1, k.scale)), (this._brfYazi ??= []).push(k), this._brfYazi.forEach((q) => q.setScale(this._brfOlcek)));
             (k.setX(cx), t.add([im, k]));
             return kw;
           }
@@ -10381,11 +10392,13 @@ class _s extends Phaser.Scene {
       if (yeni.length) {
         let tk = e.newTowers.length,
           dk = e.newEnemies.length,
-          ADIM = 188,
+          // üç madalyonda sağdaki başlık perdenin altına girmesin diye adım daralır
+          ADIM = yeni.length >= 3 ? 168 : 188,
           dx = RX + tk * ADIM;
         // grup başlıkları kendi madalyonlarının üstünde ortalanır (sağdaki çarpıya taşmasın)
         // kurdele grup genişliğini aşmasın (tek kule + tek düşmanda iki başlık üst üste biniyordu)
         let kisa = (g) => (tk && dk ? Math.max(170, g * ADIM - 14) : 0);
+        ((this._brfOlcek = 1), (this._brfYazi = []));
         if (tk) baslik(RX + (tk * ADIM) / 2, HY, m("map.newTowers"), kisa(tk), !0);
         if (dk) baslik(dx + (dk * ADIM) / 2, HY, m("map.newEnemies"), kisa(dk), !0);
         e.newTowers.forEach((u, f) => madalyon(RX + 92 + f * ADIM, HY + 116, ii[u] ?? "ikon_kilit", m(oe[u].nameKey), !1));

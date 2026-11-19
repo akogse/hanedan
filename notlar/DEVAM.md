@@ -7,3 +7,5 @@ Sıra:
 4. [x] Sonsuz Kuşatma — harita assets/harita_sonsuz_tam_a/b.webp, yerleşim notlar/harita_sonsuz.json; yollar araclar/yol_uydur.py ile uydurulacak.
 5. [x] Füzyon kuleleri — kule_fuzyon_*.webp sabit resimler var, saldırı videoları kısmen.
 Test: scratchpad t_*.js sürücüleri; yerel sunucu `python3 -m http.server 8765`.
+6. [x] Günlük Meydan Okuma — tarihe bağlı bölüm + kural (7 kural), seri, rozet_gunluk, hazine+elmas; kule yasaklayan kural elde az kule bırakıyorsa sıradaki kurala geçer.
+Kod tarafında yazılacak özellik kalmadı. Bekleyen: Flow animasyonları (kullanıcının arkadaşı), telefon geri bildirimi, yayın öncesi 119 sesi ücretli ElevenLabs'te yeniden üretmek.
