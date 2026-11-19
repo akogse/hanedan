@@ -114,3 +114,6 @@ combo_asiriyuk.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli plan
 combo_erime.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
 combo_parcalanma.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
 menu_ac.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
+spell_ravenSwarm.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
+spell_royalGuard.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
+spell_shieldWall.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
