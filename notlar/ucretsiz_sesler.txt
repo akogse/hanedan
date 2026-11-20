@@ -117,4 +117,4 @@ menu_ac.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeni
 spell_ravenSwarm.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
 spell_royalGuard.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
 spell_shieldWall.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
-ses_kahraman_aldric_secim — Aldric "Emrinizdeyim." (ElevenLabs TTS, Voice Design, v4, ücretsiz plan)
+ses_kahraman_aldric_secim.mp3 — ElevenLabs ÜCRETSİZ plan (TTS, Voice Design, v4). Yayından önce ücretli planda yeniden üretilecek. (2026-11-20)
