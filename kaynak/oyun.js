@@ -6547,7 +6547,17 @@ function Va(e) {
 }
 // Bellek: iPhone Safari sekmesi ~1,5 GB'ı aşınca sayfayı öldürüp yeniden açıyor.
 // Ağır görseller (bölüm haritaları, kitap sayfaları, ağaç) ve tüm animasyon sayfaları gerektiği an yüklenir, iş bitince bırakılır.
+// Flow saldırı videolarından ayıklanmış ışık efektleri (araclar/efekt_ayikla.py); siyah zemin, ADD karışımla basılır
+var EFX = {
+  efx_buz: { url: "assets/efx_buz.webp", frameWidth: 300, frameHeight: 169, frames: 20, ax: 0.5, ay: 0.62, sure: 620 },
+  efx_buz_halka: { url: "assets/efx_buz_halka.webp", frameWidth: 320, frameHeight: 184, frames: 16, ax: 0.5, ay: 0.62, sure: 640 },
+  efx_yildirim: { url: "assets/efx_yildirim.webp", frameWidth: 300, frameHeight: 172, frames: 10, ax: 0.5, ay: 0.64, sure: 420 },
+  efx_zehir: { url: "assets/efx_zehir.webp", frameWidth: 300, frameHeight: 224, frames: 16, ax: 0.33, ay: 0.3, sure: 700 },
+  efx_ates: { url: "assets/efx_ates.webp", frameWidth: 300, frameHeight: 169, frames: 12, ax: 0.63, ay: 0.25, sure: 480 },
+  efx_tipi: { url: "assets/efx_tipi.webp", frameWidth: 360, frameHeight: 202, frames: 16, ax: 0.5, ay: 0.6, sure: 900 },
+};
 var AGIR = /^harita_stage\d+_(tam|arka)$|^vaka_\d+$|^vakayiname_cerceve$|^tac_agaci_arka$|^kh_tam_|^acilis_logo$/;
+for (let k in EFX) et[k] = { url: EFX[k].url, frameWidth: EFX[k].frameWidth, frameHeight: EFX[k].frameHeight, frames: EFX[k].frames, originX: EFX[k].ax, originY: EFX[k].ay, bodyHeight: EFX[k].frameHeight };
 function sayfaIste(e, t, s) {
   // e: sahne, t: anahtar listesi (et ya da zt), s: hepsi gelince çağrılır
   let a = t.filter((i) => !e.textures.exists(i));
@@ -11285,6 +11295,7 @@ class xs {
   poisonT = 0;
   armorBrokenT = 0;
   comboCdT = 0;
+  markT = 0;
   get burning() {
     return this.burnT > 0;
   }
@@ -11332,6 +11343,7 @@ class xs {
     if (this.poisonT > 0) this.poisonT -= e;
     if (this.armorBrokenT > 0) this.armorBrokenT -= e;
     if (this.comboCdT > 0) this.comboCdT -= e;
+    if (this.markT > 0) this.markT -= e;
     for (let [t, s] of this.slows) if (((s.t -= e), s.t <= 0)) this.slows.delete(t);
   }
 }
@@ -11630,6 +11642,7 @@ class vs {
     if (e.def.ethereal && s.kind === "physical") a *= e.def.ethereal;
     if (!s.ignoreShieldAura) a *= this.shieldAuraFactor(e);
     if (e.status.wet && s.element === "lightning") a *= 1.2;
+    if (e.status.markT > 0) a *= 1.5; // Avcı İşareti
     if (e.flying && emanetEtkin("kuzgun_tuyu")) a *= 1.2;
     if (
       ((a = Math.max(a > 0 ? 1 : 0, Math.round(a))),
@@ -12172,7 +12185,7 @@ class Ss {
     return t * t + s * s <= this.lv.range * this.lv.range;
   }
   runeMul() {
-    let e = tacKule(this.def.id) * (this.def.id === "fire" && emanetEtkin("ejder_kalbi") ? 1.2 : 1) * (this.orsT > 0 ? 1.3 : 1) * (this.s.mabet && this.s.mabet === { fire: "fire", frost: "ice", storm: "lightning", alchemist: "poison" }[this.def.id] ? 1.3 : 1);
+    let e = tacKule(this.def.id) * (this.def.id === "fire" && emanetEtkin("ejder_kalbi") ? 1.2 : 1) * (this.orsT > 0 ? 1.3 : 1) * (this.ocakT > 0 ? 1.4 : 1) * (this.s.mabet && this.s.mabet === { fire: "fire", frost: "ice", storm: "lightning", alchemist: "poison" }[this.def.id] ? 1.3 : 1);
     for (let t of this.s.towers)
       if (t && t !== this && t.def.id === "rune" && t.silencedT <= 0 && t.empowers(this)) e = Math.max(e, tacKule(this.def.id) * (1 + t.lv.buff * (1 + tac("run") * 0.1)));
     return e;
@@ -12260,7 +12273,7 @@ class Ss {
       let r = t.splash ?? 70;
       (this.s.addProjectile(
         new Me(this.s, "potion", s, a - 10, e, null, 900, (n, o) => {
-          (this.s.fx.ring(n, o, r, 9500544, 380, 6), this.s.fx.burst(n, o - 10, "kirik_buz", 6, 11206570, 50, 360, 1.1, o + 50));
+          (this.s.fx.efx("efx_zehir", n, o, r * 4.4, { max: 4, flip: Math.random() < 0.5 }) || this.s.fx.ring(n, o, r, 9500544, 380, 6), this.s.fx.burst(n, o - 10, "kirik_buz", 6, 11206570, 50, 360, 1.1, o + 50));
           for (let l of this.s.enemiesNear(n, o, r)) {
             if (l.flying) continue;
             (this.s.combat.hit(l, i, { kind: "magic", element: "poison" }),
@@ -12299,7 +12312,7 @@ class Ss {
         (o.push({ x: d.x, y: d.y - 34 * d.scale - (d.flying ? 70 : 0) }),
           this.s.combat.hit(d, l, { kind: "magic", element: "lightning" }),
           (l *= t.decay ?? 0.65));
-      (this.s.fx.lightning(o), Ie("simsek", "muhur", { volume: 0.6, minGapMs: 140, maxLive: 2 }));
+      (this.s.fx.lightning(o), r[0] && this.s.fx.efx("efx_yildirim", r[0].x, r[0].y - (r[0].flying ? 70 : 0), 420, { max: 3, flip: Math.random() < 0.5 }), Ie("simsek", "muhur", { volume: 0.6, minGapMs: 140, maxLive: 2 }));
     } else if (this.def.id === "ballista")
       (this.s.addProjectile(
         new Me(this.s, "bolt", s, a + 40, e, null, 1500, (r, n, o) => {
@@ -13078,6 +13091,17 @@ class Ps {
     for (let i of e.slice(1)) this.ring(i.x, i.y, 34, r2, 220, 4);
     this.s.tweens.add({ targets: t, alpha: 0, duration: 240, onComplete: () => t.destroy() });
   }
+  efx(k, x, y, gen, o = {}) {
+    let d = EFX[k];
+    if (!d || !Q(k) || !this.s.textures.exists(k)) return !1;
+    let say = (this.efxSay ??= {});
+    if ((say[k] ?? 0) >= (o.max ?? 4)) return !0;
+    let sp = this.s.add.sprite(x, y, k, 0).setBlendMode(Phaser.BlendModes.ADD).setOrigin(d.ax, d.ay).setDepth(o.depth ?? 4050).setScale(gen / d.frameWidth);
+    (o.flip && sp.setFlipX(!0), o.alpha && sp.setAlpha(o.alpha), (say[k] = (say[k] ?? 0) + 1));
+    let c = { f: 0 };
+    this.s.tweens.add({ targets: c, f: d.frames - 0.001, duration: (o.sure ?? d.sure) / Math.max(1, (this.s.speed || 1) * 0.7), onUpdate: () => sp.setFrame(Math.floor(c.f)), onComplete: () => (sp.destroy(), say[k]--) });
+    return !0;
+  }
   hitSpark(e, t) {
     (this.burst(e, t, "kivilcim", 4, 16773312, 28, 220, 0.7), this.flash(e, t, 16773312, 34, 140));
   }
@@ -13144,16 +13168,18 @@ class Ps {
       this.ring(e, t, s, 16757575, 420, 10));
   }
   fireImpact(e, t, s) {
+    if (s >= 55) this.efx("efx_ates", e, t - 20, s * 3.4, { max: 3, flip: Math.random() < 0.5 });
     (this.flash(e, t - 10, 16752704, s * 1.3, 260),
       this.burst(e, t, "parcacik", 20, 16747050, s, 480, 1.7),
       this.burst(e, t, "kivilcim", 8, 16765286, s, 380, 1),
       this.ring(e, t, s, 16747050, 360, 6));
   }
   frostImpact(e, t) {
+    if (this.efx("efx_buz", e, t - 10, 250, { max: 5, flip: Math.random() < 0.5 })) return void this.flash(e, t - 20, 12119295, 40, 180);
     (this.flash(e, t - 20, 12119295, 60, 220), this.burst(e, t, "kirik_buz", 8, 16777215, 50, 420, 1));
   }
   shatter(e, t) {
-    (this.burst(e, t, "kirik_buz", 18, 16777215, 120, 650, 1.4), this.ring(e, t, 100, 9426677, 400, 8));
+    (this.efx("efx_buz_halka", e, t, 300, { max: 3 }) || this.ring(e, t, 100, 9426677, 400, 8), this.burst(e, t, "kirik_buz", 12, 16777215, 110, 650, 1.3));
   }
   buildImpact(e, t) {
     (this.dust(e, t + 10, !0), this.s.cameras.main.shake(140, 0.004), this.s.sfx("build"));
@@ -13476,7 +13502,7 @@ class Rs extends Phaser.Scene {
     let e = bolumBul(this.init0.stageId),
       t = this.init0.resume?.hero ?? P().hero;
     if (e.sonsuz) this.sonsuzHazir = e;
-    this.yuklenen = bolumSayfalari(e, t);
+    this.yuklenen = [...bolumSayfalari(e, t), ...Object.keys(EFX)];
     let s = this.yuklenen.filter((n) => !this.textures.exists(n));
     for (let n of s)
       if (n in et) {
@@ -13826,6 +13852,7 @@ class Rs extends Phaser.Scene {
     let t = this.stage.mechanic;
     if (!t) return;
     for (let s of this.towers) if (s && s.orsT > 0) s.orsT -= e;
+    for (let s of this.towers) if (s && s.ocakT > 0 && (s.ocakT -= e) <= 0) s.sprite.clearTint();
     if (t === "ash") {
       let s = this.waves.running || this.enemies.length;
       if (((this.kulT = (this.kulT ?? 24) - (s ? e : 0)), this.kulT <= 0 && !this.kulFirtina)) {
@@ -14817,6 +14844,8 @@ class Rs extends Phaser.Scene {
             (n, o) => {
               (this.fx.explosion(n, o, i.radius),
                 this.fx.explosion(n + 30, o + 10, i.radius * 0.7),
+                this.fx.efx("efx_ates", n, o - 30, i.radius * 6, { max: 2 }),
+                this.fx.efx("efx_ates", n - 40, o - 10, i.radius * 4.2, { max: 2, flip: !0 }),
                 this.cameras.main.shake(260, 0.009),
                 this.cameras.main.flash(120, 255, 190, 120, !1));
               for (let l of this.enemiesNear(n, o, i.radius))
@@ -14826,6 +14855,101 @@ class Rs extends Phaser.Scene {
             0.6,
           ),
         );
+        break;
+      }
+      case "shieldWall": {
+        // yolun en yakın noktasına kalkan duvarı: değen düşmanlar durur ve duvara vurur
+        let n = null;
+        for (let d of this.paths) {
+          let h = d.nearest(t, s);
+          if (!n || h.dist < n.dist) n = h;
+        }
+        let o = n && n.dist < 200 ? n.x : t,
+          l = n && n.dist < 200 ? n.y : s,
+          S = this,
+          gor = this.add.container(o, l).setDepth(l + 2);
+        for (let k = -1; k <= 1; k++) {
+          let ik = C(this, k * 46, -46 - Math.abs(k) * -8, "ikon_kalkan", 1);
+          (wt(ik, 118 - Math.abs(k) * 16), gor.add(ik));
+        }
+        let par = this.add.image(0, -40, "parcacik").setTint(16766080).setBlendMode(Phaser.BlendModes.ADD).setScale(9, 5).setAlpha(0.45);
+        (gor.addAt(par, 0), this.tweens.add({ targets: par, alpha: 0.2, duration: 600, yoyo: !0, repeat: -1 }), gor.setScale(0.2), this.tweens.add({ targets: gor, scale: 1, duration: 260, ease: "Back.Out" }));
+        let duvar = {
+          alive: !0,
+          x: o,
+          y: l,
+          hp: Math.round(420 * r),
+          maxHp: Math.round(420 * r),
+          t: 7,
+          view: gor,
+          takeHit(e) {
+            if (!this.alive) return;
+            ((this.hp -= e), S.tweens.add({ targets: gor, x: o + (Math.random() - 0.5) * 8, duration: 50, yoyo: !0 }));
+            if (this.hp <= 0) this.alive = !1;
+          },
+          update(e) {
+            if (!this.alive) return;
+            if ((this.t -= e) <= 0) return void (this.alive = !1);
+            for (let d of S.enemies)
+              if (d.alive && !d.flying && !d.def.unblockable && !d.blockedBy && Math.hypot(d.x - o, d.y - l) < i.radius) d.blockedBy = this;
+          },
+          destroy() {
+            (S.fx.dust(o, l, !0), S.tweens.add({ targets: gor, alpha: 0, scale: 0.6, duration: 260, onComplete: () => gor.destroy() }));
+          },
+        };
+        (this.summons.push(duvar), this.fx.ring(o, l, i.radius, 16766080, 420, 8), this.fx.flash(o, l - 50, 16770720, 200, 380), this.cameras.main.shake(120, 0.004));
+        break;
+      }
+      case "huntersMark": {
+        // en güçlü düşmana avcı işareti: 10 sn boyunca her kaynaktan %50 fazla hasar
+        let hedef = null;
+        for (let d of this.enemiesNear(t, s, 160)) if (!hedef || d.hp > hedef.hp) hedef = d;
+        if (!hedef) for (let d of this.enemiesNear(t, s, 260)) if (!hedef || d.hp > hedef.hp) hedef = d;
+        if (!hedef) break;
+        hedef.status.markT = 10;
+        let isr = M("sv_hedef") ? this.add.image(hedef.x, hedef.y, "sv_hedef").setTint(16729156).setDisplaySize(130, 72) : this.add.ellipse(hedef.x, hedef.y, 120, 60).setStrokeStyle(6, 16729156);
+        (isr.setDepth(4060).setBlendMode(Phaser.BlendModes.ADD), this.tweens.add({ targets: isr, angle: 360, duration: 3000, repeat: -1 }));
+        let tak = () => {
+          if (!hedef.alive || hedef.status.markT <= 0 || !isr.active) return (this.events.off("update", tak), isr.destroy());
+          isr.setPosition(hedef.x, hedef.y - (hedef.flying ? 70 : 0) + 6);
+        };
+        (this.events.on("update", tak), this.fx.flash(hedef.x, hedef.y - 60, 16729156, 120, 300), this.fx.floatText(hedef.x, hedef.y - 140, m("spell.huntersMark"), "#ff8a6a", 30));
+        break;
+      }
+      case "elementStorm": {
+        // önce her düşmana rastgele bir element yüklenir, az sonra onu patlatacak ikinci element iner: kombo zinciri
+        (this.fx.efx("efx_tipi", t, s, i.radius * 3.4, { max: 2 }) || this.fx.ring(t, s, i.radius, 10541055, 500, 10), this.fx.efx("efx_buz_halka", t, s, i.radius * 2.6, { max: 3 }));
+        (this.fx.flash(t, s - 40, 13434879, i.radius * 1.6, 420), this.cameras.main.shake(200, 0.005));
+        let ilk = [];
+        for (let n of this.enemiesNear(t, s, i.radius)) {
+          let el = ["fire", "poison", "wet", "ice"][Math.floor(Math.random() * 4)],
+            st = n.status;
+          if (el === "fire") st.burn(4 * r, 4);
+          else if (el === "poison") ((st.poisonDps = Math.max(st.poisonDps, 6 * r)), (st.poisonT = Math.max(st.poisonT, 4)));
+          else if (el === "wet") st.wetT = Math.max(st.wetT, 4);
+          else if (st.freezeImmuneT <= 0 && !n.boss) ((st.frozenT = 1.2), (st.freezeImmuneT = 4));
+          else st.addSlow("buyu", 0.4, 3);
+          (this.combat.hit(n, 18 * r, { kind: "magic", element: "none", ignoreShieldAura: !0 }), ilk.push([n, el]));
+        }
+        this.time.delayedCall(600, () => {
+          for (let [n, el] of ilk) {
+            if (!n.alive) continue;
+            let ik = { fire: "ice", poison: "fire", wet: "lightning", ice: "lightning" }[el];
+            this.combat.hit(n, 26 * r, { kind: "magic", element: ik, ignoreShieldAura: !0 });
+            if (ik === "lightning") this.fx.efx("efx_yildirim", n.x, n.y, 300, { max: 4 });
+          }
+        });
+        break;
+      }
+      case "forgeFire": {
+        // yakındaki kuleler 8 sn boyunca %40 sert vurur
+        let say = 0;
+        for (let k of this.towers) {
+          if (!k || Math.hypot(k.x - t, k.y - s) > i.radius) continue;
+          ((k.ocakT = 8), k.sprite.setTint(16762000), say++, this.fx.efx("efx_ates", k.x, k.y - 40, 260, { max: 6, flip: say % 2 === 0 }) || this.fx.fireImpact(k.x, k.y, 50));
+        }
+        (this.fx.ring(t, s, i.radius, 16747050, 500, 10), this.fx.flash(t, s - 30, 16752704, 200, 360));
+        if (!say) this.fx.floatText(t, s - 80, m("spell.forgeFire"), "#ffb070", 30);
         break;
       }
       case "anvilStrike": {
