@@ -1,10 +1,12 @@
 """Vuruşa hizalı döngü: tempo (onset otokorelasyonu) bulunur, döngü uzunluğu tam ölçü katı seçilir,
-son kısım başa eşit güçlü çapraz geçişle bağlanır. kullanım: dongu_vurus.py girdi cikti [bpm_tahmini]"""
+son kısım başa eşit güçlü çapraz geçişle bağlanır. kullanım: dongu_vurus.py girdi cikti [bpm_tahmini|-] [son_sn]"""
 import sys, subprocess, numpy as np
 SR = 44100
 src, dst = sys.argv[1], sys.argv[2]
-bpm0 = float(sys.argv[3]) if len(sys.argv) > 3 else None
+bpm0 = float(sys.argv[3]) if len(sys.argv) > 3 and sys.argv[3] != '-' else None
+son = float(sys.argv[4]) if len(sys.argv) > 4 else None  # bu saniyeden sonrası (parçanın kapanışı/sönmesi) kullanılmaz
 x = np.frombuffer(subprocess.run(['ffmpeg','-v','error','-i',src,'-ac','2','-ar',str(SR),'-f','f32le','-'],capture_output=True).stdout,np.float32).reshape(-1,2).copy()
+if son: x = x[:int(son * SR)]
 L = len(x); m = x.mean(1)
 H = 256
 e = np.sqrt(np.convolve(m**2, np.ones(1024)/1024, 'same'))[::H]
