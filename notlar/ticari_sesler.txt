@@ -29,3 +29,5 @@ ses_kahraman_velmora_emir.mp3 — ElevenLabs STARTER (ticari lisans), TTS, Voice
 ses_kahraman_velmora_emir_2.mp3 — ElevenLabs STARTER (ticari lisans), TTS, Voice Design, v4. (2026-11-20)
 ses_kahraman_velmora_buyu.mp3 — ElevenLabs STARTER (ticari lisans), TTS, Voice Design, v4. (2026-11-20)
 ses_kahraman_velmora_zafer.mp3 — ElevenLabs STARTER (ticari lisans), TTS, Voice Design, v4. (2026-11-20)
+ui_tik.mp3 — ElevenLabs STARTER (ticari lisans), Sound Effects. (2026-11-20)
+ui_tik_2.mp3 — ui_tik.mp3 dosyasından türetildi (perde +1 yarım ton), ticari. (2026-11-20)
