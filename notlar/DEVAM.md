@@ -22,7 +22,7 @@ Kullanıcının uyarısı: ezbere gitme; senarist gibi kurgula, sanatçı gibi i
 4. [x] Sonuç ekranı tam ekran ve görkemli (zafer/yenilgi).
 5. [x] Hazine ve Elmas hiçbir yerde harcanmıyor — anlamlı kullanım tasarla (ör. hazine: kahraman eğitimi,
        elmas: emanet güçlendirme) ve rehbere ekle.
-6. [ ] Ambiyans: canlı harita altyapısı (Rt, harita_stageN_canli video+maske) hangi bölümlerde var çıkar;
+6. [x] Ambiyans (bulut gölgeleri + canlı harita prompt paketi): canlı harita altyapısı (Rt, harita_stageN_canli video+maske) hangi bölümlerde var çıkar;
        eksikler için Flow prompt paketi; kodla yalnızca ince ışık/renk/vinyet.
-7. [ ] Kullanıcıya tek paket: savaş müziği varyasyonları (rotasyon), kahraman ses replikleri (ElevenLabs),
+7. [x] Kullanıcıya tek paket (notlar/OKU_sabah_paketi.txt, outputs/sabah_paketi.zip): savaş müziği varyasyonları (rotasyon), kahraman ses replikleri (ElevenLabs),
        canlı harita Flow promptları.

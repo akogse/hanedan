@@ -1,0 +1,108 @@
+DYNASTY SIEGE — SABAH PAKETİ (20.11)
+Üç bölüm var: A) Flow canlı haritalar, B) ElevenLabs müzik, C) ElevenLabs kahraman sesleri.
+Kod tarafı hazır: dosyaları bana verdiğinde yerlerine koyarım, maskeleri ve döngüleri ben hazırlarım.
+
+════════════════════════ A) FLOW — CANLI HARİTALAR (14 video) ════════════════════════
+NEDEN: "Düz fotoğraf üstünde hareket eden şeyler" eleştirisinin asıl çözümü. 1. ve 3. bölüm haritaları zaten
+canlı (su akar, ateş titrer). Kalan 14 haritayı da aynı yolla canlandırıyoruz. Video gelince ben haritada
+yalnızca canlanan bölgeleri maskeyle oyuna işlerim; yollar, kule yerleri ve kale kıpırdamaz.
+
+BAŞLANGIÇ KARESİ: "baslangic_kareleri/harita_stageN.jpg" (her bölümün kendi haritası, 4K). Video bu kareden
+başlamalı. Çözünürlük: 4K (3840×2160), 8 sn, 16:9.
+
+ORTAK EK — her promptun sonuna ekle:
+"Use the attached image as the exact first frame. Locked static camera: no zoom, no pan, no camera movement,
+no parallax. Every building, road, stone circle, wall, castle and painted detail stays exactly where it is,
+rigid and unchanged; nothing new appears, no people, no creatures, no text. Only the living elements listed
+move, gently and naturally, in the same painterly style. Seamless loop: the last frame is identical to the
+first frame. Highest resolution, sharp crisp detail, no motion blur, no compression artifacts."
+
+ 2) harita_stage2_canli — "Thin smoke rises slowly from the burned mill ruins at the top, small embers glow and
+    flicker in the ruins, the wheat and dry grass sway in a light wind, the stream at the top right flows."
+ 4) harita_stage4_canli — "The river rushes and foams under the stone bridge with white water and spray, the
+    pine trees sway very slightly, soft mist drifts along the riverbanks."
+ 5) harita_stage5_canli — "Purple heather and tall grass wave in a strong wind, low clouds drift across the
+    sky at the top, the sun rays shimmer softly."
+ 6) harita_stage6_canli — "The swamp water ripples slowly, low fog drifts between the dead trees, tiny green
+    fireflies glow and float, hanging moss sways."
+ 7) harita_stage7_canli — "The big bonfire in the center of the raider camp burns with flickering flames and a
+    column of smoke, torches flicker, tent cloth and banners flutter."
+ 8) harita_stage8_canli — "Smoke columns rise from burning debris, glowing embers float upward, red banners
+    flutter, the red sky glows and pulses slowly."
+ 9) harita_stage9_canli — "Smoke rises from the burning haystacks, embers drift, fine grey ash falls slowly
+    from the sky."
+10) harita_stage10_canli — "Golden light rays through the temple slowly shift, dust motes float in the light,
+    torches flicker, leaves tremble in a soft breeze."
+11) harita_stage11_canli — "Low fog crawls between the graves, eerie green ghost lights pulse softly, the moon
+    glows behind thin moving clouds."
+12) harita_stage12_canli — "The village houses burn with tall flickering flames and thick smoke, embers fly,
+    the red banners flutter in the hot wind."
+13) harita_stage13_canli — "The waterfall on the left flows and splashes, the blacksmith forge glows with fire
+    and sparks, banners flutter, clouds drift over the snowy mountains."
+14) harita_stage14_canli — "The four shrines come alive: the fire shrine's brazier burns, the ice shrine's
+    crystal shimmers with cold light, the green poison pool bubbles, purple lightning crackles over the storm
+    shrine; the rune circle in the center glows and pulses."
+15) harita_stage15_canli — "Sunset clouds drift slowly, thin smoke rises from the burnt debris, banners
+    flutter, the grass waves in the evening wind."
+16) harita_stage16_canli — "Purple mist and smoke flow slowly over the bone field, the glowing purple cracks in
+    the ground pulse, faint purple spirit lights float."
+
+ÖNCELİK: 12, 13, 14, 16 (en çok kazanç) → 4, 7, 8, 9 → kalanlar.
+
+════════════════════════ B) ELEVENLABS — SAVAŞ MÜZİĞİ VARYASYONLARI ════════════════════════
+NEDEN: "Savaş müziğinin döngüsü yorucu." Kod artık her savaşta farklı bir savaş parçası seçiyor ve uzun
+savaşta müziği arada geri çekiyor. İki yeni parça yeterli. Dosya adları: muzik_savas_2.mp3, muzik_savas_3.mp3
+Ücretsiz planda 30 sn; ÜCRETLİ PLANDA 2–3 DAKİKA üret (asıl çözüm uzunluk). Mevcut muzik_savas da ücretli
+planda 2–3 dk yeniden üretilmeli.
+
+muzik_savas_2 — "Epic dark fantasy battle music for a tower defense game, relentless siege: deep pounding war
+drums and taiko, low brass ostinato, staccato strings, distant war horns, tense and driving, building
+gradually in intensity, no vocals, no choir solo, instrumental only, seamless loop, 110 BPM, D minor"
+
+muzik_savas_3 — "Heroic medieval battle music for a tower defense game, the defenders strike back: bold French
+horns and trumpets carrying a noble theme, galloping strings, snare and timpani, hopeful but fierce, rising
+emotion, no vocals, instrumental only, seamless loop, 120 BPM, E minor"
+
+════════════════════════ C) ELEVENLABS — KAHRAMAN SESLERİ (24 kısa replik) ════════════════════════
+NEDEN: Arkadaşının önerisi. Kahraman seçilince, bir yere gönderilince, büyü yapınca ve zaferde konuşur.
+ElevenLabs'te "Voice Design" ile her kahramana bir ses tasarla (aşağıdaki tarifler), sonra replikleri o
+sesle oku. Türkçe. Dosya adı = satırın başındaki ad (.mp3). Her biri 1–2 sn; sonundaki sessizliği ben keserim.
+
+ALDRIC — "A battle-hardened middle-aged knight, deep warm baritone, calm authority, noble, slightly rough,
+  speaks Turkish with a clear strong voice"
+  ses_kahraman_aldric_secim     "Emrinizdeyim."
+  ses_kahraman_aldric_secim_2   "Kalkanım hazır."
+  ses_kahraman_aldric_emir      "Yolu tutacağım!"
+  ses_kahraman_aldric_emir_2    "Oraya gidiyorum."
+  ses_kahraman_aldric_buyu      "Kral için!"
+  ses_kahraman_aldric_zafer     "Krallık ayakta kaldı."
+
+SARYA — "A young fierce ranger woman, clear confident mid voice with a slight husky edge, quick and sharp,
+  speaks Turkish"
+  ses_kahraman_sarya_secim      "Gözüm üstlerinde."
+  ses_kahraman_sarya_secim_2    "Okum hazır."
+  ses_kahraman_sarya_emir       "Sessizce gidiyorum."
+  ses_kahraman_sarya_emir_2     "Oradan daha iyi görürüm."
+  ses_kahraman_sarya_buyu       "Kuzgunlar, uçun!"
+  ses_kahraman_sarya_zafer      "Tek ok bile boşa gitmedi."
+
+VELMORA — "An elderly wise sorceress, calm resonant low female voice, mysterious and measured, a faint echo
+  of magic, speaks Turkish slowly"
+  ses_kahraman_velmora_secim    "Rünler fısıldıyor..."
+  ses_kahraman_velmora_secim_2  "Dinliyorum."
+  ses_kahraman_velmora_emir     "Yol açılsın."
+  ses_kahraman_velmora_emir_2   "Oraya varırım."
+  ses_kahraman_velmora_buyu     "Elementler, uyanın!"
+  ses_kahraman_velmora_zafer    "Bugün ölüler kazanamadı."
+
+THORGAR — "A stocky dwarf blacksmith warrior, booming gravelly bass voice, hearty and humorous, loud,
+  speaks Turkish"
+  ses_kahraman_thorgar_secim    "Çekicim hazır!"
+  ses_kahraman_thorgar_secim_2  "Ne dövelim?"
+  ses_kahraman_thorgar_emir     "Kısa bacaklarla geliyorum!"
+  ses_kahraman_thorgar_emir_2   "Yürü bakalım!"
+  ses_kahraman_thorgar_buyu     "Örsün sesini duyun!"
+  ses_kahraman_thorgar_zafer    "Ha! Demir her zaman kazanır."
+
+NOT: Hepsi ücretsiz planla üretilirse ses listesine (ucretsiz_sesler.txt) eklerim; yayından önce ücretli
+planda yeniden üretilmeli.
