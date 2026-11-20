@@ -13095,9 +13095,11 @@ class Ms {
   }
   moveTo(e, t) {
     Ie("ses_kahraman_" + this.def.id + "_emir" + (Jt === "en" ? "_en" : ""), null, { volume: 0.9, minGapMs: 2500, maxLive: 1, detune: 0 });
-    if (((this.guardX = e), (this.guardY = t), this.engaged && this.engaged.blockedBy === this))
-      this.engaged.blockedBy = null;
+    ((this.guardX = e), (this.guardY = t), this.birakHepsi());
     ((this.engaged = null), (this.target = null), this.s.fx.ring(e, t, 50, 15255674, 400, 5));
+  }
+  birakHepsi() {
+    for (let h of this.s.enemies) if (h.blockedBy === this) h.blockedBy = null;
   }
   takeHit(e) {
     if (!this.alive) return;
@@ -13111,9 +13113,9 @@ class Ms {
         (Ie("ses_kahraman_" + this.def.id + "_olum", "death", { volume: 0.9 }),
         (this.alive = !1),
         (this.respawnT = ma),
-        this.engaged && this.engaged.blockedBy === this)
+        !0)
       )
-        this.engaged.blockedBy = null;
+        this.birakHepsi();
       ((this.engaged = null), this.s.fx.dust(this.x, this.y, !0));
       let t = "kahraman_" + this.def.id + "_olum";
       if (this.walkAnim && Q(t)) (this.play(t, 0.9, !0), this.marker.setAlpha(0.35));
@@ -13159,6 +13161,17 @@ class Ms {
         if (u < alan && u < d) ((d = u), (l = h));
       }
       if (l) ((this.engaged = l), (l.blockedBy = this));
+    }
+    // kahraman tek düşmanla oyalanırken yanından geçenler de durup ona saldırır (yakın dövüşçü 3, uzak menzilli 2 düşman)
+    if (!t) {
+      let say = 0,
+        cap = this.def.ranged ? 2 : 3;
+      for (let h of this.s.enemies) if (h.alive && h.blockedBy === this) say++;
+      for (let h of this.s.enemies) {
+        if (say >= cap) break;
+        if (!h.alive || h.flying || h.def.unblockable || h.blockedBy) continue;
+        if (Math.hypot(h.x - this.x, h.y - this.y) < 80) ((h.blockedBy = this), say++);
+      }
     }
     if (this.def.ranged && !this.target) {
       let l = null;
