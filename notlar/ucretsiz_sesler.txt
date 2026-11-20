@@ -118,3 +118,8 @@ spell_ravenSwarm.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli pl
 spell_royalGuard.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
 spell_shieldWall.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
 ses_kahraman_aldric_secim.mp3 — ElevenLabs ÜCRETSİZ plan (TTS, Voice Design, v4). Yayından önce ücretli planda yeniden üretilecek. (2026-11-20)
+ses_kahraman_aldric_secim_2.mp3 — ElevenLabs ÜCRETSİZ plan (TTS, Voice Design, v4). Yayından önce ücretli planda yeniden üretilecek. (2026-11-20)
+ses_kahraman_aldric_emir.mp3 — ElevenLabs ÜCRETSİZ plan (TTS, Voice Design, v4). Yayından önce ücretli planda yeniden üretilecek. (2026-11-20)
+ses_kahraman_aldric_emir_2.mp3 — ElevenLabs ÜCRETSİZ plan (TTS, Voice Design, v4). Yayından önce ücretli planda yeniden üretilecek. (2026-11-20)
+ses_kahraman_aldric_buyu.mp3 — ElevenLabs ÜCRETSİZ plan (TTS, Voice Design, v4). Yayından önce ücretli planda yeniden üretilecek. (2026-11-20)
+ses_kahraman_aldric_zafer.mp3 — ElevenLabs ÜCRETSİZ plan (TTS, Voice Design, v4). Yayından önce ücretli planda yeniden üretilecek. (2026-11-20)
