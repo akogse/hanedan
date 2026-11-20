@@ -2340,9 +2340,10 @@ window.addEventListener("webglcontextrestored", () => hataGoster({ message: "Web
     try {
       return adim.call(this, t, d);
     } catch (e) {
-      // aynı karede yarım kalan çizim toparlansın
+      // kare yine de çizilsin: çizilmezse ekranda iki eski kare sırayla görünür (düşmanlar ileri geri titrer)
       try {
-        this.renderer?.postRender?.();
+        let r = this.renderer;
+        (r.preRender(), this.scene.render(r), r.postRender());
       } catch (x) {}
       hataGoster(e);
     }
