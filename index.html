@@ -2305,6 +2305,75 @@ var st = Es(),
   q = Math.min(2.4, Math.max(1, (st.h * Da) / w)),
   Ht = Math.round(T * q),
   Is = Math.round(w * q);
+// KUCUK-BAS (araclar/kucult.py üretir, elle düzenleme)
+var KUCUK = {
+  dusman_ates_iblisi_olum: ["assets/k/anim_dusman_ates_iblisi_olum.webp?v=3d334927", 215, 248],
+  dusman_ates_iblisi_saldiri: ["assets/k/anim_dusman_ates_iblisi_saldiri.webp?v=5058174c", 289, 247],
+  dusman_ates_iblisi_yuru: ["assets/k/anim_dusman_ates_iblisi_yuru.webp?v=990284e3", 165, 244],
+  dusman_bataklik_balcigi_olum: ["assets/k/anim_dusman_bataklik_balcigi_olum.webp?v=bd0f8539", 280, 157],
+  dusman_bataklik_balcigi_saldiri: ["assets/k/anim_dusman_bataklik_balcigi_saldiri.webp?v=2f6ee48e", 266, 153],
+  dusman_bataklik_balcigi_yuru: ["assets/k/anim_dusman_bataklik_balcigi_yuru.webp?v=7a421050", 246, 149],
+  dusman_gargoyle_olum: ["assets/k/anim_dusman_gargoyle_olum.webp?v=41698e98", 332, 185],
+  dusman_gargoyle_saldiri: ["assets/k/anim_dusman_gargoyle_saldiri.webp?v=f903cf25", 314, 184],
+  dusman_gargoyle_yuru: ["assets/k/anim_dusman_gargoyle_yuru.webp?v=5f213c93", 326, 187],
+  dusman_goblin_olum: ["assets/k/anim_dusman_goblin_olum.webp?v=1961d08b", 219, 186],
+  dusman_goblin_saldiri: ["assets/k/anim_dusman_goblin_saldiri.webp?v=d6b6453b", 226, 176],
+  dusman_goblin_saman_olum: ["assets/k/anim_dusman_goblin_saman_olum.webp?v=d6086d3d", 291, 185],
+  dusman_goblin_saman_saldiri: ["assets/k/anim_dusman_goblin_saman_saldiri.webp?v=f34aba12", 291, 186],
+  dusman_goblin_saman_yuru: ["assets/k/anim_dusman_goblin_saman_yuru.webp?v=644577a9", 217, 186],
+  dusman_goblin_yuru: ["assets/k/anim_dusman_goblin_yuru.webp?v=9de1b04e", 220, 184],
+  dusman_hayalet_yuru: ["assets/k/anim_dusman_hayalet_yuru.webp?v=1541fa50", 259, 249],
+  dusman_haydut_kalkan_olum: ["assets/k/anim_dusman_haydut_kalkan_olum.webp?v=31846371", 233, 210],
+  dusman_haydut_kalkan_saldiri: ["assets/k/anim_dusman_haydut_kalkan_saldiri.webp?v=572d7633", 246, 209],
+  dusman_haydut_kalkan_yuru: ["assets/k/anim_dusman_haydut_kalkan_yuru.webp?v=599a0695", 189, 213],
+  dusman_haydut_zirhli_olum: ["assets/k/anim_dusman_haydut_zirhli_olum.webp?v=00b51ff5", 303, 240],
+  dusman_haydut_zirhli_saldiri: ["assets/k/anim_dusman_haydut_zirhli_saldiri.webp?v=c3db53b7", 273, 238],
+  dusman_haydut_zirhli_yuru: ["assets/k/anim_dusman_haydut_zirhli_yuru.webp?v=6c329cfa", 217, 241],
+  dusman_iskelet_olum: ["assets/k/anim_dusman_iskelet_olum.webp?v=670be7c2", 263, 207],
+  dusman_iskelet_saldiri: ["assets/k/anim_dusman_iskelet_saldiri.webp?v=2f0cf131", 266, 207],
+  dusman_iskelet_yuru: ["assets/k/anim_dusman_iskelet_yuru.webp?v=66b2cabb", 204, 209],
+  dusman_kos_olum: ["assets/k/anim_dusman_kos_olum.webp?v=5dd5bc2c", 446, 251],
+  dusman_kos_saldiri: ["assets/k/anim_dusman_kos_saldiri.webp?v=99dd1d5c", 429, 233],
+  dusman_kos_yuru: ["assets/k/anim_dusman_kos_yuru.webp?v=1411e704", 429, 233],
+  dusman_kurt_olum: ["assets/k/anim_dusman_kurt_olum.webp?v=d94a61a6", 301, 177],
+  dusman_kurt_saldiri: ["assets/k/anim_dusman_kurt_saldiri.webp?v=6e1acc19", 309, 182],
+  dusman_kurt_yuru: ["assets/k/anim_dusman_kurt_yuru.webp?v=81975282", 302, 177],
+  dusman_kuzgun_olum: ["assets/k/anim_dusman_kuzgun_olum.webp?v=a6a0e495", 232, 131],
+  dusman_kuzgun_saldiri: ["assets/k/anim_dusman_kuzgun_saldiri.webp?v=13cdd838", 233, 131],
+  dusman_kuzgun_yuru: ["assets/k/anim_dusman_kuzgun_yuru.webp?v=3b45cde8", 233, 131],
+  dusman_olu_buyucu_olum: ["assets/k/anim_dusman_olu_buyucu_olum.webp?v=4fa93ab6", 250, 232],
+  dusman_olu_buyucu_saldiri: ["assets/k/anim_dusman_olu_buyucu_saldiri.webp?v=fbf6b747", 328, 230],
+  dusman_olu_buyucu_yuru: ["assets/k/anim_dusman_olu_buyucu_yuru.webp?v=dd7eadec", 216, 233],
+  dusman_varhol_sovalyesi_olum: ["assets/k/anim_dusman_varhol_sovalyesi_olum.webp?v=d3ae52d0", 379, 248],
+  dusman_varhol_sovalyesi_saldiri: ["assets/k/anim_dusman_varhol_sovalyesi_saldiri.webp?v=2750e1ab", 331, 248],
+  dusman_varhol_sovalyesi_yuru: ["assets/k/anim_dusman_varhol_sovalyesi_yuru.webp?v=f6c8f564", 209, 251],
+  kahraman_aldric_bekle: ["assets/k/anim_kahraman_aldric_bekle.webp?v=7a680f22", 241, 243],
+  kahraman_aldric_kalk: ["assets/k/anim_kahraman_aldric_kalk.webp?v=2987baed", 189, 246],
+  kahraman_aldric_olum: ["assets/k/anim_kahraman_aldric_olum.webp?v=4f198cfb", 267, 249],
+  kahraman_aldric_saldiri: ["assets/k/anim_kahraman_aldric_saldiri.webp?v=b8ea5c54", 316, 247],
+  kahraman_aldric_yetenek: ["assets/k/anim_kahraman_aldric_yetenek.webp?v=bc89f31e", 359, 249],
+  kahraman_aldric_yuru: ["assets/k/anim_kahraman_aldric_yuru.webp?v=33e504b3", 197, 252],
+  kahraman_aldric_yuru_arka: ["assets/k/anim_kahraman_aldric_yuru_arka.webp?v=7cbf83c0", 189, 248],
+  kule_balista_3_bekle: ["assets/k/anim_kule_balista_3_bekle.webp?v=48b7686d", 301, 214],
+  kule_balista_3_saldiri_sag: ["assets/k/anim_kule_balista_3_saldiri_sag.webp?v=83bdb4ae", 335, 216],
+  kule_balista_3_saldiri_sol: ["assets/k/anim_kule_balista_3_saldiri_sol.webp?v=fae2d50d", 314, 215],
+  kule_balista_dal_kanca_bekle: ["assets/k/anim_kule_balista_dal_kanca_bekle.webp?v=e2b286e9", 304, 187],
+  kule_balista_dal_kanca_saldiri_sag: ["assets/k/anim_kule_balista_dal_kanca_saldiri_sag.webp?v=10ce2c03", 358, 200],
+  kule_balista_dal_kanca_saldiri_sol: ["assets/k/anim_kule_balista_dal_kanca_saldiri_sol.webp?v=36f5c12f", 324, 187],
+  kule_balista_dal_mizrak_bekle: ["assets/k/anim_kule_balista_dal_mizrak_bekle.webp?v=91cb890a", 317, 177],
+  kule_balista_dal_mizrak_saldiri_sol: ["assets/k/anim_kule_balista_dal_mizrak_saldiri_sol.webp?v=ecbf04c6", 310, 178],
+  kule_maden_dal_darphane_bekle: ["assets/k/anim_kule_maden_dal_darphane_bekle.webp?v=6f983d21", 294, 212],
+  kule_maden_dal_darphane_saldiri: ["assets/k/anim_kule_maden_dal_darphane_saldiri.webp?v=9ac5e0f6", 294, 211]
+};
+// KUCUK-SON
+// ekranı küçük cihazda (telefonlar) animasyon sayfalarının küçük kopyası yüklenir: bellek ~yarıya iner, görüntü aynı boyda
+if (q <= 1.5)
+  for (let k in KUCUK) {
+    let d = et[k];
+    if (!d) continue;
+    let [u, fw, fh] = KUCUK[k];
+    ((d.bodyHeight *= fh / d.frameHeight), (d.url = u), (d.frameWidth = fw), (d.frameHeight = fh));
+  }
 function Ba() {
   try {
     let e = document.createElement("div");
@@ -3816,7 +3885,35 @@ function La() {
   } catch {}
 }
 function Fs(e) {
-  for (let t in tt) e.load.audio(t, tt[t]);
+  // müzikler açılışta yüklenmez: her biri çözülünce ~40 MB tutar; çalınacağı zaman muzikIste ile gelir
+  for (let t in tt) if (!t.startsWith("muzik_")) e.load.audio(t, tt[t]);
+}
+var muzikBekle = {},
+  muzikKatman = {};
+function muzikIste(k, cb) {
+  if (!ke || !(k in tt)) return;
+  if (ke.cache.audio.exists(k)) return void cb?.();
+  let ctx = ke.sound.context;
+  if (!ctx) return;
+  (muzikBekle[k] ??= []).push(cb);
+  if (muzikBekle[k].length > 1) return;
+  fetch(tt[k])
+    .then((r) => r.arrayBuffer())
+    .then((b) => new Promise((ok, no) => ctx.decodeAudioData(b, ok, no)))
+    .then((buf) => {
+      let l = muzikBekle[k] ?? [];
+      delete muzikBekle[k];
+      ke.cache.audio.exists(k) || ke.cache.audio.add(k, buf);
+      for (let f of l) f?.();
+      muzikTemizle();
+    })
+    .catch(() => delete muzikBekle[k]);
+}
+function muzikTemizle() {
+  // çalmayan müziğin çözülmüş verisi bellekten atılır
+  if (!ke) return;
+  let kul = new Set(ke.sound.sounds.filter((x) => !x.pendingRemove).map((x) => x.key));
+  for (let k of ke.cache.audio.getKeys()) if (k.startsWith("muzik_") && !kul.has(k) && !(k in muzikBekle)) ke.cache.audio.remove(k);
 }
 function sesKaydet() {
   try {
@@ -3911,29 +4008,41 @@ function yt(e, t, s, a) {
 }
 function Xs(e = 900) {
   let t = [...Object.values(Le), ...(nt ? [nt] : [])].filter(Boolean);
-  for (let s of t) yt(s, 0, e, () => s.destroy());
+  for (let s of t) yt(s, 0, e, () => (s.destroy(), setTimeout(muzikTemizle, 100)));
   ((Le = {}), (nt = null), (pt = ""));
 }
 function It(e) {
   if (!ke || pt === e) return;
   if ((Xs(), (pt = e), !(e in tt))) return;
-  ((nt = ke.sound.add(e, { loop: !0, volume: 0 })), nt.play(), yt(nt, Ee.music, 1200));
+  muzikIste(e, () => {
+    if (pt !== e || nt) return;
+    ((nt = ke.sound.add(e, { loop: !0, volume: 0 })), nt.play(), yt(nt, Ee.music, 1200));
+  });
+}
+function katmanYukle(s) {
+  let a = muzikKatman[s],
+    p = pt;
+  if (!a) return;
+  muzikIste(a, () => {
+    if (pt !== p || Le[s]) return;
+    let i = ke.sound.add(a, { loop: !0, volume: 0 });
+    (i.play(), (Le[s] = i));
+    if (Et === s) yt(i, Ee.music * (muzikNefesAlt ? 0.4 : 1), 1500);
+  });
 }
 function Ns(e) {
   if (!ke || pt === e) return;
-  (Xs(), (pt = e), (Et = "kesif"), (muzikNefesT = 0), (muzikNefesAlt = !1));
+  (Xs(), (pt = e), (Et = "kesif"), (muzikNefesT = 0), (muzikNefesAlt = !1), (muzikKatman = {}));
   for (let s of ["kesif", "savas", "boss"]) {
     let a = e + "_" + s;
     if (!(a in tt)) {
-      let ad = [ "muzik_" + s, "muzik_" + s + "_2", "muzik_" + s + "_3"].filter((k) => k in tt && !!ke?.cache.audio.exists(k));
+      let ad = ["muzik_" + s, "muzik_" + s + "_2", "muzik_" + s + "_3"].filter((k) => k in tt);
       a = ad.length ? ad[Math.floor(Math.random() * ad.length)] : "muzik_" + s;
     }
-    if (!(a in tt)) continue;
-    let i = ke.sound.add(a, { loop: !0, volume: 0 });
-    (i.play(), (Le[s] = i));
+    if (a in tt) muzikKatman[s] = a;
   }
-  let t = Le.kesif ?? Le.savas;
-  if (t) yt(t, Ee.music, 1500);
+  // keşif hemen, savaş ardından; boss katmanı ancak boss gelince yüklenir (bellek)
+  (katmanYukle("kesif"), katmanYukle("savas"));
 }
 function Vs(e) {
   if (e === Et || !Le[e]) return;
@@ -3942,7 +4051,10 @@ function Vs(e) {
   yt(Le[e], Ee.music * (muzikNefesAlt ? 0.4 : 1), 1400);
 }
 function muzikDurum(e) {
-  if (Le[e]) Vs(e);
+  if (Le[e]) return Vs(e);
+  if (e === Et || !muzikKatman[e]) return;
+  let t = Le[Et];
+  ((Et = e), t && yt(t, 0, 1400), katmanYukle(e));
 }
 // uzun savaşta aynı döngü yormasın: çalan katman her 75 sn'de bir 25 sn boyunca %40'a çekilir,
 // savaş sesleri ve ortam öne çıkar, sonra müzik geri gelir
@@ -12113,6 +12225,7 @@ class Ss {
     let e = this.artKey(),
       t = e + "_bekle",
       s = this.sprite;
+    if (this.sonArt !== e) ((this.sonArt = e), this.s.kuleTemizle?.());
     {
       let a = kuleSayfalari(e).filter((i) => !this.s.textures.exists(i));
       if (a.length) {
@@ -13707,7 +13820,7 @@ class Rs extends Phaser.Scene {
     (Ns("muzik_stage" + e.id), (this.paths = e.paths.map((r) => new ks(r))));
     this.time.delayedCall(400, () => Ie("bolum_baslangic", "wave", { volume: 0.8 }));
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
-      let r = [...(this.yuklenen ?? []), ...(this.kuleYuk ?? [])];
+      let r = [...(this.yuklenen ?? []), ...(this.kuleYuk ?? []), ...Object.keys(et).filter((k) => k.startsWith("kule_"))];
       this.time.delayedCall ? sayfaBirak(this, r) : 0;
     });
     let t = this.init0.resume ?? null;
@@ -14634,6 +14747,26 @@ class Rs extends Phaser.Scene {
     if (((this.towers[e] = n), this.spotImgs[e]?.setVisible(!1), i)) n.dropIn();
     return n;
   }
+  // yükseltilen ya da satılan kulelerin artık kullanılmayan animasyon sayfaları bellekten atılır
+  // (yoksa uzun bölümde her seviyenin sayfası birikir ve telefon tarayıcısı çöker)
+  kuleTemizle() {
+    if (this.kuleTemizT) return;
+    // oyun duraklatılmışken de çalışsın diye sahne saati değil gerçek zaman
+    this.kuleTemizT = setTimeout(() => {
+      this.kuleTemizT = null;
+      if (!this.kuleYuk?.length || !(this.sys.isActive() || this.sys.isPaused())) return;
+      let kul = new Set();
+      for (let t of this.towers)
+        if (t) {
+          for (let k of kuleSayfalari(t.artKey())) kul.add(k);
+          for (let sp of [t.sprite, t.harman]) if (sp?.texture && sp.visible) kul.add(sp.texture.key);
+        }
+      let bos = this.kuleYuk.filter((k) => !kul.has(k));
+      if (!bos.length) return;
+      this.kuleYuk = this.kuleYuk.filter((k) => kul.has(k));
+      sayfaBirak(this, bos);
+    }, 2500);
+  }
   sellTower(e) {
     let t = this.towers[e],
       s = Math.floor(ps(t.def.id, t.level, t.branch) * gs);
@@ -14644,7 +14777,8 @@ class Rs extends Phaser.Scene {
       t.destroy(),
       (this.towers[e] = null),
       this.spotImgs[e]?.setVisible(!0),
-      this.sfx("sell"));
+      this.sfx("sell"),
+      this.kuleTemizle());
   }
   spawnEnemy(e, t, s, a, i = 0, r) {
     let n = Te[e],
