@@ -41,3 +41,4 @@ altin_3.mp3 — altin.mp3 dosyasından türetildi (perde +1 yarım ton), ticari.
 build.mp3 — ElevenLabs STARTER (ticari lisans), Sound Effects. (2026-11-20)
 upgrade.mp3 — ElevenLabs STARTER (ticari lisans), Sound Effects. (2026-11-20)
 sell.mp3 — ElevenLabs STARTER (ticari lisans), Sound Effects. (2026-11-20)
+muhur.mp3 — ElevenLabs STARTER (ticari lisans), Sound Effects. (2026-11-20)
