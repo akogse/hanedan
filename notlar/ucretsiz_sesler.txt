@@ -133,3 +133,5 @@ ses_kahraman_velmora_emir.mp3 — ElevenLabs ÜCRETSİZ plan (TTS, Voice Design,
 ses_kahraman_velmora_emir_2.mp3 — ElevenLabs ÜCRETSİZ plan (TTS, Voice Design, v4). Yayından önce ücretli planda yeniden üretilecek. (2026-11-20)
 ses_kahraman_velmora_buyu.mp3 — ElevenLabs ÜCRETSİZ plan (TTS, Voice Design, v4). Yayından önce ücretli planda yeniden üretilecek. (2026-11-20)
 ses_kahraman_velmora_zafer.mp3 — ElevenLabs ÜCRETSİZ plan (TTS, Voice Design, v4). Yayından önce ücretli planda yeniden üretilecek. (2026-11-20)
+ses_kahraman_thorgar_saldiri.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)
+ses_kahraman_thorgar_olum.mp3 — ElevenLabs ÜCRETSİZ plan. Yayından önce ücretli planda yeniden üretilecek. (2026-11-19)

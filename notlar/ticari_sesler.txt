@@ -1,6 +1,4 @@
 # Ücretli planda (ticari lisansla) üretilmiş sesler — yeniden üretim gerekmez
-ses_kahraman_thorgar_saldiri.mp3 — ElevenLabs STARTER (ticari lisans), TTS, Voice Design, v4. (2026-11-20)
-ses_kahraman_thorgar_olum.mp3 — ElevenLabs STARTER (ticari lisans), TTS, Voice Design, v4. (2026-11-20)
 ses_kahraman_thorgar_secim.mp3 — ElevenLabs STARTER (ticari lisans), TTS, Voice Design, v4. (2026-11-20)
 ses_kahraman_thorgar_secim_2.mp3 — ElevenLabs STARTER (ticari lisans), TTS, Voice Design, v4. (2026-11-20)
 ses_kahraman_thorgar_emir.mp3 — ElevenLabs STARTER (ticari lisans), TTS, Voice Design, v4. (2026-11-20)
