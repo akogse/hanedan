@@ -12797,10 +12797,10 @@ class Ms {
     return !this.def.ranged;
   }
   select(e) {
-    ((this.selected = e), this.ring.setVisible(e), e && Ie("ses_kahraman_" + this.def.id + "_secim", null, { volume: 0.9, minGapMs: 2500, maxLive: 1, detune: 0 }));
+    ((this.selected = e), this.ring.setVisible(e), e && Ie("ses_kahraman_" + this.def.id + "_secim" + (Jt === "en" ? "_en" : ""), null, { volume: 0.9, minGapMs: 2500, maxLive: 1, detune: 0 }));
   }
   moveTo(e, t) {
-    Ie("ses_kahraman_" + this.def.id + "_emir", null, { volume: 0.9, minGapMs: 2500, maxLive: 1, detune: 0 });
+    Ie("ses_kahraman_" + this.def.id + "_emir" + (Jt === "en" ? "_en" : ""), null, { volume: 0.9, minGapMs: 2500, maxLive: 1, detune: 0 });
     if (((this.guardX = e), (this.guardY = t), this.engaged && this.engaged.blockedBy === this))
       this.engaged.blockedBy = null;
     ((this.engaged = null), (this.target = null), this.s.fx.ring(e, t, 50, 15255674, 400, 5));
@@ -14876,7 +14876,7 @@ class Rs extends Phaser.Scene {
     let a = this.hero,
       i = a.def.spells[e];
     a.spellCd[e] = i.cooldown * (1 - tac("buyu") * 0.06) * (emanetEtkin("iskar_asasi") ? 0.8 : 1);
-    Ie("ses_kahraman_" + a.def.id + "_buyu", null, { volume: 0.95, minGapMs: 1500, maxLive: 1, detune: 0 });
+    Ie("ses_kahraman_" + a.def.id + "_buyu" + (Jt === "en" ? "_en" : ""), null, { volume: 0.95, minGapMs: 1500, maxLive: 1, detune: 0 });
     let r = a.power;
     switch ((this.events.emit("spellCast", e), i.id)) {
       case "royalGuard": {
@@ -16527,7 +16527,7 @@ class Os extends Phaser.Scene {
   async endSequence(e) {
     // savaş müziği susar; zafer/yenilgi ezgisinden sonra harita müziği usulca gelir
     (Xs(1600), this.time.delayedCall(6500, () => It("muzik_harita")));
-    if (e.victory) this.time.delayedCall(2200, () => Ie("ses_kahraman_" + (this.b.heroId ?? P().hero) + "_zafer", null, { volume: 1, maxLive: 1, detune: 0 }));
+    if (e.victory) this.time.delayedCall(2200, () => Ie("ses_kahraman_" + (this.b.heroId ?? P().hero) + "_zafer" + (Jt === "en" ? "_en" : ""), null, { volume: 1, maxLive: 1, detune: 0 }));
     if (this.b.stage.sonsuz) return this.sonsuzSon(e);
     (this.endTut(), this.closeInfo());
     let t = P(),
