@@ -2220,6 +2220,49 @@ var st = Es(),
   q = Math.min(2.4, Math.max(1, (st.h * Da) / w)),
   Ht = Math.round(T * q),
   Is = Math.round(w * q);
+// Hata kalkanı: tek bir hata oyun döngüsünü durdurup ekranı dondurmasın (ses çalmaya devam ediyor, görüntü donuyordu).
+// Hata yakalanır, oyun sürer; ekranın köşesinde kısa bir kayıt çıkar (ekran görüntüsüyle hatanın yeri bulunur).
+var hataSay = 0;
+function hataGoster(e) {
+  try {
+    hataSay++;
+    let ms = String((e && (e.message || e.reason?.message || e)) || "?").slice(0, 160),
+      st = String(e?.stack || e?.reason?.stack || "")
+        .split("\n")
+        .slice(0, 4)
+        .map((x) => x.replace(/https?:\/\/[^ )]*\//g, "").trim())
+        .join(" | ")
+        .slice(0, 400);
+    let d = document.getElementById("hataKutu");
+    if (!d) {
+      d = document.createElement("div");
+      d.id = "hataKutu";
+      d.style.cssText = "position:fixed;left:4px;bottom:4px;max-width:70vw;z-index:99999;background:rgba(60,0,0,.82);color:#ffb4a0;font:10px/1.3 monospace;padding:4px 6px;border-radius:4px;white-space:pre-wrap;word-break:break-all;pointer-events:auto";
+      d.onclick = () => d.remove();
+      document.body.appendChild(d);
+    }
+    d.textContent = "HATA #" + hataSay + ": " + ms + "\n" + st;
+  } catch (x) {}
+}
+window.addEventListener("error", (ev) => hataGoster(ev.error || ev.message));
+window.addEventListener("unhandledrejection", (ev) => hataGoster(ev.reason));
+// ekran kartı bağlamı kaybolursa (Android'de grafik belleği baskısı) görüntü donar, ses sürer: bunu da kaydet
+window.addEventListener("webglcontextlost", () => hataGoster({ message: "WebGL bağlamı kayboldu (grafik belleği)" }), !0);
+window.addEventListener("webglcontextrestored", () => hataGoster({ message: "WebGL bağlamı geri geldi" }), !0);
+{
+  let adim = Phaser.Game.prototype.step;
+  Phaser.Game.prototype.step = function (t, d) {
+    try {
+      return adim.call(this, t, d);
+    } catch (e) {
+      // aynı karede yarım kalan çizim toparlansın
+      try {
+        this.renderer?.postRender?.();
+      } catch (x) {}
+      hataGoster(e);
+    }
+  };
+}
 // KUCUK-BAS (araclar/kucult.py üretir, elle düzenleme)
 var KUCUK = {
   dusman_ates_iblisi_olum: ["assets/k/anim_dusman_ates_iblisi_olum.webp", 215, 248],
