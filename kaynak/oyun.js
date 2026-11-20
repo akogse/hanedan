@@ -93,6 +93,7 @@ var zt = {
     kh_anahtar_yatak: "assets/kh_anahtar_yatak.webp",
     kh_anahtar_topuz: "assets/kh_anahtar_topuz.webp",
     acilis_logo: "assets/acilis_logo.webp",
+  kalkan_duvari: "assets/kalkan_duvari.webp",
     basarim_bin_dusman: "assets/basarim_bin_dusman.webp",
     basarim_boss_avcisi: "assets/basarim_boss_avcisi.webp",
     basarim_dal_ustasi: "assets/basarim_dal_ustasi.webp",
@@ -14950,12 +14951,14 @@ class Rs extends Phaser.Scene {
           l = n && n.dist < 200 ? n.y : s,
           S = this,
           gor = this.add.container(o, l).setDepth(l + 2);
-        for (let k = -1; k <= 1; k++) {
-          let ik = C(this, k * 46, -46 - Math.abs(k) * -8, "ikon_kalkan", 1);
-          (wt(ik, 118 - Math.abs(k) * 16), gor.add(ik));
-        }
-        let par = this.add.image(0, -40, "parcacik").setTint(16766080).setBlendMode(Phaser.BlendModes.ADD).setScale(9, 5).setAlpha(0.45);
-        (gor.addAt(par, 0), this.tweens.add({ targets: par, alpha: 0.2, duration: 600, yoyo: !0, repeat: -1 }), gor.setScale(0.2), this.tweens.add({ targets: gor, scale: 1, duration: 260, ease: "Back.Out" }));
+        // kalkanlar gökten yola çakılır
+        let par = this.add.image(0, -50, "parcacik").setTint(16766080).setBlendMode(Phaser.BlendModes.ADD).setScale(11, 5).setAlpha(0.4);
+        gor.add(par);
+        let kd = M("kalkan_duvari") ? this.add.image(0, 8, "kalkan_duvari").setOrigin(0.5, 0.95) : C(this, 0, -46, "ikon_kalkan", 1);
+        (kd.setDisplaySize(270, M("kalkan_duvari") ? (270 * kd.height) / kd.width : 120), gor.add(kd));
+        (this.tweens.add({ targets: par, alpha: 0.18, duration: 650, yoyo: !0, repeat: -1 }),
+          kd.setY(-260).setAlpha(0),
+          this.tweens.add({ targets: kd, y: 8, alpha: 1, duration: 280, ease: "Quad.In", onComplete: () => (this.fx.dust(o, l, !0), this.cameras.main.shake(140, 0.006), this.tweens.add({ targets: kd, scaleY: kd.scaleY * 0.94, duration: 70, yoyo: !0 })) }));
         let duvar = {
           alive: !0,
           x: o,
@@ -14966,7 +14969,7 @@ class Rs extends Phaser.Scene {
           view: gor,
           takeHit(e) {
             if (!this.alive) return;
-            ((this.hp -= e), S.tweens.add({ targets: gor, x: o + (Math.random() - 0.5) * 8, duration: 50, yoyo: !0 }));
+            ((this.hp -= e), S.tweens.add({ targets: gor, x: o + (Math.random() - 0.5) * 8, duration: 50, yoyo: !0 }), kd.setTintFill?.(16777215), S.time.delayedCall(60, () => kd.active && kd.clearTint()));
             if (this.hp <= 0) this.alive = !1;
           },
           update(e) {
