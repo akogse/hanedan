@@ -35,8 +35,28 @@ for key, url, fw, fh, n, bh in ets:
         im.convert('RGBA').resize((cols * nfw, rows * nfh), Image.LANCZOS).save(hedef, 'WEBP', quality=88, method=4)
     tablo[key] = [hedef, nfw, nfh]
     once += W * H * 4; sonra += cols * nfw * rows * nfh * 4
+# --- tek görseller (zt): ekranda en büyük göründükleri ölçek araclar/gorunum.json'da (t_gorunum ölçümü).
+# Oyun bu görselleri küçük yükler ama dokuyu ASIL boyutuyla tanıtır (addImage kancası): yerleşim hiç değişmez.
+HARIC = {'panel_kucuk', 'harita_zemin_yol', 'harita_zemin_cim', 'harita_zemin_parsomen', 'z_xp_dolgu', 'sv_boss_dolgu', 'parcacik', 'brf_kahraman_yuva_secili'}
+gor = json.load(open('araclar/gorunum.json'))['gor'] if os.path.exists('araclar/gorunum.json') else {}
+tablog, g_once, g_sonra = {}, 0, 0
+for key, url in zt.items():
+    if key in HARIC or not os.path.exists(url) or url.startswith('assets/k/'): continue
+    im = Image.open(url); W, H = im.size
+    if key in gor: f = min(1, 1.5 * gor[key])
+    elif max(W, H) <= 1100: f = min(1, 768 / max(W, H))  # ölçülmemiş: 768 px'e kadar (512 mantıksal px'e dek keskin)
+    else: continue
+    if f > 0.8: continue
+    nw, nh = max(4, round(W * f)), max(4, round(H * f))
+    hedef = 'assets/k/' + os.path.basename(url)
+    if not (os.path.exists(hedef) and os.path.getmtime(hedef) >= os.path.getmtime(url) and Image.open(hedef).size == (nw, nh)):
+        im.convert('RGBA').resize((nw, nh), Image.LANCZOS).save(hedef, 'WEBP', quality=90, method=4)
+    tablog[key] = [hedef, W, H]
+    g_once += W * H * 4; g_sonra += nw * nh * 4
+print(f'{len(tablog)} görsel küçültüldü: {g_once / 2**20:.0f} MB -> {g_sonra / 2**20:.0f} MB (çözülmüş)')
+satirlarg = ',\n'.join(f'  {k}: ["{v[0]}", {v[1]}, {v[2]}]' for k, v in sorted(tablog.items()))
 satirlar = ',\n'.join(f'  {k}: ["{v[0]}", {v[1]}, {v[2]}]' for k, v in sorted(tablo.items()))
-blok = f'// KUCUK-BAS (araclar/kucult.py üretir, elle düzenleme)\nvar KUCUK = {{\n{satirlar}\n}};\n// KUCUK-SON'
+blok = f'// KUCUK-BAS (araclar/kucult.py üretir, elle düzenleme)\nvar KUCUK = {{\n{satirlar}\n}};\nvar KUCUKG = {{\n{satirlarg}\n}};\n// KUCUK-SON'
 src = re.sub(r'// KUCUK-BAS.*?// KUCUK-SON', lambda m: blok, src, flags=re.S)
 open('kaynak/oyun.js', 'w', encoding='utf-8').write(src)
 print(f'{len(tablo)} sayfa küçültüldü: {once / 2**20:.0f} MB -> {sonra / 2**20:.0f} MB (çözülmüş)')
