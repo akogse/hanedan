@@ -2074,6 +2074,8 @@ var zt = {
     muzik_harita: "ses/muzik_harita.mp3",
     muzik_kesif: "ses/muzik_kesif.mp3",
     muzik_savas: "ses/muzik_savas.mp3",
+    muzik_savas_2: "ses/muzik_savas_2.mp3",
+    muzik_savas_3: "ses/muzik_savas_3.mp3",
     muzik_boss: "ses/muzik_boss.mp3",
     altin: "ses/altin.mp3",
     altin_2: "ses/altin_2.mp3",
