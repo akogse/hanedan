@@ -2149,6 +2149,7 @@ var zt = {
     ses_kahraman_aldric_olum: "ses/ses_kahraman_aldric_olum.mp3",
     ses_kahraman_aldric_saldiri: "ses/ses_kahraman_aldric_saldiri.mp3",
     ses_kahraman_aldric_yetenek: "ses/ses_kahraman_aldric_yetenek.mp3",
+    ses_kahraman_aldric_secim: "ses/ses_kahraman_aldric_secim.mp3",
     ui_tik: "ses/ui_tik.mp3",
     ui_tik_2: "ses/ui_tik_2.mp3",
     upgrade: "ses/upgrade.mp3",
