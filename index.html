@@ -16408,6 +16408,51 @@ class Os extends Phaser.Scene {
     let dg = F(this, 0, 330, 300, 96, m("common.ok"), kapa, "gold");
     (dg.setAlpha(0), c.add(dg), this.tweens.add({ targets: dg, alpha: 1, delay: 1500, duration: 400 }));
   }
+  sonucKahraman(k, zafer) {
+    // geniş ekranda panelin yanları boş kalmasın: solda kahraman tam boy, sağda büyük sancak
+    let yan = O / 2 - 560 * k;
+    if (yan < 150) return !1;
+    let kh = "kh_tam_" + (this.b.heroId ?? P().hero),
+      H = Math.min(w * 0.86, (yan + 120) * 1.65),
+      koy = () => {
+        if (!this.scene.isActive() || !this.textures.exists(kh)) return;
+        let im = this.add.image(O / 2 - 560 * k - yan * 0.42, w + 10, kh).setOrigin(0.5, 1).setDepth(1.5);
+        (im.setScale(H / im.height), zafer || im.setTint(8421504).setAlpha(0.85));
+        let x0 = im.x;
+        (im.setX(x0 - 80).setAlpha(0), this.tweens.add({ targets: im, x: x0, alpha: zafer ? 1 : 0.85, duration: 700, delay: 300, ease: "Cubic.Out" }));
+        if (zafer) this.tweens.add({ targets: im, scaleY: im.scaleY * 1.008, duration: 1800, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
+      };
+    this.textures.exists(kh) ? koy() : sayfaIste(this, [kh], koy);
+    let sk = zafer ? "z_zafer_sancagi" : "z_yenilgi_sancagi";
+    if (M(sk)) {
+      let sn = this.add.image(O / 2 + 560 * k + yan * 0.5, -10, sk).setOrigin(0.5, 0.02).setDepth(1.5).setFlipX(!0);
+      (sn.setScale(Math.min(w * 0.78, yan * 1.9) / sn.height), sn.setAlpha(0), this.tweens.add({ targets: sn, alpha: 1, duration: 700, delay: 300 }));
+      this.tweens.add({ targets: sn, angle: { from: -1.5, to: 1.5 }, duration: zafer ? 2200 : 4000, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
+    }
+    return !0;
+  }
+  sonucZemin(zafer) {
+    // savaş alanını tamamen örten tam ekran sahne: kadife zemin, kenar gölgesi; zaferde dönen altın ışık, yenilgide soğuk ton ve kül
+    let c = this.add.container(0, 0).setDepth(1),
+      X0 = -Be - 40,
+      W0 = O + 2 * Be + 80;
+    if (M("brf_zemin")) c.add(this.add.image(O / 2, w / 2, "brf_zemin").setDisplaySize(W0, w + 40).setTint(zafer ? 16777215 : 9474240));
+    else c.add(this.add.rectangle(X0, 0, W0, w, 659744).setOrigin(0));
+    if (zafer && M("z_isik")) {
+      let i1 = this.add.image(O / 2, w * 0.18, "z_isik").setBlendMode(Phaser.BlendModes.ADD).setAlpha(0.42);
+      (i1.setScale((W0 * 1.25) / i1.width), c.add(i1), this.tweens.add({ targets: i1, angle: 360, duration: 90000, repeat: -1 }));
+      let i2 = this.add.image(O / 2, w * 0.18, "z_isik").setBlendMode(Phaser.BlendModes.ADD).setAlpha(0.25).setTint(16766080);
+      (i2.setScale((W0 * 0.8) / i2.width), c.add(i2), this.tweens.add({ targets: i2, angle: -360, duration: 60000, repeat: -1 }));
+    }
+    if (M("vinyet")) c.add(this.add.image(X0, 0, "vinyet").setOrigin(0).setDisplaySize(W0, w).setAlpha(zafer ? 0.85 : 1));
+    if (!zafer)
+      for (let k = 0; k < 26; k++) {
+        let kl = this.add.image(X0 + Math.random() * W0, w + 20, "parcacik").setTint(Math.random() < 0.5 ? 16737843 : 8421504).setBlendMode(Phaser.BlendModes.ADD).setScale(0.3 + Math.random() * 0.5).setAlpha(0.6);
+        (c.add(kl), this.tweens.add({ targets: kl, y: -40, x: kl.x + (Math.random() - 0.5) * 200, alpha: 0, duration: 6000 + Math.random() * 6000, delay: Math.random() * 6000, repeat: -1 }));
+      }
+    (c.setAlpha(0), this.tweens.add({ targets: c, alpha: 1, duration: 700 }));
+    return c;
+  }
   sonsuzSon(e) {
     // Sonsuz Kuşatma sonu: dayanılan dalga sayısı, rekor töreni
     let t = P(),
@@ -16419,7 +16464,7 @@ class Os extends Phaser.Scene {
     ((t.heroXp[s] = (t.heroXp[s] ?? 0) + xp), rekor && (t.sonsuzRekor = dalga), (t.snapshot = null));
     if (dalga >= 20) ((t.rozetler ??= {})[99] ??= {}).sonsuz = !0;
     (istat("sonsuzOyun"), j());
-    ((this.modalOpen = !0), V(rekor ? "zafer" : "yenilgi", { volume: 0.85 }), Tt(this, 0.62));
+    ((this.modalOpen = !0), V(rekor ? "zafer" : "yenilgi", { volume: 0.85 }), Tt(this, 0.62), this.sonucZemin(rekor));
     let o = this.add.container(O / 2, w / 2).setDepth(2);
     o.add(pe(this, 0, 30, 1000, 640, m("end.sonsuz")));
     if (M("z_isik")) {
@@ -16494,11 +16539,14 @@ class Os extends Phaser.Scene {
       let f = Hs[e.stageId];
       if (f && f.post.length) await this.dialogue(f.post);
     }
-    ((this.modalOpen = !0), V(e.victory ? "zafer" : "yenilgi", { volume: 0.85 }), Tt(this, 0.62));
+    ((this.modalOpen = !0), V(e.victory ? "zafer" : "yenilgi", { volume: 0.85 }), Tt(this, 0.62), this.sonucZemin(e.victory));
     let o = this.add.container(O / 2, w / 2).setDepth(2),
       l = e.victory ? "zafer_afisi" : "yenilgi_afisi",
       d = M(l);
     let kisa = e.victory ? 0 : 130;
+    // sonuç bir pencere değil, bir sahne: içerik ekran yüksekliğini doldurur
+    let ok = Math.min(1.12, (w - 20) / 1010, (O - 40) / 1520);
+    (o.setScale(ok), o.setY(w / 2 + 62 * ok), (this.genisSonuc = this.sonucKahraman(ok, e.victory)));
     if ((o.add(pe(this, 0, 40 - kisa / 2, 1100, 720 - kisa, d ? void 0 : e.victory ? m("end.victory") : m("end.defeat"))), d)) {
       let f = this.add.image(0, -392, l),
         _ = 500;
@@ -16524,7 +16572,7 @@ class Os extends Phaser.Scene {
       PY0 = 40 - kisa / 2;
     // yan sancaklar: zaferde gururla dalgalanır, yenilgide yanık ve sarkık
     let sk = e.victory ? "z_zafer_sancagi" : "z_yenilgi_sancagi";
-    if (M(sk))
+    if (M(sk) && !this.genisSonuc)
       for (let yon of [-1, 1]) {
         let sn = this.add.image(yon * 600, PY0 - PH0 / 2 - 10, sk).setOrigin(0.5, 0.04);
         (sn.setScale(330 / sn.height), yon > 0 && sn.setFlipX(!0), o.addAt(sn, 0));
