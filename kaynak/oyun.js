@@ -13766,7 +13766,44 @@ class Rs extends Phaser.Scene {
     }
   }
   // ---- ortam efektleri: harita başına parçacık, sis, ışık ----
+  bulutGolgesi() {
+    // haritanın üstünden yavaşça geçen bulut gölgeleri: güneş bulutun arkasına girip çıkıyormuş gibi (resim nefes alır)
+    if (!this.textures.exists("bulut_golge")) {
+      // üst üste binen yumuşak daireler + bulanıklık: gerçek bir bulut kümesinin gölgesi
+      let N = 256,
+        cv = this.textures.createCanvas("bulut_golge", N, N),
+        cx = cv.getContext();
+      cx.filter = "blur(10px)";
+      for (let k = 0; k < 14; k++) {
+        let a = Math.random() * Math.PI * 2,
+          r = Math.random() * 46,
+          x = N / 2 + Math.cos(a) * r * 1.3,
+          y = N / 2 + Math.sin(a) * r * 0.7,
+          rr = 26 + Math.random() * 20,
+          gr = cx.createRadialGradient(x, y, 0, x, y, rr);
+        (gr.addColorStop(0, "rgba(0,0,0,0.55)"), gr.addColorStop(0.6, "rgba(0,0,0,0.35)"), gr.addColorStop(1, "rgba(0,0,0,0)"), (cx.fillStyle = gr), cx.beginPath(), cx.arc(x, y, rr, 0, Math.PI * 2), cx.fill());
+      }
+      cv.refresh();
+    }
+    let karanlik = [11, 16].includes(this.stage.id) ? 0.3 : 0.55,
+      yol = () => {
+        let b = this.add.image(-700, Math.random() * ue, "bulut_golge").setDepth(4390).setAlpha(0);
+        (b.setScale(1.3 + Math.random() * 0.9, 0.9 + Math.random() * 0.5), b.setAngle(Math.random() * 30 - 15));
+        let sure = 70000 + Math.random() * 40000;
+        (this.tweens.add({ targets: b, alpha: karanlik * (0.7 + Math.random() * 0.6), duration: 6000 }),
+          this.tweens.add({ targets: b, x: re + 700, y: b.y + 200 - Math.random() * 400, duration: sure, onComplete: () => b.destroy() }),
+          this.tweens.add({ targets: b, alpha: 0, delay: sure - 6000, duration: 6000 }));
+      };
+    // başta sahnede birkaç tane olsun, sonra arada bir yenisi gelsin
+    for (let k = 0; k < 7; k++) {
+      let b = this.add.image(Math.random() * re, Math.random() * ue, "bulut_golge").setDepth(4390).setAlpha(karanlik * 0.9);
+      (b.setScale(1.3 + Math.random() * 0.9, 0.9 + Math.random() * 0.5), b.setAngle(Math.random() * 30 - 15));
+      this.tweens.add({ targets: b, x: re + 800, duration: 50000 + Math.random() * 50000, onComplete: () => b.destroy() });
+    }
+    this.time.addEvent({ delay: 9000, loop: !0, callback: yol });
+  }
   ortamKur() {
+    this.bulutGolgesi();
     let e = this.stage.id,
       t = {
         1: [["yaprak_yesil", 7, "drift", 10479952], ["ates_bocegi", 10, "float", 15400800]],
