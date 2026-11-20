@@ -20,7 +20,7 @@ Kullanıcının uyarısı: ezbere gitme; senarist gibi kurgula, sanatçı gibi i
 3. [x] Flow videolarından efekt ayıkla (kullanıcı önerisi): saldırı videolarındaki buz patlaması, şimşek, ateş topu,
        zehir bulutu → kuleden bağımsız efekt sayfaları (ADD karışım) → büyü/vuruş efektlerinde kullan. Kodla çizim değil.
 4. [x] Sonuç ekranı tam ekran ve görkemli (zafer/yenilgi).
-5. [ ] Hazine ve Elmas hiçbir yerde harcanmıyor — anlamlı kullanım tasarla (ör. hazine: kahraman eğitimi,
+5. [x] Hazine ve Elmas hiçbir yerde harcanmıyor — anlamlı kullanım tasarla (ör. hazine: kahraman eğitimi,
        elmas: emanet güçlendirme) ve rehbere ekle.
 6. [ ] Ambiyans: canlı harita altyapısı (Rt, harita_stageN_canli video+maske) hangi bölümlerde var çıkar;
        eksikler için Flow prompt paketi; kodla yalnızca ince ışık/renk/vinyet.

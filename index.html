@@ -2672,6 +2672,13 @@ var $t = {
   "end.tip": "İpucu: Kuleleri yükseltmek, yeni kule kurmaktan çoğu zaman daha verimlidir. Kışlayı kavşaklara kur.",
   "end.heroXp": "{hero} +{n} deneyim",
   "end.xpWord": "deneyim",
+  "sans.baslik": "Surlar yıkılıyor!",
+  "sans.metin": "Bana on elmas ver, {hitap}. Surları bir kez daha ayağa kaldırırım. Ama bu savaşta bir kez yapabilirim.",
+  "sans.onar": "Onar",
+  "sans.vazgec": "Vazgeç",
+  "egit.dugme": "Eğit",
+  "egit.yok": "Yetersiz hazine",
+  "egit.oldu": "+{n} deneyim",
   "dlg.1.pre.0": "{hitap}, sınır karakolundan duman yükseliyor. Goblinler ormandan taştı. Konsey toplandı; emrinizi bekliyoruz.",
   "dlg.1.pre.1": "Kuzgunlarım saydı: otuz meşale, belki fazlası. Goblin bu kadar düzenli yürümez. Biri onları sürüyor.",
   "dlg.1.pre.2": "Taşı ben dizerim, ateşi sen yakarsın. Kuleleri yolun kıvrımlarına kur; düşman orada oyalanır.",
@@ -2765,8 +2772,10 @@ var $t = {
   "hitap.youngRuler": "Majesteleri",
   "hitap.exiledHeir": "Lordum",
   "rh.devam": "Devam için dokun",
+  "rh.hz.0": "Krallık Hazinesi dolmaya başladı, {hitap}. Hazineyle bizi eğitebilirsiniz: Kahraman salonunda kartımızdaki Eğit düğmesi, kırk altına elli deneyim.",
+  "rh.el.0": "Elmaslarını harcama, {hitap}. Kale düşerken on elmasla surları bir kez daha ayağa kaldırırım. Her savaşta bir kez.",
   "rh.gec": "Rehberi geç",
-  "rh.ilk.0": "Komutanım, {k} krallığının haritası önünüzde. Her mühür bir savaş alanı; düşman sınırdan başkente doğru onları birer birer yakıyor.",
+  "rh.ilk.0": "{hitap}, {k} krallığının haritası önünüzde. Her mühür bir savaş alanı; düşman sınırdan başkente doğru onları birer birer yakıyor.",
   "rh.ilk.1": "İlk ateş Sınır Karakolu'nda yandı. Mühre dokunun: gelen düşmanları görür, yanınıza alacağınız kahramanı seçer ve savaşa çıkarsınız.",
   "rh.z1.0": "Karakol ayakta! Her zafer yıldız kazandırır; kale ne kadar az yara alırsa o kadar çok yıldız. Topladığınız bütün yıldızlar burada.",
   "rh.z1.1": "Her yıldız bir Taç Puanı. Taç Ağacı'nda o puanlarla kulelerine kalıcı güç dökerim. Beğenmezsen puanı geri alır, başka yere harcarsın.",
@@ -3347,6 +3356,13 @@ var Ls = {
   "end.tip": "Tip: upgrading towers often beats building new ones. Put barracks at road bends.",
   "end.heroXp": "{hero} +{n} XP",
   "end.xpWord": "XP",
+  "sans.baslik": "The walls are falling!",
+  "sans.metin": "Give me ten diamonds, {hitap}, and I will raise these walls once more. But only once in this battle.",
+  "sans.onar": "Repair",
+  "sans.vazgec": "Give up",
+  "egit.dugme": "Train",
+  "egit.yok": "Not enough treasury",
+  "egit.oldu": "+{n} XP",
   "dlg.1.pre.0": "{hitap}, smoke is rising from the border outpost. Goblins have poured out of the forest. The council is gathered; we await your command.",
   "dlg.1.pre.1": "My ravens counted thirty torches, maybe more. Goblins never march this orderly. Someone is driving them.",
   "dlg.1.pre.2": "I'll lay the stone, you light the fire. Build towers at the bends of the road; the enemy lingers there.",
@@ -3440,8 +3456,10 @@ var Ls = {
   "hitap.youngRuler": "Your Majesty",
   "hitap.exiledHeir": "My lord",
   "rh.devam": "Tap to continue",
+  "rh.hz.0": "The Royal Treasury is filling up, {hitap}. You can use it to train us: the Train button on our cards in the Hero hall, forty for fifty XP.",
+  "rh.el.0": "Don't squander your diamonds, {hitap}. When the castle falls, ten diamonds let me raise the walls once more. Once per battle.",
   "rh.gec": "Skip guide",
-  "rh.ilk.0": "Commander, the map of {k} lies before you. Every seal is a battlefield, and the enemy is burning them one by one, from the border to the capital.",
+  "rh.ilk.0": "{hitap}, the map of {k} lies before you. Every seal is a battlefield, and the enemy is burning them one by one, from the border to the capital.",
   "rh.ilk.1": "The first fire was lit at the Border Outpost. Tap its seal: you will see who is coming, choose the hero at your side and march to battle.",
   "rh.z1.0": "The outpost stands! Every victory earns stars; the less the castle bleeds, the more stars. All the stars you have gathered are counted here.",
   "rh.z1.1": "Every star is a Crown Point. In the Crown Tree I forge them into lasting power for your towers. Don't like it? Take the point back and spend it elsewhere.",
@@ -3941,6 +3959,8 @@ function Us() {
   try {
     let e = localStorage.getItem("hanedan-kusatmasi-save-v1");
     if (e) xe = { ...Dt(), ...JSON.parse(e) };
+    if (xe.mastery || xe.heroShards || xe.banners)
+      ((xe.treasure = (xe.treasure ?? 0) + (xe.mastery ?? 0) * 25), (xe.diamonds = (xe.diamonds ?? 0) + ((xe.heroShards ?? 0) + (xe.banners ?? 0)) * 5), (xe.mastery = xe.heroShards = xe.banners = 0));
   } catch {
     xe = Dt();
   }
@@ -10322,7 +10342,7 @@ class _s extends Phaser.Scene {
     if (!r.ilk && !y(1))
       ((anahtar = "ilk"),
         (sira = [
-          { kim: "aldric", metin: m("rh.ilk.0", { k: t.kingdom || m("intro.kingdomDefault") }) },
+          { kim: "aldric", metin: m("rh.ilk.0", hk()) },
           { kim: "aldric", metin: m("rh.ilk.1"), hedef: dugum(1) },
         ]));
     else if (!r.z1 && y(1))
@@ -10347,6 +10367,9 @@ class _s extends Phaser.Scene {
           { kim: "velmora", metin: m("rh.z8.0"), hedef: () => ({ x: T - Be - 140, y: w - 288, w: 190, h: 250 }) },
           { kim: "velmora", metin: m("rh.z8.1"), hedef: alt(3) },
         ]));
+    if (!sira && !r.hz && r.z2 && (t.treasure ?? 0) >= 40)
+      ((anahtar = "hz"), (sira = [{ kim: "aldric", metin: m("rh.hz.0", hk()), hedef: () => this.ustPlaka?.[0] ?? null }, { kim: "aldric", metin: m("rh.z2.1"), hedef: alt(0) }]));
+    else if (!sira && !r.el && (t.diamonds ?? 0) >= 10) ((anahtar = "el"), (sira = [{ kim: "thorgar", metin: m("rh.el.0", hk()), hedef: () => this.ustPlaka?.[1] ?? null }]));
     if (!sira) return;
     ((this.rehberAcik = !0),
       rehber(this, sira, () => {
@@ -10924,7 +10947,18 @@ class _s extends Phaser.Scene {
                   .setWordWrapWidth(iw - 50),
               );
             });
-            let dg = F(this, 0, KH / 2 - 62, KW * 0.7, 74, n ? m("hero.selected") : m("hero.choose"), () => (P().hero !== s && V("ui_tik"), (P().hero = s), j(), t()), n ? "gold" : "stone", { size: 24 });
+            // Krallık Hazinesi ile eğitim: 40 hazine → 50 deneyim
+            let EG = 40,
+              eg = F(this, KW * 0.235, KH / 2 - 62, KW * 0.44, 74, m("egit.dugme") + " · " + EG, () => {
+                let sv = P();
+                if ((sv.treasure ?? 0) < EG) return void (V("ui_tik"), this.toast(m("egit.yok") + " (" + (sv.treasure ?? 0) + ")"));
+                let lv0 = Ne(sv.heroXp[s] ?? 0);
+                ((sv.treasure -= EG), (sv.heroXp[s] = (sv.heroXp[s] ?? 0) + 50), j(), V("upgrade", { volume: 0.7 }));
+                let lv1 = Ne(sv.heroXp[s]);
+                (this.toast(m("egit.oldu", { n: 50 }) + (lv1 > lv0 ? "  ·  " + m("hero.level", { n: lv1 }) : "") + "  ·  " + m("map.treasure") + " " + sv.treasure), t());
+              }, "stone", { icon: "ikon_hazine", size: 24 });
+            k.add(eg);
+            let dg = F(this, -KW * 0.2, KH / 2 - 62, KW * 0.42, 74, n ? m("hero.selected") : m("hero.choose"), () => (P().hero !== s && V("ui_tik"), (P().hero = s), j(), t()), n ? "gold" : "stone", { size: 24 });
             k.add(dg);
             if (!n) k.setScale(0.96);
           }));
@@ -15199,6 +15233,17 @@ class Rs extends Phaser.Scene {
   }
   finish(e) {
     if (this.ended) return;
+    // İkinci Şans: kale düşerken 10 elmasla surlar bir kez daha ayağa kalkar (Demir zorluğunda ve Sonsuz'da yok)
+    if (!e && !this.ikinciSans && !this.stage.sonsuz && this.mod !== "demir" && (P().diamonds ?? 0) >= 10) {
+      ((this.ikinciSans = !0), (this.paused = !0), this.closeMenu());
+      return void this.scene.get("Hud").ikinciSansSor((kabul) => {
+        this.paused = !1;
+        if (!kabul) return this.finish(!1);
+        let t = P();
+        ((t.diamonds -= 10), j(), (this.castleHp = Math.max(5, Math.round(this.castleMax * 0.3))), this.updateCastleDamage(), this.events.emit("castleHit", this.castleHp));
+        (this.fx.ring(this.castle.x, this.castle.y, 260, 16766080, 700, 12), this.fx.flash(this.castle.x, this.castle.y - 80, 16770720, 320, 600), this.cameras.main.shake(260, 0.006), V("muhur"));
+      });
+    }
     ((this.ended = !0), this.closeMenu());
     let t = e ? ba(this.castleHp, this.castleMax) : 0,
       s = P();
@@ -15407,11 +15452,11 @@ function fi(e, t) {
     case 2:
       return { treasure: Math.round(s * 0.8) };
     case 3:
-      return { mastery: 1 };
+      return { treasure: Math.round(s * 1.2) };
     case 4:
       return { diamonds: 5 };
     case 5:
-      return { special: t % 2 === 1 ? "heroShard" : "banner" };
+      return { diamonds: 10 };
     default:
       return {};
   }
@@ -16200,6 +16245,40 @@ class Os extends Phaser.Scene {
         [a]
       );
     });
+  }
+  ikinciSansSor(cb) {
+    // hikâyeden: Thorgar surları elmasla onarmayı teklif eder; 10 sn içinde seçilmezse vazgeçilmiş sayılır
+    let kok = this.add.container(0, 0).setDepth(60),
+      perde = Tt(this, 0.66);
+    kok.add(perde);
+    let c = this.add.container(O / 2, w / 2);
+    kok.add(c);
+    let KW = 1060,
+      KH = 400;
+    c.add(M("panel_kucuk") ? us(this, KW, KH) : this.add.rectangle(0, 0, KW, KH, 660528).setStrokeStyle(4, 14200904));
+    let px = -KW / 2 + 150;
+    c.add(Ae(this, px, -20, 96, "kahraman_thorgar_portre", he.thorgar.color ?? 9075298));
+    if (M("brf_kahraman_yuva_secili")) {
+      let fr = this.add.image(px, -20, "brf_kahraman_yuva_secili");
+      (fr.setScale((96 * 2) / 0.6 / fr.width), c.add(fr));
+    }
+    let tx = px + 150;
+    (c.add(this.add.text(tx, -KH / 2 + 50, G(m("sans.baslik")), { fontFamily: DD, fontStyle: "900", fontSize: "40px", color: "#ff9a6a", stroke: "#1a0804", strokeThickness: 6 }).setLetterSpacing(2)),
+      c.add(this.add.text(tx, -KH / 2 + 118, m("sans.metin", hk()), { ...z(28, "#f1e7cd", "700"), wordWrap: { width: KW / 2 - tx - 40, useAdvancedWrap: !0 }, lineSpacing: 6 })));
+    let bitti = !1,
+      sec = (k) => {
+        if (bitti) return;
+        ((bitti = !0), sayac.remove(), V("ui_tik"), this.tweens.add({ targets: kok, alpha: 0, duration: 220, onComplete: () => kok.destroy() }), cb(k));
+      };
+    let b1 = F(this, 40, KH / 2 - 72, 330, 92, m("sans.onar") + "  ·  10", () => sec(!0), "red", { icon: "ikon_elmas", size: 30 }),
+      b2 = F(this, KW / 2 - 140, KH / 2 - 72, 210, 80, m("sans.vazgec"), () => sec(!1), "stone", { size: 26 });
+    c.add([b1, b2]);
+    this.tweens.add({ targets: b1, scale: 1.05, duration: 500, yoyo: !0, repeat: -1, ease: "Sine.InOut" });
+    let kalan = 10,
+      sy = this.add.text(-200, KH / 2 - 72, "10", { fontFamily: DD, fontStyle: "900", fontSize: "44px", color: "#f4dc90" }).setOrigin(0.5);
+    c.add(sy);
+    let sayac = this.time.addEvent({ delay: 1000, repeat: 9, callback: () => (sy.setText(String(--kalan)), kalan <= 0 && sec(!1)) });
+    (c.setScale(0.9).setAlpha(0), this.tweens.add({ targets: c, scale: 1, alpha: 1, duration: 260, ease: "Back.Out" }), V("boss", { volume: 0.5 }));
   }
   messageCard(e, t) {
     return this.modal((s) => {
