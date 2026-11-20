@@ -37,11 +37,11 @@ for key, url, fw, fh, n, bh in ets:
     once += W * H * 4; sonra += cols * nfw * rows * nfh * 4
 # --- tek görseller (zt): ekranda en büyük göründükleri ölçek araclar/gorunum.json'da (t_gorunum ölçümü).
 # Oyun bu görselleri küçük yükler ama dokuyu ASIL boyutuyla tanıtır (addImage kancası): yerleşim hiç değişmez.
-HARIC = {'panel_kucuk', 'harita_zemin_yol', 'harita_zemin_cim', 'harita_zemin_parsomen', 'z_xp_dolgu', 'sv_boss_dolgu', 'parcacik', 'brf_kahraman_yuva_secili'}
+HARIC = {'z_zafer_sancagi', 'z_yenilgi_sancagi', 'panel_kucuk', 'harita_zemin_yol', 'harita_zemin_cim', 'harita_zemin_parsomen', 'z_xp_dolgu', 'sv_boss_dolgu', 'parcacik', 'brf_kahraman_yuva_secili'}
 gor = json.load(open('araclar/gorunum.json'))['gor'] if os.path.exists('araclar/gorunum.json') else {}
 tablog, g_once, g_sonra = {}, 0, 0
 for key, url in zt.items():
-    if key in HARIC or not os.path.exists(url) or url.startswith('assets/k/'): continue
+    if key in HARIC or key.startswith('kh_tam_') or not os.path.exists(url) or url.startswith('assets/k/'): continue
     im = Image.open(url); W, H = im.size
     if key in gor: f = min(1, 1.5 * gor[key])
     elif max(W, H) <= 1100: f = min(1, 768 / max(W, H))  # ölçülmemiş: 768 px'e kadar (512 mantıksal px'e dek keskin)
