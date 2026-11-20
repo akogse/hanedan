@@ -15463,7 +15463,7 @@ class Rs extends Phaser.Scene {
   startNextWave(e = !0) {
     if (this.ended || this.waves.spawning) return;
     muzikDurum("savas");
-    if (e && this.waves.countdown > 0) {
+    if (e && this.waves.countdown > 0 && this.waves.index >= 0) {
       let s = Math.ceil(this.waves.countdown * Ut);
       this.gold += s;
       let a = this.paths[0].at(Math.min(260, this.paths[0].length));
@@ -15518,7 +15518,7 @@ class Rs extends Phaser.Scene {
     let s = Math.min(t / 1000, 0.05) * this.speed * OYUN_TEMPO;
     muzikNefes(Math.min(t / 1000, 0.05));
     (this.waves.update(s),
-      Vs(
+      muzikDurum(
         this.enemies.some((i) => i.alive && i.boss)
           ? "boss"
           : this.waves.running || this.enemies.length
@@ -15550,12 +15550,14 @@ class Rs extends Phaser.Scene {
     }
     this.steams = this.steams.filter((i) => i.t > 0);
     let a = this.waves;
-    if (a.running && !a.spawning && !a.isLast && a.countdown < 0 && a.index >= 0) a.countdown = Vt;
+    if (a.running && !a.spawning && !a.isLast && a.countdown < 0 && a.index >= 0) ((a.countdown = Vt), (a.cdMax = Vt));
+    // ilk dalga da kendiliğinden gelir: oyuncu basmazsa geri sayım biter, dalga başlar (ilk bölümlerde daha uzun süre)
+    if (a.index < 0 && !a.running && !this.ilkSayac && !this.ended) ((this.ilkSayac = !0), (a.countdown = a.cdMax = this.stage.id <= 2 ? 45 : 30));
     if (a.finished(this.enemies.length))
       if (((a.running = !1), a.isLast)) this.time.delayedCall(900, () => this.finish(!0));
       else (this.events.emit("waveCleared", a.index), muzikDurum("kesif"));
     if (a.countdown > 0) {
-      if (!this.enemies.length) a.countdown = Math.min(a.countdown, Pa);
+      if (!this.enemies.length && a.index >= 0) a.countdown = Math.min(a.countdown, Pa);
       if (((a.countdown -= s), a.countdown <= 0)) this.startNextWave(!1);
     }
     (this.drawBars(), this.menu?.refresh(this.gold));
@@ -16335,12 +16337,12 @@ class Os extends Phaser.Scene {
       (s.c.setPosition(Phaser.Math.Clamp(r.x, 70, O - 70), Phaser.Math.Clamp(r.y, 150, w - 220)), s.ring.clear());
       let n = e.waves.countdown;
       if (n > 0) {
-        let o = Phaser.Math.Clamp(n / Vt, 0, 1);
+        let o = Phaser.Math.Clamp(n / (e.waves.cdMax || Vt), 0, 1);
         (s.ring.lineStyle(7, 15255674, 1),
           s.ring.beginPath(),
           s.ring.arc(0, 0, 50, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * o, !1),
           s.ring.strokePath(),
-          s.bonus.setText("+" + Math.ceil(n * Ut)));
+          s.bonus.setText(e.waves.index >= 0 ? "+" + Math.ceil(n * Ut) : String(Math.ceil(n))));
       } else s.bonus.setText("");
     }
   }
