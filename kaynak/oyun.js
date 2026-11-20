@@ -15543,7 +15543,8 @@ class Rs extends Phaser.Scene {
   }
   drawBars() {
     let e = this.bars;
-    (e.clear(), (this.durumHavuz ??= []), (this.durumN = 0));
+    // havuz sahne yeniden başlayınca yok edilmiş resimleri tutuyordu (2. bölümden itibaren donma): ölüleri at
+    (e.clear(), (this.durumHavuz = (this.durumHavuz ?? []).filter((x) => x.scene && x.active)), (this.durumN = 0));
     let t = (s, a, i, r, n, o) => {
       if (
         (e.fillStyle(1840142, 1),
